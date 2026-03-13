@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-payroll/pay-run.json",
+  "title": "Workday Payroll Pay Run",
+  "description": "A pay run represents a single payroll processing cycle for a pay group, encompassing the calculation, review, and completion of payroll for a specific pay period.",
+  "type": "object",
+  "required": ["payGroup", "payPeriod", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the pay run"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Human-readable name of the pay run"
+    },
+    "payGroup": {
+      "$ref": "#/$defs/PayGroupRef"
+    },
+    "payPeriod": {
+      "$ref": "#/$defs/PayPeriod"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "InProgress", "Completed", "Cancelled"],
+      "description": "Current status of the pay run"
+    },
+    "runCategory": {
+      "type": "string",
+      "enum": ["Regular", "OffCycle", "OnDemand"],
+      "description": "Category of the pay run indicating whether it is a regular, off-cycle, or on-demand run"
+    },
+    "paymentDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date payments will be distributed to workers"
+    },
+    "totalGrossPay": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total gross pay for all workers in the pay run"
+    },
+    "totalNetPay": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total net pay after deductions and taxes"
+    },
+    "totalDeductions": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total deductions across all workers"
+    },
+    "totalTaxes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total tax withholdings across all workers"
+    },
+    "workerCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of workers included in the pay run"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 currency code"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the pay run was created"
+    },
+    "completedOn": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp when the pay run was completed"
+    }
+  },
+  "$defs": {
+    "PayGroupRef": {
+      "type": "object",
+      "description": "Reference to a pay group that organizes workers for payroll processing",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Pay group unique identifier"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Pay group display name"
+        }
+      }
+    },
+    "PayPeriod": {
+      "type": "object",
+      "description": "Date range defining the pay period covered by the run",
+      "required": ["startDate", "endDate"],
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the pay period"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the pay period"
+        }
+      }
+    }
+  }
+}

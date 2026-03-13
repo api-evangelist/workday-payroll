@@ -1,0 +1,844 @@
+openapi: 3.1.0
+info:
+  title: Workday Tax API
+  description: >-
+    API for managing payroll tax calculations, tax withholdings, tax filing
+    information, W-4 elections, and tax jurisdiction data within the Workday
+    platform.
+  version: v1
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/customer-support.html
+    email: support@workday.com
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday Tax API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+servers:
+  - url: https://api.workday.com/tax/v1
+    description: Workday Tax Production
+  - url: https://{tenant}.workday.com/api/tax/v1
+    description: Workday Tax Tenant-Specific
+    variables:
+      tenant:
+        description: Workday tenant identifier
+        default: your-tenant
+tags:
+  - name: Tax Withholdings
+    description: Manage worker tax withholding configurations
+  - name: Tax Elections
+    description: Access and manage worker tax elections (W-4, state forms)
+  - name: Tax Jurisdictions
+    description: Retrieve tax jurisdiction and authority information
+  - name: Tax Filing
+    description: Access tax filing data and compliance reports
+  - name: Tax Calculations
+    description: View and manage tax calculation results
+security:
+  - bearerAuth: []
+paths:
+  /workers/{workerId}/taxWithholdings:
+    get:
+      operationId: listWorkerTaxWithholdings
+      summary: List worker tax withholdings
+      description: >-
+        Retrieve all tax withholding configurations for a specific worker,
+        including federal, state, and local withholdings.
+      tags:
+        - Tax Withholdings
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Collection of tax withholdings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxWithholdingCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/taxWithholdings/{withholdingId}:
+    get:
+      operationId: getWorkerTaxWithholding
+      summary: Get a worker tax withholding
+      description: >-
+        Retrieve details of a specific tax withholding configuration
+        for a worker.
+      tags:
+        - Tax Withholdings
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+        - $ref: '#/components/parameters/withholdingId'
+      responses:
+        '200':
+          description: Tax withholding details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxWithholding'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateWorkerTaxWithholding
+      summary: Update a worker tax withholding
+      description: >-
+        Update a tax withholding configuration for a worker, such as
+        changing filing status or additional withholding amounts.
+      tags:
+        - Tax Withholdings
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+        - $ref: '#/components/parameters/withholdingId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaxWithholdingRequest'
+      responses:
+        '200':
+          description: Tax withholding updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxWithholding'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/taxElections:
+    get:
+      operationId: listWorkerTaxElections
+      summary: List worker tax elections
+      description: >-
+        Retrieve all tax elections for a worker, including federal W-4 data,
+        state withholding elections, and local tax elections.
+      tags:
+        - Tax Elections
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Collection of tax elections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxElectionCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createWorkerTaxElection
+      summary: Create a worker tax election
+      description: >-
+        Submit a new tax election for a worker, such as a W-4 update
+        or state withholding form change.
+      tags:
+        - Tax Elections
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaxElectionRequest'
+      responses:
+        '201':
+          description: Tax election created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxElection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/taxElections/{electionId}:
+    get:
+      operationId: getWorkerTaxElection
+      summary: Get a worker tax election
+      description: >-
+        Retrieve details of a specific tax election for a worker.
+      tags:
+        - Tax Elections
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+        - $ref: '#/components/parameters/electionId'
+      responses:
+        '200':
+          description: Tax election details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxElection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /taxJurisdictions:
+    get:
+      operationId: listTaxJurisdictions
+      summary: List tax jurisdictions
+      description: >-
+        Retrieve all configured tax jurisdictions, including federal,
+        state, and local tax authorities.
+      tags:
+        - Tax Jurisdictions
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: level
+          in: query
+          description: Filter by jurisdiction level
+          schema:
+            type: string
+            enum:
+              - Federal
+              - State
+              - Local
+              - Other
+        - name: country
+          in: query
+          description: Filter by country code
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collection of tax jurisdictions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxJurisdictionCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /taxJurisdictions/{jurisdictionId}:
+    get:
+      operationId: getTaxJurisdiction
+      summary: Get a tax jurisdiction
+      description: >-
+        Retrieve details of a specific tax jurisdiction, including
+        applicable tax types and rates.
+      tags:
+        - Tax Jurisdictions
+      parameters:
+        - $ref: '#/components/parameters/jurisdictionId'
+      responses:
+        '200':
+          description: Tax jurisdiction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxJurisdiction'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /taxFilings:
+    get:
+      operationId: listTaxFilings
+      summary: List tax filings
+      description: >-
+        Retrieve tax filing records for compliance reporting, including
+        quarterly and annual filing data.
+      tags:
+        - Tax Filing
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: taxYear
+          in: query
+          description: Filter by tax year
+          schema:
+            type: integer
+        - name: filingType
+          in: query
+          description: Filter by filing type
+          schema:
+            type: string
+            enum:
+              - Quarterly
+              - Annual
+              - Amendment
+        - name: jurisdiction
+          in: query
+          description: Filter by jurisdiction identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collection of tax filings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxFilingCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /taxFilings/{filingId}:
+    get:
+      operationId: getTaxFiling
+      summary: Get a tax filing
+      description: >-
+        Retrieve details of a specific tax filing record.
+      tags:
+        - Tax Filing
+      parameters:
+        - $ref: '#/components/parameters/filingId'
+      responses:
+        '200':
+          description: Tax filing details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxFiling'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /payRuns/{payRunId}/taxResults:
+    get:
+      operationId: listPayRunTaxResults
+      summary: List tax results for a pay run
+      description: >-
+        Retrieve aggregated tax calculation results for a completed
+        pay run, broken down by tax type and jurisdiction.
+      tags:
+        - Tax Calculations
+      parameters:
+        - $ref: '#/components/parameters/payRunId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Collection of tax results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxResultCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/taxSummary:
+    get:
+      operationId: getWorkerTaxSummary
+      summary: Get worker tax summary
+      description: >-
+        Retrieve a year-to-date tax summary for a worker, including
+        total withholdings by jurisdiction and tax type.
+      tags:
+        - Tax Calculations
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+        - name: taxYear
+          in: query
+          description: Tax year (defaults to current year)
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Worker tax summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkerTaxSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth 2.0 bearer token obtained through Workday authentication.
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+    withholdingId:
+      name: withholdingId
+      in: path
+      required: true
+      description: Unique identifier for the tax withholding
+      schema:
+        type: string
+    electionId:
+      name: electionId
+      in: path
+      required: true
+      description: Unique identifier for the tax election
+      schema:
+        type: string
+    jurisdictionId:
+      name: jurisdictionId
+      in: path
+      required: true
+      description: Unique identifier for the tax jurisdiction
+      schema:
+        type: string
+    filingId:
+      name: filingId
+      in: path
+      required: true
+      description: Unique identifier for the tax filing
+      schema:
+        type: string
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TaxWithholding:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tax withholding
+        jurisdiction:
+          $ref: '#/components/schemas/TaxJurisdictionRef'
+        taxType:
+          type: string
+          enum:
+            - FederalIncome
+            - StateIncome
+            - LocalIncome
+            - SocialSecurity
+            - Medicare
+            - FUTA
+            - SUTA
+            - Other
+          description: Type of tax
+        filingStatus:
+          type: string
+          enum:
+            - Single
+            - MarriedFilingJointly
+            - MarriedFilingSeparately
+            - HeadOfHousehold
+            - QualifyingWidower
+          description: Tax filing status
+        allowances:
+          type: integer
+          description: Number of withholding allowances claimed
+        additionalWithholding:
+          type: number
+          format: double
+          description: Additional flat withholding amount per pay period
+        exempt:
+          type: boolean
+          description: Whether the worker claims exempt status
+        effectiveDate:
+          type: string
+          format: date
+          description: Date the withholding configuration took effect
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    TaxWithholdingCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxWithholding'
+        total:
+          type: integer
+          description: Total number of tax withholdings
+    UpdateTaxWithholdingRequest:
+      type: object
+      properties:
+        filingStatus:
+          type: string
+          enum:
+            - Single
+            - MarriedFilingJointly
+            - MarriedFilingSeparately
+            - HeadOfHousehold
+            - QualifyingWidower
+          description: Updated filing status
+        allowances:
+          type: integer
+          description: Updated number of allowances
+        additionalWithholding:
+          type: number
+          format: double
+          description: Updated additional withholding amount
+        exempt:
+          type: boolean
+          description: Updated exempt status
+    TaxElection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tax election
+        formType:
+          type: string
+          enum:
+            - W4
+            - StateWithholding
+            - LocalWithholding
+          description: Type of tax form
+        jurisdiction:
+          $ref: '#/components/schemas/TaxJurisdictionRef'
+        filingStatus:
+          type: string
+          description: Filing status on the form
+        multipleJobs:
+          type: boolean
+          description: Whether the worker has multiple jobs (W-4 Step 2)
+        dependentsAmount:
+          type: number
+          format: double
+          description: Total amount for dependents (W-4 Step 3)
+        otherIncome:
+          type: number
+          format: double
+          description: Other income amount (W-4 Step 4a)
+        deductions:
+          type: number
+          format: double
+          description: Itemized deductions amount (W-4 Step 4b)
+        additionalWithholding:
+          type: number
+          format: double
+          description: Extra withholding per period (W-4 Step 4c)
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date of the election
+        submittedOn:
+          type: string
+          format: date-time
+          description: When the election was submitted
+        status:
+          type: string
+          enum:
+            - Active
+            - Superseded
+            - Voided
+          description: Current status of the election
+    TaxElectionCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxElection'
+        total:
+          type: integer
+          description: Total number of tax elections
+    CreateTaxElectionRequest:
+      type: object
+      required:
+        - formType
+        - jurisdictionId
+        - filingStatus
+      properties:
+        formType:
+          type: string
+          enum:
+            - W4
+            - StateWithholding
+            - LocalWithholding
+          description: Type of tax form
+        jurisdictionId:
+          type: string
+          description: Tax jurisdiction identifier
+        filingStatus:
+          type: string
+          description: Filing status
+        multipleJobs:
+          type: boolean
+          description: Multiple jobs indicator
+        dependentsAmount:
+          type: number
+          format: double
+          description: Dependents amount
+        otherIncome:
+          type: number
+          format: double
+          description: Other income amount
+        deductions:
+          type: number
+          format: double
+          description: Deductions amount
+        additionalWithholding:
+          type: number
+          format: double
+          description: Additional withholding per period
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+    TaxJurisdiction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tax jurisdiction
+        descriptor:
+          type: string
+          description: Display name of the jurisdiction
+        level:
+          type: string
+          enum:
+            - Federal
+            - State
+            - Local
+            - Other
+          description: Jurisdiction level
+        country:
+          type: string
+          description: ISO 3166-1 country code
+        stateCode:
+          type: string
+          description: State or province code
+        localityName:
+          type: string
+          description: Local jurisdiction name
+        taxTypes:
+          type: array
+          items:
+            type: string
+          description: Applicable tax types in this jurisdiction
+        active:
+          type: boolean
+          description: Whether the jurisdiction is currently active
+    TaxJurisdictionRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Jurisdiction identifier
+        descriptor:
+          type: string
+          description: Jurisdiction display name
+    TaxJurisdictionCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxJurisdiction'
+        total:
+          type: integer
+          description: Total number of tax jurisdictions
+    TaxFiling:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tax filing
+        filingType:
+          type: string
+          enum:
+            - Quarterly
+            - Annual
+            - Amendment
+          description: Type of filing
+        jurisdiction:
+          $ref: '#/components/schemas/TaxJurisdictionRef'
+        taxYear:
+          type: integer
+          description: Tax year
+        quarter:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Quarter (for quarterly filings)
+        formNumber:
+          type: string
+          description: Tax form number (e.g., 941, 940, W-2)
+        totalTaxableWages:
+          type: number
+          format: double
+          description: Total taxable wages for the filing period
+        totalTaxWithheld:
+          type: number
+          format: double
+          description: Total tax withheld for the filing period
+        totalEmployerTax:
+          type: number
+          format: double
+          description: Total employer tax liability
+        dueDate:
+          type: string
+          format: date
+          description: Filing due date
+        filedDate:
+          type: string
+          format: date
+          description: Date the filing was submitted
+        status:
+          type: string
+          enum:
+            - Draft
+            - Pending
+            - Filed
+            - Accepted
+            - Rejected
+          description: Filing status
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    TaxFilingCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxFiling'
+        total:
+          type: integer
+          description: Total number of tax filings
+    TaxResult:
+      type: object
+      properties:
+        jurisdiction:
+          $ref: '#/components/schemas/TaxJurisdictionRef'
+        taxType:
+          type: string
+          description: Type of tax
+        employeeAmount:
+          type: number
+          format: double
+          description: Employee tax amount
+        employerAmount:
+          type: number
+          format: double
+          description: Employer tax amount
+        taxableWages:
+          type: number
+          format: double
+          description: Taxable wages for this tax type
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    TaxResultCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxResult'
+        total:
+          type: integer
+          description: Total number of tax result records
+    WorkerTaxSummary:
+      type: object
+      properties:
+        worker:
+          $ref: '#/components/schemas/WorkerRef'
+        taxYear:
+          type: integer
+          description: Tax year for the summary
+        totalGrossWages:
+          type: number
+          format: double
+          description: Year-to-date gross wages
+        totalTaxableWages:
+          type: number
+          format: double
+          description: Year-to-date taxable wages
+        totalFederalWithholding:
+          type: number
+          format: double
+          description: Year-to-date federal income tax withheld
+        totalStateWithholding:
+          type: number
+          format: double
+          description: Year-to-date state income tax withheld
+        totalLocalWithholding:
+          type: number
+          format: double
+          description: Year-to-date local tax withheld
+        totalSocialSecurity:
+          type: number
+          format: double
+          description: Year-to-date Social Security tax
+        totalMedicare:
+          type: number
+          format: double
+          description: Year-to-date Medicare tax
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        jurisdictionBreakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxResult'
+          description: Breakdown by jurisdiction
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Worker identifier
+        descriptor:
+          type: string
+          description: Worker display name
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message

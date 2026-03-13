@@ -1,0 +1,1017 @@
+openapi: 3.1.0
+info:
+  title: Workday Payroll Input API
+  description: >-
+    API for submitting and managing payroll input data within the Workday
+    platform, including one-time payments, payroll adjustments, supplemental
+    earnings, and batch input submissions.
+  version: v1
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/customer-support.html
+    email: support@workday.com
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday Payroll Input API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+servers:
+  - url: https://api.workday.com/payroll-input/v1
+    description: Workday Payroll Input Production
+  - url: https://{tenant}.workday.com/api/payroll-input/v1
+    description: Workday Payroll Input Tenant-Specific
+    variables:
+      tenant:
+        description: Workday tenant identifier
+        default: your-tenant
+tags:
+  - name: One-Time Payments
+    description: Submit and manage one-time payment requests
+  - name: Payroll Adjustments
+    description: Create and manage payroll adjustments and corrections
+  - name: Supplemental Earnings
+    description: Submit supplemental earnings such as bonuses and commissions
+  - name: Input Batches
+    description: Manage batch submissions of payroll input data
+  - name: Time Off Inputs
+    description: Submit time off and leave inputs for payroll processing
+security:
+  - bearerAuth: []
+paths:
+  /oneTimePayments:
+    get:
+      operationId: listOneTimePayments
+      summary: List one-time payments
+      description: >-
+        Retrieve all one-time payment requests, optionally filtered by
+        status, worker, or date range.
+      tags:
+        - One-Time Payments
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: workerId
+          in: query
+          description: Filter by worker identifier
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by status
+          schema:
+            type: string
+            enum:
+              - Pending
+              - Approved
+              - Processed
+              - Rejected
+      responses:
+        '200':
+          description: Collection of one-time payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimePaymentCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOneTimePayment
+      summary: Create a one-time payment
+      description: >-
+        Submit a new one-time payment request for a worker, such as a bonus,
+        retroactive pay adjustment, or relocation allowance.
+      tags:
+        - One-Time Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOneTimePaymentRequest'
+      responses:
+        '201':
+          description: One-time payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimePayment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /oneTimePayments/{paymentId}:
+    get:
+      operationId: getOneTimePayment
+      summary: Get a one-time payment
+      description: >-
+        Retrieve details of a specific one-time payment request.
+      tags:
+        - One-Time Payments
+      parameters:
+        - $ref: '#/components/parameters/paymentId'
+      responses:
+        '200':
+          description: One-time payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimePayment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateOneTimePayment
+      summary: Update a one-time payment
+      description: >-
+        Update a pending one-time payment request.
+      tags:
+        - One-Time Payments
+      parameters:
+        - $ref: '#/components/parameters/paymentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOneTimePaymentRequest'
+      responses:
+        '200':
+          description: One-time payment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimePayment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteOneTimePayment
+      summary: Delete a one-time payment
+      description: >-
+        Delete a pending one-time payment request that has not yet been
+        processed.
+      tags:
+        - One-Time Payments
+      parameters:
+        - $ref: '#/components/parameters/paymentId'
+      responses:
+        '204':
+          description: One-time payment deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /adjustments:
+    get:
+      operationId: listPayrollAdjustments
+      summary: List payroll adjustments
+      description: >-
+        Retrieve all payroll adjustment records, optionally filtered by
+        worker, type, or status.
+      tags:
+        - Payroll Adjustments
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: workerId
+          in: query
+          description: Filter by worker identifier
+          schema:
+            type: string
+        - name: adjustmentType
+          in: query
+          description: Filter by adjustment type
+          schema:
+            type: string
+            enum:
+              - Correction
+              - Retroactive
+              - Reversal
+              - Reclass
+      responses:
+        '200':
+          description: Collection of payroll adjustments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdjustmentCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPayrollAdjustment
+      summary: Create a payroll adjustment
+      description: >-
+        Submit a payroll adjustment to correct, reverse, or reclassify
+        previously processed payroll data.
+      tags:
+        - Payroll Adjustments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAdjustmentRequest'
+      responses:
+        '201':
+          description: Adjustment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adjustment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /adjustments/{adjustmentId}:
+    get:
+      operationId: getPayrollAdjustment
+      summary: Get a payroll adjustment
+      description: >-
+        Retrieve details of a specific payroll adjustment.
+      tags:
+        - Payroll Adjustments
+      parameters:
+        - $ref: '#/components/parameters/adjustmentId'
+      responses:
+        '200':
+          description: Adjustment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adjustment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /supplementalEarnings:
+    get:
+      operationId: listSupplementalEarnings
+      summary: List supplemental earnings
+      description: >-
+        Retrieve all supplemental earning submissions, such as bonuses,
+        commissions, and other non-regular earnings.
+      tags:
+        - Supplemental Earnings
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: workerId
+          in: query
+          description: Filter by worker identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collection of supplemental earnings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementalEarningCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSupplementalEarning
+      summary: Create a supplemental earning
+      description: >-
+        Submit a supplemental earning for a worker to be included in
+        the next payroll run.
+      tags:
+        - Supplemental Earnings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSupplementalEarningRequest'
+      responses:
+        '201':
+          description: Supplemental earning created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementalEarning'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /supplementalEarnings/{earningId}:
+    get:
+      operationId: getSupplementalEarning
+      summary: Get a supplemental earning
+      description: >-
+        Retrieve details of a specific supplemental earning submission.
+      tags:
+        - Supplemental Earnings
+      parameters:
+        - $ref: '#/components/parameters/earningId'
+      responses:
+        '200':
+          description: Supplemental earning details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementalEarning'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteSupplementalEarning
+      summary: Delete a supplemental earning
+      description: >-
+        Delete a pending supplemental earning that has not yet been processed.
+      tags:
+        - Supplemental Earnings
+      parameters:
+        - $ref: '#/components/parameters/earningId'
+      responses:
+        '204':
+          description: Supplemental earning deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /inputBatches:
+    get:
+      operationId: listInputBatches
+      summary: List input batches
+      description: >-
+        Retrieve all payroll input batch submissions, including their
+        processing status and validation results.
+      tags:
+        - Input Batches
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter by batch status
+          schema:
+            type: string
+            enum:
+              - Pending
+              - Validating
+              - Validated
+              - Processing
+              - Completed
+              - Failed
+      responses:
+        '200':
+          description: Collection of input batches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputBatchCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createInputBatch
+      summary: Create an input batch
+      description: >-
+        Submit a batch of payroll input records for processing, supporting
+        earnings, deductions, and time-off entries in bulk.
+      tags:
+        - Input Batches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInputBatchRequest'
+      responses:
+        '201':
+          description: Input batch created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputBatch'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /inputBatches/{batchId}:
+    get:
+      operationId: getInputBatch
+      summary: Get an input batch
+      description: >-
+        Retrieve details and status of a specific input batch submission.
+      tags:
+        - Input Batches
+      parameters:
+        - $ref: '#/components/parameters/batchId'
+      responses:
+        '200':
+          description: Input batch details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputBatch'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/timeOffInputs:
+    get:
+      operationId: listWorkerTimeOffInputs
+      summary: List worker time off inputs
+      description: >-
+        Retrieve time off input records for a specific worker that affect
+        payroll calculations.
+      tags:
+        - Time Off Inputs
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Collection of time off inputs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffInputCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createWorkerTimeOffInput
+      summary: Create a time off input
+      description: >-
+        Submit a time off input for a worker to be reflected in payroll
+        processing.
+      tags:
+        - Time Off Inputs
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTimeOffInputRequest'
+      responses:
+        '201':
+          description: Time off input created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth 2.0 bearer token obtained through Workday authentication.
+  parameters:
+    paymentId:
+      name: paymentId
+      in: path
+      required: true
+      description: Unique identifier for the one-time payment
+      schema:
+        type: string
+    adjustmentId:
+      name: adjustmentId
+      in: path
+      required: true
+      description: Unique identifier for the payroll adjustment
+      schema:
+        type: string
+    earningId:
+      name: earningId
+      in: path
+      required: true
+      description: Unique identifier for the supplemental earning
+      schema:
+        type: string
+    batchId:
+      name: batchId
+      in: path
+      required: true
+      description: Unique identifier for the input batch
+      schema:
+        type: string
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    OneTimePayment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the one-time payment
+        worker:
+          $ref: '#/components/schemas/WorkerRef'
+        earningCode:
+          type: string
+          description: Earning code for the payment
+        amount:
+          type: number
+          format: double
+          description: Payment amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        reason:
+          type: string
+          description: Reason for the one-time payment
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date for the payment
+        status:
+          type: string
+          enum:
+            - Pending
+            - Approved
+            - Processed
+            - Rejected
+          description: Current status
+        createdOn:
+          type: string
+          format: date-time
+          description: When the request was created
+        submittedBy:
+          type: string
+          description: User who submitted the request
+    OneTimePaymentCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OneTimePayment'
+        total:
+          type: integer
+          description: Total number of one-time payments
+    CreateOneTimePaymentRequest:
+      type: object
+      required:
+        - workerId
+        - earningCode
+        - amount
+      properties:
+        workerId:
+          type: string
+          description: Worker identifier
+        earningCode:
+          type: string
+          description: Earning code for the payment
+        amount:
+          type: number
+          format: double
+          description: Payment amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        reason:
+          type: string
+          description: Reason for the payment
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+    UpdateOneTimePaymentRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Updated payment amount
+        reason:
+          type: string
+          description: Updated reason
+        effectiveDate:
+          type: string
+          format: date
+          description: Updated effective date
+    Adjustment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the adjustment
+        worker:
+          $ref: '#/components/schemas/WorkerRef'
+        adjustmentType:
+          type: string
+          enum:
+            - Correction
+            - Retroactive
+            - Reversal
+            - Reclass
+          description: Type of adjustment
+        originalPayRunId:
+          type: string
+          description: Reference to the original pay run being adjusted
+        earningCode:
+          type: string
+          description: Earning code affected
+        deductionCode:
+          type: string
+          description: Deduction code affected
+        amount:
+          type: number
+          format: double
+          description: Adjustment amount (positive or negative)
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        reason:
+          type: string
+          description: Reason for the adjustment
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date of the adjustment
+        status:
+          type: string
+          enum:
+            - Pending
+            - Approved
+            - Processed
+            - Rejected
+          description: Current status
+        createdOn:
+          type: string
+          format: date-time
+          description: When the adjustment was created
+    AdjustmentCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Adjustment'
+        total:
+          type: integer
+          description: Total number of adjustments
+    CreateAdjustmentRequest:
+      type: object
+      required:
+        - workerId
+        - adjustmentType
+        - amount
+      properties:
+        workerId:
+          type: string
+          description: Worker identifier
+        adjustmentType:
+          type: string
+          enum:
+            - Correction
+            - Retroactive
+            - Reversal
+            - Reclass
+          description: Type of adjustment
+        originalPayRunId:
+          type: string
+          description: Original pay run being adjusted
+        earningCode:
+          type: string
+          description: Earning code to adjust
+        deductionCode:
+          type: string
+          description: Deduction code to adjust
+        amount:
+          type: number
+          format: double
+          description: Adjustment amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        reason:
+          type: string
+          description: Reason for the adjustment
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+    SupplementalEarning:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the supplemental earning
+        worker:
+          $ref: '#/components/schemas/WorkerRef'
+        earningCode:
+          type: string
+          description: Earning code for the supplemental earning
+        type:
+          type: string
+          enum:
+            - Bonus
+            - Commission
+            - Stipend
+            - Allowance
+            - Other
+          description: Type of supplemental earning
+        amount:
+          type: number
+          format: double
+          description: Earning amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+        status:
+          type: string
+          enum:
+            - Pending
+            - Approved
+            - Processed
+            - Rejected
+          description: Current status
+        reason:
+          type: string
+          description: Description or reason for the earning
+        createdOn:
+          type: string
+          format: date-time
+          description: When the earning was submitted
+    SupplementalEarningCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplementalEarning'
+        total:
+          type: integer
+          description: Total number of supplemental earnings
+    CreateSupplementalEarningRequest:
+      type: object
+      required:
+        - workerId
+        - earningCode
+        - amount
+      properties:
+        workerId:
+          type: string
+          description: Worker identifier
+        earningCode:
+          type: string
+          description: Earning code
+        type:
+          type: string
+          enum:
+            - Bonus
+            - Commission
+            - Stipend
+            - Allowance
+            - Other
+          description: Type of supplemental earning
+        amount:
+          type: number
+          format: double
+          description: Earning amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+        reason:
+          type: string
+          description: Description or reason
+    InputBatch:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the input batch
+        name:
+          type: string
+          description: Batch name
+        status:
+          type: string
+          enum:
+            - Pending
+            - Validating
+            - Validated
+            - Processing
+            - Completed
+            - Failed
+          description: Current batch status
+        recordCount:
+          type: integer
+          description: Number of records in the batch
+        validRecords:
+          type: integer
+          description: Number of records that passed validation
+        failedRecords:
+          type: integer
+          description: Number of records that failed validation
+        submittedOn:
+          type: string
+          format: date-time
+          description: When the batch was submitted
+        completedOn:
+          type: string
+          format: date-time
+          description: When batch processing completed
+        submittedBy:
+          type: string
+          description: User who submitted the batch
+    InputBatchCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputBatch'
+        total:
+          type: integer
+          description: Total number of input batches
+    CreateInputBatchRequest:
+      type: object
+      required:
+        - name
+        - records
+      properties:
+        name:
+          type: string
+          description: Batch name
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputRecord'
+          description: Input records to process
+    InputRecord:
+      type: object
+      required:
+        - workerId
+        - inputType
+      properties:
+        workerId:
+          type: string
+          description: Worker identifier
+        inputType:
+          type: string
+          enum:
+            - Earning
+            - Deduction
+            - TimeOff
+          description: Type of input record
+        earningCode:
+          type: string
+          description: Earning code (for Earning type)
+        deductionCode:
+          type: string
+          description: Deduction code (for Deduction type)
+        amount:
+          type: number
+          format: double
+          description: Amount
+        hours:
+          type: number
+          format: double
+          description: Hours (for time-based entries)
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+    TimeOffInput:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the time off input
+        worker:
+          $ref: '#/components/schemas/WorkerRef'
+        timeOffType:
+          type: string
+          description: Type of time off
+        startDate:
+          type: string
+          format: date
+          description: Start date of time off
+        endDate:
+          type: string
+          format: date
+          description: End date of time off
+        hours:
+          type: number
+          format: double
+          description: Total hours of time off
+        status:
+          type: string
+          enum:
+            - Pending
+            - Approved
+            - Processed
+          description: Current status
+        paid:
+          type: boolean
+          description: Whether the time off is paid
+    TimeOffInputCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeOffInput'
+        total:
+          type: integer
+          description: Total number of time off inputs
+    CreateTimeOffInputRequest:
+      type: object
+      required:
+        - timeOffType
+        - startDate
+        - hours
+      properties:
+        timeOffType:
+          type: string
+          description: Type of time off
+        startDate:
+          type: string
+          format: date
+          description: Start date
+        endDate:
+          type: string
+          format: date
+          description: End date
+        hours:
+          type: number
+          format: double
+          description: Hours of time off
+        paid:
+          type: boolean
+          description: Whether the time off is paid
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Worker identifier
+        descriptor:
+          type: string
+          description: Worker display name
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message

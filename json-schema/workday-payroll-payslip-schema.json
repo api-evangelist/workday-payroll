@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-payroll/payslip.json",
+  "title": "Workday Payroll Payslip",
+  "description": "A payslip represents a worker's pay statement for a specific pay period, detailing earnings, deductions, taxes, and net pay amounts along with year-to-date totals.",
+  "type": "object",
+  "required": ["worker", "payPeriod", "grossPay", "netPay"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the payslip"
+    },
+    "worker": {
+      "$ref": "#/$defs/WorkerRef"
+    },
+    "payPeriod": {
+      "$ref": "#/$defs/PayPeriod"
+    },
+    "paymentDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of payment"
+    },
+    "grossPay": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total gross pay for the period"
+    },
+    "netPay": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total net pay after all deductions and taxes"
+    },
+    "totalEarnings": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Sum of all earnings for the period"
+    },
+    "totalDeductions": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Sum of all deductions for the period"
+    },
+    "totalTaxes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Sum of all tax withholdings for the period"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 currency code"
+    },
+    "earnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EarningLine"
+      },
+      "description": "Itemized earnings breakdown"
+    },
+    "deductions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DeductionLine"
+      },
+      "description": "Itemized deductions breakdown"
+    },
+    "taxes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TaxLine"
+      },
+      "description": "Itemized tax withholdings breakdown"
+    },
+    "yearToDateGross": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Year-to-date gross pay"
+    },
+    "yearToDateNet": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Year-to-date net pay"
+    },
+    "yearToDateTaxes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Year-to-date tax withholdings"
+    }
+  },
+  "$defs": {
+    "WorkerRef": {
+      "type": "object",
+      "description": "Reference to a worker in the Workday system",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker unique identifier"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name"
+        }
+      }
+    },
+    "PayPeriod": {
+      "type": "object",
+      "description": "Date range defining the pay period",
+      "required": ["startDate", "endDate"],
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the pay period"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the pay period"
+        }
+      }
+    },
+    "EarningLine": {
+      "type": "object",
+      "description": "A single line item for an earning on the payslip",
+      "properties": {
+        "earningCode": {
+          "type": "string",
+          "description": "Earning code descriptor"
+        },
+        "currentAmount": {
+          "type": "number",
+          "description": "Current period amount"
+        },
+        "currentHours": {
+          "type": "number",
+          "description": "Current period hours worked"
+        },
+        "rate": {
+          "type": "number",
+          "description": "Pay rate applied"
+        },
+        "yearToDateAmount": {
+          "type": "number",
+          "description": "Year-to-date total for this earning"
+        }
+      }
+    },
+    "DeductionLine": {
+      "type": "object",
+      "description": "A single line item for a deduction on the payslip",
+      "properties": {
+        "deductionCode": {
+          "type": "string",
+          "description": "Deduction code descriptor"
+        },
+        "employeeAmount": {
+          "type": "number",
+          "description": "Employee contribution amount"
+        },
+        "employerAmount": {
+          "type": "number",
+          "description": "Employer contribution amount"
+        },
+        "preTax": {
+          "type": "boolean",
+          "description": "Whether the deduction is pre-tax"
+        },
+        "yearToDateEmployee": {
+          "type": "number",
+          "description": "Year-to-date employee amount"
+        },
+        "yearToDateEmployer": {
+          "type": "number",
+          "description": "Year-to-date employer amount"
+        }
+      }
+    },
+    "TaxLine": {
+      "type": "object",
+      "description": "A single line item for a tax withholding on the payslip",
+      "properties": {
+        "taxAuthority": {
+          "type": "string",
+          "description": "Tax authority name"
+        },
+        "taxType": {
+          "type": "string",
+          "description": "Type of tax"
+        },
+        "currentAmount": {
+          "type": "number",
+          "description": "Current period tax amount"
+        },
+        "yearToDateAmount": {
+          "type": "number",
+          "description": "Year-to-date tax amount"
+        }
+      }
+    }
+  }
+}
