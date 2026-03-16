@@ -1,9 +1,12 @@
+aid: workday-payroll
 name: Workday Payroll API
 description: Workday Payroll provides comprehensive APIs for managing payroll operations, employee compensation, tax calculations, and payment processing within the Workday platform.
-image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
-url: https://www.workday.com
-created: '2024'
-modified: '2026-03-04'
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/apis.yml
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Workday Payroll API
   description: Core API for managing payroll processes including payroll calculations, employee pay data, deductions, earnings, and payroll runs.
