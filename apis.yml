@@ -1,5 +1,5 @@
 aid: workday-payroll
-name: Workday Payroll API
+name: Workday Payroll
 description: Workday Payroll provides comprehensive APIs for managing payroll operations, employee compensation, tax calculations, and payment processing within the Workday platform.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: >-
