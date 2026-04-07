@@ -24,16 +24,16 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Tax Withholdings
-    description: Manage worker tax withholding configurations
-  - name: Tax Elections
-    description: Access and manage worker tax elections (W-4, state forms)
-  - name: Tax Jurisdictions
-    description: Retrieve tax jurisdiction and authority information
-  - name: Tax Filing
-    description: Access tax filing data and compliance reports
   - name: Tax Calculations
     description: View and manage tax calculation results
+  - name: Tax Elections
+    description: Access and manage worker tax elections (W-4, state forms)
+  - name: Tax Filing
+    description: Access tax filing data and compliance reports
+  - name: Tax Jurisdictions
+    description: Retrieve tax jurisdiction and authority information
+  - name: Tax Withholdings
+    description: Manage worker tax withholding configurations
 security:
   - bearerAuth: []
 paths:

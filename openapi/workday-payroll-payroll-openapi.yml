@@ -24,18 +24,18 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Pay Runs
-    description: Manage payroll processing runs and their lifecycle
-  - name: Pay Groups
-    description: Configure and manage pay groups for organizing payroll
-  - name: Workers
-    description: Access worker payroll data and compensation details
-  - name: Earnings
-    description: Manage earning codes and worker earnings
   - name: Deductions
     description: Manage deduction codes and worker deductions
+  - name: Earnings
+    description: Manage earning codes and worker earnings
+  - name: Pay Groups
+    description: Configure and manage pay groups for organizing payroll
+  - name: Pay Runs
+    description: Manage payroll processing runs and their lifecycle
   - name: Payroll Calculations
     description: Trigger and monitor payroll calculation processes
+  - name: Workers
+    description: Access worker payroll data and compensation details
 security:
   - bearerAuth: []
 paths:

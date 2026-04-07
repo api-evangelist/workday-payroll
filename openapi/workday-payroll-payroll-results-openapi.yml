@@ -23,14 +23,14 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Payslips
-    description: Access worker payslip and pay statement data
+  - name: Payment Elections
+    description: Manage worker payment election and distribution details
   - name: Payment Results
     description: Retrieve payment processing results and details
   - name: Payroll Summaries
     description: Access aggregated payroll result summaries
-  - name: Payment Elections
-    description: Manage worker payment election and distribution details
+  - name: Payslips
+    description: Access worker payslip and pay statement data
 security:
   - bearerAuth: []
 paths:

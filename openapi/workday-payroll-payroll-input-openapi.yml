@@ -24,14 +24,14 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
+  - name: Input Batches
+    description: Manage batch submissions of payroll input data
   - name: One-Time Payments
     description: Submit and manage one-time payment requests
   - name: Payroll Adjustments
     description: Create and manage payroll adjustments and corrections
   - name: Supplemental Earnings
     description: Submit supplemental earnings such as bonuses and commissions
-  - name: Input Batches
-    description: Manage batch submissions of payroll input data
   - name: Time Off Inputs
     description: Submit time off and leave inputs for payroll processing
 security:
