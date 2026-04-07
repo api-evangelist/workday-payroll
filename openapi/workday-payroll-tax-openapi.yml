@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Tax API
+  title: Workday Payroll Workday Tax API
   description: >-
     API for managing payroll tax calculations, tax withholdings, tax filing
     information, W-4 elections, and tax jurisdiction data within the Workday
@@ -40,7 +40,7 @@ paths:
   /workers/{workerId}/taxWithholdings:
     get:
       operationId: listWorkerTaxWithholdings
-      summary: List worker tax withholdings
+      summary: Workday Payroll List worker tax withholdings
       description: >-
         Retrieve all tax withholding configurations for a specific worker,
         including federal, state, and local withholdings.
@@ -62,7 +62,7 @@ paths:
   /workers/{workerId}/taxWithholdings/{withholdingId}:
     get:
       operationId: getWorkerTaxWithholding
-      summary: Get a worker tax withholding
+      summary: Workday Payroll Get a worker tax withholding
       description: >-
         Retrieve details of a specific tax withholding configuration
         for a worker.
@@ -84,7 +84,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateWorkerTaxWithholding
-      summary: Update a worker tax withholding
+      summary: Workday Payroll Update a worker tax withholding
       description: >-
         Update a tax withholding configuration for a worker, such as
         changing filing status or additional withholding amounts.
@@ -115,7 +115,7 @@ paths:
   /workers/{workerId}/taxElections:
     get:
       operationId: listWorkerTaxElections
-      summary: List worker tax elections
+      summary: Workday Payroll List worker tax elections
       description: >-
         Retrieve all tax elections for a worker, including federal W-4 data,
         state withholding elections, and local tax elections.
@@ -136,7 +136,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: createWorkerTaxElection
-      summary: Create a worker tax election
+      summary: Workday Payroll Create a worker tax election
       description: >-
         Submit a new tax election for a worker, such as a W-4 update
         or state withholding form change.
@@ -166,7 +166,7 @@ paths:
   /workers/{workerId}/taxElections/{electionId}:
     get:
       operationId: getWorkerTaxElection
-      summary: Get a worker tax election
+      summary: Workday Payroll Get a worker tax election
       description: >-
         Retrieve details of a specific tax election for a worker.
       tags:
@@ -188,7 +188,7 @@ paths:
   /taxJurisdictions:
     get:
       operationId: listTaxJurisdictions
-      summary: List tax jurisdictions
+      summary: Workday Payroll List tax jurisdictions
       description: >-
         Retrieve all configured tax jurisdictions, including federal,
         state, and local tax authorities.
@@ -224,7 +224,7 @@ paths:
   /taxJurisdictions/{jurisdictionId}:
     get:
       operationId: getTaxJurisdiction
-      summary: Get a tax jurisdiction
+      summary: Workday Payroll Get a tax jurisdiction
       description: >-
         Retrieve details of a specific tax jurisdiction, including
         applicable tax types and rates.
@@ -246,7 +246,7 @@ paths:
   /taxFilings:
     get:
       operationId: listTaxFilings
-      summary: List tax filings
+      summary: Workday Payroll List tax filings
       description: >-
         Retrieve tax filing records for compliance reporting, including
         quarterly and annual filing data.
@@ -286,7 +286,7 @@ paths:
   /taxFilings/{filingId}:
     get:
       operationId: getTaxFiling
-      summary: Get a tax filing
+      summary: Workday Payroll Get a tax filing
       description: >-
         Retrieve details of a specific tax filing record.
       tags:
@@ -307,7 +307,7 @@ paths:
   /payRuns/{payRunId}/taxResults:
     get:
       operationId: listPayRunTaxResults
-      summary: List tax results for a pay run
+      summary: Workday Payroll List tax results for a pay run
       description: >-
         Retrieve aggregated tax calculation results for a completed
         pay run, broken down by tax type and jurisdiction.
@@ -331,7 +331,7 @@ paths:
   /workers/{workerId}/taxSummary:
     get:
       operationId: getWorkerTaxSummary
-      summary: Get worker tax summary
+      summary: Workday Payroll Get worker tax summary
       description: >-
         Retrieve a year-to-date tax summary for a worker, including
         total withholdings by jurisdiction and tax type.

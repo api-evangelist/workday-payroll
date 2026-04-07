@@ -40,7 +40,7 @@ paths:
   /oneTimePayments:
     get:
       operationId: listOneTimePayments
-      summary: List one-time payments
+      summary: Workday Payroll List one-time payments
       description: >-
         Retrieve all one-time payment requests, optionally filtered by
         status, worker, or date range.
@@ -75,7 +75,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createOneTimePayment
-      summary: Create a one-time payment
+      summary: Workday Payroll Create a one-time payment
       description: >-
         Submit a new one-time payment request for a worker, such as a bonus,
         retroactive pay adjustment, or relocation allowance.
@@ -101,7 +101,7 @@ paths:
   /oneTimePayments/{paymentId}:
     get:
       operationId: getOneTimePayment
-      summary: Get a one-time payment
+      summary: Workday Payroll Get a one-time payment
       description: >-
         Retrieve details of a specific one-time payment request.
       tags:
@@ -121,7 +121,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateOneTimePayment
-      summary: Update a one-time payment
+      summary: Workday Payroll Update a one-time payment
       description: >-
         Update a pending one-time payment request.
       tags:
@@ -149,7 +149,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteOneTimePayment
-      summary: Delete a one-time payment
+      summary: Workday Payroll Delete a one-time payment
       description: >-
         Delete a pending one-time payment request that has not yet been
         processed.
@@ -167,7 +167,7 @@ paths:
   /adjustments:
     get:
       operationId: listPayrollAdjustments
-      summary: List payroll adjustments
+      summary: Workday Payroll List payroll adjustments
       description: >-
         Retrieve all payroll adjustment records, optionally filtered by
         worker, type, or status.
@@ -202,7 +202,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createPayrollAdjustment
-      summary: Create a payroll adjustment
+      summary: Workday Payroll Create a payroll adjustment
       description: >-
         Submit a payroll adjustment to correct, reverse, or reclassify
         previously processed payroll data.
@@ -228,7 +228,7 @@ paths:
   /adjustments/{adjustmentId}:
     get:
       operationId: getPayrollAdjustment
-      summary: Get a payroll adjustment
+      summary: Workday Payroll Get a payroll adjustment
       description: >-
         Retrieve details of a specific payroll adjustment.
       tags:
@@ -249,7 +249,7 @@ paths:
   /supplementalEarnings:
     get:
       operationId: listSupplementalEarnings
-      summary: List supplemental earnings
+      summary: Workday Payroll List supplemental earnings
       description: >-
         Retrieve all supplemental earning submissions, such as bonuses,
         commissions, and other non-regular earnings.
@@ -274,7 +274,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createSupplementalEarning
-      summary: Create a supplemental earning
+      summary: Workday Payroll Create a supplemental earning
       description: >-
         Submit a supplemental earning for a worker to be included in
         the next payroll run.
@@ -300,7 +300,7 @@ paths:
   /supplementalEarnings/{earningId}:
     get:
       operationId: getSupplementalEarning
-      summary: Get a supplemental earning
+      summary: Workday Payroll Get a supplemental earning
       description: >-
         Retrieve details of a specific supplemental earning submission.
       tags:
@@ -320,7 +320,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteSupplementalEarning
-      summary: Delete a supplemental earning
+      summary: Workday Payroll Delete a supplemental earning
       description: >-
         Delete a pending supplemental earning that has not yet been processed.
       tags:
@@ -337,7 +337,7 @@ paths:
   /inputBatches:
     get:
       operationId: listInputBatches
-      summary: List input batches
+      summary: Workday Payroll List input batches
       description: >-
         Retrieve all payroll input batch submissions, including their
         processing status and validation results.
@@ -369,7 +369,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createInputBatch
-      summary: Create an input batch
+      summary: Workday Payroll Create an input batch
       description: >-
         Submit a batch of payroll input records for processing, supporting
         earnings, deductions, and time-off entries in bulk.
@@ -395,7 +395,7 @@ paths:
   /inputBatches/{batchId}:
     get:
       operationId: getInputBatch
-      summary: Get an input batch
+      summary: Workday Payroll Get an input batch
       description: >-
         Retrieve details and status of a specific input batch submission.
       tags:
@@ -416,7 +416,7 @@ paths:
   /workers/{workerId}/timeOffInputs:
     get:
       operationId: listWorkerTimeOffInputs
-      summary: List worker time off inputs
+      summary: Workday Payroll List worker time off inputs
       description: >-
         Retrieve time off input records for a specific worker that affect
         payroll calculations.
@@ -439,7 +439,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: createWorkerTimeOffInput
-      summary: Create a time off input
+      summary: Workday Payroll Create a time off input
       description: >-
         Submit a time off input for a worker to be reflected in payroll
         processing.

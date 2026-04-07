@@ -42,7 +42,7 @@ paths:
   /payRuns:
     get:
       operationId: listPayRuns
-      summary: List pay runs
+      summary: Workday Payroll List pay runs
       description: >-
         Retrieve a collection of payroll runs, optionally filtered by status,
         pay group, or date range.
@@ -91,7 +91,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createPayRun
-      summary: Create a pay run
+      summary: Workday Payroll Create a pay run
       description: >-
         Initiate a new payroll run for a specified pay group and pay period.
       tags:
@@ -116,7 +116,7 @@ paths:
   /payRuns/{payRunId}:
     get:
       operationId: getPayRun
-      summary: Get a pay run
+      summary: Workday Payroll Get a pay run
       description: >-
         Retrieve details of a specific payroll run by its identifier.
       tags:
@@ -136,7 +136,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updatePayRun
-      summary: Update a pay run
+      summary: Workday Payroll Update a pay run
       description: >-
         Update the status or properties of an existing pay run.
       tags:
@@ -165,7 +165,7 @@ paths:
   /payRuns/{payRunId}/calculate:
     post:
       operationId: calculatePayRun
-      summary: Calculate a pay run
+      summary: Workday Payroll Calculate a pay run
       description: >-
         Trigger payroll calculations for a specific pay run, processing all
         earnings, deductions, and taxes for included workers.
@@ -189,7 +189,7 @@ paths:
   /payRuns/{payRunId}/complete:
     post:
       operationId: completePayRun
-      summary: Complete a pay run
+      summary: Workday Payroll Complete a pay run
       description: >-
         Mark a pay run as completed, finalizing all payroll calculations
         and preparing payments for distribution.
@@ -213,7 +213,7 @@ paths:
   /payGroups:
     get:
       operationId: listPayGroups
-      summary: List pay groups
+      summary: Workday Payroll List pay groups
       description: >-
         Retrieve all configured pay groups, which organize workers for
         payroll processing by frequency, currency, or other criteria.
@@ -234,7 +234,7 @@ paths:
   /payGroups/{payGroupId}:
     get:
       operationId: getPayGroup
-      summary: Get a pay group
+      summary: Workday Payroll Get a pay group
       description: >-
         Retrieve details of a specific pay group by its identifier.
       tags:
@@ -255,7 +255,7 @@ paths:
   /payGroups/{payGroupId}/workers:
     get:
       operationId: listPayGroupWorkers
-      summary: List workers in a pay group
+      summary: Workday Payroll List workers in a pay group
       description: >-
         Retrieve all workers assigned to a specific pay group.
       tags:
@@ -278,7 +278,7 @@ paths:
   /workers/{workerId}/payrollDetails:
     get:
       operationId: getWorkerPayrollDetails
-      summary: Get worker payroll details
+      summary: Workday Payroll Get worker payroll details
       description: >-
         Retrieve payroll-specific details for a worker, including pay group
         assignment, payment method, and compensation summary.
@@ -300,7 +300,7 @@ paths:
   /workers/{workerId}/earnings:
     get:
       operationId: listWorkerEarnings
-      summary: List worker earnings
+      summary: Workday Payroll List worker earnings
       description: >-
         Retrieve all earnings records for a specific worker, including
         regular pay, overtime, bonuses, and other earning types.
@@ -324,7 +324,7 @@ paths:
   /workers/{workerId}/deductions:
     get:
       operationId: listWorkerDeductions
-      summary: List worker deductions
+      summary: Workday Payroll List worker deductions
       description: >-
         Retrieve all deductions for a specific worker, including benefits,
         retirement contributions, garnishments, and voluntary deductions.
@@ -348,7 +348,7 @@ paths:
   /earningCodes:
     get:
       operationId: listEarningCodes
-      summary: List earning codes
+      summary: Workday Payroll List earning codes
       description: >-
         Retrieve all configured earning codes that define types of
         compensation such as regular pay, overtime, and bonuses.
@@ -369,7 +369,7 @@ paths:
   /deductionCodes:
     get:
       operationId: listDeductionCodes
-      summary: List deduction codes
+      summary: Workday Payroll List deduction codes
       description: >-
         Retrieve all configured deduction codes that define types of payroll
         deductions such as taxes, benefits, and garnishments.
