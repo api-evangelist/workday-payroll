@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-earning-code-collection-structure.json",
+  "name": "EarningCodeCollection",
+  "description": "EarningCodeCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EarningCode"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of earning codes",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "EarningCode": {
+      "name": "EarningCode",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the earning code",
+          "example": "REGULAR"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the earning code",
+          "example": "Weekly USD Pay Group"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Regular",
+            "Overtime",
+            "Bonus",
+            "Commission",
+            "Holiday",
+            "PTO",
+            "Supplemental",
+            "Other"
+          ],
+          "description": "Category of the earning",
+          "example": "Regular"
+        },
+        "taxable": {
+          "type": "boolean",
+          "description": "Whether this earning is subject to taxation",
+          "example": true
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether the earning code is currently active",
+          "example": true
+        }
+      }
+    }
+  }
+}

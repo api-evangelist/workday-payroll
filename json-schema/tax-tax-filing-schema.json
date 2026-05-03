@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-tax-filing-schema.json",
+  "title": "TaxFiling",
+  "description": "TaxFiling schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the tax filing",
+      "example": "tfl_2026q1_941"
+    },
+    "filingType": {
+      "type": "string",
+      "enum": [
+        "Quarterly",
+        "Annual",
+        "Amendment"
+      ],
+      "description": "Type of filing",
+      "example": "Quarterly"
+    },
+    "jurisdiction": {
+      "$ref": "#/$defs/TaxJurisdictionRef"
+    },
+    "taxYear": {
+      "type": "integer",
+      "description": "Tax year",
+      "example": 2026
+    },
+    "quarter": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Quarter (for quarterly filings)",
+      "example": 1
+    },
+    "formNumber": {
+      "type": "string",
+      "description": "Tax form number (e.g., 941, 940, W-2)",
+      "example": "941"
+    },
+    "totalTaxableWages": {
+      "type": "number",
+      "format": "double",
+      "description": "Total taxable wages for the filing period",
+      "example": 235000.0
+    },
+    "totalTaxWithheld": {
+      "type": "number",
+      "format": "double",
+      "description": "Total tax withheld for the filing period",
+      "example": 28500.0
+    },
+    "totalEmployerTax": {
+      "type": "number",
+      "format": "double",
+      "description": "Total employer tax liability",
+      "example": 14583.7
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Filing due date",
+      "example": "2026-04-30"
+    },
+    "filedDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the filing was submitted",
+      "example": "2026-04-30"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Pending",
+        "Filed",
+        "Accepted",
+        "Rejected"
+      ],
+      "description": "Filing status",
+      "example": "Draft"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    }
+  },
+  "$defs": {
+    "TaxJurisdictionRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

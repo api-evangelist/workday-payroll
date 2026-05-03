@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-worker-tax-summary-schema.json",
+  "title": "WorkerTaxSummary",
+  "description": "WorkerTaxSummary schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "worker": {
+      "$ref": "#/$defs/WorkerRef"
+    },
+    "taxYear": {
+      "type": "integer",
+      "description": "Tax year for the summary",
+      "example": 2026
+    },
+    "totalGrossWages": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date gross wages",
+      "example": 245000.0
+    },
+    "totalTaxableWages": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date taxable wages",
+      "example": 235000.0
+    },
+    "totalFederalWithholding": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date federal income tax withheld",
+      "example": 14250.0
+    },
+    "totalStateWithholding": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date state income tax withheld",
+      "example": 6480.0
+    },
+    "totalLocalWithholding": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date local tax withheld",
+      "example": 1240.0
+    },
+    "totalSocialSecurity": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date Social Security tax",
+      "example": 5890.0
+    },
+    "totalMedicare": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date Medicare tax",
+      "example": 1380.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "jurisdictionBreakdown": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TaxResult"
+      },
+      "description": "Breakdown by jurisdiction"
+    }
+  },
+  "$defs": {
+    "WorkerRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    },
+    "TaxResult": {
+      "type": "object",
+      "properties": {
+        "jurisdiction": {
+          "$ref": "#/$defs/TaxJurisdictionRef"
+        },
+        "taxType": {
+          "type": "string",
+          "description": "Type of tax",
+          "example": "FederalIncome"
+        },
+        "employeeAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Employee tax amount",
+          "example": 287.5
+        },
+        "employerAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Employer tax amount",
+          "example": 287.5
+        },
+        "taxableWages": {
+          "type": "number",
+          "format": "double",
+          "description": "Taxable wages for this tax type",
+          "example": 4750.0
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        }
+      }
+    },
+    "TaxJurisdictionRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

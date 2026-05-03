@@ -1,0 +1,17 @@
+{
+  "id": "adj_20260415_00012",
+  "worker": {
+    "id": "w_100542",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "adjustmentType": "Correction",
+  "originalPayRunId": "pr_20260430_weekly_001",
+  "earningCode": "REGULAR",
+  "deductionCode": "MEDICAL_PRETAX",
+  "amount": 2500.0,
+  "currency": "USD",
+  "reason": "Q1 2026 performance bonus",
+  "effectiveDate": "2026-04-30",
+  "status": "Pending",
+  "createdOn": "2026-04-30T16:45:00Z"
+}

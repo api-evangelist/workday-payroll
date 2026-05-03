@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-input-record-schema.json",
+  "title": "InputRecord",
+  "description": "InputRecord schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "workerId": {
+      "type": "string",
+      "description": "Worker identifier",
+      "example": "w_100542"
+    },
+    "inputType": {
+      "type": "string",
+      "enum": [
+        "Earning",
+        "Deduction",
+        "TimeOff"
+      ],
+      "description": "Type of input record",
+      "example": "Earning"
+    },
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code (for Earning type)",
+      "example": "REGULAR"
+    },
+    "deductionCode": {
+      "type": "string",
+      "description": "Deduction code (for Deduction type)",
+      "example": "MEDICAL_PRETAX"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Amount",
+      "example": 2500.0
+    },
+    "hours": {
+      "type": "number",
+      "format": "double",
+      "description": "Hours (for time-based entries)",
+      "example": 40.0
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date",
+      "example": "2026-04-30"
+    }
+  },
+  "required": [
+    "workerId",
+    "inputType"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-pay-run-collection-structure.json",
+  "name": "PayRunCollection",
+  "description": "PayRunCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PayRun"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of pay runs matching the query",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "PayRun": {
+      "name": "PayRun",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the pay run",
+          "example": "pr_20260430_weekly_001"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Human-readable name of the pay run",
+          "example": "Weekly USD Pay Group"
+        },
+        "payGroup": {
+          "$ref": "#/$defs/PayGroupRef"
+        },
+        "payPeriod": {
+          "$ref": "#/$defs/PayPeriod"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Draft",
+            "InProgress",
+            "Completed",
+            "Cancelled"
+          ],
+          "description": "Current status of the pay run",
+          "example": "Draft"
+        },
+        "runCategory": {
+          "type": "string",
+          "enum": [
+            "Regular",
+            "OffCycle",
+            "OnDemand"
+          ],
+          "description": "Category of the pay run",
+          "example": "Regular"
+        },
+        "paymentDate": {
+          "type": "date",
+          "description": "Date payments will be distributed",
+          "example": "2026-04-30"
+        },
+        "totalGrossPay": {
+          "type": "double",
+          "description": "Total gross pay for the pay run",
+          "example": 245830.5
+        },
+        "totalNetPay": {
+          "type": "double",
+          "description": "Total net pay for the pay run",
+          "example": 178452.3
+        },
+        "totalDeductions": {
+          "type": "double",
+          "description": "Total deductions for the pay run",
+          "example": 38210.8
+        },
+        "totalTaxes": {
+          "type": "double",
+          "description": "Total tax withholdings for the pay run",
+          "example": 29167.4
+        },
+        "workerCount": {
+          "type": "int32",
+          "description": "Number of workers included in the pay run",
+          "example": 87
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        },
+        "createdOn": {
+          "type": "datetime",
+          "description": "When the pay run was created",
+          "example": "2026-04-30T16:45:00Z"
+        },
+        "completedOn": {
+          "type": "datetime",
+          "description": "When the pay run was completed",
+          "example": "2026-04-30T16:45:00Z"
+        }
+      }
+    },
+    "PayPeriod": {
+      "name": "PayPeriod",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "date",
+          "description": "Start date of the pay period",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "date",
+          "description": "End date of the pay period",
+          "example": "2026-04-30"
+        }
+      }
+    },
+    "PayGroupRef": {
+      "name": "PayGroupRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Pay group identifier",
+          "example": "pg_weekly_usd"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Pay group display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

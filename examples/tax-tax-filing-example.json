@@ -1,0 +1,18 @@
+{
+  "id": "tfl_2026q1_941",
+  "filingType": "Quarterly",
+  "jurisdiction": {
+    "id": "tjur_us_federal",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "taxYear": 2026,
+  "quarter": 1,
+  "formNumber": "941",
+  "totalTaxableWages": 235000.0,
+  "totalTaxWithheld": 28500.0,
+  "totalEmployerTax": 14583.7,
+  "dueDate": "2026-04-30",
+  "filedDate": "2026-04-30",
+  "status": "Draft",
+  "currency": "USD"
+}

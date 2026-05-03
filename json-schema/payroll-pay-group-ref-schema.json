@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-pay-group-ref-schema.json",
+  "title": "PayGroupRef",
+  "description": "PayGroupRef schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Pay group identifier",
+      "example": "pg_weekly_usd"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Pay group display name",
+      "example": "Weekly USD Pay Group"
+    }
+  }
+}

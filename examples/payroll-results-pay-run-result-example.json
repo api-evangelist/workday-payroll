@@ -1,0 +1,15 @@
+{
+  "payRunId": "pr_20260430_weekly_001",
+  "payPeriod": {
+    "startDate": "2026-04-30",
+    "endDate": "2026-04-30"
+  },
+  "paymentDate": "2026-04-30",
+  "totalGrossPay": 245830.5,
+  "totalNetPay": 178452.3,
+  "totalDeductions": 38210.8,
+  "totalEmployerTaxes": 14583.7,
+  "totalEmployeeTaxes": 14583.7,
+  "workerCount": 87,
+  "currency": "USD"
+}

@@ -14,51 +14,53 @@ externalDocs:
   description: Workday Payroll Results API Documentation
   url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
 servers:
-  - url: https://api.workday.com/payroll-results/v1
-    description: Workday Payroll Results Production
-  - url: https://{tenant}.workday.com/api/payroll-results/v1
-    description: Workday Payroll Results Tenant-Specific
-    variables:
-      tenant:
-        description: Workday tenant identifier
-        default: your-tenant
+- url: https://api.workday.com/payroll-results/v1
+  description: Workday Payroll Results Production
+- url: https://{tenant}.workday.com/api/payroll-results/v1
+  description: Workday Payroll Results Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
 tags:
-  - name: Payment Elections
-    description: Manage worker payment election and distribution details
-  - name: Payment Results
-    description: Retrieve payment processing results and details
-  - name: Payroll Summaries
-    description: Access aggregated payroll result summaries
-  - name: Payslips
-    description: Access worker payslip and pay statement data
+- name: Payment Elections
+  description: Manage worker payment election and distribution details
+- name: Payment Results
+  description: Retrieve payment processing results and details
+- name: Payroll Summaries
+  description: Access aggregated payroll result summaries
+- name: Payslips
+  description: Access worker payslip and pay statement data
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /workers/{workerId}/payslips:
     get:
       operationId: listWorkerPayslips
-      summary: Workday Payroll List worker payslips
+      summary: Workday Payroll List Worker Payslips
       description: >-
         Retrieve all payslips for a specific worker, with optional filtering
         by date range or pay period.
       tags:
-        - Payslips
+      - Payslips
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: fromDate
-          in: query
-          description: Filter payslips from this date
-          schema:
-            type: string
-            format: date
-        - name: toDate
-          in: query
-          description: Filter payslips up to this date
-          schema:
-            type: string
-            format: date
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: fromDate
+        in: query
+        description: Filter payslips from this date
+        schema:
+          type: string
+          format: date
+        example: '2026-04-30'
+      - name: toDate
+        in: query
+        description: Filter payslips up to this date
+        schema:
+          type: string
+          format: date
+        example: '2026-04-30'
       responses:
         '200':
           description: Collection of payslips
@@ -66,22 +68,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayslipCollection'
+              examples:
+                ListWorkerPayslips200Example:
+                  summary: Default listWorkerPayslips 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: ps_w100542_20260430
+                      worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      payPeriod:
+                        startDate: '2026-04-30'
+                        endDate: '2026-04-30'
+                      paymentDate: '2026-04-30'
+                      grossPay: 1.0
+                      netPay: 1.0
+                      totalEarnings: 5240.0
+                      totalDeductions: 38210.8
+                      totalTaxes: 29167.4
+                      currency: USD
+                      earnings:
+                      - earningCode: REGULAR
+                        currentAmount: 2840.0
+                        currentHours: 40.0
+                        rate: 32.5
+                        yearToDateAmount: 8742.5
+                      deductions:
+                      - deductionCode: MEDICAL_PRETAX
+                        employeeAmount: 287.5
+                        employerAmount: 287.5
+                        preTax: true
+                        yearToDateEmployee: 8742.5
+                        yearToDateEmployer: 8742.5
+                      taxes:
+                      - taxAuthority: Internal Revenue Service
+                        taxType: FederalIncome
+                        currentAmount: 2840.0
+                        yearToDateAmount: 8742.5
+                      yearToDateGross: 42850.0
+                      yearToDateNet: 31420.65
+                      yearToDateTaxes: 8742.5
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/payslips/{payslipId}:
     get:
       operationId: getWorkerPayslip
-      summary: Workday Payroll Get a worker payslip
+      summary: Workday Payroll Get a Worker Payslip
       description: >-
         Retrieve detailed payslip information for a specific pay period,
         including earnings, deductions, taxes, and net pay.
       tags:
-        - Payslips
+      - Payslips
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/payslipId'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/payslipId'
       responses:
         '200':
           description: Payslip details
@@ -89,21 +136,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Payslip'
+              examples:
+                GetWorkerPayslip200Example:
+                  summary: Default getWorkerPayslip 200 response
+                  x-microcks-default: true
+                  value:
+                    id: ps_w100542_20260430
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    payPeriod:
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    paymentDate: '2026-04-30'
+                    grossPay: 1.0
+                    netPay: 1.0
+                    totalEarnings: 5240.0
+                    totalDeductions: 38210.8
+                    totalTaxes: 29167.4
+                    currency: USD
+                    earnings:
+                    - earningCode: REGULAR
+                      currentAmount: 2840.0
+                      currentHours: 40.0
+                      rate: 32.5
+                      yearToDateAmount: 8742.5
+                    deductions:
+                    - deductionCode: MEDICAL_PRETAX
+                      employeeAmount: 287.5
+                      employerAmount: 287.5
+                      preTax: true
+                      yearToDateEmployee: 8742.5
+                      yearToDateEmployer: 8742.5
+                    taxes:
+                    - taxAuthority: Internal Revenue Service
+                      taxType: FederalIncome
+                      currentAmount: 2840.0
+                      yearToDateAmount: 8742.5
+                    yearToDateGross: 42850.0
+                    yearToDateNet: 31420.65
+                    yearToDateTaxes: 8742.5
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/results:
     get:
       operationId: getPayRunResults
-      summary: Workday Payroll Get pay run results
+      summary: Workday Payroll Get Pay Run Results
       description: >-
         Retrieve aggregated results for a completed pay run, including
         totals for earnings, deductions, taxes, and payments.
       tags:
-        - Payroll Summaries
+      - Payroll Summaries
       parameters:
-        - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/payRunId'
       responses:
         '200':
           description: Pay run results
@@ -111,23 +201,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayRunResult'
+              examples:
+                GetPayRunResults200Example:
+                  summary: Default getPayRunResults 200 response
+                  x-microcks-default: true
+                  value:
+                    payRunId: pr_20260430_weekly_001
+                    payPeriod:
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    paymentDate: '2026-04-30'
+                    totalGrossPay: 245830.5
+                    totalNetPay: 178452.3
+                    totalDeductions: 38210.8
+                    totalEmployerTaxes: 14583.7
+                    totalEmployeeTaxes: 14583.7
+                    workerCount: 87
+                    currency: USD
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/results/workers:
     get:
       operationId: listPayRunWorkerResults
-      summary: Workday Payroll List worker-level results for a pay run
+      summary: Workday Payroll List Worker-level Results for a Pay Run
       description: >-
         Retrieve individual worker results for a completed pay run,
         including each worker's gross pay, deductions, taxes, and net pay.
       tags:
-        - Payroll Summaries
+      - Payroll Summaries
       parameters:
-        - $ref: '#/components/parameters/payRunId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of worker results
@@ -135,22 +245,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkerResultCollection'
+              examples:
+                ListPayRunWorkerResults200Example:
+                  summary: Default listPayRunWorkerResults 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      grossPay: 1.0
+                      netPay: 1.0
+                      totalEarnings: 5240.0
+                      totalDeductions: 38210.8
+                      totalTaxes: 29167.4
+                      currency: USD
+                      paymentMethod: DirectDeposit
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/results/workers/{workerId}:
     get:
       operationId: getPayRunWorkerResult
-      summary: Workday Payroll Get a worker result for a pay run
+      summary: Workday Payroll Get a Worker Result for a Pay Run
       description: >-
         Retrieve detailed results for a specific worker within a completed
         pay run.
       tags:
-        - Payroll Summaries
+      - Payroll Summaries
       parameters:
-        - $ref: '#/components/parameters/payRunId'
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/workerId'
       responses:
         '200':
           description: Worker result details
@@ -158,23 +288,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkerResult'
+              examples:
+                GetPayRunWorkerResult200Example:
+                  summary: Default getPayRunWorkerResult 200 response
+                  x-microcks-default: true
+                  value:
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    grossPay: 1.0
+                    netPay: 1.0
+                    totalEarnings: 5240.0
+                    totalDeductions: 38210.8
+                    totalTaxes: 29167.4
+                    currency: USD
+                    paymentMethod: DirectDeposit
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/payments:
     get:
       operationId: listPayRunPayments
-      summary: Workday Payroll List payments for a pay run
+      summary: Workday Payroll List Payments for a Pay Run
       description: >-
         Retrieve all payment transactions generated by a completed pay run,
         including direct deposits and check payments.
       tags:
-        - Payment Results
+      - Payment Results
       parameters:
-        - $ref: '#/components/parameters/payRunId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of payments
@@ -182,21 +330,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentCollection'
+              examples:
+                ListPayRunPayments200Example:
+                  summary: Default listPayRunPayments 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: pmt_20260502_00045
+                      worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      payRunId: pr_20260430_weekly_001
+                      paymentMethod: DirectDeposit
+                      amount: 2500.0
+                      currency: USD
+                      paymentDate: '2026-04-30'
+                      settlementDate: '2026-04-30'
+                      status: Pending
+                      bankAccount:
+                        lastFourDigits: '4521'
+                        bankName: Wells Fargo
+                        accountType: Checking
+                      checkNumber: '100482'
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payments/{paymentId}:
     get:
       operationId: getPayment
-      summary: Workday Payroll Get a payment
+      summary: Workday Payroll Get a Payment
       description: >-
         Retrieve details of a specific payment transaction, including
         payment method, amount, and settlement status.
       tags:
-        - Payment Results
+      - Payment Results
       parameters:
-        - $ref: '#/components/parameters/paymentId'
+      - $ref: '#/components/parameters/paymentId'
       responses:
         '200':
           description: Payment details
@@ -204,21 +378,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Payment'
+              examples:
+                GetPayment200Example:
+                  summary: Default getPayment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pmt_20260502_00045
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    payRunId: pr_20260430_weekly_001
+                    paymentMethod: DirectDeposit
+                    amount: 2500.0
+                    currency: USD
+                    paymentDate: '2026-04-30'
+                    settlementDate: '2026-04-30'
+                    status: Pending
+                    bankAccount:
+                      lastFourDigits: '4521'
+                      bankName: Wells Fargo
+                      accountType: Checking
+                    checkNumber: '100482'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/paymentElections:
     get:
       operationId: listWorkerPaymentElections
-      summary: Workday Payroll List worker payment elections
+      summary: Workday Payroll List Worker Payment Elections
       description: >-
         Retrieve payment election details for a worker, including direct
         deposit accounts, distribution amounts, and payment preferences.
       tags:
-        - Payment Elections
+      - Payment Elections
       parameters:
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/workerId'
       responses:
         '200':
           description: Collection of payment elections
@@ -226,10 +424,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentElectionCollection'
+              examples:
+                ListWorkerPaymentElections200Example:
+                  summary: Default listWorkerPaymentElections 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: pe_w100542_primary
+                      order: 1
+                      distributionType: Amount
+                      amount: 2500.0
+                      percentage: 100.0
+                      accountType: Checking
+                      bankName: Wells Fargo
+                      lastFourDigits: '4521'
+                      currency: USD
+                      active: true
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -246,6 +464,7 @@ components:
       description: Unique identifier for the worker
       schema:
         type: string
+      example: w_100542
     payslipId:
       name: payslipId
       in: path
@@ -253,6 +472,7 @@ components:
       description: Unique identifier for the payslip
       schema:
         type: string
+      example: ps_w100542_20260430
     payRunId:
       name: payRunId
       in: path
@@ -260,6 +480,7 @@ components:
       description: Unique identifier for the pay run
       schema:
         type: string
+      example: pr_20260430_weekly_001
     paymentId:
       name: paymentId
       in: path
@@ -267,6 +488,7 @@ components:
       description: Unique identifier for the payment
       schema:
         type: string
+      example: pmt_20260502_00045
     limit:
       name: limit
       in: query
@@ -276,6 +498,7 @@ components:
         minimum: 1
         maximum: 100
         default: 20
+      example: 20
     offset:
       name: offset
       in: query
@@ -284,6 +507,7 @@ components:
         type: integer
         minimum: 0
         default: 0
+      example: 0
   responses:
     Unauthorized:
       description: Authentication required or token expired
@@ -291,12 +515,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   schemas:
     Payslip:
       type: object
@@ -304,6 +542,7 @@ components:
         id:
           type: string
           description: Unique identifier for the payslip
+          example: ps_w100542_20260430
         worker:
           $ref: '#/components/schemas/WorkerRef'
         payPeriod:
@@ -312,29 +551,36 @@ components:
           type: string
           format: date
           description: Date of payment
+          example: '2026-04-30'
         grossPay:
           type: number
           format: double
           description: Total gross pay
+          example: 1.0
         netPay:
           type: number
           format: double
           description: Total net pay
+          example: 1.0
         totalEarnings:
           type: number
           format: double
           description: Sum of all earnings
+          example: 5240.0
         totalDeductions:
           type: number
           format: double
           description: Sum of all deductions
+          example: 38210.8
         totalTaxes:
           type: number
           format: double
           description: Sum of all tax withholdings
+          example: 29167.4
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         earnings:
           type: array
           items:
@@ -354,14 +600,17 @@ components:
           type: number
           format: double
           description: Year-to-date gross pay
+          example: 42850.0
         yearToDateNet:
           type: number
           format: double
           description: Year-to-date net pay
+          example: 31420.65
         yearToDateTaxes:
           type: number
           format: double
           description: Year-to-date tax withholdings
+          example: 8742.5
     PayslipCollection:
       type: object
       properties:
@@ -372,108 +621,133 @@ components:
         total:
           type: integer
           description: Total number of payslips
+          example: 52
     PayslipEarningLine:
       type: object
       properties:
         earningCode:
           type: string
           description: Earning code descriptor
+          example: REGULAR
         currentAmount:
           type: number
           format: double
           description: Current period amount
+          example: 2840.0
         currentHours:
           type: number
           format: double
           description: Current period hours
+          example: 40.0
         rate:
           type: number
           format: double
           description: Pay rate
+          example: 32.5
         yearToDateAmount:
           type: number
           format: double
           description: Year-to-date amount for this earning
+          example: 8742.5
     PayslipDeductionLine:
       type: object
       properties:
         deductionCode:
           type: string
           description: Deduction code descriptor
+          example: MEDICAL_PRETAX
         employeeAmount:
           type: number
           format: double
           description: Employee contribution amount
+          example: 287.5
         employerAmount:
           type: number
           format: double
           description: Employer contribution amount
+          example: 287.5
         preTax:
           type: boolean
           description: Whether this deduction is pre-tax
+          example: true
         yearToDateEmployee:
           type: number
           format: double
           description: Year-to-date employee amount
+          example: 8742.5
         yearToDateEmployer:
           type: number
           format: double
           description: Year-to-date employer amount
+          example: 8742.5
     PayslipTaxLine:
       type: object
       properties:
         taxAuthority:
           type: string
           description: Tax authority name
+          example: Internal Revenue Service
         taxType:
           type: string
           description: Type of tax
+          example: FederalIncome
         currentAmount:
           type: number
           format: double
           description: Current period tax amount
+          example: 2840.0
         yearToDateAmount:
           type: number
           format: double
           description: Year-to-date tax amount
+          example: 8742.5
     PayRunResult:
       type: object
       properties:
         payRunId:
           type: string
           description: Associated pay run identifier
+          example: pr_20260430_weekly_001
         payPeriod:
           $ref: '#/components/schemas/PayPeriod'
         paymentDate:
           type: string
           format: date
           description: Payment date
+          example: '2026-04-30'
         totalGrossPay:
           type: number
           format: double
           description: Aggregate gross pay
+          example: 245830.5
         totalNetPay:
           type: number
           format: double
           description: Aggregate net pay
+          example: 178452.3
         totalDeductions:
           type: number
           format: double
           description: Aggregate deductions
+          example: 38210.8
         totalEmployerTaxes:
           type: number
           format: double
           description: Total employer tax obligations
+          example: 14583.7
         totalEmployeeTaxes:
           type: number
           format: double
           description: Total employee tax withholdings
+          example: 14583.7
         workerCount:
           type: integer
           description: Number of workers processed
+          example: 87
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
     WorkerResult:
       type: object
       properties:
@@ -483,32 +757,39 @@ components:
           type: number
           format: double
           description: Worker gross pay for this run
+          example: 1.0
         netPay:
           type: number
           format: double
           description: Worker net pay for this run
+          example: 1.0
         totalEarnings:
           type: number
           format: double
           description: Total earnings
+          example: 5240.0
         totalDeductions:
           type: number
           format: double
           description: Total deductions
+          example: 38210.8
         totalTaxes:
           type: number
           format: double
           description: Total taxes withheld
+          example: 29167.4
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         paymentMethod:
           type: string
           enum:
-            - DirectDeposit
-            - Check
-            - Wire
+          - DirectDeposit
+          - Check
+          - Wire
           description: Method of payment
+          example: DirectDeposit
     WorkerResultCollection:
       type: object
       properties:
@@ -519,67 +800,80 @@ components:
         total:
           type: integer
           description: Total number of worker results
+          example: 52
     Payment:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the payment
+          example: pmt_20260502_00045
         worker:
           $ref: '#/components/schemas/WorkerRef'
         payRunId:
           type: string
           description: Associated pay run identifier
+          example: pr_20260430_weekly_001
         paymentMethod:
           type: string
           enum:
-            - DirectDeposit
-            - Check
-            - Wire
+          - DirectDeposit
+          - Check
+          - Wire
           description: Method of payment
+          example: DirectDeposit
         amount:
           type: number
           format: double
           description: Payment amount
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         paymentDate:
           type: string
           format: date
           description: Date payment was issued
+          example: '2026-04-30'
         settlementDate:
           type: string
           format: date
           description: Date payment was settled
+          example: '2026-04-30'
         status:
           type: string
           enum:
-            - Pending
-            - Processed
-            - Settled
-            - Failed
-            - Voided
+          - Pending
+          - Processed
+          - Settled
+          - Failed
+          - Voided
           description: Current payment status
+          example: Pending
         bankAccount:
           type: object
           properties:
             lastFourDigits:
               type: string
               description: Last four digits of the account number
+              example: '4521'
             bankName:
               type: string
               description: Name of the financial institution
+              example: Wells Fargo
             accountType:
               type: string
               enum:
-                - Checking
-                - Savings
+              - Checking
+              - Savings
               description: Type of bank account
+              example: Checking
           description: Bank account details (masked)
         checkNumber:
           type: string
           description: Check number if payment method is check
+          example: '100482'
     PaymentCollection:
       type: object
       properties:
@@ -590,48 +884,59 @@ components:
         total:
           type: integer
           description: Total number of payments
+          example: 52
     PaymentElection:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the payment election
+          example: pe_w100542_primary
         order:
           type: integer
           description: Priority order of the election
+          example: 1
         distributionType:
           type: string
           enum:
-            - Amount
-            - Percentage
-            - Remainder
+          - Amount
+          - Percentage
+          - Remainder
           description: How payment is distributed
+          example: Amount
         amount:
           type: number
           format: double
           description: Fixed amount (when distributionType is Amount)
+          example: 2500.0
         percentage:
           type: number
           format: double
           description: Percentage of net pay (when distributionType is Percentage)
+          example: 100.0
         accountType:
           type: string
           enum:
-            - Checking
-            - Savings
+          - Checking
+          - Savings
           description: Bank account type
+          example: Checking
         bankName:
           type: string
           description: Financial institution name
+          example: Wells Fargo
         lastFourDigits:
           type: string
           description: Last four digits of account number
+          example: '4521'
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         active:
           type: boolean
           description: Whether this election is currently active
+          example: true
     PaymentElectionCollection:
       type: object
       properties:
@@ -642,15 +947,18 @@ components:
         total:
           type: integer
           description: Total number of payment elections
+          example: 52
     WorkerRef:
       type: object
       properties:
         id:
           type: string
           description: Worker identifier
+          example: w_100542
         descriptor:
           type: string
           description: Worker display name
+          example: Weekly USD Pay Group
     PayPeriod:
       type: object
       properties:
@@ -658,16 +966,20 @@ components:
           type: string
           format: date
           description: Start date of the pay period
+          example: '2026-04-30'
         endDate:
           type: string
           format: date
           description: End date of the pay period
+          example: '2026-04-30'
     Error:
       type: object
       properties:
         error:
           type: string
           description: Error code
+          example: INVALID_REQUEST
         message:
           type: string
           description: Human-readable error message
+          example: Validation failed for the provided fields.

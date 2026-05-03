@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-deduction-code-collection-structure.json",
+  "name": "DeductionCodeCollection",
+  "description": "DeductionCodeCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DeductionCode"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of deduction codes",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "DeductionCode": {
+      "name": "DeductionCode",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the deduction code",
+          "example": "MEDICAL_PRETAX"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the deduction code",
+          "example": "Weekly USD Pay Group"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Benefit",
+            "Retirement",
+            "Garnishment",
+            "Tax",
+            "Voluntary",
+            "Other"
+          ],
+          "description": "Category of the deduction",
+          "example": "Benefit"
+        },
+        "preTax": {
+          "type": "boolean",
+          "description": "Whether this deduction is pre-tax by default",
+          "example": true
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether the deduction code is currently active",
+          "example": true
+        }
+      }
+    }
+  }
+}

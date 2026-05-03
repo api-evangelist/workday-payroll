@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/tax-tax-filing-collection-structure.json",
+  "name": "TaxFilingCollection",
+  "description": "TaxFilingCollection schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TaxFiling"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of tax filings",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "TaxFiling": {
+      "name": "TaxFiling",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the tax filing",
+          "example": "tfl_2026q1_941"
+        },
+        "filingType": {
+          "type": "string",
+          "enum": [
+            "Quarterly",
+            "Annual",
+            "Amendment"
+          ],
+          "description": "Type of filing",
+          "example": "Quarterly"
+        },
+        "jurisdiction": {
+          "$ref": "#/$defs/TaxJurisdictionRef"
+        },
+        "taxYear": {
+          "type": "int32",
+          "description": "Tax year",
+          "example": 2026
+        },
+        "quarter": {
+          "type": "int32",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Quarter (for quarterly filings)",
+          "example": 1
+        },
+        "formNumber": {
+          "type": "string",
+          "description": "Tax form number (e.g., 941, 940, W-2)",
+          "example": "941"
+        },
+        "totalTaxableWages": {
+          "type": "double",
+          "description": "Total taxable wages for the filing period",
+          "example": 235000.0
+        },
+        "totalTaxWithheld": {
+          "type": "double",
+          "description": "Total tax withheld for the filing period",
+          "example": 28500.0
+        },
+        "totalEmployerTax": {
+          "type": "double",
+          "description": "Total employer tax liability",
+          "example": 14583.7
+        },
+        "dueDate": {
+          "type": "date",
+          "description": "Filing due date",
+          "example": "2026-04-30"
+        },
+        "filedDate": {
+          "type": "date",
+          "description": "Date the filing was submitted",
+          "example": "2026-04-30"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Draft",
+            "Pending",
+            "Filed",
+            "Accepted",
+            "Rejected"
+          ],
+          "description": "Filing status",
+          "example": "Draft"
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        }
+      }
+    },
+    "TaxJurisdictionRef": {
+      "name": "TaxJurisdictionRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

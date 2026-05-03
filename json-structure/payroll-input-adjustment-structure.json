@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-input-adjustment-structure.json",
+  "name": "Adjustment",
+  "description": "Adjustment schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the adjustment",
+      "example": "adj_20260415_00012"
+    },
+    "worker": {
+      "$ref": "#/$defs/WorkerRef"
+    },
+    "adjustmentType": {
+      "type": "string",
+      "enum": [
+        "Correction",
+        "Retroactive",
+        "Reversal",
+        "Reclass"
+      ],
+      "description": "Type of adjustment",
+      "example": "Correction"
+    },
+    "originalPayRunId": {
+      "type": "string",
+      "description": "Reference to the original pay run being adjusted",
+      "example": "pr_20260430_weekly_001"
+    },
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code affected",
+      "example": "REGULAR"
+    },
+    "deductionCode": {
+      "type": "string",
+      "description": "Deduction code affected",
+      "example": "MEDICAL_PRETAX"
+    },
+    "amount": {
+      "type": "double",
+      "description": "Adjustment amount (positive or negative)",
+      "example": 2500.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the adjustment",
+      "example": "Q1 2026 performance bonus"
+    },
+    "effectiveDate": {
+      "type": "date",
+      "description": "Effective date of the adjustment",
+      "example": "2026-04-30"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Processed",
+        "Rejected"
+      ],
+      "description": "Current status",
+      "example": "Pending"
+    },
+    "createdOn": {
+      "type": "datetime",
+      "description": "When the adjustment was created",
+      "example": "2026-04-30T16:45:00Z"
+    }
+  },
+  "definitions": {
+    "WorkerRef": {
+      "name": "WorkerRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "id": "pr_20260430_weekly_001",
+      "descriptor": "Weekly USD Pay Group",
+      "payGroup": {
+        "id": "pg_weekly_usd",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payPeriod": {
+        "startDate": "2026-04-30",
+        "endDate": "2026-04-30"
+      },
+      "status": "Draft",
+      "runCategory": "Regular",
+      "paymentDate": "2026-04-30",
+      "totalGrossPay": 245830.5,
+      "totalNetPay": 178452.3,
+      "totalDeductions": 38210.8,
+      "totalTaxes": 29167.4,
+      "workerCount": 87,
+      "currency": "USD",
+      "createdOn": "2026-04-30T16:45:00Z",
+      "completedOn": "2026-04-30T16:45:00Z"
+    },
+    {
+      "id": "pr_20260430_weekly_001",
+      "descriptor": "Weekly USD Pay Group",
+      "payGroup": {
+        "id": "pg_weekly_usd",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payPeriod": {
+        "startDate": "2026-04-30",
+        "endDate": "2026-04-30"
+      },
+      "status": "Draft",
+      "runCategory": "Regular",
+      "paymentDate": "2026-04-30",
+      "totalGrossPay": 245830.5,
+      "totalNetPay": 178452.3,
+      "totalDeductions": 38210.8,
+      "totalTaxes": 29167.4,
+      "workerCount": 87,
+      "currency": "USD",
+      "createdOn": "2026-04-30T16:45:00Z",
+      "completedOn": "2026-04-30T16:45:00Z"
+    },
+    {
+      "id": "pr_20260430_weekly_001",
+      "descriptor": "Weekly USD Pay Group",
+      "payGroup": {
+        "id": "pg_weekly_usd",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payPeriod": {
+        "startDate": "2026-04-30",
+        "endDate": "2026-04-30"
+      },
+      "status": "Draft",
+      "runCategory": "Regular",
+      "paymentDate": "2026-04-30",
+      "totalGrossPay": 245830.5,
+      "totalNetPay": 178452.3,
+      "totalDeductions": 38210.8,
+      "totalTaxes": 29167.4,
+      "workerCount": 87,
+      "currency": "USD",
+      "createdOn": "2026-04-30T16:45:00Z",
+      "completedOn": "2026-04-30T16:45:00Z"
+    }
+  ],
+  "total": 52
+}

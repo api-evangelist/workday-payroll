@@ -15,39 +15,39 @@ externalDocs:
   description: Workday Tax API Documentation
   url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
 servers:
-  - url: https://api.workday.com/tax/v1
-    description: Workday Tax Production
-  - url: https://{tenant}.workday.com/api/tax/v1
-    description: Workday Tax Tenant-Specific
-    variables:
-      tenant:
-        description: Workday tenant identifier
-        default: your-tenant
+- url: https://api.workday.com/tax/v1
+  description: Workday Tax Production
+- url: https://{tenant}.workday.com/api/tax/v1
+  description: Workday Tax Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
 tags:
-  - name: Tax Calculations
-    description: View and manage tax calculation results
-  - name: Tax Elections
-    description: Access and manage worker tax elections (W-4, state forms)
-  - name: Tax Filing
-    description: Access tax filing data and compliance reports
-  - name: Tax Jurisdictions
-    description: Retrieve tax jurisdiction and authority information
-  - name: Tax Withholdings
-    description: Manage worker tax withholding configurations
+- name: Tax Calculations
+  description: View and manage tax calculation results
+- name: Tax Elections
+  description: Access and manage worker tax elections (W-4, state forms)
+- name: Tax Filing
+  description: Access tax filing data and compliance reports
+- name: Tax Jurisdictions
+  description: Retrieve tax jurisdiction and authority information
+- name: Tax Withholdings
+  description: Manage worker tax withholding configurations
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /workers/{workerId}/taxWithholdings:
     get:
       operationId: listWorkerTaxWithholdings
-      summary: Workday Payroll List worker tax withholdings
+      summary: Workday Payroll List Worker Tax Withholdings
       description: >-
         Retrieve all tax withholding configurations for a specific worker,
         including federal, state, and local withholdings.
       tags:
-        - Tax Withholdings
+      - Tax Withholdings
       parameters:
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/workerId'
       responses:
         '200':
           description: Collection of tax withholdings
@@ -55,22 +55,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxWithholdingCollection'
+              examples:
+                ListWorkerTaxWithholdings200Example:
+                  summary: Default listWorkerTaxWithholdings 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: twh_w100542_federal
+                      jurisdiction:
+                        id: tjur_us_federal
+                        descriptor: Weekly USD Pay Group
+                      taxType: FederalIncome
+                      filingStatus: Single
+                      allowances: 2
+                      additionalWithholding: 50.0
+                      exempt: false
+                      effectiveDate: '2026-04-30'
+                      currency: USD
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/taxWithholdings/{withholdingId}:
     get:
       operationId: getWorkerTaxWithholding
-      summary: Workday Payroll Get a worker tax withholding
+      summary: Workday Payroll Get a Worker Tax Withholding
       description: >-
         Retrieve details of a specific tax withholding configuration
         for a worker.
       tags:
-        - Tax Withholdings
+      - Tax Withholdings
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/withholdingId'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/withholdingId'
       responses:
         '200':
           description: Tax withholding details
@@ -78,27 +99,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxWithholding'
+              examples:
+                GetWorkerTaxWithholding200Example:
+                  summary: Default getWorkerTaxWithholding 200 response
+                  x-microcks-default: true
+                  value:
+                    id: twh_w100542_federal
+                    jurisdiction:
+                      id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                    taxType: FederalIncome
+                    filingStatus: Single
+                    allowances: 2
+                    additionalWithholding: 50.0
+                    exempt: false
+                    effectiveDate: '2026-04-30'
+                    currency: USD
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateWorkerTaxWithholding
-      summary: Workday Payroll Update a worker tax withholding
+      summary: Workday Payroll Update a Worker Tax Withholding
       description: >-
         Update a tax withholding configuration for a worker, such as
         changing filing status or additional withholding amounts.
       tags:
-        - Tax Withholdings
+      - Tax Withholdings
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/withholdingId'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/withholdingId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateTaxWithholdingRequest'
+            examples:
+              UpdateWorkerTaxWithholdingRequestExample:
+                summary: Default updateWorkerTaxWithholding request
+                x-microcks-default: true
+                value:
+                  filingStatus: Single
+                  allowances: 2
+                  additionalWithholding: 50.0
+                  exempt: false
       responses:
         '200':
           description: Tax withholding updated
@@ -106,23 +155,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxWithholding'
+              examples:
+                UpdateWorkerTaxWithholding200Example:
+                  summary: Default updateWorkerTaxWithholding 200 response
+                  x-microcks-default: true
+                  value:
+                    id: twh_w100542_federal
+                    jurisdiction:
+                      id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                    taxType: FederalIncome
+                    filingStatus: Single
+                    allowances: 2
+                    additionalWithholding: 50.0
+                    exempt: false
+                    effectiveDate: '2026-04-30'
+                    currency: USD
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/taxElections:
     get:
       operationId: listWorkerTaxElections
-      summary: Workday Payroll List worker tax elections
+      summary: Workday Payroll List Worker Tax Elections
       description: >-
         Retrieve all tax elections for a worker, including federal W-4 data,
         state withholding elections, and local tax elections.
       tags:
-        - Tax Elections
+      - Tax Elections
       parameters:
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/workerId'
       responses:
         '200':
           description: Collection of tax elections
@@ -130,26 +198,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxElectionCollection'
+              examples:
+                ListWorkerTaxElections200Example:
+                  summary: Default listWorkerTaxElections 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: tel_w100542_w4_2026
+                      formType: W4
+                      jurisdiction:
+                        id: tjur_us_federal
+                        descriptor: Weekly USD Pay Group
+                      filingStatus: example
+                      multipleJobs: true
+                      dependentsAmount: 2000.0
+                      otherIncome: 0.0
+                      deductions: 0.0
+                      additionalWithholding: 50.0
+                      effectiveDate: '2026-04-30'
+                      submittedOn: '2026-04-30T16:45:00Z'
+                      status: Active
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createWorkerTaxElection
-      summary: Workday Payroll Create a worker tax election
+      summary: Workday Payroll Create a Worker Tax Election
       description: >-
         Submit a new tax election for a worker, such as a W-4 update
         or state withholding form change.
       tags:
-        - Tax Elections
+      - Tax Elections
       parameters:
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/workerId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTaxElectionRequest'
+            examples:
+              CreateWorkerTaxElectionRequestExample:
+                summary: Default createWorkerTaxElection request
+                x-microcks-default: true
+                value:
+                  formType: W4
+                  jurisdictionId: tjur_us_federal
+                  filingStatus: example
+                  multipleJobs: true
+                  dependentsAmount: 2000.0
+                  otherIncome: 0.0
+                  deductions: 0.0
+                  additionalWithholding: 50.0
+                  effectiveDate: '2026-04-30'
       responses:
         '201':
           description: Tax election created
@@ -157,23 +263,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxElection'
+              examples:
+                CreateWorkerTaxElection201Example:
+                  summary: Default createWorkerTaxElection 201 response
+                  x-microcks-default: true
+                  value:
+                    id: tel_w100542_w4_2026
+                    formType: W4
+                    jurisdiction:
+                      id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                    filingStatus: example
+                    multipleJobs: true
+                    dependentsAmount: 2000.0
+                    otherIncome: 0.0
+                    deductions: 0.0
+                    additionalWithholding: 50.0
+                    effectiveDate: '2026-04-30'
+                    submittedOn: '2026-04-30T16:45:00Z'
+                    status: Active
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/taxElections/{electionId}:
     get:
       operationId: getWorkerTaxElection
-      summary: Workday Payroll Get a worker tax election
+      summary: Workday Payroll Get a Worker Tax Election
       description: >-
         Retrieve details of a specific tax election for a worker.
       tags:
-        - Tax Elections
+      - Tax Elections
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/electionId'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/electionId'
       responses:
         '200':
           description: Tax election details
@@ -181,37 +309,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxElection'
+              examples:
+                GetWorkerTaxElection200Example:
+                  summary: Default getWorkerTaxElection 200 response
+                  x-microcks-default: true
+                  value:
+                    id: tel_w100542_w4_2026
+                    formType: W4
+                    jurisdiction:
+                      id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                    filingStatus: example
+                    multipleJobs: true
+                    dependentsAmount: 2000.0
+                    otherIncome: 0.0
+                    deductions: 0.0
+                    additionalWithholding: 50.0
+                    effectiveDate: '2026-04-30'
+                    submittedOn: '2026-04-30T16:45:00Z'
+                    status: Active
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /taxJurisdictions:
     get:
       operationId: listTaxJurisdictions
-      summary: Workday Payroll List tax jurisdictions
+      summary: Workday Payroll List Tax Jurisdictions
       description: >-
         Retrieve all configured tax jurisdictions, including federal,
         state, and local tax authorities.
       tags:
-        - Tax Jurisdictions
+      - Tax Jurisdictions
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: level
-          in: query
-          description: Filter by jurisdiction level
-          schema:
-            type: string
-            enum:
-              - Federal
-              - State
-              - Local
-              - Other
-        - name: country
-          in: query
-          description: Filter by country code
-          schema:
-            type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: level
+        in: query
+        description: Filter by jurisdiction level
+        schema:
+          type: string
+          enum:
+          - Federal
+          - State
+          - Local
+          - Other
+        example: Federal
+      - name: country
+        in: query
+        description: Filter by country code
+        schema:
+          type: string
+        example: US
       responses:
         '200':
           description: Collection of tax jurisdictions
@@ -219,19 +371,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxJurisdictionCollection'
+              examples:
+                ListTaxJurisdictions200Example:
+                  summary: Default listTaxJurisdictions 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                      level: Federal
+                      country: US
+                      stateCode: CA
+                      localityName: San Francisco
+                      taxTypes: &id001
+                      - FederalIncome
+                      active: true
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /taxJurisdictions/{jurisdictionId}:
     get:
       operationId: getTaxJurisdiction
-      summary: Workday Payroll Get a tax jurisdiction
+      summary: Workday Payroll Get a Tax Jurisdiction
       description: >-
         Retrieve details of a specific tax jurisdiction, including
         applicable tax types and rates.
       tags:
-        - Tax Jurisdictions
+      - Tax Jurisdictions
       parameters:
-        - $ref: '#/components/parameters/jurisdictionId'
+      - $ref: '#/components/parameters/jurisdictionId'
       responses:
         '200':
           description: Tax jurisdiction details
@@ -239,41 +410,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxJurisdiction'
+              examples:
+                GetTaxJurisdiction200Example:
+                  summary: Default getTaxJurisdiction 200 response
+                  x-microcks-default: true
+                  value:
+                    id: tjur_us_federal
+                    descriptor: Weekly USD Pay Group
+                    level: Federal
+                    country: US
+                    stateCode: CA
+                    localityName: San Francisco
+                    taxTypes: *id001
+                    active: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /taxFilings:
     get:
       operationId: listTaxFilings
-      summary: Workday Payroll List tax filings
+      summary: Workday Payroll List Tax Filings
       description: >-
         Retrieve tax filing records for compliance reporting, including
         quarterly and annual filing data.
       tags:
-        - Tax Filing
+      - Tax Filing
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: taxYear
-          in: query
-          description: Filter by tax year
-          schema:
-            type: integer
-        - name: filingType
-          in: query
-          description: Filter by filing type
-          schema:
-            type: string
-            enum:
-              - Quarterly
-              - Annual
-              - Amendment
-        - name: jurisdiction
-          in: query
-          description: Filter by jurisdiction identifier
-          schema:
-            type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: taxYear
+        in: query
+        description: Filter by tax year
+        schema:
+          type: integer
+        example: 2026
+      - name: filingType
+        in: query
+        description: Filter by filing type
+        schema:
+          type: string
+          enum:
+          - Quarterly
+          - Annual
+          - Amendment
+        example: Quarterly
+      - name: jurisdiction
+        in: query
+        description: Filter by jurisdiction identifier
+        schema:
+          type: string
+        example: US-Federal
       responses:
         '200':
           description: Collection of tax filings
@@ -281,18 +471,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxFilingCollection'
+              examples:
+                ListTaxFilings200Example:
+                  summary: Default listTaxFilings 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: tfl_2026q1_941
+                      filingType: Quarterly
+                      jurisdiction:
+                        id: tjur_us_federal
+                        descriptor: Weekly USD Pay Group
+                      taxYear: 2026
+                      quarter: 1
+                      formNumber: '941'
+                      totalTaxableWages: 235000.0
+                      totalTaxWithheld: 28500.0
+                      totalEmployerTax: 14583.7
+                      dueDate: '2026-04-30'
+                      filedDate: '2026-04-30'
+                      status: Draft
+                      currency: USD
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /taxFilings/{filingId}:
     get:
       operationId: getTaxFiling
-      summary: Workday Payroll Get a tax filing
+      summary: Workday Payroll Get a Tax Filing
       description: >-
         Retrieve details of a specific tax filing record.
       tags:
-        - Tax Filing
+      - Tax Filing
       parameters:
-        - $ref: '#/components/parameters/filingId'
+      - $ref: '#/components/parameters/filingId'
       responses:
         '200':
           description: Tax filing details
@@ -300,23 +515,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxFiling'
+              examples:
+                GetTaxFiling200Example:
+                  summary: Default getTaxFiling 200 response
+                  x-microcks-default: true
+                  value:
+                    id: tfl_2026q1_941
+                    filingType: Quarterly
+                    jurisdiction:
+                      id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                    taxYear: 2026
+                    quarter: 1
+                    formNumber: '941'
+                    totalTaxableWages: 235000.0
+                    totalTaxWithheld: 28500.0
+                    totalEmployerTax: 14583.7
+                    dueDate: '2026-04-30'
+                    filedDate: '2026-04-30'
+                    status: Draft
+                    currency: USD
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/taxResults:
     get:
       operationId: listPayRunTaxResults
-      summary: Workday Payroll List tax results for a pay run
+      summary: Workday Payroll List Tax Results for a Pay Run
       description: >-
         Retrieve aggregated tax calculation results for a completed
         pay run, broken down by tax type and jurisdiction.
       tags:
-        - Tax Calculations
+      - Tax Calculations
       parameters:
-        - $ref: '#/components/parameters/payRunId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of tax results
@@ -324,26 +562,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaxResultCollection'
+              examples:
+                ListPayRunTaxResults200Example:
+                  summary: Default listPayRunTaxResults 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - jurisdiction:
+                        id: tjur_us_federal
+                        descriptor: Weekly USD Pay Group
+                      taxType: FederalIncome
+                      employeeAmount: 287.5
+                      employerAmount: 287.5
+                      taxableWages: 4750.0
+                      currency: USD
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/taxSummary:
     get:
       operationId: getWorkerTaxSummary
-      summary: Workday Payroll Get worker tax summary
+      summary: Workday Payroll Get Worker Tax Summary
       description: >-
         Retrieve a year-to-date tax summary for a worker, including
         total withholdings by jurisdiction and tax type.
       tags:
-        - Tax Calculations
+      - Tax Calculations
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - name: taxYear
-          in: query
-          description: Tax year (defaults to current year)
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/workerId'
+      - name: taxYear
+        in: query
+        description: Tax year (defaults to current year)
+        schema:
+          type: integer
+        example: 2026
       responses:
         '200':
           description: Worker tax summary
@@ -351,10 +608,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkerTaxSummary'
+              examples:
+                GetWorkerTaxSummary200Example:
+                  summary: Default getWorkerTaxSummary 200 response
+                  x-microcks-default: true
+                  value:
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    taxYear: 2026
+                    totalGrossWages: 245000.0
+                    totalTaxableWages: 235000.0
+                    totalFederalWithholding: 14250.0
+                    totalStateWithholding: 6480.0
+                    totalLocalWithholding: 1240.0
+                    totalSocialSecurity: 5890.0
+                    totalMedicare: 1380.0
+                    currency: USD
+                    jurisdictionBreakdown:
+                    - jurisdiction:
+                        id: tjur_us_federal
+                        descriptor: Weekly USD Pay Group
+                      taxType: FederalIncome
+                      employeeAmount: 287.5
+                      employerAmount: 287.5
+                      taxableWages: 4750.0
+                      currency: USD
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -371,6 +657,7 @@ components:
       description: Unique identifier for the worker
       schema:
         type: string
+      example: w_100542
     withholdingId:
       name: withholdingId
       in: path
@@ -378,6 +665,7 @@ components:
       description: Unique identifier for the tax withholding
       schema:
         type: string
+      example: twh_w100542_federal
     electionId:
       name: electionId
       in: path
@@ -385,6 +673,7 @@ components:
       description: Unique identifier for the tax election
       schema:
         type: string
+      example: tel_w100542_w4_2026
     jurisdictionId:
       name: jurisdictionId
       in: path
@@ -392,6 +681,7 @@ components:
       description: Unique identifier for the tax jurisdiction
       schema:
         type: string
+      example: tjur_us_federal
     filingId:
       name: filingId
       in: path
@@ -399,6 +689,7 @@ components:
       description: Unique identifier for the tax filing
       schema:
         type: string
+      example: tfl_2026q1_941
     payRunId:
       name: payRunId
       in: path
@@ -406,6 +697,7 @@ components:
       description: Unique identifier for the pay run
       schema:
         type: string
+      example: pr_20260430_weekly_001
     limit:
       name: limit
       in: query
@@ -415,6 +707,7 @@ components:
         minimum: 1
         maximum: 100
         default: 20
+      example: 20
     offset:
       name: offset
       in: query
@@ -423,6 +716,7 @@ components:
         type: integer
         minimum: 0
         default: 0
+      example: 0
   responses:
     BadRequest:
       description: Invalid request parameters
@@ -430,18 +724,39 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
     Unauthorized:
       description: Authentication required or token expired
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   schemas:
     TaxWithholding:
       type: object
@@ -449,46 +764,54 @@ components:
         id:
           type: string
           description: Unique identifier for the tax withholding
+          example: twh_w100542_federal
         jurisdiction:
           $ref: '#/components/schemas/TaxJurisdictionRef'
         taxType:
           type: string
           enum:
-            - FederalIncome
-            - StateIncome
-            - LocalIncome
-            - SocialSecurity
-            - Medicare
-            - FUTA
-            - SUTA
-            - Other
+          - FederalIncome
+          - StateIncome
+          - LocalIncome
+          - SocialSecurity
+          - Medicare
+          - FUTA
+          - SUTA
+          - Other
           description: Type of tax
+          example: FederalIncome
         filingStatus:
           type: string
           enum:
-            - Single
-            - MarriedFilingJointly
-            - MarriedFilingSeparately
-            - HeadOfHousehold
-            - QualifyingWidower
+          - Single
+          - MarriedFilingJointly
+          - MarriedFilingSeparately
+          - HeadOfHousehold
+          - QualifyingWidower
           description: Tax filing status
+          example: Single
         allowances:
           type: integer
           description: Number of withholding allowances claimed
+          example: 2
         additionalWithholding:
           type: number
           format: double
           description: Additional flat withholding amount per pay period
+          example: 50.0
         exempt:
           type: boolean
           description: Whether the worker claims exempt status
+          example: false
         effectiveDate:
           type: string
           format: date
           description: Date the withholding configuration took effect
+          example: '2026-04-30'
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
     TaxWithholdingCollection:
       type: object
       properties:
@@ -499,80 +822,96 @@ components:
         total:
           type: integer
           description: Total number of tax withholdings
+          example: 52
     UpdateTaxWithholdingRequest:
       type: object
       properties:
         filingStatus:
           type: string
           enum:
-            - Single
-            - MarriedFilingJointly
-            - MarriedFilingSeparately
-            - HeadOfHousehold
-            - QualifyingWidower
+          - Single
+          - MarriedFilingJointly
+          - MarriedFilingSeparately
+          - HeadOfHousehold
+          - QualifyingWidower
           description: Updated filing status
+          example: Single
         allowances:
           type: integer
           description: Updated number of allowances
+          example: 2
         additionalWithholding:
           type: number
           format: double
           description: Updated additional withholding amount
+          example: 50.0
         exempt:
           type: boolean
           description: Updated exempt status
+          example: false
     TaxElection:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the tax election
+          example: tel_w100542_w4_2026
         formType:
           type: string
           enum:
-            - W4
-            - StateWithholding
-            - LocalWithholding
+          - W4
+          - StateWithholding
+          - LocalWithholding
           description: Type of tax form
+          example: W4
         jurisdiction:
           $ref: '#/components/schemas/TaxJurisdictionRef'
         filingStatus:
           type: string
           description: Filing status on the form
+          example: example
         multipleJobs:
           type: boolean
           description: Whether the worker has multiple jobs (W-4 Step 2)
+          example: true
         dependentsAmount:
           type: number
           format: double
           description: Total amount for dependents (W-4 Step 3)
+          example: 2000.0
         otherIncome:
           type: number
           format: double
           description: Other income amount (W-4 Step 4a)
+          example: 0.0
         deductions:
           type: number
           format: double
           description: Itemized deductions amount (W-4 Step 4b)
+          example: 0.0
         additionalWithholding:
           type: number
           format: double
           description: Extra withholding per period (W-4 Step 4c)
+          example: 50.0
         effectiveDate:
           type: string
           format: date
           description: Effective date of the election
+          example: '2026-04-30'
         submittedOn:
           type: string
           format: date-time
           description: When the election was submitted
+          example: '2026-04-30T16:45:00Z'
         status:
           type: string
           enum:
-            - Active
-            - Superseded
-            - Voided
+          - Active
+          - Superseded
+          - Voided
           description: Current status of the election
+          example: Active
     TaxElectionCollection:
       type: object
       properties:
@@ -583,92 +922,112 @@ components:
         total:
           type: integer
           description: Total number of tax elections
+          example: 52
     CreateTaxElectionRequest:
       type: object
       required:
-        - formType
-        - jurisdictionId
-        - filingStatus
+      - formType
+      - jurisdictionId
+      - filingStatus
       properties:
         formType:
           type: string
           enum:
-            - W4
-            - StateWithholding
-            - LocalWithholding
+          - W4
+          - StateWithholding
+          - LocalWithholding
           description: Type of tax form
+          example: W4
         jurisdictionId:
           type: string
           description: Tax jurisdiction identifier
+          example: tjur_us_federal
         filingStatus:
           type: string
           description: Filing status
+          example: example
         multipleJobs:
           type: boolean
           description: Multiple jobs indicator
+          example: true
         dependentsAmount:
           type: number
           format: double
           description: Dependents amount
+          example: 2000.0
         otherIncome:
           type: number
           format: double
           description: Other income amount
+          example: 0.0
         deductions:
           type: number
           format: double
           description: Deductions amount
+          example: 0.0
         additionalWithholding:
           type: number
           format: double
           description: Additional withholding per period
+          example: 50.0
         effectiveDate:
           type: string
           format: date
           description: Effective date
+          example: '2026-04-30'
     TaxJurisdiction:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the tax jurisdiction
+          example: tjur_us_federal
         descriptor:
           type: string
           description: Display name of the jurisdiction
+          example: Weekly USD Pay Group
         level:
           type: string
           enum:
-            - Federal
-            - State
-            - Local
-            - Other
+          - Federal
+          - State
+          - Local
+          - Other
           description: Jurisdiction level
+          example: Federal
         country:
           type: string
           description: ISO 3166-1 country code
+          example: US
         stateCode:
           type: string
           description: State or province code
+          example: CA
         localityName:
           type: string
           description: Local jurisdiction name
+          example: San Francisco
         taxTypes:
           type: array
           items:
             type: string
           description: Applicable tax types in this jurisdiction
+          example: *id001
         active:
           type: boolean
           description: Whether the jurisdiction is currently active
+          example: true
     TaxJurisdictionRef:
       type: object
       properties:
         id:
           type: string
           description: Jurisdiction identifier
+          example: tjur_us_federal
         descriptor:
           type: string
           description: Jurisdiction display name
+          example: Weekly USD Pay Group
     TaxJurisdictionCollection:
       type: object
       properties:
@@ -679,64 +1038,77 @@ components:
         total:
           type: integer
           description: Total number of tax jurisdictions
+          example: 52
     TaxFiling:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the tax filing
+          example: tfl_2026q1_941
         filingType:
           type: string
           enum:
-            - Quarterly
-            - Annual
-            - Amendment
+          - Quarterly
+          - Annual
+          - Amendment
           description: Type of filing
+          example: Quarterly
         jurisdiction:
           $ref: '#/components/schemas/TaxJurisdictionRef'
         taxYear:
           type: integer
           description: Tax year
+          example: 2026
         quarter:
           type: integer
           minimum: 1
           maximum: 4
           description: Quarter (for quarterly filings)
+          example: 1
         formNumber:
           type: string
           description: Tax form number (e.g., 941, 940, W-2)
+          example: '941'
         totalTaxableWages:
           type: number
           format: double
           description: Total taxable wages for the filing period
+          example: 235000.0
         totalTaxWithheld:
           type: number
           format: double
           description: Total tax withheld for the filing period
+          example: 28500.0
         totalEmployerTax:
           type: number
           format: double
           description: Total employer tax liability
+          example: 14583.7
         dueDate:
           type: string
           format: date
           description: Filing due date
+          example: '2026-04-30'
         filedDate:
           type: string
           format: date
           description: Date the filing was submitted
+          example: '2026-04-30'
         status:
           type: string
           enum:
-            - Draft
-            - Pending
-            - Filed
-            - Accepted
-            - Rejected
+          - Draft
+          - Pending
+          - Filed
+          - Accepted
+          - Rejected
           description: Filing status
+          example: Draft
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
     TaxFilingCollection:
       type: object
       properties:
@@ -747,6 +1119,7 @@ components:
         total:
           type: integer
           description: Total number of tax filings
+          example: 52
     TaxResult:
       type: object
       properties:
@@ -755,21 +1128,26 @@ components:
         taxType:
           type: string
           description: Type of tax
+          example: FederalIncome
         employeeAmount:
           type: number
           format: double
           description: Employee tax amount
+          example: 287.5
         employerAmount:
           type: number
           format: double
           description: Employer tax amount
+          example: 287.5
         taxableWages:
           type: number
           format: double
           description: Taxable wages for this tax type
+          example: 4750.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
     TaxResultCollection:
       type: object
       properties:
@@ -780,6 +1158,7 @@ components:
         total:
           type: integer
           description: Total number of tax result records
+          example: 52
     WorkerTaxSummary:
       type: object
       properties:
@@ -788,37 +1167,46 @@ components:
         taxYear:
           type: integer
           description: Tax year for the summary
+          example: 2026
         totalGrossWages:
           type: number
           format: double
           description: Year-to-date gross wages
+          example: 245000.0
         totalTaxableWages:
           type: number
           format: double
           description: Year-to-date taxable wages
+          example: 235000.0
         totalFederalWithholding:
           type: number
           format: double
           description: Year-to-date federal income tax withheld
+          example: 14250.0
         totalStateWithholding:
           type: number
           format: double
           description: Year-to-date state income tax withheld
+          example: 6480.0
         totalLocalWithholding:
           type: number
           format: double
           description: Year-to-date local tax withheld
+          example: 1240.0
         totalSocialSecurity:
           type: number
           format: double
           description: Year-to-date Social Security tax
+          example: 5890.0
         totalMedicare:
           type: number
           format: double
           description: Year-to-date Medicare tax
+          example: 1380.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         jurisdictionBreakdown:
           type: array
           items:
@@ -830,15 +1218,19 @@ components:
         id:
           type: string
           description: Worker identifier
+          example: w_100542
         descriptor:
           type: string
           description: Worker display name
+          example: Weekly USD Pay Group
     Error:
       type: object
       properties:
         error:
           type: string
           description: Error code
+          example: INVALID_REQUEST
         message:
           type: string
           description: Human-readable error message
+          example: Validation failed for the provided fields.

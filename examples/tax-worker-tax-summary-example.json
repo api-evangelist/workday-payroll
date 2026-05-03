@@ -1,0 +1,28 @@
+{
+  "worker": {
+    "id": "w_100542",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "taxYear": 2026,
+  "totalGrossWages": 245000.0,
+  "totalTaxableWages": 235000.0,
+  "totalFederalWithholding": 14250.0,
+  "totalStateWithholding": 6480.0,
+  "totalLocalWithholding": 1240.0,
+  "totalSocialSecurity": 5890.0,
+  "totalMedicare": 1380.0,
+  "currency": "USD",
+  "jurisdictionBreakdown": [
+    {
+      "jurisdiction": {
+        "id": "tjur_us_federal",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "taxType": "FederalIncome",
+      "employeeAmount": 287.5,
+      "employerAmount": 287.5,
+      "taxableWages": 4750.0,
+      "currency": "USD"
+    }
+  ]
+}

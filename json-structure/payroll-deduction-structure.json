@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-deduction-structure.json",
+  "name": "Deduction",
+  "description": "Deduction schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique deduction record identifier",
+      "example": "ded_20260430_00211"
+    },
+    "deductionCode": {
+      "$ref": "#/$defs/DeductionCodeRef"
+    },
+    "amount": {
+      "type": "double",
+      "description": "Deduction amount",
+      "example": 2500.0
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "PerPayPeriod",
+        "Monthly",
+        "Annual",
+        "OneTime"
+      ],
+      "description": "Deduction frequency",
+      "example": "PerPayPeriod"
+    },
+    "preTax": {
+      "type": "boolean",
+      "description": "Whether the deduction is pre-tax",
+      "example": true
+    },
+    "effectiveDate": {
+      "type": "date",
+      "description": "Effective date of the deduction",
+      "example": "2026-04-30"
+    },
+    "endDate": {
+      "type": "date",
+      "description": "End date of the deduction",
+      "example": "2026-04-30"
+    }
+  },
+  "definitions": {
+    "DeductionCodeRef": {
+      "name": "DeductionCodeRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deduction code identifier",
+          "example": "MEDICAL_PRETAX"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Deduction code display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

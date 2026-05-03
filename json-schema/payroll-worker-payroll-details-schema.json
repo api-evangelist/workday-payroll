@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-worker-payroll-details-schema.json",
+  "title": "WorkerPayrollDetails",
+  "description": "WorkerPayrollDetails schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "workerId": {
+      "type": "string",
+      "description": "Unique worker identifier",
+      "example": "w_100542"
+    },
+    "workerDescriptor": {
+      "type": "string",
+      "description": "Worker display name",
+      "example": "example"
+    },
+    "payGroup": {
+      "$ref": "#/$defs/PayGroupRef"
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": [
+        "DirectDeposit",
+        "Check",
+        "Wire"
+      ],
+      "description": "Worker payment method",
+      "example": "DirectDeposit"
+    },
+    "annualSalary": {
+      "type": "number",
+      "format": "double",
+      "description": "Annual salary amount",
+      "example": 95000.0
+    },
+    "hourlyRate": {
+      "type": "number",
+      "format": "double",
+      "description": "Hourly pay rate",
+      "example": 32.5
+    },
+    "compensationFrequency": {
+      "type": "string",
+      "description": "Frequency of compensation",
+      "example": "Annual"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "taxJurisdiction": {
+      "type": "string",
+      "description": "Primary tax jurisdiction",
+      "example": "US-Federal"
+    }
+  },
+  "$defs": {
+    "PayGroupRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Pay group identifier",
+          "example": "pg_weekly_usd"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Pay group display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

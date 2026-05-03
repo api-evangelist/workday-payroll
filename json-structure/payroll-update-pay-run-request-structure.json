@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-update-pay-run-request-structure.json",
+  "name": "UpdatePayRunRequest",
+  "description": "UpdatePayRunRequest schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Cancelled"
+      ],
+      "description": "Updated status for the pay run",
+      "example": "Draft"
+    },
+    "paymentDate": {
+      "type": "date",
+      "description": "Updated payment date",
+      "example": "2026-04-30"
+    }
+  }
+}

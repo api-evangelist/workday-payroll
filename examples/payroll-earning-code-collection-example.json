@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "id": "REGULAR",
+      "descriptor": "Weekly USD Pay Group",
+      "type": "Regular",
+      "taxable": true,
+      "active": true
+    }
+  ],
+  "total": 52
+}

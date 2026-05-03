@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-worker-payroll-details-structure.json",
+  "name": "WorkerPayrollDetails",
+  "description": "WorkerPayrollDetails schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "workerId": {
+      "type": "string",
+      "description": "Unique worker identifier",
+      "example": "w_100542"
+    },
+    "workerDescriptor": {
+      "type": "string",
+      "description": "Worker display name",
+      "example": "example"
+    },
+    "payGroup": {
+      "$ref": "#/$defs/PayGroupRef"
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": [
+        "DirectDeposit",
+        "Check",
+        "Wire"
+      ],
+      "description": "Worker payment method",
+      "example": "DirectDeposit"
+    },
+    "annualSalary": {
+      "type": "double",
+      "description": "Annual salary amount",
+      "example": 95000.0
+    },
+    "hourlyRate": {
+      "type": "double",
+      "description": "Hourly pay rate",
+      "example": 32.5
+    },
+    "compensationFrequency": {
+      "type": "string",
+      "description": "Frequency of compensation",
+      "example": "Annual"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "taxJurisdiction": {
+      "type": "string",
+      "description": "Primary tax jurisdiction",
+      "example": "US-Federal"
+    }
+  },
+  "definitions": {
+    "PayGroupRef": {
+      "name": "PayGroupRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Pay group identifier",
+          "example": "pg_weekly_usd"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Pay group display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

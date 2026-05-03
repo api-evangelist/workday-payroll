@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-tax-election-schema.json",
+  "title": "TaxElection",
+  "description": "TaxElection schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the tax election",
+      "example": "tel_w100542_w4_2026"
+    },
+    "formType": {
+      "type": "string",
+      "enum": [
+        "W4",
+        "StateWithholding",
+        "LocalWithholding"
+      ],
+      "description": "Type of tax form",
+      "example": "W4"
+    },
+    "jurisdiction": {
+      "$ref": "#/$defs/TaxJurisdictionRef"
+    },
+    "filingStatus": {
+      "type": "string",
+      "description": "Filing status on the form",
+      "example": "example"
+    },
+    "multipleJobs": {
+      "type": "boolean",
+      "description": "Whether the worker has multiple jobs (W-4 Step 2)",
+      "example": true
+    },
+    "dependentsAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total amount for dependents (W-4 Step 3)",
+      "example": 2000.0
+    },
+    "otherIncome": {
+      "type": "number",
+      "format": "double",
+      "description": "Other income amount (W-4 Step 4a)",
+      "example": 0.0
+    },
+    "deductions": {
+      "type": "number",
+      "format": "double",
+      "description": "Itemized deductions amount (W-4 Step 4b)",
+      "example": 0.0
+    },
+    "additionalWithholding": {
+      "type": "number",
+      "format": "double",
+      "description": "Extra withholding per period (W-4 Step 4c)",
+      "example": 50.0
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date of the election",
+      "example": "2026-04-30"
+    },
+    "submittedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the election was submitted",
+      "example": "2026-04-30T16:45:00Z"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Superseded",
+        "Voided"
+      ],
+      "description": "Current status of the election",
+      "example": "Active"
+    }
+  },
+  "$defs": {
+    "TaxJurisdictionRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

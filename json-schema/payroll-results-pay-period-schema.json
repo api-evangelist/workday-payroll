@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-results-pay-period-schema.json",
+  "title": "PayPeriod",
+  "description": "PayPeriod schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of the pay period",
+      "example": "2026-04-30"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of the pay period",
+      "example": "2026-04-30"
+    }
+  }
+}

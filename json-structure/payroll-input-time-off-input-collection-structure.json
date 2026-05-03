@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-input-time-off-input-collection-structure.json",
+  "name": "TimeOffInputCollection",
+  "description": "TimeOffInputCollection schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TimeOffInput"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of time off inputs",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "TimeOffInput": {
+      "name": "TimeOffInput",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the time off input",
+          "example": "to_w100542_20260415"
+        },
+        "worker": {
+          "$ref": "#/$defs/WorkerRef"
+        },
+        "timeOffType": {
+          "type": "string",
+          "description": "Type of time off",
+          "example": "Vacation"
+        },
+        "startDate": {
+          "type": "date",
+          "description": "Start date of time off",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "date",
+          "description": "End date of time off",
+          "example": "2026-04-30"
+        },
+        "hours": {
+          "type": "double",
+          "description": "Total hours of time off",
+          "example": 40.0
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Processed"
+          ],
+          "description": "Current status",
+          "example": "Pending"
+        },
+        "paid": {
+          "type": "boolean",
+          "description": "Whether the time off is paid",
+          "example": true
+        }
+      }
+    },
+    "WorkerRef": {
+      "name": "WorkerRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

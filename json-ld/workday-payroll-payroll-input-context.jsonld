@@ -1,0 +1,150 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "workday": "https://community.workday.com/schemas/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Adjustment": "workday:Adjustment",
+    "AdjustmentCollection": "workday:AdjustmentCollection",
+    "CreateAdjustmentRequest": "workday:CreateAdjustmentRequest",
+    "CreateInputBatchRequest": "workday:CreateInputBatchRequest",
+    "CreateOneTimePaymentRequest": "workday:CreateOneTimePaymentRequest",
+    "CreateSupplementalEarningRequest": "workday:CreateSupplementalEarningRequest",
+    "CreateTimeOffInputRequest": "workday:CreateTimeOffInputRequest",
+    "InputBatch": "workday:InputBatch",
+    "InputBatchCollection": "workday:InputBatchCollection",
+    "InputRecord": "workday:InputRecord",
+    "OneTimePayment": "workday:OneTimePayment",
+    "OneTimePaymentCollection": "workday:OneTimePaymentCollection",
+    "SupplementalEarning": "workday:SupplementalEarning",
+    "SupplementalEarningCollection": "workday:SupplementalEarningCollection",
+    "TimeOffInput": "workday:TimeOffInput",
+    "TimeOffInputCollection": "workday:TimeOffInputCollection",
+    "UpdateOneTimePaymentRequest": "workday:UpdateOneTimePaymentRequest",
+    "WorkerRef": "workday:WorkerRef",
+    "adjustmentType": {
+      "@id": "workday:adjustment_type",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "workday:amount",
+      "@type": "xsd:double"
+    },
+    "completedOn": {
+      "@id": "workday:completed_on",
+      "@type": "xsd:dateTime"
+    },
+    "createdOn": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "currency": {
+      "@id": "workday:currency",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "workday:data",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "deductionCode": {
+      "@id": "workday:deduction_code",
+      "@type": "xsd:string"
+    },
+    "descriptor": {
+      "@id": "workday:descriptor",
+      "@type": "xsd:string"
+    },
+    "earningCode": {
+      "@id": "workday:earning_code",
+      "@type": "xsd:string"
+    },
+    "effectiveDate": {
+      "@id": "workday:effective_date",
+      "@type": "xsd:date"
+    },
+    "endDate": {
+      "@id": "workday:end_date",
+      "@type": "xsd:date"
+    },
+    "failedRecords": {
+      "@id": "workday:failed_records",
+      "@type": "xsd:integer"
+    },
+    "hours": {
+      "@id": "workday:hours",
+      "@type": "xsd:double"
+    },
+    "id": {
+      "@id": "workday:id",
+      "@type": "xsd:string"
+    },
+    "inputType": {
+      "@id": "workday:input_type",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "originalPayRunId": {
+      "@id": "workday:original_pay_run_id",
+      "@type": "xsd:string"
+    },
+    "paid": {
+      "@id": "workday:paid",
+      "@type": "xsd:boolean"
+    },
+    "reason": {
+      "@id": "workday:reason",
+      "@type": "xsd:string"
+    },
+    "recordCount": {
+      "@id": "workday:record_count",
+      "@type": "xsd:integer"
+    },
+    "records": {
+      "@id": "workday:records",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "startDate": {
+      "@id": "workday:start_date",
+      "@type": "xsd:date"
+    },
+    "status": {
+      "@id": "workday:status",
+      "@type": "xsd:string"
+    },
+    "submittedBy": {
+      "@id": "workday:submitted_by",
+      "@type": "xsd:string"
+    },
+    "submittedOn": {
+      "@id": "workday:submitted_on",
+      "@type": "xsd:dateTime"
+    },
+    "timeOffType": {
+      "@id": "workday:time_off_type",
+      "@type": "xsd:string"
+    },
+    "total": {
+      "@id": "workday:total",
+      "@type": "xsd:integer"
+    },
+    "type": {
+      "@id": "workday:type",
+      "@type": "xsd:string"
+    },
+    "validRecords": {
+      "@id": "workday:valid_records",
+      "@type": "xsd:integer"
+    },
+    "worker": {
+      "@id": "workday:worker",
+      "@type": "@id"
+    },
+    "workerId": {
+      "@id": "workday:worker_id",
+      "@type": "xsd:string"
+    }
+  }
+}

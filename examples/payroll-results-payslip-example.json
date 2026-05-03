@@ -1,0 +1,56 @@
+{
+  "id": "ps_w100542_20260430",
+  "worker": {
+    "id": "w_100542",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "payPeriod": {
+    "startDate": "2026-04-30",
+    "endDate": "2026-04-30"
+  },
+  "paymentDate": "2026-04-30",
+  "grossPay": 1.0,
+  "netPay": 1.0,
+  "totalEarnings": 5240.0,
+  "totalDeductions": 38210.8,
+  "totalTaxes": 29167.4,
+  "currency": "USD",
+  "earnings": [
+    {
+      "earningCode": "REGULAR",
+      "currentAmount": 2840.0,
+      "currentHours": 40.0,
+      "rate": 32.5,
+      "yearToDateAmount": 8742.5
+    }
+  ],
+  "deductions": [
+    {
+      "deductionCode": "MEDICAL_PRETAX",
+      "employeeAmount": 287.5,
+      "employerAmount": 287.5,
+      "preTax": true,
+      "yearToDateEmployee": 8742.5,
+      "yearToDateEmployer": 8742.5
+    },
+    {
+      "deductionCode": "MEDICAL_PRETAX",
+      "employeeAmount": 287.5,
+      "employerAmount": 287.5,
+      "preTax": true,
+      "yearToDateEmployee": 8742.5,
+      "yearToDateEmployer": 8742.5
+    }
+  ],
+  "taxes": [
+    {
+      "taxAuthority": "Internal Revenue Service",
+      "taxType": "FederalIncome",
+      "currentAmount": 2840.0,
+      "yearToDateAmount": 8742.5
+    }
+  ],
+  "yearToDateGross": 42850.0,
+  "yearToDateNet": 31420.65,
+  "yearToDateTaxes": 8742.5
+}

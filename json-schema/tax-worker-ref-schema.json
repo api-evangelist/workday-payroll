@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-worker-ref-schema.json",
+  "title": "WorkerRef",
+  "description": "WorkerRef schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Worker identifier",
+      "example": "w_100542"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Worker display name",
+      "example": "Weekly USD Pay Group"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "wd-7697a3a3",
+  "descriptor": "BiWeekly Salaried",
+  "payGroup": {
+    "id": "wd-8a314572",
+    "descriptor": "BiWeekly Salaried"
+  },
+  "payPeriod": {
+    "startDate": "2026-04-30",
+    "endDate": "2026-04-30"
+  },
+  "status": "Draft",
+  "runCategory": "OnDemand",
+  "paymentDate": "2026-04-30",
+  "totalGrossPay": 4401.64,
+  "totalNetPay": 6241.4,
+  "totalDeductions": 5876.43,
+  "totalTaxes": 6482.43,
+  "workerCount": 52,
+  "currency": "USD",
+  "createdOn": "2026-04-30T16:45:00Z",
+  "completedOn": "2026-04-30T16:45:00Z"
+}

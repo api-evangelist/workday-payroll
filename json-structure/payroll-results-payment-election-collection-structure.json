@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-results-payment-election-collection-structure.json",
+  "name": "PaymentElectionCollection",
+  "description": "PaymentElectionCollection schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PaymentElection"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of payment elections",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "PaymentElection": {
+      "name": "PaymentElection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the payment election",
+          "example": "pe_w100542_primary"
+        },
+        "order": {
+          "type": "int32",
+          "description": "Priority order of the election",
+          "example": 1
+        },
+        "distributionType": {
+          "type": "string",
+          "enum": [
+            "Amount",
+            "Percentage",
+            "Remainder"
+          ],
+          "description": "How payment is distributed",
+          "example": "Amount"
+        },
+        "amount": {
+          "type": "double",
+          "description": "Fixed amount (when distributionType is Amount)",
+          "example": 2500.0
+        },
+        "percentage": {
+          "type": "double",
+          "description": "Percentage of net pay (when distributionType is Percentage)",
+          "example": 100.0
+        },
+        "accountType": {
+          "type": "string",
+          "enum": [
+            "Checking",
+            "Savings"
+          ],
+          "description": "Bank account type",
+          "example": "Checking"
+        },
+        "bankName": {
+          "type": "string",
+          "description": "Financial institution name",
+          "example": "Wells Fargo"
+        },
+        "lastFourDigits": {
+          "type": "string",
+          "description": "Last four digits of account number",
+          "example": "4521"
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether this election is currently active",
+          "example": true
+        }
+      }
+    }
+  }
+}

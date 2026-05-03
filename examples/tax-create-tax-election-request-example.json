@@ -1,0 +1,11 @@
+{
+  "formType": "W4",
+  "jurisdictionId": "tjur_us_federal",
+  "filingStatus": "example",
+  "multipleJobs": true,
+  "dependentsAmount": 2000.0,
+  "otherIncome": 0.0,
+  "deductions": 0.0,
+  "additionalWithholding": 50.0,
+  "effectiveDate": "2026-04-30"
+}

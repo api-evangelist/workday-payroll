@@ -1,0 +1,12 @@
+{
+  "id": "tjur_us_federal",
+  "descriptor": "Weekly USD Pay Group",
+  "level": "Federal",
+  "country": "US",
+  "stateCode": "CA",
+  "localityName": "San Francisco",
+  "taxTypes": [
+    "FederalIncome"
+  ],
+  "active": true
+}

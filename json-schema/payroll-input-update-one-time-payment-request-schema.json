@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-update-one-time-payment-request-schema.json",
+  "title": "UpdateOneTimePaymentRequest",
+  "description": "UpdateOneTimePaymentRequest schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Updated payment amount",
+      "example": 2500.0
+    },
+    "reason": {
+      "type": "string",
+      "description": "Updated reason",
+      "example": "Q1 2026 performance bonus"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Updated effective date",
+      "example": "2026-04-30"
+    }
+  }
+}

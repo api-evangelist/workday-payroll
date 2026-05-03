@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-tax-jurisdiction-ref-schema.json",
+  "title": "TaxJurisdictionRef",
+  "description": "TaxJurisdictionRef schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Jurisdiction identifier",
+      "example": "tjur_us_federal"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Jurisdiction display name",
+      "example": "Weekly USD Pay Group"
+    }
+  }
+}

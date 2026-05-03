@@ -1,0 +1,11 @@
+{
+  "jurisdiction": {
+    "id": "tjur_us_federal",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "taxType": "FederalIncome",
+  "employeeAmount": 287.5,
+  "employerAmount": 287.5,
+  "taxableWages": 4750.0,
+  "currency": "USD"
+}

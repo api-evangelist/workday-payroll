@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-results-pay-run-result-structure.json",
+  "name": "PayRunResult",
+  "description": "PayRunResult schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "payRunId": {
+      "type": "string",
+      "description": "Associated pay run identifier",
+      "example": "pr_20260430_weekly_001"
+    },
+    "payPeriod": {
+      "$ref": "#/$defs/PayPeriod"
+    },
+    "paymentDate": {
+      "type": "date",
+      "description": "Payment date",
+      "example": "2026-04-30"
+    },
+    "totalGrossPay": {
+      "type": "double",
+      "description": "Aggregate gross pay",
+      "example": 245830.5
+    },
+    "totalNetPay": {
+      "type": "double",
+      "description": "Aggregate net pay",
+      "example": 178452.3
+    },
+    "totalDeductions": {
+      "type": "double",
+      "description": "Aggregate deductions",
+      "example": 38210.8
+    },
+    "totalEmployerTaxes": {
+      "type": "double",
+      "description": "Total employer tax obligations",
+      "example": 14583.7
+    },
+    "totalEmployeeTaxes": {
+      "type": "double",
+      "description": "Total employee tax withholdings",
+      "example": 14583.7
+    },
+    "workerCount": {
+      "type": "int32",
+      "description": "Number of workers processed",
+      "example": 87
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    }
+  },
+  "definitions": {
+    "PayPeriod": {
+      "name": "PayPeriod",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "date",
+          "description": "Start date of the pay period",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "date",
+          "description": "End date of the pay period",
+          "example": "2026-04-30"
+        }
+      }
+    }
+  }
+}

@@ -1,132 +1,129 @@
 {
-  "name": "PayRun",
-  "description": "Represents a payroll processing run for a pay group covering a specific pay period.",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/workday-payroll-pay-run-structure.json",
+  "name": "Workday Payroll Pay Run",
+  "description": "A pay run represents a single payroll processing cycle for a pay group, encompassing the calculation, review, and completion of payroll for a specific pay period.",
   "type": "object",
-  "properties": [
-    {
-      "name": "id",
+  "required": [
+    "payGroup",
+    "payPeriod",
+    "status"
+  ],
+  "properties": {
+    "id": {
       "type": "string",
-      "description": "Unique identifier for the pay run",
-      "required": false
+      "description": "Unique identifier for the pay run"
     },
-    {
-      "name": "descriptor",
+    "descriptor": {
       "type": "string",
-      "description": "Human-readable name of the pay run",
-      "required": false
+      "description": "Human-readable name of the pay run"
     },
-    {
-      "name": "payGroup",
+    "payGroup": {
+      "$ref": "#/$defs/PayGroupRef"
+    },
+    "payPeriod": {
+      "$ref": "#/$defs/PayPeriod"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "InProgress",
+        "Completed",
+        "Cancelled"
+      ],
+      "description": "Current status of the pay run"
+    },
+    "runCategory": {
+      "type": "string",
+      "enum": [
+        "Regular",
+        "OffCycle",
+        "OnDemand"
+      ],
+      "description": "Category of the pay run indicating whether it is a regular, off-cycle, or on-demand run"
+    },
+    "paymentDate": {
+      "type": "date",
+      "description": "Date payments will be distributed to workers"
+    },
+    "totalGrossPay": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Total gross pay for all workers in the pay run"
+    },
+    "totalNetPay": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Total net pay after deductions and taxes"
+    },
+    "totalDeductions": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Total deductions across all workers"
+    },
+    "totalTaxes": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Total tax withholdings across all workers"
+    },
+    "workerCount": {
+      "type": "int32",
+      "minimum": 0,
+      "description": "Number of workers included in the pay run"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 currency code"
+    },
+    "createdOn": {
+      "type": "datetime",
+      "description": "Timestamp when the pay run was created"
+    },
+    "completedOn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Timestamp when the pay run was completed"
+    }
+  },
+  "definitions": {
+    "PayGroupRef": {
+      "name": "PayGroupRef",
       "type": "object",
-      "description": "Reference to the associated pay group",
-      "required": false,
-      "properties": [
-        {
-          "name": "id",
+      "description": "Reference to a pay group that organizes workers for payroll processing",
+      "properties": {
+        "id": {
           "type": "string",
-          "description": "Pay group identifier"
+          "description": "Pay group unique identifier"
         },
-        {
-          "name": "descriptor",
+        "descriptor": {
           "type": "string",
           "description": "Pay group display name"
         }
-      ]
+      }
     },
-    {
-      "name": "payPeriod",
+    "PayPeriod": {
+      "name": "PayPeriod",
       "type": "object",
-      "description": "The pay period covered by this run",
-      "required": false,
-      "properties": [
-        {
-          "name": "startDate",
-          "type": "string",
-          "format": "date",
+      "description": "Date range defining the pay period covered by the run",
+      "required": [
+        "startDate",
+        "endDate"
+      ],
+      "properties": {
+        "startDate": {
+          "type": "date",
           "description": "Start date of the pay period"
         },
-        {
-          "name": "endDate",
-          "type": "string",
-          "format": "date",
+        "endDate": {
+          "type": "date",
           "description": "End date of the pay period"
         }
-      ]
-    },
-    {
-      "name": "status",
-      "type": "string",
-      "description": "Current status of the pay run",
-      "enum": ["Draft", "InProgress", "Completed", "Cancelled"],
-      "required": false
-    },
-    {
-      "name": "runCategory",
-      "type": "string",
-      "description": "Category of the pay run",
-      "enum": ["Regular", "OffCycle", "OnDemand"],
-      "required": false
-    },
-    {
-      "name": "paymentDate",
-      "type": "string",
-      "format": "date",
-      "description": "Date payments will be distributed",
-      "required": false
-    },
-    {
-      "name": "totalGrossPay",
-      "type": "number",
-      "format": "double",
-      "description": "Total gross pay for the pay run",
-      "required": false
-    },
-    {
-      "name": "totalNetPay",
-      "type": "number",
-      "format": "double",
-      "description": "Total net pay for the pay run",
-      "required": false
-    },
-    {
-      "name": "totalDeductions",
-      "type": "number",
-      "format": "double",
-      "description": "Total deductions for the pay run",
-      "required": false
-    },
-    {
-      "name": "totalTaxes",
-      "type": "number",
-      "format": "double",
-      "description": "Total tax withholdings for the pay run",
-      "required": false
-    },
-    {
-      "name": "workerCount",
-      "type": "integer",
-      "description": "Number of workers included in the pay run",
-      "required": false
-    },
-    {
-      "name": "currency",
-      "type": "string",
-      "description": "ISO 4217 currency code",
-      "required": false
-    },
-    {
-      "name": "createdOn",
-      "type": "string",
-      "format": "date-time",
-      "description": "When the pay run was created",
-      "required": false
-    },
-    {
-      "name": "completedOn",
-      "type": "string",
-      "format": "date-time",
-      "description": "When the pay run was completed",
-      "required": false
+      }
     }
-  ]
+  }
 }

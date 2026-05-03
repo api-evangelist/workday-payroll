@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "twh_w100542_federal",
+      "jurisdiction": {
+        "id": "tjur_us_federal",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "taxType": "FederalIncome",
+      "filingStatus": "Single",
+      "allowances": 2,
+      "additionalWithholding": 50.0,
+      "exempt": false,
+      "effectiveDate": "2026-04-30",
+      "currency": "USD"
+    }
+  ],
+  "total": 52
+}

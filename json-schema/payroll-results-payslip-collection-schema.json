@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-results-payslip-collection-schema.json",
+  "title": "PayslipCollection",
+  "description": "PayslipCollection schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Payslip"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of payslips",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "Payslip": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the payslip",
+          "example": "ps_w100542_20260430"
+        },
+        "worker": {
+          "$ref": "#/$defs/WorkerRef"
+        },
+        "payPeriod": {
+          "$ref": "#/$defs/PayPeriod"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of payment",
+          "example": "2026-04-30"
+        },
+        "grossPay": {
+          "type": "number",
+          "format": "double",
+          "description": "Total gross pay",
+          "example": 1.0
+        },
+        "netPay": {
+          "type": "number",
+          "format": "double",
+          "description": "Total net pay",
+          "example": 1.0
+        },
+        "totalEarnings": {
+          "type": "number",
+          "format": "double",
+          "description": "Sum of all earnings",
+          "example": 5240.0
+        },
+        "totalDeductions": {
+          "type": "number",
+          "format": "double",
+          "description": "Sum of all deductions",
+          "example": 38210.8
+        },
+        "totalTaxes": {
+          "type": "number",
+          "format": "double",
+          "description": "Sum of all tax withholdings",
+          "example": 29167.4
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        },
+        "earnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PayslipEarningLine"
+          },
+          "description": "Itemized earnings"
+        },
+        "deductions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PayslipDeductionLine"
+          },
+          "description": "Itemized deductions"
+        },
+        "taxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PayslipTaxLine"
+          },
+          "description": "Itemized tax withholdings"
+        },
+        "yearToDateGross": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date gross pay",
+          "example": 42850.0
+        },
+        "yearToDateNet": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date net pay",
+          "example": 31420.65
+        },
+        "yearToDateTaxes": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date tax withholdings",
+          "example": 8742.5
+        }
+      }
+    },
+    "PayslipEarningLine": {
+      "type": "object",
+      "properties": {
+        "earningCode": {
+          "type": "string",
+          "description": "Earning code descriptor",
+          "example": "REGULAR"
+        },
+        "currentAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Current period amount",
+          "example": 2840.0
+        },
+        "currentHours": {
+          "type": "number",
+          "format": "double",
+          "description": "Current period hours",
+          "example": 40.0
+        },
+        "rate": {
+          "type": "number",
+          "format": "double",
+          "description": "Pay rate",
+          "example": 32.5
+        },
+        "yearToDateAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date amount for this earning",
+          "example": 8742.5
+        }
+      }
+    },
+    "PayslipTaxLine": {
+      "type": "object",
+      "properties": {
+        "taxAuthority": {
+          "type": "string",
+          "description": "Tax authority name",
+          "example": "Internal Revenue Service"
+        },
+        "taxType": {
+          "type": "string",
+          "description": "Type of tax",
+          "example": "FederalIncome"
+        },
+        "currentAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Current period tax amount",
+          "example": 2840.0
+        },
+        "yearToDateAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date tax amount",
+          "example": 8742.5
+        }
+      }
+    },
+    "PayPeriod": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the pay period",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the pay period",
+          "example": "2026-04-30"
+        }
+      }
+    },
+    "WorkerRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    },
+    "PayslipDeductionLine": {
+      "type": "object",
+      "properties": {
+        "deductionCode": {
+          "type": "string",
+          "description": "Deduction code descriptor",
+          "example": "MEDICAL_PRETAX"
+        },
+        "employeeAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Employee contribution amount",
+          "example": 287.5
+        },
+        "employerAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Employer contribution amount",
+          "example": 287.5
+        },
+        "preTax": {
+          "type": "boolean",
+          "description": "Whether this deduction is pre-tax",
+          "example": true
+        },
+        "yearToDateEmployee": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date employee amount",
+          "example": 8742.5
+        },
+        "yearToDateEmployer": {
+          "type": "number",
+          "format": "double",
+          "description": "Year-to-date employer amount",
+          "example": 8742.5
+        }
+      }
+    }
+  }
+}

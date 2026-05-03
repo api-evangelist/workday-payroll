@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-input-create-supplemental-earning-request-structure.json",
+  "name": "CreateSupplementalEarningRequest",
+  "description": "CreateSupplementalEarningRequest schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "workerId": {
+      "type": "string",
+      "description": "Worker identifier",
+      "example": "w_100542"
+    },
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code",
+      "example": "REGULAR"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Bonus",
+        "Commission",
+        "Stipend",
+        "Allowance",
+        "Other"
+      ],
+      "description": "Type of supplemental earning",
+      "example": "Bonus"
+    },
+    "amount": {
+      "type": "double",
+      "description": "Earning amount",
+      "example": 2500.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "effectiveDate": {
+      "type": "date",
+      "description": "Effective date",
+      "example": "2026-04-30"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Description or reason",
+      "example": "Q1 2026 performance bonus"
+    }
+  },
+  "required": [
+    "workerId",
+    "earningCode",
+    "amount"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "calc_20260430_00012",
+  "payRunId": "pr_20260430_weekly_001",
+  "status": "Queued",
+  "startedAt": "2026-04-30T16:45:00Z",
+  "completedAt": "2026-04-30T16:45:00Z",
+  "errors": [
+    {
+      "error": "INVALID_REQUEST",
+      "message": "Validation failed for the provided fields.",
+      "details": [
+        {
+          "field": "example-12da2c",
+          "message": "Generated example value for the Workday payroll API."
+        }
+      ]
+    },
+    {
+      "error": "INVALID_REQUEST",
+      "message": "Validation failed for the provided fields.",
+      "details": [
+        {
+          "field": "example-3bd0d9",
+          "message": "Generated example value for the Workday payroll API."
+        },
+        {
+          "field": "example-9ade57",
+          "message": "Generated example value for the Workday payroll API."
+        }
+      ]
+    }
+  ]
+}

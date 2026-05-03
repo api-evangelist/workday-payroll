@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "id": "ded_20260430_00211",
+      "deductionCode": {
+        "id": "MEDICAL_PRETAX",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "amount": 2500.0,
+      "frequency": "PerPayPeriod",
+      "preTax": true,
+      "effectiveDate": "2026-04-30",
+      "endDate": "2026-04-30"
+    },
+    {
+      "id": "ded_20260430_00211",
+      "deductionCode": {
+        "id": "MEDICAL_PRETAX",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "amount": 2500.0,
+      "frequency": "PerPayPeriod",
+      "preTax": true,
+      "effectiveDate": "2026-04-30",
+      "endDate": "2026-04-30"
+    },
+    {
+      "id": "ded_20260430_00211",
+      "deductionCode": {
+        "id": "MEDICAL_PRETAX",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "amount": 2500.0,
+      "frequency": "PerPayPeriod",
+      "preTax": true,
+      "effectiveDate": "2026-04-30",
+      "endDate": "2026-04-30"
+    }
+  ],
+  "total": 52
+}

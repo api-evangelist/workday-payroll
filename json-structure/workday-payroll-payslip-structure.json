@@ -1,147 +1,212 @@
 {
-  "name": "Payslip",
-  "description": "Worker pay statement for a specific pay period, including earnings, deductions, taxes, and year-to-date totals.",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/workday-payroll-payslip-structure.json",
+  "name": "Workday Payroll Payslip",
+  "description": "A payslip represents a worker's pay statement for a specific pay period, detailing earnings, deductions, taxes, and net pay amounts along with year-to-date totals.",
   "type": "object",
-  "properties": [
-    {
-      "name": "id",
+  "required": [
+    "worker",
+    "payPeriod",
+    "grossPay",
+    "netPay"
+  ],
+  "properties": {
+    "id": {
       "type": "string",
-      "description": "Unique identifier for the payslip",
-      "required": false
+      "description": "Unique identifier for the payslip"
     },
-    {
-      "name": "worker",
-      "type": "object",
-      "description": "Reference to the worker",
-      "required": false,
-      "properties": [
-        { "name": "id", "type": "string", "description": "Worker identifier" },
-        { "name": "descriptor", "type": "string", "description": "Worker display name" }
-      ]
+    "worker": {
+      "$ref": "#/$defs/WorkerRef"
     },
-    {
-      "name": "payPeriod",
-      "type": "object",
-      "description": "Pay period covered",
-      "required": false,
-      "properties": [
-        { "name": "startDate", "type": "string", "format": "date" },
-        { "name": "endDate", "type": "string", "format": "date" }
-      ]
+    "payPeriod": {
+      "$ref": "#/$defs/PayPeriod"
     },
-    {
-      "name": "paymentDate",
+    "paymentDate": {
+      "type": "date",
+      "description": "Date of payment"
+    },
+    "grossPay": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Total gross pay for the period"
+    },
+    "netPay": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Total net pay after all deductions and taxes"
+    },
+    "totalEarnings": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Sum of all earnings for the period"
+    },
+    "totalDeductions": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Sum of all deductions for the period"
+    },
+    "totalTaxes": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Sum of all tax withholdings for the period"
+    },
+    "currency": {
       "type": "string",
-      "format": "date",
-      "description": "Date of payment",
-      "required": false
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 currency code"
     },
-    {
-      "name": "grossPay",
-      "type": "number",
-      "format": "double",
-      "description": "Total gross pay",
-      "required": false
-    },
-    {
-      "name": "netPay",
-      "type": "number",
-      "format": "double",
-      "description": "Total net pay after deductions and taxes",
-      "required": false
-    },
-    {
-      "name": "totalEarnings",
-      "type": "number",
-      "format": "double",
-      "description": "Sum of all earnings",
-      "required": false
-    },
-    {
-      "name": "totalDeductions",
-      "type": "number",
-      "format": "double",
-      "description": "Sum of all deductions",
-      "required": false
-    },
-    {
-      "name": "totalTaxes",
-      "type": "number",
-      "format": "double",
-      "description": "Sum of all tax withholdings",
-      "required": false
-    },
-    {
-      "name": "currency",
-      "type": "string",
-      "description": "ISO 4217 currency code",
-      "required": false
-    },
-    {
-      "name": "earnings",
+    "earnings": {
       "type": "array",
-      "description": "Itemized earnings lines",
-      "required": false,
       "items": {
-        "type": "object",
-        "properties": [
-          { "name": "earningCode", "type": "string" },
-          { "name": "currentAmount", "type": "number" },
-          { "name": "currentHours", "type": "number" },
-          { "name": "rate", "type": "number" },
-          { "name": "yearToDateAmount", "type": "number" }
-        ]
-      }
+        "$ref": "#/$defs/EarningLine"
+      },
+      "description": "Itemized earnings breakdown"
     },
-    {
-      "name": "deductions",
+    "deductions": {
       "type": "array",
-      "description": "Itemized deduction lines",
-      "required": false,
       "items": {
-        "type": "object",
-        "properties": [
-          { "name": "deductionCode", "type": "string" },
-          { "name": "employeeAmount", "type": "number" },
-          { "name": "employerAmount", "type": "number" },
-          { "name": "preTax", "type": "boolean" },
-          { "name": "yearToDateEmployee", "type": "number" },
-          { "name": "yearToDateEmployer", "type": "number" }
-        ]
-      }
+        "$ref": "#/$defs/DeductionLine"
+      },
+      "description": "Itemized deductions breakdown"
     },
-    {
-      "name": "taxes",
+    "taxes": {
       "type": "array",
-      "description": "Itemized tax lines",
-      "required": false,
       "items": {
-        "type": "object",
-        "properties": [
-          { "name": "taxAuthority", "type": "string" },
-          { "name": "taxType", "type": "string" },
-          { "name": "currentAmount", "type": "number" },
-          { "name": "yearToDateAmount", "type": "number" }
-        ]
-      }
+        "$ref": "#/$defs/TaxLine"
+      },
+      "description": "Itemized tax withholdings breakdown"
     },
-    {
-      "name": "yearToDateGross",
-      "type": "number",
-      "description": "Year-to-date gross pay",
-      "required": false
+    "yearToDateGross": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Year-to-date gross pay"
     },
-    {
-      "name": "yearToDateNet",
-      "type": "number",
-      "description": "Year-to-date net pay",
-      "required": false
+    "yearToDateNet": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Year-to-date net pay"
     },
-    {
-      "name": "yearToDateTaxes",
-      "type": "number",
-      "description": "Year-to-date tax withholdings",
-      "required": false
+    "yearToDateTaxes": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Year-to-date tax withholdings"
     }
-  ]
+  },
+  "definitions": {
+    "WorkerRef": {
+      "name": "WorkerRef",
+      "type": "object",
+      "description": "Reference to a worker in the Workday system",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker unique identifier"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name"
+        }
+      }
+    },
+    "PayPeriod": {
+      "name": "PayPeriod",
+      "type": "object",
+      "description": "Date range defining the pay period",
+      "required": [
+        "startDate",
+        "endDate"
+      ],
+      "properties": {
+        "startDate": {
+          "type": "date",
+          "description": "Start date of the pay period"
+        },
+        "endDate": {
+          "type": "date",
+          "description": "End date of the pay period"
+        }
+      }
+    },
+    "EarningLine": {
+      "name": "EarningLine",
+      "type": "object",
+      "description": "A single line item for an earning on the payslip",
+      "properties": {
+        "earningCode": {
+          "type": "string",
+          "description": "Earning code descriptor"
+        },
+        "currentAmount": {
+          "type": "double",
+          "description": "Current period amount"
+        },
+        "currentHours": {
+          "type": "double",
+          "description": "Current period hours worked"
+        },
+        "rate": {
+          "type": "double",
+          "description": "Pay rate applied"
+        },
+        "yearToDateAmount": {
+          "type": "double",
+          "description": "Year-to-date total for this earning"
+        }
+      }
+    },
+    "DeductionLine": {
+      "name": "DeductionLine",
+      "type": "object",
+      "description": "A single line item for a deduction on the payslip",
+      "properties": {
+        "deductionCode": {
+          "type": "string",
+          "description": "Deduction code descriptor"
+        },
+        "employeeAmount": {
+          "type": "double",
+          "description": "Employee contribution amount"
+        },
+        "employerAmount": {
+          "type": "double",
+          "description": "Employer contribution amount"
+        },
+        "preTax": {
+          "type": "boolean",
+          "description": "Whether the deduction is pre-tax"
+        },
+        "yearToDateEmployee": {
+          "type": "double",
+          "description": "Year-to-date employee amount"
+        },
+        "yearToDateEmployer": {
+          "type": "double",
+          "description": "Year-to-date employer amount"
+        }
+      }
+    },
+    "TaxLine": {
+      "name": "TaxLine",
+      "type": "object",
+      "description": "A single line item for a tax withholding on the payslip",
+      "properties": {
+        "taxAuthority": {
+          "type": "string",
+          "description": "Tax authority name"
+        },
+        "taxType": {
+          "type": "string",
+          "description": "Type of tax"
+        },
+        "currentAmount": {
+          "type": "double",
+          "description": "Current period tax amount"
+        },
+        "yearToDateAmount": {
+          "type": "double",
+          "description": "Year-to-date tax amount"
+        }
+      }
+    }
+  }
 }

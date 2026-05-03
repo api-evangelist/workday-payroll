@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-tax-result-schema.json",
+  "title": "TaxResult",
+  "description": "TaxResult schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "jurisdiction": {
+      "$ref": "#/$defs/TaxJurisdictionRef"
+    },
+    "taxType": {
+      "type": "string",
+      "description": "Type of tax",
+      "example": "FederalIncome"
+    },
+    "employeeAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Employee tax amount",
+      "example": 287.5
+    },
+    "employerAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Employer tax amount",
+      "example": 287.5
+    },
+    "taxableWages": {
+      "type": "number",
+      "format": "double",
+      "description": "Taxable wages for this tax type",
+      "example": 4750.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    }
+  },
+  "$defs": {
+    "TaxJurisdictionRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "workday": "https://community.workday.com/schemas/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CreateTaxElectionRequest": "workday:CreateTaxElectionRequest",
+    "TaxElection": "workday:TaxElection",
+    "TaxElectionCollection": "workday:TaxElectionCollection",
+    "TaxFiling": "workday:TaxFiling",
+    "TaxFilingCollection": "workday:TaxFilingCollection",
+    "TaxJurisdiction": "workday:TaxJurisdiction",
+    "TaxJurisdictionCollection": "workday:TaxJurisdictionCollection",
+    "TaxJurisdictionRef": "workday:TaxJurisdictionRef",
+    "TaxResult": "workday:TaxResult",
+    "TaxResultCollection": "workday:TaxResultCollection",
+    "TaxWithholding": "workday:TaxWithholding",
+    "TaxWithholdingCollection": "workday:TaxWithholdingCollection",
+    "UpdateTaxWithholdingRequest": "workday:UpdateTaxWithholdingRequest",
+    "WorkerRef": "workday:WorkerRef",
+    "WorkerTaxSummary": "workday:WorkerTaxSummary",
+    "active": {
+      "@id": "workday:active",
+      "@type": "xsd:boolean"
+    },
+    "additionalWithholding": {
+      "@id": "workday:additional_withholding",
+      "@type": "xsd:double"
+    },
+    "allowances": {
+      "@id": "workday:allowances",
+      "@type": "xsd:integer"
+    },
+    "country": {
+      "@id": "workday:country",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "workday:currency",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "workday:data",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "deductions": {
+      "@id": "workday:deductions",
+      "@type": "xsd:double"
+    },
+    "dependentsAmount": {
+      "@id": "workday:dependents_amount",
+      "@type": "xsd:double"
+    },
+    "descriptor": {
+      "@id": "workday:descriptor",
+      "@type": "xsd:string"
+    },
+    "dueDate": {
+      "@id": "workday:due_date",
+      "@type": "xsd:date"
+    },
+    "effectiveDate": {
+      "@id": "workday:effective_date",
+      "@type": "xsd:date"
+    },
+    "employeeAmount": {
+      "@id": "workday:employee_amount",
+      "@type": "xsd:double"
+    },
+    "employerAmount": {
+      "@id": "workday:employer_amount",
+      "@type": "xsd:double"
+    },
+    "exempt": {
+      "@id": "workday:exempt",
+      "@type": "xsd:boolean"
+    },
+    "filedDate": {
+      "@id": "workday:filed_date",
+      "@type": "xsd:date"
+    },
+    "filingStatus": {
+      "@id": "workday:filing_status",
+      "@type": "xsd:string"
+    },
+    "filingType": {
+      "@id": "workday:filing_type",
+      "@type": "xsd:string"
+    },
+    "formNumber": {
+      "@id": "workday:form_number",
+      "@type": "xsd:string"
+    },
+    "formType": {
+      "@id": "workday:form_type",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "workday:id",
+      "@type": "xsd:string"
+    },
+    "jurisdiction": {
+      "@id": "workday:jurisdiction",
+      "@type": "@id"
+    },
+    "jurisdictionBreakdown": {
+      "@id": "workday:jurisdiction_breakdown",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "jurisdictionId": {
+      "@id": "workday:jurisdiction_id",
+      "@type": "xsd:string"
+    },
+    "level": {
+      "@id": "workday:level",
+      "@type": "xsd:string"
+    },
+    "localityName": {
+      "@id": "workday:locality_name",
+      "@type": "xsd:string"
+    },
+    "multipleJobs": {
+      "@id": "workday:multiple_jobs",
+      "@type": "xsd:boolean"
+    },
+    "otherIncome": {
+      "@id": "workday:other_income",
+      "@type": "xsd:double"
+    },
+    "quarter": {
+      "@id": "workday:quarter",
+      "@type": "xsd:integer"
+    },
+    "stateCode": {
+      "@id": "workday:state_code",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "workday:status",
+      "@type": "xsd:string"
+    },
+    "submittedOn": {
+      "@id": "workday:submitted_on",
+      "@type": "xsd:dateTime"
+    },
+    "taxType": {
+      "@id": "workday:tax_type",
+      "@type": "xsd:string"
+    },
+    "taxTypes": {
+      "@id": "workday:tax_types",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "taxYear": {
+      "@id": "workday:tax_year",
+      "@type": "xsd:integer"
+    },
+    "taxableWages": {
+      "@id": "workday:taxable_wages",
+      "@type": "xsd:double"
+    },
+    "total": {
+      "@id": "workday:total",
+      "@type": "xsd:integer"
+    },
+    "totalEmployerTax": {
+      "@id": "workday:total_employer_tax",
+      "@type": "xsd:double"
+    },
+    "totalFederalWithholding": {
+      "@id": "workday:total_federal_withholding",
+      "@type": "xsd:double"
+    },
+    "totalGrossWages": {
+      "@id": "workday:total_gross_wages",
+      "@type": "xsd:double"
+    },
+    "totalLocalWithholding": {
+      "@id": "workday:total_local_withholding",
+      "@type": "xsd:double"
+    },
+    "totalMedicare": {
+      "@id": "workday:total_medicare",
+      "@type": "xsd:double"
+    },
+    "totalSocialSecurity": {
+      "@id": "workday:total_social_security",
+      "@type": "xsd:double"
+    },
+    "totalStateWithholding": {
+      "@id": "workday:total_state_withholding",
+      "@type": "xsd:double"
+    },
+    "totalTaxWithheld": {
+      "@id": "workday:total_tax_withheld",
+      "@type": "xsd:double"
+    },
+    "totalTaxableWages": {
+      "@id": "workday:total_taxable_wages",
+      "@type": "xsd:double"
+    },
+    "worker": {
+      "@id": "workday:worker",
+      "@type": "@id"
+    }
+  }
+}

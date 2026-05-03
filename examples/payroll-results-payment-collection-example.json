@@ -1,0 +1,65 @@
+{
+  "data": [
+    {
+      "id": "pmt_20260502_00045",
+      "worker": {
+        "id": "w_100542",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payRunId": "pr_20260430_weekly_001",
+      "paymentMethod": "DirectDeposit",
+      "amount": 2500.0,
+      "currency": "USD",
+      "paymentDate": "2026-04-30",
+      "settlementDate": "2026-04-30",
+      "status": "Pending",
+      "bankAccount": {
+        "lastFourDigits": "4521",
+        "bankName": "Wells Fargo",
+        "accountType": "Checking"
+      },
+      "checkNumber": "100482"
+    },
+    {
+      "id": "pmt_20260502_00045",
+      "worker": {
+        "id": "w_100542",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payRunId": "pr_20260430_weekly_001",
+      "paymentMethod": "DirectDeposit",
+      "amount": 2500.0,
+      "currency": "USD",
+      "paymentDate": "2026-04-30",
+      "settlementDate": "2026-04-30",
+      "status": "Pending",
+      "bankAccount": {
+        "lastFourDigits": "4521",
+        "bankName": "Wells Fargo",
+        "accountType": "Checking"
+      },
+      "checkNumber": "100482"
+    },
+    {
+      "id": "pmt_20260502_00045",
+      "worker": {
+        "id": "w_100542",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payRunId": "pr_20260430_weekly_001",
+      "paymentMethod": "DirectDeposit",
+      "amount": 2500.0,
+      "currency": "USD",
+      "paymentDate": "2026-04-30",
+      "settlementDate": "2026-04-30",
+      "status": "Pending",
+      "bankAccount": {
+        "lastFourDigits": "4521",
+        "bankName": "Wells Fargo",
+        "accountType": "Checking"
+      },
+      "checkNumber": "100482"
+    }
+  ],
+  "total": 52
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-earning-collection-structure.json",
+  "name": "EarningCollection",
+  "description": "EarningCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Earning"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of earnings",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "Earning": {
+      "name": "Earning",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique earning record identifier",
+          "example": "ern_20260430_00301"
+        },
+        "earningCode": {
+          "$ref": "#/$defs/EarningCodeRef"
+        },
+        "amount": {
+          "type": "double",
+          "description": "Earning amount",
+          "example": 2500.0
+        },
+        "hours": {
+          "type": "double",
+          "description": "Hours worked for this earning",
+          "example": 40.0
+        },
+        "rate": {
+          "type": "double",
+          "description": "Pay rate for this earning",
+          "example": 32.5
+        },
+        "effectiveDate": {
+          "type": "date",
+          "description": "Effective date of the earning",
+          "example": "2026-04-30"
+        },
+        "payPeriod": {
+          "$ref": "#/$defs/PayPeriod"
+        }
+      }
+    },
+    "EarningCodeRef": {
+      "name": "EarningCodeRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Earning code identifier",
+          "example": "REGULAR"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Earning code display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    },
+    "PayPeriod": {
+      "name": "PayPeriod",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "date",
+          "description": "Start date of the pay period",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "date",
+          "description": "End date of the pay period",
+          "example": "2026-04-30"
+        }
+      }
+    }
+  }
+}

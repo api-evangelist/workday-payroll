@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-earning-collection-schema.json",
+  "title": "EarningCollection",
+  "description": "EarningCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Earning"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of earnings",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "Earning": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique earning record identifier",
+          "example": "ern_20260430_00301"
+        },
+        "earningCode": {
+          "$ref": "#/$defs/EarningCodeRef"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Earning amount",
+          "example": 2500.0
+        },
+        "hours": {
+          "type": "number",
+          "format": "double",
+          "description": "Hours worked for this earning",
+          "example": 40.0
+        },
+        "rate": {
+          "type": "number",
+          "format": "double",
+          "description": "Pay rate for this earning",
+          "example": 32.5
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Effective date of the earning",
+          "example": "2026-04-30"
+        },
+        "payPeriod": {
+          "$ref": "#/$defs/PayPeriod"
+        }
+      }
+    },
+    "EarningCodeRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Earning code identifier",
+          "example": "REGULAR"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Earning code display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    },
+    "PayPeriod": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the pay period",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the pay period",
+          "example": "2026-04-30"
+        }
+      }
+    }
+  }
+}

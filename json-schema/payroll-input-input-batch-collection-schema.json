@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-input-batch-collection-schema.json",
+  "title": "InputBatchCollection",
+  "description": "InputBatchCollection schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/InputBatch"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of input batches",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "InputBatch": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the input batch",
+          "example": "ib_20260428_00007"
+        },
+        "name": {
+          "type": "string",
+          "description": "Batch name",
+          "example": "April 2026 Bonus Batch"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Validating",
+            "Validated",
+            "Processing",
+            "Completed",
+            "Failed"
+          ],
+          "description": "Current batch status",
+          "example": "Pending"
+        },
+        "recordCount": {
+          "type": "integer",
+          "description": "Number of records in the batch",
+          "example": 100
+        },
+        "validRecords": {
+          "type": "integer",
+          "description": "Number of records that passed validation",
+          "example": 98
+        },
+        "failedRecords": {
+          "type": "integer",
+          "description": "Number of records that failed validation",
+          "example": 2
+        },
+        "submittedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the batch was submitted",
+          "example": "2026-04-30T16:45:00Z"
+        },
+        "completedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When batch processing completed",
+          "example": "2026-04-30T16:45:00Z"
+        },
+        "submittedBy": {
+          "type": "string",
+          "description": "User who submitted the batch",
+          "example": "payroll.admin@example.com"
+        }
+      }
+    }
+  }
+}

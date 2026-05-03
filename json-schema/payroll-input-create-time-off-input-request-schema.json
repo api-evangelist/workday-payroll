@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-create-time-off-input-request-schema.json",
+  "title": "CreateTimeOffInputRequest",
+  "description": "CreateTimeOffInputRequest schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "timeOffType": {
+      "type": "string",
+      "description": "Type of time off",
+      "example": "Vacation"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date",
+      "example": "2026-04-30"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "End date",
+      "example": "2026-04-30"
+    },
+    "hours": {
+      "type": "number",
+      "format": "double",
+      "description": "Hours of time off",
+      "example": 40.0
+    },
+    "paid": {
+      "type": "boolean",
+      "description": "Whether the time off is paid",
+      "example": true
+    }
+  },
+  "required": [
+    "timeOffType",
+    "startDate",
+    "hours"
+  ]
+}

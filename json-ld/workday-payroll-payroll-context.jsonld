@@ -1,0 +1,231 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "workday": "https://community.workday.com/schemas/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CalculationStatus": "workday:CalculationStatus",
+    "CreatePayRunRequest": "workday:CreatePayRunRequest",
+    "Deduction": "workday:Deduction",
+    "DeductionCode": "workday:DeductionCode",
+    "DeductionCodeCollection": "workday:DeductionCodeCollection",
+    "DeductionCodeRef": "workday:DeductionCodeRef",
+    "DeductionCollection": "workday:DeductionCollection",
+    "Earning": "workday:Earning",
+    "EarningCode": "workday:EarningCode",
+    "EarningCodeCollection": "workday:EarningCodeCollection",
+    "EarningCodeRef": "workday:EarningCodeRef",
+    "EarningCollection": "workday:EarningCollection",
+    "Error": "workday:Error",
+    "PayGroup": "workday:PayGroup",
+    "PayGroupCollection": "workday:PayGroupCollection",
+    "PayGroupRef": "workday:PayGroupRef",
+    "PayPeriod": "workday:PayPeriod",
+    "PayRun": "workday:PayRun",
+    "PayRunCollection": "workday:PayRunCollection",
+    "UpdatePayRunRequest": "workday:UpdatePayRunRequest",
+    "WorkerCollection": "workday:WorkerCollection",
+    "WorkerPayrollDetails": "workday:WorkerPayrollDetails",
+    "WorkerRef": "workday:WorkerRef",
+    "active": {
+      "@id": "workday:active",
+      "@type": "xsd:boolean"
+    },
+    "amount": {
+      "@id": "workday:amount",
+      "@type": "xsd:double"
+    },
+    "annualSalary": {
+      "@id": "workday:annual_salary",
+      "@type": "xsd:double"
+    },
+    "compensationFrequency": {
+      "@id": "workday:compensation_frequency",
+      "@type": "xsd:string"
+    },
+    "completedAt": {
+      "@id": "workday:completed_at",
+      "@type": "xsd:dateTime"
+    },
+    "completedOn": {
+      "@id": "workday:completed_on",
+      "@type": "xsd:dateTime"
+    },
+    "country": {
+      "@id": "workday:country",
+      "@type": "xsd:string"
+    },
+    "createdOn": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "currency": {
+      "@id": "workday:currency",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "workday:data",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "deductionCode": {
+      "@id": "workday:deduction_code",
+      "@type": "@id"
+    },
+    "descriptor": {
+      "@id": "workday:descriptor",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "workday:details",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "earningCode": {
+      "@id": "workday:earning_code",
+      "@type": "@id"
+    },
+    "effectiveDate": {
+      "@id": "workday:effective_date",
+      "@type": "xsd:date"
+    },
+    "endDate": {
+      "@id": "workday:end_date",
+      "@type": "xsd:date"
+    },
+    "error": {
+      "@id": "workday:error",
+      "@type": "xsd:string"
+    },
+    "errors": {
+      "@id": "workday:errors",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "field": {
+      "@id": "workday:field",
+      "@type": "xsd:string"
+    },
+    "frequency": {
+      "@id": "workday:frequency",
+      "@type": "xsd:string"
+    },
+    "hourlyRate": {
+      "@id": "workday:hourly_rate",
+      "@type": "xsd:double"
+    },
+    "hours": {
+      "@id": "workday:hours",
+      "@type": "xsd:double"
+    },
+    "id": {
+      "@id": "workday:id",
+      "@type": "xsd:string"
+    },
+    "inactive": {
+      "@id": "workday:inactive",
+      "@type": "xsd:boolean"
+    },
+    "message": {
+      "@id": "workday:message",
+      "@type": "xsd:string"
+    },
+    "payFrequency": {
+      "@id": "workday:pay_frequency",
+      "@type": "xsd:string"
+    },
+    "payGroup": {
+      "@id": "workday:pay_group",
+      "@type": "@id"
+    },
+    "payGroupId": {
+      "@id": "workday:pay_group_id",
+      "@type": "xsd:string"
+    },
+    "payPeriod": {
+      "@id": "workday:pay_period",
+      "@type": "@id"
+    },
+    "payRunId": {
+      "@id": "workday:pay_run_id",
+      "@type": "xsd:string"
+    },
+    "paymentDate": {
+      "@id": "workday:payment_date",
+      "@type": "xsd:date"
+    },
+    "paymentMethod": {
+      "@id": "workday:payment_method",
+      "@type": "xsd:string"
+    },
+    "preTax": {
+      "@id": "workday:pre_tax",
+      "@type": "xsd:boolean"
+    },
+    "rate": {
+      "@id": "workday:rate",
+      "@type": "xsd:double"
+    },
+    "runCategory": {
+      "@id": "workday:run_category",
+      "@type": "xsd:string"
+    },
+    "startDate": {
+      "@id": "workday:start_date",
+      "@type": "xsd:date"
+    },
+    "startedAt": {
+      "@id": "workday:started_at",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "workday:status",
+      "@type": "xsd:string"
+    },
+    "taxJurisdiction": {
+      "@id": "workday:tax_jurisdiction",
+      "@type": "xsd:string"
+    },
+    "taxable": {
+      "@id": "workday:taxable",
+      "@type": "xsd:boolean"
+    },
+    "total": {
+      "@id": "workday:total",
+      "@type": "xsd:integer"
+    },
+    "totalDeductions": {
+      "@id": "workday:total_deductions",
+      "@type": "xsd:double"
+    },
+    "totalGrossPay": {
+      "@id": "workday:total_gross_pay",
+      "@type": "xsd:double"
+    },
+    "totalNetPay": {
+      "@id": "workday:total_net_pay",
+      "@type": "xsd:double"
+    },
+    "totalTaxes": {
+      "@id": "workday:total_taxes",
+      "@type": "xsd:double"
+    },
+    "type": {
+      "@id": "workday:type",
+      "@type": "xsd:string"
+    },
+    "workerCount": {
+      "@id": "workday:worker_count",
+      "@type": "xsd:integer"
+    },
+    "workerDescriptor": {
+      "@id": "workday:worker_descriptor",
+      "@type": "xsd:string"
+    },
+    "workerId": {
+      "@id": "workday:worker_id",
+      "@type": "xsd:string"
+    }
+  }
+}

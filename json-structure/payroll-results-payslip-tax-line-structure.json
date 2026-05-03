@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-results-payslip-tax-line-structure.json",
+  "name": "PayslipTaxLine",
+  "description": "PayslipTaxLine schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "taxAuthority": {
+      "type": "string",
+      "description": "Tax authority name",
+      "example": "Internal Revenue Service"
+    },
+    "taxType": {
+      "type": "string",
+      "description": "Type of tax",
+      "example": "FederalIncome"
+    },
+    "currentAmount": {
+      "type": "double",
+      "description": "Current period tax amount",
+      "example": 2840.0
+    },
+    "yearToDateAmount": {
+      "type": "double",
+      "description": "Year-to-date tax amount",
+      "example": 8742.5
+    }
+  }
+}

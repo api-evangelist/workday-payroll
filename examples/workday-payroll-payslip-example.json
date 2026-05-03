@@ -1,0 +1,64 @@
+{
+  "id": "wd-a8169dab",
+  "worker": {
+    "id": "wd-dea57a72",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "payPeriod": {
+    "startDate": "2026-04-30",
+    "endDate": "2026-04-30"
+  },
+  "paymentDate": "2026-04-30",
+  "grossPay": 7757.38,
+  "netPay": 6176.39,
+  "totalEarnings": 1922.22,
+  "totalDeductions": 7644.81,
+  "totalTaxes": 7106.59,
+  "currency": "USD",
+  "earnings": [
+    {
+      "earningCode": "BONUS",
+      "currentAmount": 4905.98,
+      "currentHours": 72.33,
+      "rate": 46.7,
+      "yearToDateAmount": 137.79
+    }
+  ],
+  "deductions": [
+    {
+      "deductionCode": "MEDICAL_PRETAX",
+      "employeeAmount": 9157.71,
+      "employerAmount": 6349.83,
+      "preTax": false,
+      "yearToDateEmployee": 36.27,
+      "yearToDateEmployer": 91.68
+    },
+    {
+      "deductionCode": "VISION",
+      "employeeAmount": 9723.71,
+      "employerAmount": 8493.77,
+      "preTax": false,
+      "yearToDateEmployee": 58.88,
+      "yearToDateEmployer": 84.09
+    },
+    {
+      "deductionCode": "PARKING",
+      "employeeAmount": 9979.03,
+      "employerAmount": 6803.18,
+      "preTax": false,
+      "yearToDateEmployee": 42.98,
+      "yearToDateEmployer": 72.08
+    }
+  ],
+  "taxes": [
+    {
+      "taxAuthority": "Internal Revenue Service",
+      "taxType": "SUTA",
+      "currentAmount": 4222.49,
+      "yearToDateAmount": 5166.28
+    }
+  ],
+  "yearToDateGross": 5920.05,
+  "yearToDateNet": 6753.78,
+  "yearToDateTaxes": 1975.82
+}

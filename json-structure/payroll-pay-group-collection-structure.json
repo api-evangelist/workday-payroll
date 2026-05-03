@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-pay-group-collection-structure.json",
+  "name": "PayGroupCollection",
+  "description": "PayGroupCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PayGroup"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of pay groups",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "PayGroup": {
+      "name": "PayGroup",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the pay group",
+          "example": "pg_weekly_usd"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Human-readable name of the pay group",
+          "example": "Weekly USD Pay Group"
+        },
+        "payFrequency": {
+          "type": "string",
+          "enum": [
+            "Weekly",
+            "BiWeekly",
+            "SemiMonthly",
+            "Monthly"
+          ],
+          "description": "How often payroll is processed",
+          "example": "Weekly"
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code for the pay group",
+          "example": "USD"
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 country code",
+          "example": "US"
+        },
+        "runCategory": {
+          "type": "string",
+          "description": "Default run category for this pay group",
+          "example": "example"
+        },
+        "workerCount": {
+          "type": "int32",
+          "description": "Number of workers in the pay group",
+          "example": 87
+        },
+        "inactive": {
+          "type": "boolean",
+          "description": "Whether the pay group is inactive",
+          "example": false
+        }
+      }
+    }
+  }
+}

@@ -15,55 +15,57 @@ externalDocs:
   description: Workday Payroll Input API Documentation
   url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
 servers:
-  - url: https://api.workday.com/payroll-input/v1
-    description: Workday Payroll Input Production
-  - url: https://{tenant}.workday.com/api/payroll-input/v1
-    description: Workday Payroll Input Tenant-Specific
-    variables:
-      tenant:
-        description: Workday tenant identifier
-        default: your-tenant
+- url: https://api.workday.com/payroll-input/v1
+  description: Workday Payroll Input Production
+- url: https://{tenant}.workday.com/api/payroll-input/v1
+  description: Workday Payroll Input Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
 tags:
-  - name: Input Batches
-    description: Manage batch submissions of payroll input data
-  - name: One-Time Payments
-    description: Submit and manage one-time payment requests
-  - name: Payroll Adjustments
-    description: Create and manage payroll adjustments and corrections
-  - name: Supplemental Earnings
-    description: Submit supplemental earnings such as bonuses and commissions
-  - name: Time Off Inputs
-    description: Submit time off and leave inputs for payroll processing
+- name: Input Batches
+  description: Manage batch submissions of payroll input data
+- name: One-Time Payments
+  description: Submit and manage one-time payment requests
+- name: Payroll Adjustments
+  description: Create and manage payroll adjustments and corrections
+- name: Supplemental Earnings
+  description: Submit supplemental earnings such as bonuses and commissions
+- name: Time Off Inputs
+  description: Submit time off and leave inputs for payroll processing
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /oneTimePayments:
     get:
       operationId: listOneTimePayments
-      summary: Workday Payroll List one-time payments
+      summary: Workday Payroll List One-time Payments
       description: >-
         Retrieve all one-time payment requests, optionally filtered by
         status, worker, or date range.
       tags:
-        - One-Time Payments
+      - One-Time Payments
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: workerId
-          in: query
-          description: Filter by worker identifier
-          schema:
-            type: string
-        - name: status
-          in: query
-          description: Filter by status
-          schema:
-            type: string
-            enum:
-              - Pending
-              - Approved
-              - Processed
-              - Rejected
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: workerId
+        in: query
+        description: Filter by worker identifier
+        schema:
+          type: string
+        example: w_100542
+      - name: status
+        in: query
+        description: Filter by status
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Approved
+          - Processed
+          - Rejected
+        example: Pending
       responses:
         '200':
           description: Collection of one-time payments
@@ -71,22 +73,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OneTimePaymentCollection'
+              examples:
+                ListOneTimePayments200Example:
+                  summary: Default listOneTimePayments 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: pmt_20260502_00045
+                      worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      earningCode: REGULAR
+                      amount: 2500.0
+                      currency: USD
+                      reason: Q1 2026 performance bonus
+                      effectiveDate: '2026-04-30'
+                      status: Pending
+                      createdOn: '2026-04-30T16:45:00Z'
+                      submittedBy: payroll.admin@example.com
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createOneTimePayment
-      summary: Workday Payroll Create a one-time payment
+      summary: Workday Payroll Create a One-time Payment
       description: >-
         Submit a new one-time payment request for a worker, such as a bonus,
         retroactive pay adjustment, or relocation allowance.
       tags:
-        - One-Time Payments
+      - One-Time Payments
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateOneTimePaymentRequest'
+            examples:
+              CreateOneTimePaymentRequestExample:
+                summary: Default createOneTimePayment request
+                x-microcks-default: true
+                value:
+                  workerId: w_100542
+                  earningCode: REGULAR
+                  amount: 2500.0
+                  currency: USD
+                  reason: Q1 2026 performance bonus
+                  effectiveDate: '2026-04-30'
       responses:
         '201':
           description: One-time payment created
@@ -94,20 +129,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OneTimePayment'
+              examples:
+                CreateOneTimePayment201Example:
+                  summary: Default createOneTimePayment 201 response
+                  x-microcks-default: true
+                  value:
+                    id: pmt_20260502_00045
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    earningCode: REGULAR
+                    amount: 2500.0
+                    currency: USD
+                    reason: Q1 2026 performance bonus
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    createdOn: '2026-04-30T16:45:00Z'
+                    submittedBy: payroll.admin@example.com
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /oneTimePayments/{paymentId}:
     get:
       operationId: getOneTimePayment
-      summary: Workday Payroll Get a one-time payment
+      summary: Workday Payroll Get a One-time Payment
       description: >-
         Retrieve details of a specific one-time payment request.
       tags:
-        - One-Time Payments
+      - One-Time Payments
       parameters:
-        - $ref: '#/components/parameters/paymentId'
+      - $ref: '#/components/parameters/paymentId'
       responses:
         '200':
           description: One-time payment details
@@ -115,25 +170,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OneTimePayment'
+              examples:
+                GetOneTimePayment200Example:
+                  summary: Default getOneTimePayment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pmt_20260502_00045
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    earningCode: REGULAR
+                    amount: 2500.0
+                    currency: USD
+                    reason: Q1 2026 performance bonus
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    createdOn: '2026-04-30T16:45:00Z'
+                    submittedBy: payroll.admin@example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateOneTimePayment
-      summary: Workday Payroll Update a one-time payment
+      summary: Workday Payroll Update a One-time Payment
       description: >-
         Update a pending one-time payment request.
       tags:
-        - One-Time Payments
+      - One-Time Payments
       parameters:
-        - $ref: '#/components/parameters/paymentId'
+      - $ref: '#/components/parameters/paymentId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateOneTimePaymentRequest'
+            examples:
+              UpdateOneTimePaymentRequestExample:
+                summary: Default updateOneTimePayment request
+                x-microcks-default: true
+                value:
+                  amount: 2500.0
+                  reason: Q1 2026 performance bonus
+                  effectiveDate: '2026-04-30'
       responses:
         '200':
           description: One-time payment updated
@@ -141,22 +224,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OneTimePayment'
+              examples:
+                UpdateOneTimePayment200Example:
+                  summary: Default updateOneTimePayment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pmt_20260502_00045
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    earningCode: REGULAR
+                    amount: 2500.0
+                    currency: USD
+                    reason: Q1 2026 performance bonus
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    createdOn: '2026-04-30T16:45:00Z'
+                    submittedBy: payroll.admin@example.com
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteOneTimePayment
-      summary: Workday Payroll Delete a one-time payment
+      summary: Workday Payroll Delete a One-time Payment
       description: >-
         Delete a pending one-time payment request that has not yet been
         processed.
       tags:
-        - One-Time Payments
+      - One-Time Payments
       parameters:
-        - $ref: '#/components/parameters/paymentId'
+      - $ref: '#/components/parameters/paymentId'
       responses:
         '204':
           description: One-time payment deleted
@@ -164,33 +267,38 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /adjustments:
     get:
       operationId: listPayrollAdjustments
-      summary: Workday Payroll List payroll adjustments
+      summary: Workday Payroll List Payroll Adjustments
       description: >-
         Retrieve all payroll adjustment records, optionally filtered by
         worker, type, or status.
       tags:
-        - Payroll Adjustments
+      - Payroll Adjustments
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: workerId
-          in: query
-          description: Filter by worker identifier
-          schema:
-            type: string
-        - name: adjustmentType
-          in: query
-          description: Filter by adjustment type
-          schema:
-            type: string
-            enum:
-              - Correction
-              - Retroactive
-              - Reversal
-              - Reclass
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: workerId
+        in: query
+        description: Filter by worker identifier
+        schema:
+          type: string
+        example: w_100542
+      - name: adjustmentType
+        in: query
+        description: Filter by adjustment type
+        schema:
+          type: string
+          enum:
+          - Correction
+          - Retroactive
+          - Reversal
+          - Reclass
+        example: Correction
       responses:
         '200':
           description: Collection of payroll adjustments
@@ -198,22 +306,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AdjustmentCollection'
+              examples:
+                ListPayrollAdjustments200Example:
+                  summary: Default listPayrollAdjustments 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: adj_20260415_00012
+                      worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      adjustmentType: Correction
+                      originalPayRunId: pr_20260430_weekly_001
+                      earningCode: REGULAR
+                      deductionCode: MEDICAL_PRETAX
+                      amount: 2500.0
+                      currency: USD
+                      reason: Q1 2026 performance bonus
+                      effectiveDate: '2026-04-30'
+                      status: Pending
+                      createdOn: '2026-04-30T16:45:00Z'
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createPayrollAdjustment
-      summary: Workday Payroll Create a payroll adjustment
+      summary: Workday Payroll Create a Payroll Adjustment
       description: >-
         Submit a payroll adjustment to correct, reverse, or reclassify
         previously processed payroll data.
       tags:
-        - Payroll Adjustments
+      - Payroll Adjustments
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAdjustmentRequest'
+            examples:
+              CreatePayrollAdjustmentRequestExample:
+                summary: Default createPayrollAdjustment request
+                x-microcks-default: true
+                value:
+                  workerId: w_100542
+                  adjustmentType: Correction
+                  originalPayRunId: pr_20260430_weekly_001
+                  earningCode: REGULAR
+                  deductionCode: MEDICAL_PRETAX
+                  amount: 2500.0
+                  currency: USD
+                  reason: Q1 2026 performance bonus
+                  effectiveDate: '2026-04-30'
       responses:
         '201':
           description: Adjustment created
@@ -221,20 +367,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Adjustment'
+              examples:
+                CreatePayrollAdjustment201Example:
+                  summary: Default createPayrollAdjustment 201 response
+                  x-microcks-default: true
+                  value:
+                    id: adj_20260415_00012
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    adjustmentType: Correction
+                    originalPayRunId: pr_20260430_weekly_001
+                    earningCode: REGULAR
+                    deductionCode: MEDICAL_PRETAX
+                    amount: 2500.0
+                    currency: USD
+                    reason: Q1 2026 performance bonus
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    createdOn: '2026-04-30T16:45:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /adjustments/{adjustmentId}:
     get:
       operationId: getPayrollAdjustment
-      summary: Workday Payroll Get a payroll adjustment
+      summary: Workday Payroll Get a Payroll Adjustment
       description: >-
         Retrieve details of a specific payroll adjustment.
       tags:
-        - Payroll Adjustments
+      - Payroll Adjustments
       parameters:
-        - $ref: '#/components/parameters/adjustmentId'
+      - $ref: '#/components/parameters/adjustmentId'
       responses:
         '200':
           description: Adjustment details
@@ -242,27 +410,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Adjustment'
+              examples:
+                GetPayrollAdjustment200Example:
+                  summary: Default getPayrollAdjustment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: adj_20260415_00012
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    adjustmentType: Correction
+                    originalPayRunId: pr_20260430_weekly_001
+                    earningCode: REGULAR
+                    deductionCode: MEDICAL_PRETAX
+                    amount: 2500.0
+                    currency: USD
+                    reason: Q1 2026 performance bonus
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    createdOn: '2026-04-30T16:45:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /supplementalEarnings:
     get:
       operationId: listSupplementalEarnings
-      summary: Workday Payroll List supplemental earnings
+      summary: Workday Payroll List Supplemental Earnings
       description: >-
         Retrieve all supplemental earning submissions, such as bonuses,
         commissions, and other non-regular earnings.
       tags:
-        - Supplemental Earnings
+      - Supplemental Earnings
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: workerId
-          in: query
-          description: Filter by worker identifier
-          schema:
-            type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: workerId
+        in: query
+        description: Filter by worker identifier
+        schema:
+          type: string
+        example: w_100542
       responses:
         '200':
           description: Collection of supplemental earnings
@@ -270,22 +461,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SupplementalEarningCollection'
+              examples:
+                ListSupplementalEarnings200Example:
+                  summary: Default listSupplementalEarnings 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: sup_20260430_00121
+                      worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      earningCode: REGULAR
+                      type: Bonus
+                      amount: 2500.0
+                      currency: USD
+                      effectiveDate: '2026-04-30'
+                      status: Pending
+                      reason: Q1 2026 performance bonus
+                      createdOn: '2026-04-30T16:45:00Z'
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSupplementalEarning
-      summary: Workday Payroll Create a supplemental earning
+      summary: Workday Payroll Create a Supplemental Earning
       description: >-
         Submit a supplemental earning for a worker to be included in
         the next payroll run.
       tags:
-        - Supplemental Earnings
+      - Supplemental Earnings
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateSupplementalEarningRequest'
+            examples:
+              CreateSupplementalEarningRequestExample:
+                summary: Default createSupplementalEarning request
+                x-microcks-default: true
+                value:
+                  workerId: w_100542
+                  earningCode: REGULAR
+                  type: Bonus
+                  amount: 2500.0
+                  currency: USD
+                  effectiveDate: '2026-04-30'
+                  reason: Q1 2026 performance bonus
       responses:
         '201':
           description: Supplemental earning created
@@ -293,20 +518,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SupplementalEarning'
+              examples:
+                CreateSupplementalEarning201Example:
+                  summary: Default createSupplementalEarning 201 response
+                  x-microcks-default: true
+                  value:
+                    id: sup_20260430_00121
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    earningCode: REGULAR
+                    type: Bonus
+                    amount: 2500.0
+                    currency: USD
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    reason: Q1 2026 performance bonus
+                    createdOn: '2026-04-30T16:45:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /supplementalEarnings/{earningId}:
     get:
       operationId: getSupplementalEarning
-      summary: Workday Payroll Get a supplemental earning
+      summary: Workday Payroll Get a Supplemental Earning
       description: >-
         Retrieve details of a specific supplemental earning submission.
       tags:
-        - Supplemental Earnings
+      - Supplemental Earnings
       parameters:
-        - $ref: '#/components/parameters/earningId'
+      - $ref: '#/components/parameters/earningId'
       responses:
         '200':
           description: Supplemental earning details
@@ -314,19 +559,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SupplementalEarning'
+              examples:
+                GetSupplementalEarning200Example:
+                  summary: Default getSupplementalEarning 200 response
+                  x-microcks-default: true
+                  value:
+                    id: sup_20260430_00121
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    earningCode: REGULAR
+                    type: Bonus
+                    amount: 2500.0
+                    currency: USD
+                    effectiveDate: '2026-04-30'
+                    status: Pending
+                    reason: Q1 2026 performance bonus
+                    createdOn: '2026-04-30T16:45:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSupplementalEarning
-      summary: Workday Payroll Delete a supplemental earning
+      summary: Workday Payroll Delete a Supplemental Earning
       description: >-
         Delete a pending supplemental earning that has not yet been processed.
       tags:
-        - Supplemental Earnings
+      - Supplemental Earnings
       parameters:
-        - $ref: '#/components/parameters/earningId'
+      - $ref: '#/components/parameters/earningId'
       responses:
         '204':
           description: Supplemental earning deleted
@@ -334,30 +599,34 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /inputBatches:
     get:
       operationId: listInputBatches
-      summary: Workday Payroll List input batches
+      summary: Workday Payroll List Input Batches
       description: >-
         Retrieve all payroll input batch submissions, including their
         processing status and validation results.
       tags:
-        - Input Batches
+      - Input Batches
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: status
-          in: query
-          description: Filter by batch status
-          schema:
-            type: string
-            enum:
-              - Pending
-              - Validating
-              - Validated
-              - Processing
-              - Completed
-              - Failed
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: status
+        in: query
+        description: Filter by batch status
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Validating
+          - Validated
+          - Processing
+          - Completed
+          - Failed
+        example: Pending
       responses:
         '200':
           description: Collection of input batches
@@ -365,22 +634,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputBatchCollection'
+              examples:
+                ListInputBatches200Example:
+                  summary: Default listInputBatches 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: ib_20260428_00007
+                      name: April 2026 Bonus Batch
+                      status: Pending
+                      recordCount: 100
+                      validRecords: 98
+                      failedRecords: 2
+                      submittedOn: '2026-04-30T16:45:00Z'
+                      completedOn: '2026-04-30T16:45:00Z'
+                      submittedBy: payroll.admin@example.com
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createInputBatch
-      summary: Workday Payroll Create an input batch
+      summary: Workday Payroll Create an Input Batch
       description: >-
         Submit a batch of payroll input records for processing, supporting
         earnings, deductions, and time-off entries in bulk.
       tags:
-        - Input Batches
+      - Input Batches
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateInputBatchRequest'
+            examples:
+              CreateInputBatchRequestExample:
+                summary: Default createInputBatch request
+                x-microcks-default: true
+                value:
+                  name: April 2026 Bonus Batch
+                  records:
+                  - workerId: w_100542
+                    inputType: Earning
+                    earningCode: REGULAR
+                    deductionCode: MEDICAL_PRETAX
+                    amount: 2500.0
+                    hours: 40.0
+                    effectiveDate: '2026-04-30'
       responses:
         '201':
           description: Input batch created
@@ -388,20 +690,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputBatch'
+              examples:
+                CreateInputBatch201Example:
+                  summary: Default createInputBatch 201 response
+                  x-microcks-default: true
+                  value:
+                    id: ib_20260428_00007
+                    name: April 2026 Bonus Batch
+                    status: Pending
+                    recordCount: 100
+                    validRecords: 98
+                    failedRecords: 2
+                    submittedOn: '2026-04-30T16:45:00Z'
+                    completedOn: '2026-04-30T16:45:00Z'
+                    submittedBy: payroll.admin@example.com
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /inputBatches/{batchId}:
     get:
       operationId: getInputBatch
-      summary: Workday Payroll Get an input batch
+      summary: Workday Payroll Get an Input Batch
       description: >-
         Retrieve details and status of a specific input batch submission.
       tags:
-        - Input Batches
+      - Input Batches
       parameters:
-        - $ref: '#/components/parameters/batchId'
+      - $ref: '#/components/parameters/batchId'
       responses:
         '200':
           description: Input batch details
@@ -409,23 +728,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputBatch'
+              examples:
+                GetInputBatch200Example:
+                  summary: Default getInputBatch 200 response
+                  x-microcks-default: true
+                  value:
+                    id: ib_20260428_00007
+                    name: April 2026 Bonus Batch
+                    status: Pending
+                    recordCount: 100
+                    validRecords: 98
+                    failedRecords: 2
+                    submittedOn: '2026-04-30T16:45:00Z'
+                    completedOn: '2026-04-30T16:45:00Z'
+                    submittedBy: payroll.admin@example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/timeOffInputs:
     get:
       operationId: listWorkerTimeOffInputs
-      summary: Workday Payroll List worker time off inputs
+      summary: Workday Payroll List Worker Time Off Inputs
       description: >-
         Retrieve time off input records for a specific worker that affect
         payroll calculations.
       tags:
-        - Time Off Inputs
+      - Time Off Inputs
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of time off inputs
@@ -433,26 +769,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimeOffInputCollection'
+              examples:
+                ListWorkerTimeOffInputs200Example:
+                  summary: Default listWorkerTimeOffInputs 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: to_w100542_20260415
+                      worker:
+                        id: w_100542
+                        descriptor: Weekly USD Pay Group
+                      timeOffType: Vacation
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                      hours: 40.0
+                      status: Pending
+                      paid: true
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createWorkerTimeOffInput
-      summary: Workday Payroll Create a time off input
+      summary: Workday Payroll Create a Time Off Input
       description: >-
         Submit a time off input for a worker to be reflected in payroll
         processing.
       tags:
-        - Time Off Inputs
+      - Time Off Inputs
       parameters:
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/workerId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTimeOffInputRequest'
+            examples:
+              CreateWorkerTimeOffInputRequestExample:
+                summary: Default createWorkerTimeOffInput request
+                x-microcks-default: true
+                value:
+                  timeOffType: Vacation
+                  startDate: '2026-04-30'
+                  endDate: '2026-04-30'
+                  hours: 40.0
+                  paid: true
       responses:
         '201':
           description: Time off input created
@@ -460,12 +826,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimeOffInput'
+              examples:
+                CreateWorkerTimeOffInput201Example:
+                  summary: Default createWorkerTimeOffInput 201 response
+                  x-microcks-default: true
+                  value:
+                    id: to_w100542_20260415
+                    worker:
+                      id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    timeOffType: Vacation
+                    startDate: '2026-04-30'
+                    endDate: '2026-04-30'
+                    hours: 40.0
+                    status: Pending
+                    paid: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -482,6 +866,7 @@ components:
       description: Unique identifier for the one-time payment
       schema:
         type: string
+      example: pmt_20260502_00045
     adjustmentId:
       name: adjustmentId
       in: path
@@ -489,6 +874,7 @@ components:
       description: Unique identifier for the payroll adjustment
       schema:
         type: string
+      example: adj_20260415_00012
     earningId:
       name: earningId
       in: path
@@ -496,6 +882,7 @@ components:
       description: Unique identifier for the supplemental earning
       schema:
         type: string
+      example: ern_20260430_00301
     batchId:
       name: batchId
       in: path
@@ -503,6 +890,7 @@ components:
       description: Unique identifier for the input batch
       schema:
         type: string
+      example: ib_20260428_00007
     workerId:
       name: workerId
       in: path
@@ -510,6 +898,7 @@ components:
       description: Unique identifier for the worker
       schema:
         type: string
+      example: w_100542
     limit:
       name: limit
       in: query
@@ -519,6 +908,7 @@ components:
         minimum: 1
         maximum: 100
         default: 20
+      example: 20
     offset:
       name: offset
       in: query
@@ -527,6 +917,7 @@ components:
         type: integer
         minimum: 0
         default: 0
+      example: 0
   responses:
     BadRequest:
       description: Invalid request parameters
@@ -534,18 +925,39 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
     Unauthorized:
       description: Authentication required or token expired
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   schemas:
     OneTimePayment:
       type: object
@@ -553,40 +965,49 @@ components:
         id:
           type: string
           description: Unique identifier for the one-time payment
+          example: pmt_20260502_00045
         worker:
           $ref: '#/components/schemas/WorkerRef'
         earningCode:
           type: string
           description: Earning code for the payment
+          example: REGULAR
         amount:
           type: number
           format: double
           description: Payment amount
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         reason:
           type: string
           description: Reason for the one-time payment
+          example: Q1 2026 performance bonus
         effectiveDate:
           type: string
           format: date
           description: Effective date for the payment
+          example: '2026-04-30'
         status:
           type: string
           enum:
-            - Pending
-            - Approved
-            - Processed
-            - Rejected
+          - Pending
+          - Approved
+          - Processed
+          - Rejected
           description: Current status
+          example: Pending
         createdOn:
           type: string
           format: date-time
           description: When the request was created
+          example: '2026-04-30T16:45:00Z'
         submittedBy:
           type: string
           description: User who submitted the request
+          example: payroll.admin@example.com
     OneTimePaymentCollection:
       type: object
       properties:
@@ -597,33 +1018,40 @@ components:
         total:
           type: integer
           description: Total number of one-time payments
+          example: 52
     CreateOneTimePaymentRequest:
       type: object
       required:
-        - workerId
-        - earningCode
-        - amount
+      - workerId
+      - earningCode
+      - amount
       properties:
         workerId:
           type: string
           description: Worker identifier
+          example: w_100542
         earningCode:
           type: string
           description: Earning code for the payment
+          example: REGULAR
         amount:
           type: number
           format: double
           description: Payment amount
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         reason:
           type: string
           description: Reason for the payment
+          example: Q1 2026 performance bonus
         effectiveDate:
           type: string
           format: date
           description: Effective date
+          example: '2026-04-30'
     UpdateOneTimePaymentRequest:
       type: object
       properties:
@@ -631,64 +1059,78 @@ components:
           type: number
           format: double
           description: Updated payment amount
+          example: 2500.0
         reason:
           type: string
           description: Updated reason
+          example: Q1 2026 performance bonus
         effectiveDate:
           type: string
           format: date
           description: Updated effective date
+          example: '2026-04-30'
     Adjustment:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the adjustment
+          example: adj_20260415_00012
         worker:
           $ref: '#/components/schemas/WorkerRef'
         adjustmentType:
           type: string
           enum:
-            - Correction
-            - Retroactive
-            - Reversal
-            - Reclass
+          - Correction
+          - Retroactive
+          - Reversal
+          - Reclass
           description: Type of adjustment
+          example: Correction
         originalPayRunId:
           type: string
           description: Reference to the original pay run being adjusted
+          example: pr_20260430_weekly_001
         earningCode:
           type: string
           description: Earning code affected
+          example: REGULAR
         deductionCode:
           type: string
           description: Deduction code affected
+          example: MEDICAL_PRETAX
         amount:
           type: number
           format: double
           description: Adjustment amount (positive or negative)
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         reason:
           type: string
           description: Reason for the adjustment
+          example: Q1 2026 performance bonus
         effectiveDate:
           type: string
           format: date
           description: Effective date of the adjustment
+          example: '2026-04-30'
         status:
           type: string
           enum:
-            - Pending
-            - Approved
-            - Processed
-            - Rejected
+          - Pending
+          - Approved
+          - Processed
+          - Rejected
           description: Current status
+          example: Pending
         createdOn:
           type: string
           format: date-time
           description: When the adjustment was created
+          example: '2026-04-30T16:45:00Z'
     AdjustmentCollection:
       type: object
       properties:
@@ -699,93 +1141,112 @@ components:
         total:
           type: integer
           description: Total number of adjustments
+          example: 52
     CreateAdjustmentRequest:
       type: object
       required:
-        - workerId
-        - adjustmentType
-        - amount
+      - workerId
+      - adjustmentType
+      - amount
       properties:
         workerId:
           type: string
           description: Worker identifier
+          example: w_100542
         adjustmentType:
           type: string
           enum:
-            - Correction
-            - Retroactive
-            - Reversal
-            - Reclass
+          - Correction
+          - Retroactive
+          - Reversal
+          - Reclass
           description: Type of adjustment
+          example: Correction
         originalPayRunId:
           type: string
           description: Original pay run being adjusted
+          example: pr_20260430_weekly_001
         earningCode:
           type: string
           description: Earning code to adjust
+          example: REGULAR
         deductionCode:
           type: string
           description: Deduction code to adjust
+          example: MEDICAL_PRETAX
         amount:
           type: number
           format: double
           description: Adjustment amount
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         reason:
           type: string
           description: Reason for the adjustment
+          example: Q1 2026 performance bonus
         effectiveDate:
           type: string
           format: date
           description: Effective date
+          example: '2026-04-30'
     SupplementalEarning:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the supplemental earning
+          example: sup_20260430_00121
         worker:
           $ref: '#/components/schemas/WorkerRef'
         earningCode:
           type: string
           description: Earning code for the supplemental earning
+          example: REGULAR
         type:
           type: string
           enum:
-            - Bonus
-            - Commission
-            - Stipend
-            - Allowance
-            - Other
+          - Bonus
+          - Commission
+          - Stipend
+          - Allowance
+          - Other
           description: Type of supplemental earning
+          example: Bonus
         amount:
           type: number
           format: double
           description: Earning amount
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         effectiveDate:
           type: string
           format: date
           description: Effective date
+          example: '2026-04-30'
         status:
           type: string
           enum:
-            - Pending
-            - Approved
-            - Processed
-            - Rejected
+          - Pending
+          - Approved
+          - Processed
+          - Rejected
           description: Current status
+          example: Pending
         reason:
           type: string
           description: Description or reason for the earning
+          example: Q1 2026 performance bonus
         createdOn:
           type: string
           format: date-time
           description: When the earning was submitted
+          example: '2026-04-30T16:45:00Z'
     SupplementalEarningCollection:
       type: object
       properties:
@@ -796,81 +1257,98 @@ components:
         total:
           type: integer
           description: Total number of supplemental earnings
+          example: 52
     CreateSupplementalEarningRequest:
       type: object
       required:
-        - workerId
-        - earningCode
-        - amount
+      - workerId
+      - earningCode
+      - amount
       properties:
         workerId:
           type: string
           description: Worker identifier
+          example: w_100542
         earningCode:
           type: string
           description: Earning code
+          example: REGULAR
         type:
           type: string
           enum:
-            - Bonus
-            - Commission
-            - Stipend
-            - Allowance
-            - Other
+          - Bonus
+          - Commission
+          - Stipend
+          - Allowance
+          - Other
           description: Type of supplemental earning
+          example: Bonus
         amount:
           type: number
           format: double
           description: Earning amount
+          example: 2500.0
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         effectiveDate:
           type: string
           format: date
           description: Effective date
+          example: '2026-04-30'
         reason:
           type: string
           description: Description or reason
+          example: Q1 2026 performance bonus
     InputBatch:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the input batch
+          example: ib_20260428_00007
         name:
           type: string
           description: Batch name
+          example: April 2026 Bonus Batch
         status:
           type: string
           enum:
-            - Pending
-            - Validating
-            - Validated
-            - Processing
-            - Completed
-            - Failed
+          - Pending
+          - Validating
+          - Validated
+          - Processing
+          - Completed
+          - Failed
           description: Current batch status
+          example: Pending
         recordCount:
           type: integer
           description: Number of records in the batch
+          example: 100
         validRecords:
           type: integer
           description: Number of records that passed validation
+          example: 98
         failedRecords:
           type: integer
           description: Number of records that failed validation
+          example: 2
         submittedOn:
           type: string
           format: date-time
           description: When the batch was submitted
+          example: '2026-04-30T16:45:00Z'
         completedOn:
           type: string
           format: date-time
           description: When batch processing completed
+          example: '2026-04-30T16:45:00Z'
         submittedBy:
           type: string
           description: User who submitted the batch
+          example: payroll.admin@example.com
     InputBatchCollection:
       type: object
       properties:
@@ -881,15 +1359,17 @@ components:
         total:
           type: integer
           description: Total number of input batches
+          example: 52
     CreateInputBatchRequest:
       type: object
       required:
-        - name
-        - records
+      - name
+      - records
       properties:
         name:
           type: string
           description: Batch name
+          example: April 2026 Bonus Batch
         records:
           type: array
           items:
@@ -898,70 +1378,84 @@ components:
     InputRecord:
       type: object
       required:
-        - workerId
-        - inputType
+      - workerId
+      - inputType
       properties:
         workerId:
           type: string
           description: Worker identifier
+          example: w_100542
         inputType:
           type: string
           enum:
-            - Earning
-            - Deduction
-            - TimeOff
+          - Earning
+          - Deduction
+          - TimeOff
           description: Type of input record
+          example: Earning
         earningCode:
           type: string
           description: Earning code (for Earning type)
+          example: REGULAR
         deductionCode:
           type: string
           description: Deduction code (for Deduction type)
+          example: MEDICAL_PRETAX
         amount:
           type: number
           format: double
           description: Amount
+          example: 2500.0
         hours:
           type: number
           format: double
           description: Hours (for time-based entries)
+          example: 40.0
         effectiveDate:
           type: string
           format: date
           description: Effective date
+          example: '2026-04-30'
     TimeOffInput:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the time off input
+          example: to_w100542_20260415
         worker:
           $ref: '#/components/schemas/WorkerRef'
         timeOffType:
           type: string
           description: Type of time off
+          example: Vacation
         startDate:
           type: string
           format: date
           description: Start date of time off
+          example: '2026-04-30'
         endDate:
           type: string
           format: date
           description: End date of time off
+          example: '2026-04-30'
         hours:
           type: number
           format: double
           description: Total hours of time off
+          example: 40.0
         status:
           type: string
           enum:
-            - Pending
-            - Approved
-            - Processed
+          - Pending
+          - Approved
+          - Processed
           description: Current status
+          example: Pending
         paid:
           type: boolean
           description: Whether the time off is paid
+          example: true
     TimeOffInputCollection:
       type: object
       properties:
@@ -972,46 +1466,56 @@ components:
         total:
           type: integer
           description: Total number of time off inputs
+          example: 52
     CreateTimeOffInputRequest:
       type: object
       required:
-        - timeOffType
-        - startDate
-        - hours
+      - timeOffType
+      - startDate
+      - hours
       properties:
         timeOffType:
           type: string
           description: Type of time off
+          example: Vacation
         startDate:
           type: string
           format: date
           description: Start date
+          example: '2026-04-30'
         endDate:
           type: string
           format: date
           description: End date
+          example: '2026-04-30'
         hours:
           type: number
           format: double
           description: Hours of time off
+          example: 40.0
         paid:
           type: boolean
           description: Whether the time off is paid
+          example: true
     WorkerRef:
       type: object
       properties:
         id:
           type: string
           description: Worker identifier
+          example: w_100542
         descriptor:
           type: string
           description: Worker display name
+          example: Weekly USD Pay Group
     Error:
       type: object
       properties:
         error:
           type: string
           description: Error code
+          example: INVALID_REQUEST
         message:
           type: string
           description: Human-readable error message
+          example: Validation failed for the provided fields.

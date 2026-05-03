@@ -1,0 +1,75 @@
+{
+  "data": [
+    {
+      "id": "ps_w100542_20260430",
+      "worker": {
+        "id": "w_100542",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payPeriod": {
+        "startDate": "2026-04-30",
+        "endDate": "2026-04-30"
+      },
+      "paymentDate": "2026-04-30",
+      "grossPay": 1.0,
+      "netPay": 1.0,
+      "totalEarnings": 5240.0,
+      "totalDeductions": 38210.8,
+      "totalTaxes": 29167.4,
+      "currency": "USD",
+      "earnings": [
+        {},
+        {},
+        {}
+      ],
+      "deductions": [
+        {},
+        {}
+      ],
+      "taxes": [
+        {},
+        {},
+        {}
+      ],
+      "yearToDateGross": 42850.0,
+      "yearToDateNet": 31420.65,
+      "yearToDateTaxes": 8742.5
+    },
+    {
+      "id": "ps_w100542_20260430",
+      "worker": {
+        "id": "w_100542",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "payPeriod": {
+        "startDate": "2026-04-30",
+        "endDate": "2026-04-30"
+      },
+      "paymentDate": "2026-04-30",
+      "grossPay": 1.0,
+      "netPay": 1.0,
+      "totalEarnings": 5240.0,
+      "totalDeductions": 38210.8,
+      "totalTaxes": 29167.4,
+      "currency": "USD",
+      "earnings": [
+        {},
+        {},
+        {}
+      ],
+      "deductions": [
+        {},
+        {},
+        {}
+      ],
+      "taxes": [
+        {},
+        {}
+      ],
+      "yearToDateGross": 42850.0,
+      "yearToDateNet": 31420.65,
+      "yearToDateTaxes": 8742.5
+    }
+  ],
+  "total": 52
+}

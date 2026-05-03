@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-create-adjustment-request-schema.json",
+  "title": "CreateAdjustmentRequest",
+  "description": "CreateAdjustmentRequest schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "workerId": {
+      "type": "string",
+      "description": "Worker identifier",
+      "example": "w_100542"
+    },
+    "adjustmentType": {
+      "type": "string",
+      "enum": [
+        "Correction",
+        "Retroactive",
+        "Reversal",
+        "Reclass"
+      ],
+      "description": "Type of adjustment",
+      "example": "Correction"
+    },
+    "originalPayRunId": {
+      "type": "string",
+      "description": "Original pay run being adjusted",
+      "example": "pr_20260430_weekly_001"
+    },
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code to adjust",
+      "example": "REGULAR"
+    },
+    "deductionCode": {
+      "type": "string",
+      "description": "Deduction code to adjust",
+      "example": "MEDICAL_PRETAX"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Adjustment amount",
+      "example": 2500.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the adjustment",
+      "example": "Q1 2026 performance bonus"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date",
+      "example": "2026-04-30"
+    }
+  },
+  "required": [
+    "workerId",
+    "adjustmentType",
+    "amount"
+  ]
+}

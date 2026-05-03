@@ -1,0 +1,9 @@
+{
+  "payGroupId": "pg_weekly_usd",
+  "payPeriod": {
+    "startDate": "2026-04-30",
+    "endDate": "2026-04-30"
+  },
+  "runCategory": "Regular",
+  "paymentDate": "2026-04-30"
+}

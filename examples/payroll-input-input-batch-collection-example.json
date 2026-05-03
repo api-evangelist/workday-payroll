@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": "ib_20260428_00007",
+      "name": "April 2026 Bonus Batch",
+      "status": "Pending",
+      "recordCount": 100,
+      "validRecords": 98,
+      "failedRecords": 2,
+      "submittedOn": "2026-04-30T16:45:00Z",
+      "completedOn": "2026-04-30T16:45:00Z",
+      "submittedBy": "payroll.admin@example.com"
+    },
+    {
+      "id": "ib_20260428_00007",
+      "name": "April 2026 Bonus Batch",
+      "status": "Pending",
+      "recordCount": 100,
+      "validRecords": 98,
+      "failedRecords": 2,
+      "submittedOn": "2026-04-30T16:45:00Z",
+      "completedOn": "2026-04-30T16:45:00Z",
+      "submittedBy": "payroll.admin@example.com"
+    }
+  ],
+  "total": 52
+}

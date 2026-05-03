@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-deduction-collection-schema.json",
+  "title": "DeductionCollection",
+  "description": "DeductionCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Deduction"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of deductions",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "Deduction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique deduction record identifier",
+          "example": "ded_20260430_00211"
+        },
+        "deductionCode": {
+          "$ref": "#/$defs/DeductionCodeRef"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Deduction amount",
+          "example": 2500.0
+        },
+        "frequency": {
+          "type": "string",
+          "enum": [
+            "PerPayPeriod",
+            "Monthly",
+            "Annual",
+            "OneTime"
+          ],
+          "description": "Deduction frequency",
+          "example": "PerPayPeriod"
+        },
+        "preTax": {
+          "type": "boolean",
+          "description": "Whether the deduction is pre-tax",
+          "example": true
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Effective date of the deduction",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the deduction",
+          "example": "2026-04-30"
+        }
+      }
+    },
+    "DeductionCodeRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deduction code identifier",
+          "example": "MEDICAL_PRETAX"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Deduction code display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

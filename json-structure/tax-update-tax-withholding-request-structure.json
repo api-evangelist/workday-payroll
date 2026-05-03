@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/tax-update-tax-withholding-request-structure.json",
+  "name": "UpdateTaxWithholdingRequest",
+  "description": "UpdateTaxWithholdingRequest schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "filingStatus": {
+      "type": "string",
+      "enum": [
+        "Single",
+        "MarriedFilingJointly",
+        "MarriedFilingSeparately",
+        "HeadOfHousehold",
+        "QualifyingWidower"
+      ],
+      "description": "Updated filing status",
+      "example": "Single"
+    },
+    "allowances": {
+      "type": "int32",
+      "description": "Updated number of allowances",
+      "example": 2
+    },
+    "additionalWithholding": {
+      "type": "double",
+      "description": "Updated additional withholding amount",
+      "example": 50.0
+    },
+    "exempt": {
+      "type": "boolean",
+      "description": "Updated exempt status",
+      "example": false
+    }
+  }
+}

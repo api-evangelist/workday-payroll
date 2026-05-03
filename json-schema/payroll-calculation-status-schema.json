@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-calculation-status-schema.json",
+  "title": "CalculationStatus",
+  "description": "CalculationStatus schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Calculation job identifier",
+      "example": "calc_20260430_00012"
+    },
+    "payRunId": {
+      "type": "string",
+      "description": "Associated pay run identifier",
+      "example": "pr_20260430_weekly_001"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Queued",
+        "Processing",
+        "Completed",
+        "Failed"
+      ],
+      "description": "Current status of the calculation",
+      "example": "Queued"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the calculation started",
+      "example": "2026-04-30T16:45:00Z"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the calculation completed",
+      "example": "2026-04-30T16:45:00Z"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Error"
+      },
+      "description": "Any errors encountered during calculation"
+    }
+  },
+  "$defs": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error code",
+          "example": "INVALID_REQUEST"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message",
+          "example": "Validation failed for the provided fields."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "Detailed error information"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-tax-jurisdiction-collection-schema.json",
+  "title": "TaxJurisdictionCollection",
+  "description": "TaxJurisdictionCollection schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TaxJurisdiction"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of tax jurisdictions",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "TaxJurisdiction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the tax jurisdiction",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the jurisdiction",
+          "example": "Weekly USD Pay Group"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Federal",
+            "State",
+            "Local",
+            "Other"
+          ],
+          "description": "Jurisdiction level",
+          "example": "Federal"
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 country code",
+          "example": "US"
+        },
+        "stateCode": {
+          "type": "string",
+          "description": "State or province code",
+          "example": "CA"
+        },
+        "localityName": {
+          "type": "string",
+          "description": "Local jurisdiction name",
+          "example": "San Francisco"
+        },
+        "taxTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Applicable tax types in this jurisdiction",
+          "example": [
+            "FederalIncome"
+          ]
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether the jurisdiction is currently active",
+          "example": true
+        }
+      }
+    }
+  }
+}

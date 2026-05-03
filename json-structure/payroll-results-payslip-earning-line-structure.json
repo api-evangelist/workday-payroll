@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-results-payslip-earning-line-structure.json",
+  "name": "PayslipEarningLine",
+  "description": "PayslipEarningLine schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code descriptor",
+      "example": "REGULAR"
+    },
+    "currentAmount": {
+      "type": "double",
+      "description": "Current period amount",
+      "example": 2840.0
+    },
+    "currentHours": {
+      "type": "double",
+      "description": "Current period hours",
+      "example": 40.0
+    },
+    "rate": {
+      "type": "double",
+      "description": "Pay rate",
+      "example": 32.5
+    },
+    "yearToDateAmount": {
+      "type": "double",
+      "description": "Year-to-date amount for this earning",
+      "example": 8742.5
+    }
+  }
+}

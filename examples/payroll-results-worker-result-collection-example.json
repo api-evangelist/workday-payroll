@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "worker": {
+        "id": "w_100542",
+        "descriptor": "Weekly USD Pay Group"
+      },
+      "grossPay": 1.0,
+      "netPay": 1.0,
+      "totalEarnings": 5240.0,
+      "totalDeductions": 38210.8,
+      "totalTaxes": 29167.4,
+      "currency": "USD",
+      "paymentMethod": "DirectDeposit"
+    }
+  ],
+  "total": 52
+}

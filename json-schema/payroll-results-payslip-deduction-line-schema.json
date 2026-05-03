@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-results-payslip-deduction-line-schema.json",
+  "title": "PayslipDeductionLine",
+  "description": "PayslipDeductionLine schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "deductionCode": {
+      "type": "string",
+      "description": "Deduction code descriptor",
+      "example": "MEDICAL_PRETAX"
+    },
+    "employeeAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Employee contribution amount",
+      "example": 287.5
+    },
+    "employerAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Employer contribution amount",
+      "example": 287.5
+    },
+    "preTax": {
+      "type": "boolean",
+      "description": "Whether this deduction is pre-tax",
+      "example": true
+    },
+    "yearToDateEmployee": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date employee amount",
+      "example": 8742.5
+    },
+    "yearToDateEmployer": {
+      "type": "number",
+      "format": "double",
+      "description": "Year-to-date employer amount",
+      "example": 8742.5
+    }
+  }
+}

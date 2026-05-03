@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/tax-tax-withholding-structure.json",
+  "name": "TaxWithholding",
+  "description": "TaxWithholding schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the tax withholding",
+      "example": "twh_w100542_federal"
+    },
+    "jurisdiction": {
+      "$ref": "#/$defs/TaxJurisdictionRef"
+    },
+    "taxType": {
+      "type": "string",
+      "enum": [
+        "FederalIncome",
+        "StateIncome",
+        "LocalIncome",
+        "SocialSecurity",
+        "Medicare",
+        "FUTA",
+        "SUTA",
+        "Other"
+      ],
+      "description": "Type of tax",
+      "example": "FederalIncome"
+    },
+    "filingStatus": {
+      "type": "string",
+      "enum": [
+        "Single",
+        "MarriedFilingJointly",
+        "MarriedFilingSeparately",
+        "HeadOfHousehold",
+        "QualifyingWidower"
+      ],
+      "description": "Tax filing status",
+      "example": "Single"
+    },
+    "allowances": {
+      "type": "int32",
+      "description": "Number of withholding allowances claimed",
+      "example": 2
+    },
+    "additionalWithholding": {
+      "type": "double",
+      "description": "Additional flat withholding amount per pay period",
+      "example": 50.0
+    },
+    "exempt": {
+      "type": "boolean",
+      "description": "Whether the worker claims exempt status",
+      "example": false
+    },
+    "effectiveDate": {
+      "type": "date",
+      "description": "Date the withholding configuration took effect",
+      "example": "2026-04-30"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    }
+  },
+  "definitions": {
+    "TaxJurisdictionRef": {
+      "name": "TaxJurisdictionRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-results-worker-result-schema.json",
+  "title": "WorkerResult",
+  "description": "WorkerResult schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "worker": {
+      "$ref": "#/$defs/WorkerRef"
+    },
+    "grossPay": {
+      "type": "number",
+      "format": "double",
+      "description": "Worker gross pay for this run",
+      "example": 1.0
+    },
+    "netPay": {
+      "type": "number",
+      "format": "double",
+      "description": "Worker net pay for this run",
+      "example": 1.0
+    },
+    "totalEarnings": {
+      "type": "number",
+      "format": "double",
+      "description": "Total earnings",
+      "example": 5240.0
+    },
+    "totalDeductions": {
+      "type": "number",
+      "format": "double",
+      "description": "Total deductions",
+      "example": 38210.8
+    },
+    "totalTaxes": {
+      "type": "number",
+      "format": "double",
+      "description": "Total taxes withheld",
+      "example": 29167.4
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": [
+        "DirectDeposit",
+        "Check",
+        "Wire"
+      ],
+      "description": "Method of payment",
+      "example": "DirectDeposit"
+    }
+  },
+  "$defs": {
+    "WorkerRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

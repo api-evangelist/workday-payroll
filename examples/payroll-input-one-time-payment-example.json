@@ -1,0 +1,15 @@
+{
+  "id": "pmt_20260502_00045",
+  "worker": {
+    "id": "w_100542",
+    "descriptor": "Weekly USD Pay Group"
+  },
+  "earningCode": "REGULAR",
+  "amount": 2500.0,
+  "currency": "USD",
+  "reason": "Q1 2026 performance bonus",
+  "effectiveDate": "2026-04-30",
+  "status": "Pending",
+  "createdOn": "2026-04-30T16:45:00Z",
+  "submittedBy": "payroll.admin@example.com"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-input-one-time-payment-structure.json",
+  "name": "OneTimePayment",
+  "description": "OneTimePayment schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the one-time payment",
+      "example": "pmt_20260502_00045"
+    },
+    "worker": {
+      "$ref": "#/$defs/WorkerRef"
+    },
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code for the payment",
+      "example": "REGULAR"
+    },
+    "amount": {
+      "type": "double",
+      "description": "Payment amount",
+      "example": 2500.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the one-time payment",
+      "example": "Q1 2026 performance bonus"
+    },
+    "effectiveDate": {
+      "type": "date",
+      "description": "Effective date for the payment",
+      "example": "2026-04-30"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Processed",
+        "Rejected"
+      ],
+      "description": "Current status",
+      "example": "Pending"
+    },
+    "createdOn": {
+      "type": "datetime",
+      "description": "When the request was created",
+      "example": "2026-04-30T16:45:00Z"
+    },
+    "submittedBy": {
+      "type": "string",
+      "description": "User who submitted the request",
+      "example": "payroll.admin@example.com"
+    }
+  },
+  "definitions": {
+    "WorkerRef": {
+      "name": "WorkerRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-input-worker-ref-structure.json",
+  "name": "WorkerRef",
+  "description": "WorkerRef schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Worker identifier",
+      "example": "w_100542"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Worker display name",
+      "example": "Weekly USD Pay Group"
+    }
+  }
+}

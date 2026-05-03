@@ -1,0 +1,7 @@
+{
+  "id": "MEDICAL_PRETAX",
+  "descriptor": "Weekly USD Pay Group",
+  "type": "Benefit",
+  "preTax": true,
+  "active": true
+}

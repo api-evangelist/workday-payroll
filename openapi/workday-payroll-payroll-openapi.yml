@@ -15,69 +15,73 @@ externalDocs:
   description: Workday Payroll API Documentation
   url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
 servers:
-  - url: https://api.workday.com/payroll/v1
-    description: Workday Payroll Production
-  - url: https://{tenant}.workday.com/api/payroll/v1
-    description: Workday Payroll Tenant-Specific
-    variables:
-      tenant:
-        description: Workday tenant identifier
-        default: your-tenant
+- url: https://api.workday.com/payroll/v1
+  description: Workday Payroll Production
+- url: https://{tenant}.workday.com/api/payroll/v1
+  description: Workday Payroll Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
 tags:
-  - name: Deductions
-    description: Manage deduction codes and worker deductions
-  - name: Earnings
-    description: Manage earning codes and worker earnings
-  - name: Pay Groups
-    description: Configure and manage pay groups for organizing payroll
-  - name: Pay Runs
-    description: Manage payroll processing runs and their lifecycle
-  - name: Payroll Calculations
-    description: Trigger and monitor payroll calculation processes
-  - name: Workers
-    description: Access worker payroll data and compensation details
+- name: Deductions
+  description: Manage deduction codes and worker deductions
+- name: Earnings
+  description: Manage earning codes and worker earnings
+- name: Pay Groups
+  description: Configure and manage pay groups for organizing payroll
+- name: Pay Runs
+  description: Manage payroll processing runs and their lifecycle
+- name: Payroll Calculations
+  description: Trigger and monitor payroll calculation processes
+- name: Workers
+  description: Access worker payroll data and compensation details
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /payRuns:
     get:
       operationId: listPayRuns
-      summary: Workday Payroll List pay runs
+      summary: Workday Payroll List Pay Runs
       description: >-
         Retrieve a collection of payroll runs, optionally filtered by status,
         pay group, or date range.
       tags:
-        - Pay Runs
+      - Pay Runs
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - name: payGroupId
-          in: query
-          description: Filter by pay group identifier
-          schema:
-            type: string
-        - name: status
-          in: query
-          description: Filter by pay run status
-          schema:
-            type: string
-            enum:
-              - Draft
-              - InProgress
-              - Completed
-              - Cancelled
-        - name: fromDate
-          in: query
-          description: Filter pay runs starting from this date
-          schema:
-            type: string
-            format: date
-        - name: toDate
-          in: query
-          description: Filter pay runs up to this date
-          schema:
-            type: string
-            format: date
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: payGroupId
+        in: query
+        description: Filter by pay group identifier
+        schema:
+          type: string
+        example: pg_weekly_usd
+      - name: status
+        in: query
+        description: Filter by pay run status
+        schema:
+          type: string
+          enum:
+          - Draft
+          - InProgress
+          - Completed
+          - Cancelled
+        example: Draft
+      - name: fromDate
+        in: query
+        description: Filter pay runs starting from this date
+        schema:
+          type: string
+          format: date
+        example: '2026-04-30'
+      - name: toDate
+        in: query
+        description: Filter pay runs up to this date
+        schema:
+          type: string
+          format: date
+        example: '2026-04-30'
       responses:
         '200':
           description: Collection of pay runs
@@ -85,23 +89,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayRunCollection'
+              examples:
+                ListPayRuns200Example:
+                  summary: Default listPayRuns 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: pr_20260430_weekly_001
+                      descriptor: Weekly USD Pay Group
+                      payGroup:
+                        id: pg_weekly_usd
+                        descriptor: Weekly USD Pay Group
+                      payPeriod:
+                        startDate: '2026-04-30'
+                        endDate: '2026-04-30'
+                      status: Draft
+                      runCategory: Regular
+                      paymentDate: '2026-04-30'
+                      totalGrossPay: 245830.5
+                      totalNetPay: 178452.3
+                      totalDeductions: 38210.8
+                      totalTaxes: 29167.4
+                      workerCount: 87
+                      currency: USD
+                      createdOn: '2026-04-30T16:45:00Z'
+                      completedOn: '2026-04-30T16:45:00Z'
+                    total: 52
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createPayRun
-      summary: Workday Payroll Create a pay run
+      summary: Workday Payroll Create a Pay Run
       description: >-
         Initiate a new payroll run for a specified pay group and pay period.
       tags:
-        - Pay Runs
+      - Pay Runs
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreatePayRunRequest'
+            examples:
+              CreatePayRunRequestExample:
+                summary: Default createPayRun request
+                x-microcks-default: true
+                value:
+                  payGroupId: pg_weekly_usd
+                  payPeriod:
+                    startDate: '2026-04-30'
+                    endDate: '2026-04-30'
+                  runCategory: Regular
+                  paymentDate: '2026-04-30'
       responses:
         '201':
           description: Pay run created
@@ -109,20 +153,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayRun'
+              examples:
+                CreatePayRun201Example:
+                  summary: Default createPayRun 201 response
+                  x-microcks-default: true
+                  value:
+                    id: pr_20260430_weekly_001
+                    descriptor: Weekly USD Pay Group
+                    payGroup:
+                      id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                    payPeriod:
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    status: Draft
+                    runCategory: Regular
+                    paymentDate: '2026-04-30'
+                    totalGrossPay: 245830.5
+                    totalNetPay: 178452.3
+                    totalDeductions: 38210.8
+                    totalTaxes: 29167.4
+                    workerCount: 87
+                    currency: USD
+                    createdOn: '2026-04-30T16:45:00Z'
+                    completedOn: '2026-04-30T16:45:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}:
     get:
       operationId: getPayRun
-      summary: Workday Payroll Get a pay run
+      summary: Workday Payroll Get a Pay Run
       description: >-
         Retrieve details of a specific payroll run by its identifier.
       tags:
-        - Pay Runs
+      - Pay Runs
       parameters:
-        - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/payRunId'
       responses:
         '200':
           description: Pay run details
@@ -130,25 +201,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayRun'
+              examples:
+                GetPayRun200Example:
+                  summary: Default getPayRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pr_20260430_weekly_001
+                    descriptor: Weekly USD Pay Group
+                    payGroup:
+                      id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                    payPeriod:
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    status: Draft
+                    runCategory: Regular
+                    paymentDate: '2026-04-30'
+                    totalGrossPay: 245830.5
+                    totalNetPay: 178452.3
+                    totalDeductions: 38210.8
+                    totalTaxes: 29167.4
+                    workerCount: 87
+                    currency: USD
+                    createdOn: '2026-04-30T16:45:00Z'
+                    completedOn: '2026-04-30T16:45:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updatePayRun
-      summary: Workday Payroll Update a pay run
+      summary: Workday Payroll Update a Pay Run
       description: >-
         Update the status or properties of an existing pay run.
       tags:
-        - Pay Runs
+      - Pay Runs
       parameters:
-        - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/payRunId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdatePayRunRequest'
+            examples:
+              UpdatePayRunRequestExample:
+                summary: Default updatePayRun request
+                x-microcks-default: true
+                value:
+                  status: Draft
+                  paymentDate: '2026-04-30'
       responses:
         '200':
           description: Pay run updated
@@ -156,23 +261,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayRun'
+              examples:
+                UpdatePayRun200Example:
+                  summary: Default updatePayRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pr_20260430_weekly_001
+                    descriptor: Weekly USD Pay Group
+                    payGroup:
+                      id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                    payPeriod:
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    status: Draft
+                    runCategory: Regular
+                    paymentDate: '2026-04-30'
+                    totalGrossPay: 245830.5
+                    totalNetPay: 178452.3
+                    totalDeductions: 38210.8
+                    totalTaxes: 29167.4
+                    workerCount: 87
+                    currency: USD
+                    createdOn: '2026-04-30T16:45:00Z'
+                    completedOn: '2026-04-30T16:45:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/calculate:
     post:
       operationId: calculatePayRun
-      summary: Workday Payroll Calculate a pay run
+      summary: Workday Payroll Calculate a Pay Run
       description: >-
         Trigger payroll calculations for a specific pay run, processing all
         earnings, deductions, and taxes for included workers.
       tags:
-        - Payroll Calculations
+      - Payroll Calculations
       parameters:
-        - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/payRunId'
       responses:
         '202':
           description: Calculation initiated
@@ -180,23 +312,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculationStatus'
+              examples:
+                CalculatePayRun202Example:
+                  summary: Default calculatePayRun 202 response
+                  x-microcks-default: true
+                  value:
+                    id: calc_20260430_00012
+                    payRunId: pr_20260430_weekly_001
+                    status: Queued
+                    startedAt: '2026-04-30T16:45:00Z'
+                    completedAt: '2026-04-30T16:45:00Z'
+                    errors:
+                    - error: INVALID_REQUEST
+                      message: Validation failed for the provided fields.
+                      details:
+                      - field: amount
+                        message: Validation failed for the provided fields.
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payRuns/{payRunId}/complete:
     post:
       operationId: completePayRun
-      summary: Workday Payroll Complete a pay run
+      summary: Workday Payroll Complete a Pay Run
       description: >-
         Mark a pay run as completed, finalizing all payroll calculations
         and preparing payments for distribution.
       tags:
-        - Pay Runs
+      - Pay Runs
       parameters:
-        - $ref: '#/components/parameters/payRunId'
+      - $ref: '#/components/parameters/payRunId'
       responses:
         '200':
           description: Pay run completed
@@ -204,24 +355,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayRun'
+              examples:
+                CompletePayRun200Example:
+                  summary: Default completePayRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pr_20260430_weekly_001
+                    descriptor: Weekly USD Pay Group
+                    payGroup:
+                      id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                    payPeriod:
+                      startDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    status: Draft
+                    runCategory: Regular
+                    paymentDate: '2026-04-30'
+                    totalGrossPay: 245830.5
+                    totalNetPay: 178452.3
+                    totalDeductions: 38210.8
+                    totalTaxes: 29167.4
+                    workerCount: 87
+                    currency: USD
+                    createdOn: '2026-04-30T16:45:00Z'
+                    completedOn: '2026-04-30T16:45:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payGroups:
     get:
       operationId: listPayGroups
-      summary: Workday Payroll List pay groups
+      summary: Workday Payroll List Pay Groups
       description: >-
         Retrieve all configured pay groups, which organize workers for
         payroll processing by frequency, currency, or other criteria.
       tags:
-        - Pay Groups
+      - Pay Groups
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of pay groups
@@ -229,18 +407,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayGroupCollection'
+              examples:
+                ListPayGroups200Example:
+                  summary: Default listPayGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                      payFrequency: Weekly
+                      currency: USD
+                      country: US
+                      runCategory: example
+                      workerCount: 87
+                      inactive: false
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payGroups/{payGroupId}:
     get:
       operationId: getPayGroup
-      summary: Workday Payroll Get a pay group
+      summary: Workday Payroll Get a Pay Group
       description: >-
         Retrieve details of a specific pay group by its identifier.
       tags:
-        - Pay Groups
+      - Pay Groups
       parameters:
-        - $ref: '#/components/parameters/payGroupId'
+      - $ref: '#/components/parameters/payGroupId'
       responses:
         '200':
           description: Pay group details
@@ -248,22 +444,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayGroup'
+              examples:
+                GetPayGroup200Example:
+                  summary: Default getPayGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    id: pg_weekly_usd
+                    descriptor: Weekly USD Pay Group
+                    payFrequency: Weekly
+                    currency: USD
+                    country: US
+                    runCategory: example
+                    workerCount: 87
+                    inactive: false
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /payGroups/{payGroupId}/workers:
     get:
       operationId: listPayGroupWorkers
-      summary: Workday Payroll List workers in a pay group
+      summary: Workday Payroll List Workers in a Pay Group
       description: >-
         Retrieve all workers assigned to a specific pay group.
       tags:
-        - Pay Groups
+      - Pay Groups
       parameters:
-        - $ref: '#/components/parameters/payGroupId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/payGroupId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of workers in the pay group
@@ -271,21 +483,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkerCollection'
+              examples:
+                ListPayGroupWorkers200Example:
+                  summary: Default listPayGroupWorkers 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: w_100542
+                      descriptor: Weekly USD Pay Group
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/payrollDetails:
     get:
       operationId: getWorkerPayrollDetails
-      summary: Workday Payroll Get worker payroll details
+      summary: Workday Payroll Get Worker Payroll Details
       description: >-
         Retrieve payroll-specific details for a worker, including pay group
         assignment, payment method, and compensation summary.
       tags:
-        - Workers
+      - Workers
       parameters:
-        - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/workerId'
       responses:
         '200':
           description: Worker payroll details
@@ -293,23 +517,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkerPayrollDetails'
+              examples:
+                GetWorkerPayrollDetails200Example:
+                  summary: Default getWorkerPayrollDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    workerId: w_100542
+                    workerDescriptor: example
+                    payGroup:
+                      id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                    paymentMethod: DirectDeposit
+                    annualSalary: 95000.0
+                    hourlyRate: 32.5
+                    compensationFrequency: Annual
+                    currency: USD
+                    taxJurisdiction: US-Federal
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/earnings:
     get:
       operationId: listWorkerEarnings
-      summary: Workday Payroll List worker earnings
+      summary: Workday Payroll List Worker Earnings
       description: >-
         Retrieve all earnings records for a specific worker, including
         regular pay, overtime, bonuses, and other earning types.
       tags:
-        - Earnings
+      - Earnings
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of worker earnings
@@ -317,23 +560,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EarningCollection'
+              examples:
+                ListWorkerEarnings200Example:
+                  summary: Default listWorkerEarnings 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: ern_20260430_00301
+                      earningCode:
+                        id: REGULAR
+                        descriptor: Weekly USD Pay Group
+                      amount: 2500.0
+                      hours: 40.0
+                      rate: 32.5
+                      effectiveDate: '2026-04-30'
+                      payPeriod:
+                        startDate: '2026-04-30'
+                        endDate: '2026-04-30'
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workers/{workerId}/deductions:
     get:
       operationId: listWorkerDeductions
-      summary: Workday Payroll List worker deductions
+      summary: Workday Payroll List Worker Deductions
       description: >-
         Retrieve all deductions for a specific worker, including benefits,
         retirement contributions, garnishments, and voluntary deductions.
       tags:
-        - Deductions
+      - Deductions
       parameters:
-        - $ref: '#/components/parameters/workerId'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/workerId'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of worker deductions
@@ -341,22 +605,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeductionCollection'
+              examples:
+                ListWorkerDeductions200Example:
+                  summary: Default listWorkerDeductions 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: ded_20260430_00211
+                      deductionCode:
+                        id: MEDICAL_PRETAX
+                        descriptor: Weekly USD Pay Group
+                      amount: 2500.0
+                      frequency: PerPayPeriod
+                      preTax: true
+                      effectiveDate: '2026-04-30'
+                      endDate: '2026-04-30'
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /earningCodes:
     get:
       operationId: listEarningCodes
-      summary: Workday Payroll List earning codes
+      summary: Workday Payroll List Earning Codes
       description: >-
         Retrieve all configured earning codes that define types of
         compensation such as regular pay, overtime, and bonuses.
       tags:
-        - Earnings
+      - Earnings
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of earning codes
@@ -364,20 +647,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EarningCodeCollection'
+              examples:
+                ListEarningCodes200Example:
+                  summary: Default listEarningCodes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: REGULAR
+                      descriptor: Weekly USD Pay Group
+                      type: Regular
+                      taxable: true
+                      active: true
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /deductionCodes:
     get:
       operationId: listDeductionCodes
-      summary: Workday Payroll List deduction codes
+      summary: Workday Payroll List Deduction Codes
       description: >-
         Retrieve all configured deduction codes that define types of payroll
         deductions such as taxes, benefits, and garnishments.
       tags:
-        - Deductions
+      - Deductions
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Collection of deduction codes
@@ -385,8 +683,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeductionCodeCollection'
+              examples:
+                ListDeductionCodes200Example:
+                  summary: Default listDeductionCodes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: MEDICAL_PRETAX
+                      descriptor: Weekly USD Pay Group
+                      type: Benefit
+                      preTax: true
+                      active: true
+                    total: 52
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -404,6 +717,7 @@ components:
       description: Unique identifier for the pay run
       schema:
         type: string
+      example: pr_20260430_weekly_001
     payGroupId:
       name: payGroupId
       in: path
@@ -411,6 +725,7 @@ components:
       description: Unique identifier for the pay group
       schema:
         type: string
+      example: pg_weekly_usd
     workerId:
       name: workerId
       in: path
@@ -418,6 +733,7 @@ components:
       description: Unique identifier for the worker (Workday ID)
       schema:
         type: string
+      example: w_100542
     limit:
       name: limit
       in: query
@@ -427,6 +743,7 @@ components:
         minimum: 1
         maximum: 100
         default: 20
+      example: 20
     offset:
       name: offset
       in: query
@@ -435,6 +752,7 @@ components:
         type: integer
         minimum: 0
         default: 0
+      example: 0
   responses:
     BadRequest:
       description: Invalid request parameters
@@ -442,18 +760,48 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
     Unauthorized:
       description: Authentication required or token expired
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
   schemas:
     PayRun:
       type: object
@@ -461,9 +809,11 @@ components:
         id:
           type: string
           description: Unique identifier for the pay run
+          example: pr_20260430_weekly_001
         descriptor:
           type: string
           description: Human-readable name of the pay run
+          example: Weekly USD Pay Group
         payGroup:
           $ref: '#/components/schemas/PayGroupRef'
         payPeriod:
@@ -471,52 +821,63 @@ components:
         status:
           type: string
           enum:
-            - Draft
-            - InProgress
-            - Completed
-            - Cancelled
+          - Draft
+          - InProgress
+          - Completed
+          - Cancelled
           description: Current status of the pay run
+          example: Draft
         runCategory:
           type: string
           enum:
-            - Regular
-            - OffCycle
-            - OnDemand
+          - Regular
+          - OffCycle
+          - OnDemand
           description: Category of the pay run
+          example: Regular
         paymentDate:
           type: string
           format: date
           description: Date payments will be distributed
+          example: '2026-04-30'
         totalGrossPay:
           type: number
           format: double
           description: Total gross pay for the pay run
+          example: 245830.5
         totalNetPay:
           type: number
           format: double
           description: Total net pay for the pay run
+          example: 178452.3
         totalDeductions:
           type: number
           format: double
           description: Total deductions for the pay run
+          example: 38210.8
         totalTaxes:
           type: number
           format: double
           description: Total tax withholdings for the pay run
+          example: 29167.4
         workerCount:
           type: integer
           description: Number of workers included in the pay run
+          example: 87
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         createdOn:
           type: string
           format: date-time
           description: When the pay run was created
+          example: '2026-04-30T16:45:00Z'
         completedOn:
           type: string
           format: date-time
           description: When the pay run was completed
+          example: '2026-04-30T16:45:00Z'
     PayRunCollection:
       type: object
       properties:
@@ -527,67 +888,78 @@ components:
         total:
           type: integer
           description: Total number of pay runs matching the query
+          example: 52
     CreatePayRunRequest:
       type: object
       required:
-        - payGroupId
-        - payPeriod
+      - payGroupId
+      - payPeriod
       properties:
         payGroupId:
           type: string
           description: Identifier of the pay group for this run
+          example: pg_weekly_usd
         payPeriod:
           $ref: '#/components/schemas/PayPeriod'
         runCategory:
           type: string
           enum:
-            - Regular
-            - OffCycle
-            - OnDemand
+          - Regular
+          - OffCycle
+          - OnDemand
           default: Regular
           description: Category of the pay run
+          example: Regular
         paymentDate:
           type: string
           format: date
           description: Desired payment date
+          example: '2026-04-30'
     UpdatePayRunRequest:
       type: object
       properties:
         status:
           type: string
           enum:
-            - Draft
-            - Cancelled
+          - Draft
+          - Cancelled
           description: Updated status for the pay run
+          example: Draft
         paymentDate:
           type: string
           format: date
           description: Updated payment date
+          example: '2026-04-30'
     CalculationStatus:
       type: object
       properties:
         id:
           type: string
           description: Calculation job identifier
+          example: calc_20260430_00012
         payRunId:
           type: string
           description: Associated pay run identifier
+          example: pr_20260430_weekly_001
         status:
           type: string
           enum:
-            - Queued
-            - Processing
-            - Completed
-            - Failed
+          - Queued
+          - Processing
+          - Completed
+          - Failed
           description: Current status of the calculation
+          example: Queued
         startedAt:
           type: string
           format: date-time
           description: When the calculation started
+          example: '2026-04-30T16:45:00Z'
         completedAt:
           type: string
           format: date-time
           description: When the calculation completed
+          example: '2026-04-30T16:45:00Z'
         errors:
           type: array
           items:
@@ -599,41 +971,51 @@ components:
         id:
           type: string
           description: Unique identifier for the pay group
+          example: pg_weekly_usd
         descriptor:
           type: string
           description: Human-readable name of the pay group
+          example: Weekly USD Pay Group
         payFrequency:
           type: string
           enum:
-            - Weekly
-            - BiWeekly
-            - SemiMonthly
-            - Monthly
+          - Weekly
+          - BiWeekly
+          - SemiMonthly
+          - Monthly
           description: How often payroll is processed
+          example: Weekly
         currency:
           type: string
           description: ISO 4217 currency code for the pay group
+          example: USD
         country:
           type: string
           description: ISO 3166-1 country code
+          example: US
         runCategory:
           type: string
           description: Default run category for this pay group
+          example: example
         workerCount:
           type: integer
           description: Number of workers in the pay group
+          example: 87
         inactive:
           type: boolean
           description: Whether the pay group is inactive
+          example: false
     PayGroupRef:
       type: object
       properties:
         id:
           type: string
           description: Pay group identifier
+          example: pg_weekly_usd
         descriptor:
           type: string
           description: Pay group display name
+          example: Weekly USD Pay Group
     PayGroupCollection:
       type: object
       properties:
@@ -644,6 +1026,7 @@ components:
         total:
           type: integer
           description: Total number of pay groups
+          example: 52
     PayPeriod:
       type: object
       properties:
@@ -651,54 +1034,66 @@ components:
           type: string
           format: date
           description: Start date of the pay period
+          example: '2026-04-30'
         endDate:
           type: string
           format: date
           description: End date of the pay period
+          example: '2026-04-30'
     WorkerPayrollDetails:
       type: object
       properties:
         workerId:
           type: string
           description: Unique worker identifier
+          example: w_100542
         workerDescriptor:
           type: string
           description: Worker display name
+          example: example
         payGroup:
           $ref: '#/components/schemas/PayGroupRef'
         paymentMethod:
           type: string
           enum:
-            - DirectDeposit
-            - Check
-            - Wire
+          - DirectDeposit
+          - Check
+          - Wire
           description: Worker payment method
+          example: DirectDeposit
         annualSalary:
           type: number
           format: double
           description: Annual salary amount
+          example: 95000.0
         hourlyRate:
           type: number
           format: double
           description: Hourly pay rate
+          example: 32.5
         compensationFrequency:
           type: string
           description: Frequency of compensation
+          example: Annual
         currency:
           type: string
           description: ISO 4217 currency code
+          example: USD
         taxJurisdiction:
           type: string
           description: Primary tax jurisdiction
+          example: US-Federal
     WorkerRef:
       type: object
       properties:
         id:
           type: string
           description: Worker identifier
+          example: w_100542
         descriptor:
           type: string
           description: Worker display name
+          example: Weekly USD Pay Group
     WorkerCollection:
       type: object
       properties:
@@ -709,30 +1104,36 @@ components:
         total:
           type: integer
           description: Total number of workers
+          example: 52
     Earning:
       type: object
       properties:
         id:
           type: string
           description: Unique earning record identifier
+          example: ern_20260430_00301
         earningCode:
           $ref: '#/components/schemas/EarningCodeRef'
         amount:
           type: number
           format: double
           description: Earning amount
+          example: 2500.0
         hours:
           type: number
           format: double
           description: Hours worked for this earning
+          example: 40.0
         rate:
           type: number
           format: double
           description: Pay rate for this earning
+          example: 32.5
         effectiveDate:
           type: string
           format: date
           description: Effective date of the earning
+          example: '2026-04-30'
         payPeriod:
           $ref: '#/components/schemas/PayPeriod'
     EarningCollection:
@@ -745,42 +1146,50 @@ components:
         total:
           type: integer
           description: Total number of earnings
+          example: 52
     EarningCode:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the earning code
+          example: REGULAR
         descriptor:
           type: string
           description: Display name of the earning code
+          example: Weekly USD Pay Group
         type:
           type: string
           enum:
-            - Regular
-            - Overtime
-            - Bonus
-            - Commission
-            - Holiday
-            - PTO
-            - Supplemental
-            - Other
+          - Regular
+          - Overtime
+          - Bonus
+          - Commission
+          - Holiday
+          - PTO
+          - Supplemental
+          - Other
           description: Category of the earning
+          example: Regular
         taxable:
           type: boolean
           description: Whether this earning is subject to taxation
+          example: true
         active:
           type: boolean
           description: Whether the earning code is currently active
+          example: true
     EarningCodeRef:
       type: object
       properties:
         id:
           type: string
           description: Earning code identifier
+          example: REGULAR
         descriptor:
           type: string
           description: Earning code display name
+          example: Weekly USD Pay Group
     EarningCodeCollection:
       type: object
       properties:
@@ -791,37 +1200,44 @@ components:
         total:
           type: integer
           description: Total number of earning codes
+          example: 52
     Deduction:
       type: object
       properties:
         id:
           type: string
           description: Unique deduction record identifier
+          example: ded_20260430_00211
         deductionCode:
           $ref: '#/components/schemas/DeductionCodeRef'
         amount:
           type: number
           format: double
           description: Deduction amount
+          example: 2500.0
         frequency:
           type: string
           enum:
-            - PerPayPeriod
-            - Monthly
-            - Annual
-            - OneTime
+          - PerPayPeriod
+          - Monthly
+          - Annual
+          - OneTime
           description: Deduction frequency
+          example: PerPayPeriod
         preTax:
           type: boolean
           description: Whether the deduction is pre-tax
+          example: true
         effectiveDate:
           type: string
           format: date
           description: Effective date of the deduction
+          example: '2026-04-30'
         endDate:
           type: string
           format: date
           description: End date of the deduction
+          example: '2026-04-30'
     DeductionCollection:
       type: object
       properties:
@@ -832,40 +1248,48 @@ components:
         total:
           type: integer
           description: Total number of deductions
+          example: 52
     DeductionCode:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the deduction code
+          example: MEDICAL_PRETAX
         descriptor:
           type: string
           description: Display name of the deduction code
+          example: Weekly USD Pay Group
         type:
           type: string
           enum:
-            - Benefit
-            - Retirement
-            - Garnishment
-            - Tax
-            - Voluntary
-            - Other
+          - Benefit
+          - Retirement
+          - Garnishment
+          - Tax
+          - Voluntary
+          - Other
           description: Category of the deduction
+          example: Benefit
         preTax:
           type: boolean
           description: Whether this deduction is pre-tax by default
+          example: true
         active:
           type: boolean
           description: Whether the deduction code is currently active
+          example: true
     DeductionCodeRef:
       type: object
       properties:
         id:
           type: string
           description: Deduction code identifier
+          example: MEDICAL_PRETAX
         descriptor:
           type: string
           description: Deduction code display name
+          example: Weekly USD Pay Group
     DeductionCodeCollection:
       type: object
       properties:
@@ -876,15 +1300,18 @@ components:
         total:
           type: integer
           description: Total number of deduction codes
+          example: 52
     Error:
       type: object
       properties:
         error:
           type: string
           description: Error code
+          example: INVALID_REQUEST
         message:
           type: string
           description: Human-readable error message
+          example: Validation failed for the provided fields.
         details:
           type: array
           items:

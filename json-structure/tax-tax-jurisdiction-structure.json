@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/tax-tax-jurisdiction-structure.json",
+  "name": "TaxJurisdiction",
+  "description": "TaxJurisdiction schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the tax jurisdiction",
+      "example": "tjur_us_federal"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the jurisdiction",
+      "example": "Weekly USD Pay Group"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "Federal",
+        "State",
+        "Local",
+        "Other"
+      ],
+      "description": "Jurisdiction level",
+      "example": "Federal"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 country code",
+      "example": "US"
+    },
+    "stateCode": {
+      "type": "string",
+      "description": "State or province code",
+      "example": "CA"
+    },
+    "localityName": {
+      "type": "string",
+      "description": "Local jurisdiction name",
+      "example": "San Francisco"
+    },
+    "taxTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Applicable tax types in this jurisdiction",
+      "example": [
+        "FederalIncome"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the jurisdiction is currently active",
+      "example": true
+    }
+  }
+}

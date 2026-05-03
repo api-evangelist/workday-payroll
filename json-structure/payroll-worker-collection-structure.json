@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-worker-collection-structure.json",
+  "name": "WorkerCollection",
+  "description": "WorkerCollection schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/WorkerRef"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of workers",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "WorkerRef": {
+      "name": "WorkerRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

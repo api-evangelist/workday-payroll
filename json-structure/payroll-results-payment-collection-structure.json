@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-results-payment-collection-structure.json",
+  "name": "PaymentCollection",
+  "description": "PaymentCollection schema from Workday Payroll Results API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Payment"
+      }
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of payments",
+      "example": 52
+    }
+  },
+  "definitions": {
+    "Payment": {
+      "name": "Payment",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the payment",
+          "example": "pmt_20260502_00045"
+        },
+        "worker": {
+          "$ref": "#/$defs/WorkerRef"
+        },
+        "payRunId": {
+          "type": "string",
+          "description": "Associated pay run identifier",
+          "example": "pr_20260430_weekly_001"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": [
+            "DirectDeposit",
+            "Check",
+            "Wire"
+          ],
+          "description": "Method of payment",
+          "example": "DirectDeposit"
+        },
+        "amount": {
+          "type": "double",
+          "description": "Payment amount",
+          "example": 2500.0
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        },
+        "paymentDate": {
+          "type": "date",
+          "description": "Date payment was issued",
+          "example": "2026-04-30"
+        },
+        "settlementDate": {
+          "type": "date",
+          "description": "Date payment was settled",
+          "example": "2026-04-30"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Processed",
+            "Settled",
+            "Failed",
+            "Voided"
+          ],
+          "description": "Current payment status",
+          "example": "Pending"
+        },
+        "bankAccount": {
+          "type": "object",
+          "properties": {
+            "lastFourDigits": {
+              "type": "string",
+              "description": "Last four digits of the account number",
+              "example": "4521"
+            },
+            "bankName": {
+              "type": "string",
+              "description": "Name of the financial institution",
+              "example": "Wells Fargo"
+            },
+            "accountType": {
+              "type": "string",
+              "enum": [
+                "Checking",
+                "Savings"
+              ],
+              "description": "Type of bank account",
+              "example": "Checking"
+            }
+          },
+          "description": "Bank account details (masked)"
+        },
+        "checkNumber": {
+          "type": "string",
+          "description": "Check number if payment method is check",
+          "example": "100482"
+        }
+      }
+    },
+    "WorkerRef": {
+      "name": "WorkerRef",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

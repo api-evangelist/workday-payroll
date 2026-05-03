@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "pg_weekly_usd",
+      "descriptor": "Weekly USD Pay Group",
+      "payFrequency": "Weekly",
+      "currency": "USD",
+      "country": "US",
+      "runCategory": "example",
+      "workerCount": 87,
+      "inactive": false
+    },
+    {
+      "id": "pg_weekly_usd",
+      "descriptor": "Weekly USD Pay Group",
+      "payFrequency": "Weekly",
+      "currency": "USD",
+      "country": "US",
+      "runCategory": "example",
+      "workerCount": 87,
+      "inactive": false
+    }
+  ],
+  "total": 52
+}

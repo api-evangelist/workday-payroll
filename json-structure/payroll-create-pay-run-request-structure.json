@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-structure/payroll-create-pay-run-request-structure.json",
+  "name": "CreatePayRunRequest",
+  "description": "CreatePayRunRequest schema from Workday Payroll API",
+  "type": "object",
+  "properties": {
+    "payGroupId": {
+      "type": "string",
+      "description": "Identifier of the pay group for this run",
+      "example": "pg_weekly_usd"
+    },
+    "payPeriod": {
+      "$ref": "#/$defs/PayPeriod"
+    },
+    "runCategory": {
+      "type": "string",
+      "enum": [
+        "Regular",
+        "OffCycle",
+        "OnDemand"
+      ],
+      "default": "Regular",
+      "description": "Category of the pay run",
+      "example": "Regular"
+    },
+    "paymentDate": {
+      "type": "date",
+      "description": "Desired payment date",
+      "example": "2026-04-30"
+    }
+  },
+  "required": [
+    "payGroupId",
+    "payPeriod"
+  ],
+  "definitions": {
+    "PayPeriod": {
+      "name": "PayPeriod",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "date",
+          "description": "Start date of the pay period",
+          "example": "2026-04-30"
+        },
+        "endDate": {
+          "type": "date",
+          "description": "End date of the pay period",
+          "example": "2026-04-30"
+        }
+      }
+    }
+  }
+}

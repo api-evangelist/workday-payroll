@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-create-tax-election-request-schema.json",
+  "title": "CreateTaxElectionRequest",
+  "description": "CreateTaxElectionRequest schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "formType": {
+      "type": "string",
+      "enum": [
+        "W4",
+        "StateWithholding",
+        "LocalWithholding"
+      ],
+      "description": "Type of tax form",
+      "example": "W4"
+    },
+    "jurisdictionId": {
+      "type": "string",
+      "description": "Tax jurisdiction identifier",
+      "example": "tjur_us_federal"
+    },
+    "filingStatus": {
+      "type": "string",
+      "description": "Filing status",
+      "example": "example"
+    },
+    "multipleJobs": {
+      "type": "boolean",
+      "description": "Multiple jobs indicator",
+      "example": true
+    },
+    "dependentsAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Dependents amount",
+      "example": 2000.0
+    },
+    "otherIncome": {
+      "type": "number",
+      "format": "double",
+      "description": "Other income amount",
+      "example": 0.0
+    },
+    "deductions": {
+      "type": "number",
+      "format": "double",
+      "description": "Deductions amount",
+      "example": 0.0
+    },
+    "additionalWithholding": {
+      "type": "number",
+      "format": "double",
+      "description": "Additional withholding per period",
+      "example": 50.0
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date",
+      "example": "2026-04-30"
+    }
+  },
+  "required": [
+    "formType",
+    "jurisdictionId",
+    "filingStatus"
+  ]
+}

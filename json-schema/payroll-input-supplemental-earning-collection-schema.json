@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-supplemental-earning-collection-schema.json",
+  "title": "SupplementalEarningCollection",
+  "description": "SupplementalEarningCollection schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SupplementalEarning"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of supplemental earnings",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "SupplementalEarning": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the supplemental earning",
+          "example": "sup_20260430_00121"
+        },
+        "worker": {
+          "$ref": "#/$defs/WorkerRef"
+        },
+        "earningCode": {
+          "type": "string",
+          "description": "Earning code for the supplemental earning",
+          "example": "REGULAR"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Bonus",
+            "Commission",
+            "Stipend",
+            "Allowance",
+            "Other"
+          ],
+          "description": "Type of supplemental earning",
+          "example": "Bonus"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Earning amount",
+          "example": 2500.0
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Effective date",
+          "example": "2026-04-30"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Processed",
+            "Rejected"
+          ],
+          "description": "Current status",
+          "example": "Pending"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Description or reason for the earning",
+          "example": "Q1 2026 performance bonus"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the earning was submitted",
+          "example": "2026-04-30T16:45:00Z"
+        }
+      }
+    },
+    "WorkerRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker identifier",
+          "example": "w_100542"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Worker display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

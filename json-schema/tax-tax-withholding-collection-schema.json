@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/tax-tax-withholding-collection-schema.json",
+  "title": "TaxWithholdingCollection",
+  "description": "TaxWithholdingCollection schema from Workday Payroll Workday Tax API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TaxWithholding"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of tax withholdings",
+      "example": 52
+    }
+  },
+  "$defs": {
+    "TaxWithholding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the tax withholding",
+          "example": "twh_w100542_federal"
+        },
+        "jurisdiction": {
+          "$ref": "#/$defs/TaxJurisdictionRef"
+        },
+        "taxType": {
+          "type": "string",
+          "enum": [
+            "FederalIncome",
+            "StateIncome",
+            "LocalIncome",
+            "SocialSecurity",
+            "Medicare",
+            "FUTA",
+            "SUTA",
+            "Other"
+          ],
+          "description": "Type of tax",
+          "example": "FederalIncome"
+        },
+        "filingStatus": {
+          "type": "string",
+          "enum": [
+            "Single",
+            "MarriedFilingJointly",
+            "MarriedFilingSeparately",
+            "HeadOfHousehold",
+            "QualifyingWidower"
+          ],
+          "description": "Tax filing status",
+          "example": "Single"
+        },
+        "allowances": {
+          "type": "integer",
+          "description": "Number of withholding allowances claimed",
+          "example": 2
+        },
+        "additionalWithholding": {
+          "type": "number",
+          "format": "double",
+          "description": "Additional flat withholding amount per pay period",
+          "example": 50.0
+        },
+        "exempt": {
+          "type": "boolean",
+          "description": "Whether the worker claims exempt status",
+          "example": false
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date the withholding configuration took effect",
+          "example": "2026-04-30"
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "example": "USD"
+        }
+      }
+    },
+    "TaxJurisdictionRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Jurisdiction identifier",
+          "example": "tjur_us_federal"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Jurisdiction display name",
+          "example": "Weekly USD Pay Group"
+        }
+      }
+    }
+  }
+}

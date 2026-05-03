@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/json-schema/payroll-input-create-one-time-payment-request-schema.json",
+  "title": "CreateOneTimePaymentRequest",
+  "description": "CreateOneTimePaymentRequest schema from Workday Payroll Input API",
+  "type": "object",
+  "properties": {
+    "workerId": {
+      "type": "string",
+      "description": "Worker identifier",
+      "example": "w_100542"
+    },
+    "earningCode": {
+      "type": "string",
+      "description": "Earning code for the payment",
+      "example": "REGULAR"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Payment amount",
+      "example": 2500.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the payment",
+      "example": "Q1 2026 performance bonus"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date",
+      "example": "2026-04-30"
+    }
+  },
+  "required": [
+    "workerId",
+    "earningCode",
+    "amount"
+  ]
+}
