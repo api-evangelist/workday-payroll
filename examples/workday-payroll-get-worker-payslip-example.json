@@ -1,0 +1,105 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.workday.com/payroll-results/v1/workers/w_123456/payslips/ps_20260430_001",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "ps_20260430_001",
+      "worker": {
+        "id": "w_123456",
+        "descriptor": "Jane Smith"
+      },
+      "payPeriod": {
+        "startDate": "2026-04-24",
+        "endDate": "2026-04-30"
+      },
+      "paymentDate": "2026-05-02",
+      "grossPay": 4807.69,
+      "netPay": 3421.52,
+      "totalEarnings": 4807.69,
+      "totalDeductions": 842.30,
+      "totalTaxes": 543.87,
+      "currency": "USD",
+      "earnings": [
+        {
+          "earningCode": "REG",
+          "currentAmount": 4615.38,
+          "currentHours": 80.0,
+          "rate": 57.69,
+          "yearToDateAmount": 55384.56
+        },
+        {
+          "earningCode": "OT",
+          "currentAmount": 192.31,
+          "currentHours": 2.0,
+          "rate": 96.15,
+          "yearToDateAmount": 576.93
+        }
+      ],
+      "deductions": [
+        {
+          "deductionCode": "MEDICAL",
+          "employeeAmount": 285.00,
+          "employerAmount": 570.00,
+          "preTax": true,
+          "yearToDateEmployee": 3420.00,
+          "yearToDateEmployer": 6840.00
+        },
+        {
+          "deductionCode": "401K",
+          "employeeAmount": 480.77,
+          "employerAmount": 240.38,
+          "preTax": true,
+          "yearToDateEmployee": 5769.24,
+          "yearToDateEmployer": 2884.56
+        },
+        {
+          "deductionCode": "DENTAL",
+          "employeeAmount": 76.53,
+          "employerAmount": 38.27,
+          "preTax": true,
+          "yearToDateEmployee": 918.36,
+          "yearToDateEmployer": 459.24
+        }
+      ],
+      "taxes": [
+        {
+          "taxAuthority": "Federal",
+          "taxType": "Income Tax",
+          "currentAmount": 312.50,
+          "yearToDateAmount": 3750.00
+        },
+        {
+          "taxAuthority": "Federal",
+          "taxType": "Social Security",
+          "currentAmount": 146.15,
+          "yearToDateAmount": 1753.80
+        },
+        {
+          "taxAuthority": "Federal",
+          "taxType": "Medicare",
+          "currentAmount": 55.22,
+          "yearToDateAmount": 662.64
+        },
+        {
+          "taxAuthority": "California",
+          "taxType": "State Income Tax",
+          "currentAmount": 30.00,
+          "yearToDateAmount": 360.00
+        }
+      ],
+      "yearToDateGross": 57961.49,
+      "yearToDateNet": 41268.24,
+      "yearToDateTaxes": 6526.44
+    }
+  }
+}

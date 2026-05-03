@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.workday.com/payroll-input/v1/oneTimePayments",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "workerId": "w_123456",
+      "earningCode": "BONUS",
+      "amount": 5000.00,
+      "currency": "USD",
+      "reason": "Q1 2026 Performance Bonus",
+      "effectiveDate": "2026-05-15"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "otp_20260503_001",
+      "worker": {
+        "id": "w_123456",
+        "descriptor": "Jane Smith"
+      },
+      "earningCode": "BONUS",
+      "amount": 5000.00,
+      "currency": "USD",
+      "reason": "Q1 2026 Performance Bonus",
+      "effectiveDate": "2026-05-15",
+      "status": "Pending",
+      "createdOn": "2026-05-03T10:30:00Z",
+      "submittedBy": "admin@company.com"
+    }
+  }
+}

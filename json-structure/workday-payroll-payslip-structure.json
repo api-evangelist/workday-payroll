@@ -1,0 +1,147 @@
+{
+  "name": "Payslip",
+  "description": "Worker pay statement for a specific pay period, including earnings, deductions, taxes, and year-to-date totals.",
+  "type": "object",
+  "properties": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique identifier for the payslip",
+      "required": false
+    },
+    {
+      "name": "worker",
+      "type": "object",
+      "description": "Reference to the worker",
+      "required": false,
+      "properties": [
+        { "name": "id", "type": "string", "description": "Worker identifier" },
+        { "name": "descriptor", "type": "string", "description": "Worker display name" }
+      ]
+    },
+    {
+      "name": "payPeriod",
+      "type": "object",
+      "description": "Pay period covered",
+      "required": false,
+      "properties": [
+        { "name": "startDate", "type": "string", "format": "date" },
+        { "name": "endDate", "type": "string", "format": "date" }
+      ]
+    },
+    {
+      "name": "paymentDate",
+      "type": "string",
+      "format": "date",
+      "description": "Date of payment",
+      "required": false
+    },
+    {
+      "name": "grossPay",
+      "type": "number",
+      "format": "double",
+      "description": "Total gross pay",
+      "required": false
+    },
+    {
+      "name": "netPay",
+      "type": "number",
+      "format": "double",
+      "description": "Total net pay after deductions and taxes",
+      "required": false
+    },
+    {
+      "name": "totalEarnings",
+      "type": "number",
+      "format": "double",
+      "description": "Sum of all earnings",
+      "required": false
+    },
+    {
+      "name": "totalDeductions",
+      "type": "number",
+      "format": "double",
+      "description": "Sum of all deductions",
+      "required": false
+    },
+    {
+      "name": "totalTaxes",
+      "type": "number",
+      "format": "double",
+      "description": "Sum of all tax withholdings",
+      "required": false
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "required": false
+    },
+    {
+      "name": "earnings",
+      "type": "array",
+      "description": "Itemized earnings lines",
+      "required": false,
+      "items": {
+        "type": "object",
+        "properties": [
+          { "name": "earningCode", "type": "string" },
+          { "name": "currentAmount", "type": "number" },
+          { "name": "currentHours", "type": "number" },
+          { "name": "rate", "type": "number" },
+          { "name": "yearToDateAmount", "type": "number" }
+        ]
+      }
+    },
+    {
+      "name": "deductions",
+      "type": "array",
+      "description": "Itemized deduction lines",
+      "required": false,
+      "items": {
+        "type": "object",
+        "properties": [
+          { "name": "deductionCode", "type": "string" },
+          { "name": "employeeAmount", "type": "number" },
+          { "name": "employerAmount", "type": "number" },
+          { "name": "preTax", "type": "boolean" },
+          { "name": "yearToDateEmployee", "type": "number" },
+          { "name": "yearToDateEmployer", "type": "number" }
+        ]
+      }
+    },
+    {
+      "name": "taxes",
+      "type": "array",
+      "description": "Itemized tax lines",
+      "required": false,
+      "items": {
+        "type": "object",
+        "properties": [
+          { "name": "taxAuthority", "type": "string" },
+          { "name": "taxType", "type": "string" },
+          { "name": "currentAmount", "type": "number" },
+          { "name": "yearToDateAmount", "type": "number" }
+        ]
+      }
+    },
+    {
+      "name": "yearToDateGross",
+      "type": "number",
+      "description": "Year-to-date gross pay",
+      "required": false
+    },
+    {
+      "name": "yearToDateNet",
+      "type": "number",
+      "description": "Year-to-date net pay",
+      "required": false
+    },
+    {
+      "name": "yearToDateTaxes",
+      "type": "number",
+      "description": "Year-to-date tax withholdings",
+      "required": false
+    }
+  ]
+}

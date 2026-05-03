@@ -1,0 +1,289 @@
+vocabulary:
+  name: Workday Payroll Vocabulary
+  description: >-
+    Vocabulary and terminology for the Workday Payroll APIs, covering payroll
+    processing, compensation, deductions, tax withholdings, and payment management.
+  version: "1.0"
+  created: "2026-05-03"
+  modified: "2026-05-03"
+  tags:
+    - Workday
+    - Payroll
+    - Compensation
+    - Human Resources
+
+  domains:
+    - name: Payroll Processing
+      description: Concepts related to running and managing payroll cycles
+      terms:
+        - term: Pay Run
+          definition: >-
+            A payroll processing run for a specific pay group covering a defined
+            pay period. Progresses through Draft, InProgress, Completed, or Cancelled states.
+          synonyms:
+            - Payroll Run
+            - Payroll Cycle
+          related:
+            - Pay Group
+            - Pay Period
+            - Payroll Calculation
+
+        - term: Pay Group
+          definition: >-
+            An organizational unit that groups workers for payroll processing
+            based on pay frequency, currency, country, or business unit.
+          synonyms:
+            - Payroll Group
+          related:
+            - Pay Frequency
+            - Pay Run
+
+        - term: Pay Period
+          definition: >-
+            The time range (start date to end date) covered by a payroll run.
+            Common frequencies include weekly, bi-weekly, semi-monthly, and monthly.
+          related:
+            - Pay Run
+            - Pay Frequency
+
+        - term: Pay Frequency
+          definition: >-
+            How often payroll is processed for a pay group: Weekly, BiWeekly,
+            SemiMonthly, or Monthly.
+          values:
+            - Weekly
+            - BiWeekly
+            - SemiMonthly
+            - Monthly
+
+        - term: Run Category
+          definition: >-
+            Classification of a payroll run. Regular runs process normal
+            payroll; OffCycle runs handle exceptions or corrections; OnDemand
+            runs are triggered outside normal schedules.
+          values:
+            - Regular
+            - OffCycle
+            - OnDemand
+
+        - term: Payroll Calculation
+          definition: >-
+            The computational process that applies earnings, deductions, and
+            tax withholdings to produce net pay for each worker in a pay run.
+          related:
+            - Gross Pay
+            - Net Pay
+            - Tax Withholding
+
+    - name: Compensation
+      description: Concepts related to worker pay and earnings
+      terms:
+        - term: Earning
+          definition: >-
+            A monetary amount paid to a worker during a pay period, classified
+            by earning code (Regular, Overtime, Bonus, Commission, etc.).
+          related:
+            - Earning Code
+            - Gross Pay
+
+        - term: Earning Code
+          definition: >-
+            A configuration identifier that classifies the type of compensation:
+            Regular, Overtime, Bonus, Commission, Holiday, PTO, Supplemental, or Other.
+          values:
+            - Regular
+            - Overtime
+            - Bonus
+            - Commission
+            - Holiday
+            - PTO
+            - Supplemental
+            - Other
+
+        - term: Gross Pay
+          definition: >-
+            Total compensation earned before deductions and tax withholdings are applied.
+          related:
+            - Net Pay
+            - Earnings
+
+        - term: Net Pay
+          definition: >-
+            Take-home pay after all deductions and tax withholdings are subtracted
+            from gross pay.
+          related:
+            - Gross Pay
+            - Deductions
+            - Tax Withholding
+
+        - term: Supplemental Earning
+          definition: >-
+            Non-regular earnings submitted outside the normal payroll input cycle,
+            such as bonuses, commissions, stipends, and allowances.
+          values:
+            - Bonus
+            - Commission
+            - Stipend
+            - Allowance
+
+        - term: Year-to-Date (YTD)
+          definition: >-
+            Cumulative total of earnings, deductions, or taxes from the beginning
+            of the calendar year to the current pay period.
+          abbreviation: YTD
+
+    - name: Deductions
+      description: Concepts related to payroll deductions and withholdings
+      terms:
+        - term: Deduction
+          definition: >-
+            An amount subtracted from gross pay, including benefits premiums,
+            retirement contributions, garnishments, and voluntary deductions.
+          related:
+            - Deduction Code
+            - Pre-Tax Deduction
+
+        - term: Deduction Code
+          definition: >-
+            A configuration identifier classifying the type of deduction:
+            Benefit, Retirement, Garnishment, Tax, Voluntary, or Other.
+          values:
+            - Benefit
+            - Retirement
+            - Garnishment
+            - Tax
+            - Voluntary
+            - Other
+
+        - term: Pre-Tax Deduction
+          definition: >-
+            A deduction subtracted from gross pay before income taxes are
+            calculated, reducing taxable income. Examples include 401(k)
+            contributions and medical insurance premiums.
+          related:
+            - Post-Tax Deduction
+            - Taxable Income
+
+        - term: Post-Tax Deduction
+          definition: >-
+            A deduction subtracted from pay after taxes have been applied.
+          related:
+            - Pre-Tax Deduction
+
+    - name: Taxation
+      description: Concepts related to payroll tax calculations and compliance
+      terms:
+        - term: Tax Withholding
+          definition: >-
+            An amount withheld from a worker's pay on behalf of a tax authority
+            (federal, state, or local) to satisfy income tax obligations.
+          related:
+            - Tax Election
+            - Tax Jurisdiction
+
+        - term: Tax Election
+          definition: >-
+            A worker's filing status and withholding instructions, typically
+            captured via Form W-4 (federal) or equivalent state forms.
+          synonyms:
+            - W-4 Election
+          related:
+            - Tax Withholding
+
+        - term: Tax Jurisdiction
+          definition: >-
+            A governmental authority that levies payroll taxes, such as the
+            IRS (federal), state revenue departments, or local taxing authorities.
+          related:
+            - Tax Withholding
+            - Tax Filing
+
+        - term: Tax Filing
+          definition: >-
+            Periodic reports submitted to tax authorities summarizing wages paid
+            and taxes withheld (e.g., Form 941, W-2, state equivalents).
+          related:
+            - Tax Jurisdiction
+            - Tax Compliance
+
+    - name: Payments
+      description: Concepts related to payment distribution to workers
+      terms:
+        - term: Payment Election
+          definition: >-
+            A worker's designated method and account(s) for receiving pay,
+            including direct deposit bank accounts with distribution rules
+            (fixed amount, percentage, or remainder).
+          related:
+            - Direct Deposit
+            - Payment Method
+
+        - term: Payment Method
+          definition: >-
+            The mechanism by which a worker receives pay: DirectDeposit,
+            Check, or Wire transfer.
+          values:
+            - DirectDeposit
+            - Check
+            - Wire
+
+        - term: Direct Deposit
+          definition: >-
+            Electronic transfer of net pay directly to a worker's bank account(s).
+          related:
+            - Payment Election
+            - ACH
+
+        - term: One-Time Payment
+          definition: >-
+            A non-recurring payment processed outside the regular payroll cycle,
+            such as a spot bonus, relocation allowance, or retroactive pay adjustment.
+          related:
+            - Supplemental Earning
+            - Payroll Adjustment
+
+        - term: Payroll Adjustment
+          definition: >-
+            A correction to previously processed payroll data, including
+            Correction, Retroactive, Reversal, or Reclass types.
+          values:
+            - Correction
+            - Retroactive
+            - Reversal
+            - Reclass
+
+    - name: Payslips
+      description: Concepts related to worker pay statements
+      terms:
+        - term: Payslip
+          definition: >-
+            A detailed pay statement issued to a worker for each pay period,
+            showing gross pay, itemized earnings, deductions, taxes, net pay,
+            and year-to-date totals.
+          synonyms:
+            - Pay Statement
+            - Pay Stub
+            - Earnings Statement
+          related:
+            - Gross Pay
+            - Net Pay
+            - YTD
+
+    - name: Input Processing
+      description: Concepts related to payroll data input and batch processing
+      terms:
+        - term: Input Batch
+          definition: >-
+            A collection of payroll input records (earnings, deductions, time off)
+            submitted together for bulk processing and validation.
+          related:
+            - Payroll Input
+            - Batch Processing
+
+        - term: Time Off Input
+          definition: >-
+            A leave or absence record submitted to payroll processing that
+            affects pay calculations, including vacation, sick leave, and FMLA.
+          related:
+            - Input Batch
+            - Time Off

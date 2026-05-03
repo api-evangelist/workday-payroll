@@ -1,0 +1,124 @@
+extends: spectral:oas
+rules:
+  workday-payroll-operation-summary-title-case:
+    description: >-
+      All operation summaries must use Title Case and start with "Workday Payroll".
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Workday Payroll [A-Z]"
+
+  workday-payroll-operation-ids-camel-case:
+    description: >-
+      Operation IDs must use camelCase.
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  workday-payroll-bearer-security:
+    description: >-
+      All operations must declare bearer token security.
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: security
+      function: defined
+
+  workday-payroll-pagination-parameters:
+    description: >-
+      List operations (GET returning collections) should support limit and offset
+      query parameters for pagination.
+    severity: warn
+    given: "$.paths[*].get"
+    then:
+      field: parameters
+      function: defined
+
+  workday-payroll-error-responses:
+    description: >-
+      All operations must define 401 Unauthorized responses.
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: defined
+
+  workday-payroll-collection-schema-data-array:
+    description: >-
+      Collection schemas (named *Collection) must have a data property containing an array.
+    severity: warn
+    given: "$.components.schemas[?(@property =~ /Collection$/)]"
+    then:
+      field: properties.data
+      function: defined
+
+  workday-payroll-collection-schema-total:
+    description: >-
+      Collection schemas must have a total property indicating the full result count.
+    severity: warn
+    given: "$.components.schemas[?(@property =~ /Collection$/)]"
+    then:
+      field: properties.total
+      function: defined
+
+  workday-payroll-path-kebab-case:
+    description: >-
+      Path segments must use camelCase or camelCase-derived resource names
+      consistent with the Workday API style (camelCase resources, not kebab-case).
+    severity: hint
+    given: "$.paths"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z][a-zA-Z0-9]*({[a-zA-Z]+})?)+$"
+
+  workday-payroll-request-body-content-type:
+    description: >-
+      Request bodies must use application/json content type.
+    severity: error
+    given: "$.paths[*][*].requestBody.content"
+    then:
+      field: application/json
+      function: defined
+
+  workday-payroll-200-response-schema:
+    description: >-
+      Successful GET responses must include a schema.
+    severity: warn
+    given: "$.paths[*].get.responses.200.content.application/json"
+    then:
+      field: schema
+      function: defined
+
+  workday-payroll-id-property-type:
+    description: >-
+      Resource schemas must include an id property of type string.
+    severity: warn
+    given: "$.components.schemas[?(@.type == 'object' && !(@property =~ /(Ref|Request|Collection|Status|Period|Line)$/))].properties"
+    then:
+      field: id
+      function: defined
+
+  workday-payroll-tags-present:
+    description: >-
+      All operations must have at least one tag for grouping.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: defined
+
+  workday-payroll-description-present:
+    description: >-
+      All operations must have a description.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: defined

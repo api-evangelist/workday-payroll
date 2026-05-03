@@ -5,7 +5,7 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: >-
   https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-05-03'
 specificationVersion: '0.19'
 apis:
   - name: Workday Payroll API
@@ -104,13 +104,23 @@ common:
     url: json-schema/workday-payroll-pay-run-schema.json
   - type: JSONSchema
     url: json-schema/workday-payroll-payslip-schema.json
+  - type: JSONStructure
+    url: json-structure/workday-payroll-pay-run-structure.json
+  - type: JSONStructure
+    url: json-structure/workday-payroll-payslip-structure.json
+  - type: SpectralRules
+    url: rules/workday-payroll-rules.yml
+  - type: NaftikoCapability
+    url: capabilities/payroll-processing.yaml
+  - type: Vocabulary
+    url: vocabulary/workday-payroll-vocabulary.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 tags:
   - Compensation
   - Enterprise
-  - Human-Resources
+  - Human Resources
   - Payroll
-  - Saas
+  - SaaS
   - Tax

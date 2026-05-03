@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.workday.com/payroll/v1/payRuns?status=Completed&limit=5",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": [
+        {
+          "id": "pr_20260430_weekly_001",
+          "descriptor": "Weekly Payroll - April 30, 2026",
+          "payGroup": {
+            "id": "pg_weekly_usd",
+            "descriptor": "Weekly USD Pay Group"
+          },
+          "payPeriod": {
+            "startDate": "2026-04-24",
+            "endDate": "2026-04-30"
+          },
+          "status": "Completed",
+          "runCategory": "Regular",
+          "paymentDate": "2026-05-02",
+          "totalGrossPay": 245830.50,
+          "totalNetPay": 178452.30,
+          "totalDeductions": 38210.80,
+          "totalTaxes": 29167.40,
+          "workerCount": 87,
+          "currency": "USD",
+          "createdOn": "2026-04-28T09:00:00Z",
+          "completedOn": "2026-04-30T16:45:00Z"
+        },
+        {
+          "id": "pr_20260423_weekly_001",
+          "descriptor": "Weekly Payroll - April 23, 2026",
+          "payGroup": {
+            "id": "pg_weekly_usd",
+            "descriptor": "Weekly USD Pay Group"
+          },
+          "payPeriod": {
+            "startDate": "2026-04-17",
+            "endDate": "2026-04-23"
+          },
+          "status": "Completed",
+          "runCategory": "Regular",
+          "paymentDate": "2026-04-25",
+          "totalGrossPay": 243100.75,
+          "totalNetPay": 176820.55,
+          "totalDeductions": 37950.20,
+          "totalTaxes": 28330.00,
+          "workerCount": 86,
+          "currency": "USD",
+          "createdOn": "2026-04-21T09:00:00Z",
+          "completedOn": "2026-04-23T17:10:00Z"
+        }
+      ],
+      "total": 52
+    }
+  }
+}

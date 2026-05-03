@@ -1,0 +1,132 @@
+{
+  "name": "PayRun",
+  "description": "Represents a payroll processing run for a pay group covering a specific pay period.",
+  "type": "object",
+  "properties": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique identifier for the pay run",
+      "required": false
+    },
+    {
+      "name": "descriptor",
+      "type": "string",
+      "description": "Human-readable name of the pay run",
+      "required": false
+    },
+    {
+      "name": "payGroup",
+      "type": "object",
+      "description": "Reference to the associated pay group",
+      "required": false,
+      "properties": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Pay group identifier"
+        },
+        {
+          "name": "descriptor",
+          "type": "string",
+          "description": "Pay group display name"
+        }
+      ]
+    },
+    {
+      "name": "payPeriod",
+      "type": "object",
+      "description": "The pay period covered by this run",
+      "required": false,
+      "properties": [
+        {
+          "name": "startDate",
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the pay period"
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "format": "date",
+          "description": "End date of the pay period"
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "Current status of the pay run",
+      "enum": ["Draft", "InProgress", "Completed", "Cancelled"],
+      "required": false
+    },
+    {
+      "name": "runCategory",
+      "type": "string",
+      "description": "Category of the pay run",
+      "enum": ["Regular", "OffCycle", "OnDemand"],
+      "required": false
+    },
+    {
+      "name": "paymentDate",
+      "type": "string",
+      "format": "date",
+      "description": "Date payments will be distributed",
+      "required": false
+    },
+    {
+      "name": "totalGrossPay",
+      "type": "number",
+      "format": "double",
+      "description": "Total gross pay for the pay run",
+      "required": false
+    },
+    {
+      "name": "totalNetPay",
+      "type": "number",
+      "format": "double",
+      "description": "Total net pay for the pay run",
+      "required": false
+    },
+    {
+      "name": "totalDeductions",
+      "type": "number",
+      "format": "double",
+      "description": "Total deductions for the pay run",
+      "required": false
+    },
+    {
+      "name": "totalTaxes",
+      "type": "number",
+      "format": "double",
+      "description": "Total tax withholdings for the pay run",
+      "required": false
+    },
+    {
+      "name": "workerCount",
+      "type": "integer",
+      "description": "Number of workers included in the pay run",
+      "required": false
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "required": false
+    },
+    {
+      "name": "createdOn",
+      "type": "string",
+      "format": "date-time",
+      "description": "When the pay run was created",
+      "required": false
+    },
+    {
+      "name": "completedOn",
+      "type": "string",
+      "format": "date-time",
+      "description": "When the pay run was completed",
+      "required": false
+    }
+  ]
+}
