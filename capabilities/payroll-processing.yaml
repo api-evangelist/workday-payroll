@@ -1,1179 +1,2361 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Workday Payroll Processing"
-  description: >-
-    Unified capability for end-to-end payroll processing workflows combining
-    the Workday Payroll, Payroll Input, Payroll Results, and Tax APIs. Supports
-    HR administrators and payroll specialists running payroll cycles, managing
-    worker pay data, submitting adjustments, and reviewing payroll results and
-    compliance data.
+  label: Workday Payroll Processing
+  description: Unified capability for end-to-end payroll processing workflows combining the Workday Payroll, Payroll Input,
+    Payroll Results, and Tax APIs. Supports HR administrators and payroll specialists running payroll cycles, managing worker
+    pay data, submitting adjustments, and reviewing payroll results and compliance data.
   tags:
-    - Workday
-    - Payroll
-    - Compensation
-    - Human Resources
-    - Tax
-    - Compliance
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Workday
+  - Payroll
+  - Compensation
+  - Human Resources
+  - Tax
+  - Compliance
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      WORKDAY_PAYROLL_TOKEN: WORKDAY_PAYROLL_TOKEN
-
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_TOKEN: WORKDAY_PAYROLL_TOKEN
 capability:
   consumes:
-    - import: payroll
-      location: ./shared/payroll.yaml
-    - import: payroll-results
-      location: ./shared/payroll-results.yaml
-    - import: payroll-input
-      location: ./shared/payroll-input.yaml
-    - import: payroll-tax
-      location: ./shared/payroll-tax.yaml
-
+  - type: http
+    namespace: payroll
+    baseUri: https://api.workday.com/payroll/v1
+    description: Core API for managing payroll runs, pay groups, workers, earnings, and deductions.
+    authentication:
+      type: bearer
+      token: '{{WORKDAY_PAYROLL_TOKEN}}'
+    resources:
+    - name: pay-runs
+      path: /payRuns
+      description: Manage payroll processing runs
+      operations:
+      - name: list-pay-runs
+        method: GET
+        description: Retrieve a collection of payroll runs
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: payGroupId
+          in: query
+          type: string
+          required: false
+          description: Filter by pay group identifier
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by pay run status
+        - name: fromDate
+          in: query
+          type: string
+          required: false
+          description: Filter from date
+        - name: toDate
+          in: query
+          type: string
+          required: false
+          description: Filter to date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-pay-run
+        method: POST
+        description: Initiate a new payroll run
+        body:
+          type: json
+          data:
+            payGroupId: '{{tools.payGroupId}}'
+            payPeriod: '{{tools.payPeriod}}'
+            runCategory: '{{tools.runCategory}}'
+            paymentDate: '{{tools.paymentDate}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-by-id
+      path: /payRuns/{payRunId}
+      description: Manage a specific pay run
+      operations:
+      - name: get-pay-run
+        method: GET
+        description: Retrieve details of a specific payroll run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier for the pay run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-pay-run
+        method: PATCH
+        description: Update the status or properties of a pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier for the pay run
+        body:
+          type: json
+          data:
+            status: '{{tools.status}}'
+            paymentDate: '{{tools.paymentDate}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-calculate
+      path: /payRuns/{payRunId}/calculate
+      description: Trigger payroll calculations
+      operations:
+      - name: calculate-pay-run
+        method: POST
+        description: Trigger payroll calculations for a specific pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier for the pay run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-complete
+      path: /payRuns/{payRunId}/complete
+      description: Complete a pay run
+      operations:
+      - name: complete-pay-run
+        method: POST
+        description: Mark a pay run as completed
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier for the pay run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-groups
+      path: /payGroups
+      description: Manage pay groups
+      operations:
+      - name: list-pay-groups
+        method: GET
+        description: Retrieve all configured pay groups
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-group-by-id
+      path: /payGroups/{payGroupId}
+      description: Access a specific pay group
+      operations:
+      - name: get-pay-group
+        method: GET
+        description: Retrieve details of a specific pay group
+        inputParameters:
+        - name: payGroupId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier for the pay group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-group-workers
+      path: /payGroups/{payGroupId}/workers
+      description: Workers in a pay group
+      operations:
+      - name: list-pay-group-workers
+        method: GET
+        description: Retrieve all workers assigned to a specific pay group
+        inputParameters:
+        - name: payGroupId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier for the pay group
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-payroll-details
+      path: /workers/{workerId}/payrollDetails
+      description: Worker payroll details
+      operations:
+      - name: get-worker-payroll-details
+        method: GET
+        description: Retrieve payroll-specific details for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-earnings
+      path: /workers/{workerId}/earnings
+      description: Worker earnings
+      operations:
+      - name: list-worker-earnings
+        method: GET
+        description: Retrieve all earnings records for a specific worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-deductions
+      path: /workers/{workerId}/deductions
+      description: Worker deductions
+      operations:
+      - name: list-worker-deductions
+        method: GET
+        description: Retrieve all deductions for a specific worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: earning-codes
+      path: /earningCodes
+      description: Earning code configuration
+      operations:
+      - name: list-earning-codes
+        method: GET
+        description: Retrieve all configured earning codes
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deduction-codes
+      path: /deductionCodes
+      description: Deduction code configuration
+      operations:
+      - name: list-deduction-codes
+        method: GET
+        description: Retrieve all configured deduction codes
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: payroll-results
+    baseUri: https://api.workday.com/payroll-results/v1
+    description: API for payslips, payments, payment elections, and payroll summaries.
+    authentication:
+      type: bearer
+      token: '{{WORKDAY_PAYROLL_TOKEN}}'
+    resources:
+    - name: worker-payslips
+      path: /workers/{workerId}/payslips
+      description: Worker payslip data
+      operations:
+      - name: list-worker-payslips
+        method: GET
+        description: Retrieve all payslips for a specific worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: fromDate
+          in: query
+          type: string
+          required: false
+          description: Filter from date
+        - name: toDate
+          in: query
+          type: string
+          required: false
+          description: Filter to date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-payslip-by-id
+      path: /workers/{workerId}/payslips/{payslipId}
+      description: Individual payslip
+      operations:
+      - name: get-worker-payslip
+        method: GET
+        description: Retrieve detailed payslip for a specific pay period
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: payslipId
+          in: path
+          type: string
+          required: true
+          description: Unique payslip identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-results
+      path: /payRuns/{payRunId}/results
+      description: Aggregated pay run results
+      operations:
+      - name: get-pay-run-results
+        method: GET
+        description: Retrieve aggregated results for a completed pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique pay run identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-worker-results
+      path: /payRuns/{payRunId}/results/workers
+      description: Worker-level pay run results
+      operations:
+      - name: list-pay-run-worker-results
+        method: GET
+        description: Retrieve individual worker results for a completed pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique pay run identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-worker-result-by-id
+      path: /payRuns/{payRunId}/results/workers/{workerId}
+      description: Individual worker result for a pay run
+      operations:
+      - name: get-pay-run-worker-result
+        method: GET
+        description: Retrieve detailed worker results within a completed pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique pay run identifier
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-payments
+      path: /payRuns/{payRunId}/payments
+      description: Payments generated by a pay run
+      operations:
+      - name: list-pay-run-payments
+        method: GET
+        description: Retrieve all payment transactions generated by a pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique pay run identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payment-by-id
+      path: /payments/{paymentId}
+      description: Individual payment transaction
+      operations:
+      - name: get-payment
+        method: GET
+        description: Retrieve details of a specific payment transaction
+        inputParameters:
+        - name: paymentId
+          in: path
+          type: string
+          required: true
+          description: Unique payment identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-payment-elections
+      path: /workers/{workerId}/paymentElections
+      description: Worker payment election details
+      operations:
+      - name: list-worker-payment-elections
+        method: GET
+        description: Retrieve payment election details for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: payroll-input
+    baseUri: https://api.workday.com/payroll-input/v1
+    description: API for submitting one-time payments, adjustments, supplemental earnings, and batch payroll inputs.
+    authentication:
+      type: bearer
+      token: '{{WORKDAY_PAYROLL_TOKEN}}'
+    resources:
+    - name: one-time-payments
+      path: /oneTimePayments
+      description: One-time payment requests
+      operations:
+      - name: list-one-time-payments
+        method: GET
+        description: Retrieve all one-time payment requests
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: workerId
+          in: query
+          type: string
+          required: false
+          description: Filter by worker
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-one-time-payment
+        method: POST
+        description: Submit a new one-time payment request
+        body:
+          type: json
+          data:
+            workerId: '{{tools.workerId}}'
+            earningCode: '{{tools.earningCode}}'
+            amount: '{{tools.amount}}'
+            currency: '{{tools.currency}}'
+            reason: '{{tools.reason}}'
+            effectiveDate: '{{tools.effectiveDate}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: one-time-payment-by-id
+      path: /oneTimePayments/{paymentId}
+      description: Individual one-time payment
+      operations:
+      - name: get-one-time-payment
+        method: GET
+        description: Retrieve details of a specific one-time payment
+        inputParameters:
+        - name: paymentId
+          in: path
+          type: string
+          required: true
+          description: One-time payment identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-one-time-payment
+        method: PATCH
+        description: Update a pending one-time payment request
+        inputParameters:
+        - name: paymentId
+          in: path
+          type: string
+          required: true
+          description: One-time payment identifier
+        body:
+          type: json
+          data:
+            amount: '{{tools.amount}}'
+            reason: '{{tools.reason}}'
+            effectiveDate: '{{tools.effectiveDate}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-one-time-payment
+        method: DELETE
+        description: Delete a pending one-time payment
+        inputParameters:
+        - name: paymentId
+          in: path
+          type: string
+          required: true
+          description: One-time payment identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: adjustments
+      path: /adjustments
+      description: Payroll adjustments
+      operations:
+      - name: list-payroll-adjustments
+        method: GET
+        description: Retrieve all payroll adjustment records
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: workerId
+          in: query
+          type: string
+          required: false
+          description: Filter by worker
+        - name: adjustmentType
+          in: query
+          type: string
+          required: false
+          description: Filter by adjustment type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-payroll-adjustment
+        method: POST
+        description: Submit a payroll adjustment
+        body:
+          type: json
+          data:
+            workerId: '{{tools.workerId}}'
+            adjustmentType: '{{tools.adjustmentType}}'
+            originalPayRunId: '{{tools.originalPayRunId}}'
+            earningCode: '{{tools.earningCode}}'
+            deductionCode: '{{tools.deductionCode}}'
+            amount: '{{tools.amount}}'
+            currency: '{{tools.currency}}'
+            reason: '{{tools.reason}}'
+            effectiveDate: '{{tools.effectiveDate}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: adjustment-by-id
+      path: /adjustments/{adjustmentId}
+      description: Individual payroll adjustment
+      operations:
+      - name: get-payroll-adjustment
+        method: GET
+        description: Retrieve details of a specific payroll adjustment
+        inputParameters:
+        - name: adjustmentId
+          in: path
+          type: string
+          required: true
+          description: Payroll adjustment identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: supplemental-earnings
+      path: /supplementalEarnings
+      description: Supplemental earnings submissions
+      operations:
+      - name: list-supplemental-earnings
+        method: GET
+        description: Retrieve all supplemental earning submissions
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: workerId
+          in: query
+          type: string
+          required: false
+          description: Filter by worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-supplemental-earning
+        method: POST
+        description: Submit a supplemental earning for a worker
+        body:
+          type: json
+          data:
+            workerId: '{{tools.workerId}}'
+            earningCode: '{{tools.earningCode}}'
+            type: '{{tools.type}}'
+            amount: '{{tools.amount}}'
+            currency: '{{tools.currency}}'
+            effectiveDate: '{{tools.effectiveDate}}'
+            reason: '{{tools.reason}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: supplemental-earning-by-id
+      path: /supplementalEarnings/{earningId}
+      description: Individual supplemental earning
+      operations:
+      - name: get-supplemental-earning
+        method: GET
+        description: Retrieve details of a specific supplemental earning
+        inputParameters:
+        - name: earningId
+          in: path
+          type: string
+          required: true
+          description: Supplemental earning identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-supplemental-earning
+        method: DELETE
+        description: Delete a pending supplemental earning
+        inputParameters:
+        - name: earningId
+          in: path
+          type: string
+          required: true
+          description: Supplemental earning identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: input-batches
+      path: /inputBatches
+      description: Batch payroll input submissions
+      operations:
+      - name: list-input-batches
+        method: GET
+        description: Retrieve all payroll input batch submissions
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by batch status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-input-batch
+        method: POST
+        description: Submit a batch of payroll input records
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            records: '{{tools.records}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: input-batch-by-id
+      path: /inputBatches/{batchId}
+      description: Individual input batch
+      operations:
+      - name: get-input-batch
+        method: GET
+        description: Retrieve details of a specific input batch
+        inputParameters:
+        - name: batchId
+          in: path
+          type: string
+          required: true
+          description: Input batch identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-time-off-inputs
+      path: /workers/{workerId}/timeOffInputs
+      description: Worker time off inputs
+      operations:
+      - name: list-worker-time-off-inputs
+        method: GET
+        description: Retrieve time off input records for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-worker-time-off-input
+        method: POST
+        description: Submit a time off input for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        body:
+          type: json
+          data:
+            timeOffType: '{{tools.timeOffType}}'
+            startDate: '{{tools.startDate}}'
+            endDate: '{{tools.endDate}}'
+            hours: '{{tools.hours}}'
+            paid: '{{tools.paid}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: payroll-tax
+    baseUri: https://api.workday.com/tax/v1
+    description: API for tax withholdings, elections, calculations, jurisdictions, and filing.
+    authentication:
+      type: bearer
+      token: '{{WORKDAY_PAYROLL_TOKEN}}'
+    resources:
+    - name: worker-tax-withholdings
+      path: /workers/{workerId}/taxWithholdings
+      description: Worker tax withholding configurations
+      operations:
+      - name: list-worker-tax-withholdings
+        method: GET
+        description: Retrieve all tax withholding configurations for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-tax-withholding-by-id
+      path: /workers/{workerId}/taxWithholdings/{withholdingId}
+      description: Individual tax withholding
+      operations:
+      - name: get-worker-tax-withholding
+        method: GET
+        description: Retrieve a specific tax withholding configuration
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: withholdingId
+          in: path
+          type: string
+          required: true
+          description: Tax withholding identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-worker-tax-withholding
+        method: PATCH
+        description: Update a tax withholding configuration
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: withholdingId
+          in: path
+          type: string
+          required: true
+          description: Tax withholding identifier
+        body:
+          type: json
+          data:
+            filingStatus: '{{tools.filingStatus}}'
+            allowances: '{{tools.allowances}}'
+            additionalWithholding: '{{tools.additionalWithholding}}'
+            exempt: '{{tools.exempt}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-tax-elections
+      path: /workers/{workerId}/taxElections
+      description: Worker tax elections (W-4, state forms)
+      operations:
+      - name: list-worker-tax-elections
+        method: GET
+        description: Retrieve W-4 and state tax election forms for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-worker-tax-election
+        method: POST
+        description: Submit a new tax election for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        body:
+          type: json
+          data:
+            formType: '{{tools.formType}}'
+            jurisdictionId: '{{tools.jurisdictionId}}'
+            filingStatus: '{{tools.filingStatus}}'
+            multipleJobs: '{{tools.multipleJobs}}'
+            dependentsAmount: '{{tools.dependentsAmount}}'
+            otherIncome: '{{tools.otherIncome}}'
+            deductions: '{{tools.deductions}}'
+            additionalWithholding: '{{tools.additionalWithholding}}'
+            effectiveDate: '{{tools.effectiveDate}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-tax-election-by-id
+      path: /workers/{workerId}/taxElections/{electionId}
+      description: Individual tax election
+      operations:
+      - name: get-worker-tax-election
+        method: GET
+        description: Retrieve a specific tax election
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: electionId
+          in: path
+          type: string
+          required: true
+          description: Tax election identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tax-jurisdictions
+      path: /taxJurisdictions
+      description: Tax jurisdiction information
+      operations:
+      - name: list-tax-jurisdictions
+        method: GET
+        description: Retrieve all configured tax jurisdictions
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: level
+          in: query
+          type: string
+          required: false
+          description: Filter by jurisdiction level
+        - name: country
+          in: query
+          type: string
+          required: false
+          description: Filter by country code
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tax-jurisdiction-by-id
+      path: /taxJurisdictions/{jurisdictionId}
+      description: Individual tax jurisdiction
+      operations:
+      - name: get-tax-jurisdiction
+        method: GET
+        description: Retrieve a specific tax jurisdiction
+        inputParameters:
+        - name: jurisdictionId
+          in: path
+          type: string
+          required: true
+          description: Tax jurisdiction identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tax-filings
+      path: /taxFilings
+      description: Tax filing data and compliance reports
+      operations:
+      - name: list-tax-filings
+        method: GET
+        description: Retrieve tax filing records and compliance data
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        - name: taxYear
+          in: query
+          type: integer
+          required: false
+          description: Filter by tax year
+        - name: filingType
+          in: query
+          type: string
+          required: false
+          description: Filter by filing type
+        - name: jurisdiction
+          in: query
+          type: string
+          required: false
+          description: Filter by jurisdiction identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tax-filing-by-id
+      path: /taxFilings/{filingId}
+      description: Individual tax filing
+      operations:
+      - name: get-tax-filing
+        method: GET
+        description: Retrieve a specific tax filing record
+        inputParameters:
+        - name: filingId
+          in: path
+          type: string
+          required: true
+          description: Tax filing identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pay-run-tax-results
+      path: /payRuns/{payRunId}/taxResults
+      description: Tax results for a pay run
+      operations:
+      - name: list-pay-run-tax-results
+        method: GET
+        description: Retrieve aggregated tax calculation results for a completed pay run
+        inputParameters:
+        - name: payRunId
+          in: path
+          type: string
+          required: true
+          description: Unique pay run identifier
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: worker-tax-summary
+      path: /workers/{workerId}/taxSummary
+      description: Worker year-to-date tax summary
+      operations:
+      - name: get-worker-tax-summary
+        method: GET
+        description: Retrieve a year-to-date tax summary for a worker
+        inputParameters:
+        - name: workerId
+          in: path
+          type: string
+          required: true
+          description: Unique worker identifier
+        - name: taxYear
+          in: query
+          type: integer
+          required: false
+          description: Tax year (defaults to current year)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: payroll-processing-api
-      description: "Unified REST API for Workday payroll processing workflows."
-      resources:
-        - path: /v1/pay-runs
-          name: pay-runs
-          description: "Payroll run lifecycle management"
-          operations:
-            - method: GET
-              name: list-pay-runs
-              description: "List all payroll runs with optional filters"
-              call: "payroll.list-pay-runs"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-pay-run
-              description: "Initiate a new payroll run"
-              call: "payroll.create-pay-run"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}
-          name: pay-run-by-id
-          description: "Manage a specific pay run"
-          operations:
-            - method: GET
-              name: get-pay-run
-              description: "Get pay run details"
-              call: "payroll.get-pay-run"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PATCH
-              name: update-pay-run
-              description: "Update a pay run"
-              call: "payroll.update-pay-run"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/calculate
-          name: pay-run-calculate
-          description: "Trigger payroll calculation"
-          operations:
-            - method: POST
-              name: calculate-pay-run
-              description: "Trigger payroll calculations for a pay run"
-              call: "payroll.calculate-pay-run"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/complete
-          name: pay-run-complete
-          description: "Complete a pay run"
-          operations:
-            - method: POST
-              name: complete-pay-run
-              description: "Mark a pay run as completed"
-              call: "payroll.complete-pay-run"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/results
-          name: pay-run-results
-          description: "Pay run result summaries"
-          operations:
-            - method: GET
-              name: get-pay-run-results
-              description: "Get aggregated results for a completed pay run"
-              call: "payroll-results.get-pay-run-results"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/worker-results
-          name: pay-run-worker-results
-          description: "Worker-level results for a pay run"
-          operations:
-            - method: GET
-              name: list-pay-run-worker-results
-              description: "List individual worker results for a pay run"
-              call: "payroll-results.list-pay-run-worker-results"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/worker-results/{workerId}
-          name: pay-run-worker-result-by-id
-          description: "Detailed worker result"
-          operations:
-            - method: GET
-              name: get-pay-run-worker-result
-              description: "Get detailed result for a worker in a pay run"
-              call: "payroll-results.get-pay-run-worker-result"
-              with:
-                payRunId: "rest.payRunId"
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/payments
-          name: pay-run-payments
-          description: "Payments generated by a pay run"
-          operations:
-            - method: GET
-              name: list-pay-run-payments
-              description: "List payments for a completed pay run"
-              call: "payroll-results.list-pay-run-payments"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-runs/{payRunId}/tax-results
-          name: pay-run-tax-results
-          description: "Tax results for a pay run"
-          operations:
-            - method: GET
-              name: list-pay-run-tax-results
-              description: "List tax calculation results for a pay run"
-              call: "payroll-tax.list-pay-run-tax-results"
-              with:
-                payRunId: "rest.payRunId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-groups
-          name: pay-groups
-          description: "Pay group management"
-          operations:
-            - method: GET
-              name: list-pay-groups
-              description: "List all pay groups"
-              call: "payroll.list-pay-groups"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-groups/{payGroupId}
-          name: pay-group-by-id
-          description: "Individual pay group"
-          operations:
-            - method: GET
-              name: get-pay-group
-              description: "Get a specific pay group"
-              call: "payroll.get-pay-group"
-              with:
-                payGroupId: "rest.payGroupId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pay-groups/{payGroupId}/workers
-          name: pay-group-workers
-          description: "Workers in a pay group"
-          operations:
-            - method: GET
-              name: list-pay-group-workers
-              description: "List workers in a pay group"
-              call: "payroll.list-pay-group-workers"
-              with:
-                payGroupId: "rest.payGroupId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/payments/{paymentId}
-          name: payment-by-id
-          description: "Individual payment"
-          operations:
-            - method: GET
-              name: get-payment
-              description: "Get a specific payment transaction"
-              call: "payroll-results.get-payment"
-              with:
-                paymentId: "rest.paymentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/payroll-details
-          name: worker-payroll-details
-          description: "Worker payroll details"
-          operations:
-            - method: GET
-              name: get-worker-payroll-details
-              description: "Get payroll details for a worker"
-              call: "payroll.get-worker-payroll-details"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/payslips
-          name: worker-payslips
-          description: "Worker pay statements"
-          operations:
-            - method: GET
-              name: list-worker-payslips
-              description: "List payslips for a worker"
-              call: "payroll-results.list-worker-payslips"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/payslips/{payslipId}
-          name: worker-payslip-by-id
-          description: "Individual payslip"
-          operations:
-            - method: GET
-              name: get-worker-payslip
-              description: "Get a specific payslip"
-              call: "payroll-results.get-worker-payslip"
-              with:
-                workerId: "rest.workerId"
-                payslipId: "rest.payslipId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/payment-elections
-          name: worker-payment-elections
-          description: "Worker payment elections"
-          operations:
-            - method: GET
-              name: list-worker-payment-elections
-              description: "List payment elections for a worker"
-              call: "payroll-results.list-worker-payment-elections"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/earnings
-          name: worker-earnings
-          description: "Worker earnings records"
-          operations:
-            - method: GET
-              name: list-worker-earnings
-              description: "List earnings for a worker"
-              call: "payroll.list-worker-earnings"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/deductions
-          name: worker-deductions
-          description: "Worker deduction records"
-          operations:
-            - method: GET
-              name: list-worker-deductions
-              description: "List deductions for a worker"
-              call: "payroll.list-worker-deductions"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/tax-withholdings
-          name: worker-tax-withholdings
-          description: "Worker tax withholdings"
-          operations:
-            - method: GET
-              name: list-worker-tax-withholdings
-              description: "List tax withholdings for a worker"
-              call: "payroll-tax.list-worker-tax-withholdings"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/tax-withholdings/{withholdingId}
-          name: worker-tax-withholding-by-id
-          description: "Individual tax withholding"
-          operations:
-            - method: GET
-              name: get-worker-tax-withholding
-              description: "Get a specific tax withholding"
-              call: "payroll-tax.get-worker-tax-withholding"
-              with:
-                workerId: "rest.workerId"
-                withholdingId: "rest.withholdingId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PATCH
-              name: update-worker-tax-withholding
-              description: "Update a tax withholding"
-              call: "payroll-tax.update-worker-tax-withholding"
-              with:
-                workerId: "rest.workerId"
-                withholdingId: "rest.withholdingId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/tax-elections
-          name: worker-tax-elections
-          description: "Worker tax elections"
-          operations:
-            - method: GET
-              name: list-worker-tax-elections
-              description: "List tax elections for a worker"
-              call: "payroll-tax.list-worker-tax-elections"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-worker-tax-election
-              description: "Submit a new W-4 or state tax election"
-              call: "payroll-tax.create-worker-tax-election"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/tax-elections/{electionId}
-          name: worker-tax-election-by-id
-          description: "Individual tax election"
-          operations:
-            - method: GET
-              name: get-worker-tax-election
-              description: "Get a specific tax election"
-              call: "payroll-tax.get-worker-tax-election"
-              with:
-                workerId: "rest.workerId"
-                electionId: "rest.electionId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/tax-summary
-          name: worker-tax-summary
-          description: "Worker tax summary"
-          operations:
-            - method: GET
-              name: get-worker-tax-summary
-              description: "Get year-to-date tax summary"
-              call: "payroll-tax.get-worker-tax-summary"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/workers/{workerId}/time-off-inputs
-          name: worker-time-off-inputs
-          description: "Worker time off inputs"
-          operations:
-            - method: GET
-              name: list-worker-time-off-inputs
-              description: "List time off inputs for a worker"
-              call: "payroll-input.list-worker-time-off-inputs"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-worker-time-off-input
-              description: "Submit a time off input"
-              call: "payroll-input.create-worker-time-off-input"
-              with:
-                workerId: "rest.workerId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/one-time-payments
-          name: one-time-payments
-          description: "One-time payment requests"
-          operations:
-            - method: GET
-              name: list-one-time-payments
-              description: "List one-time payment requests"
-              call: "payroll-input.list-one-time-payments"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-one-time-payment
-              description: "Submit a one-time payment"
-              call: "payroll-input.create-one-time-payment"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/one-time-payments/{paymentId}
-          name: one-time-payment-by-id
-          description: "Individual one-time payment"
-          operations:
-            - method: GET
-              name: get-one-time-payment
-              description: "Get a specific one-time payment"
-              call: "payroll-input.get-one-time-payment"
-              with:
-                paymentId: "rest.paymentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PATCH
-              name: update-one-time-payment
-              description: "Update a pending one-time payment"
-              call: "payroll-input.update-one-time-payment"
-              with:
-                paymentId: "rest.paymentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-one-time-payment
-              description: "Delete a pending one-time payment"
-              call: "payroll-input.delete-one-time-payment"
-              with:
-                paymentId: "rest.paymentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/adjustments
-          name: adjustments
-          description: "Payroll adjustments and corrections"
-          operations:
-            - method: GET
-              name: list-payroll-adjustments
-              description: "List payroll adjustments"
-              call: "payroll-input.list-payroll-adjustments"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-payroll-adjustment
-              description: "Submit a payroll adjustment"
-              call: "payroll-input.create-payroll-adjustment"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/adjustments/{adjustmentId}
-          name: adjustment-by-id
-          description: "Individual payroll adjustment"
-          operations:
-            - method: GET
-              name: get-payroll-adjustment
-              description: "Get a specific payroll adjustment"
-              call: "payroll-input.get-payroll-adjustment"
-              with:
-                adjustmentId: "rest.adjustmentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/supplemental-earnings
-          name: supplemental-earnings
-          description: "Supplemental earnings (bonuses, commissions)"
-          operations:
-            - method: GET
-              name: list-supplemental-earnings
-              description: "List supplemental earnings"
-              call: "payroll-input.list-supplemental-earnings"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-supplemental-earning
-              description: "Submit a supplemental earning"
-              call: "payroll-input.create-supplemental-earning"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/supplemental-earnings/{earningId}
-          name: supplemental-earning-by-id
-          description: "Individual supplemental earning"
-          operations:
-            - method: GET
-              name: get-supplemental-earning
-              description: "Get a specific supplemental earning"
-              call: "payroll-input.get-supplemental-earning"
-              with:
-                earningId: "rest.earningId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-supplemental-earning
-              description: "Delete a pending supplemental earning"
-              call: "payroll-input.delete-supplemental-earning"
-              with:
-                earningId: "rest.earningId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/input-batches
-          name: input-batches
-          description: "Batch payroll input submissions"
-          operations:
-            - method: GET
-              name: list-input-batches
-              description: "List input batches"
-              call: "payroll-input.list-input-batches"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-input-batch
-              description: "Submit a batch of payroll inputs"
-              call: "payroll-input.create-input-batch"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/input-batches/{batchId}
-          name: input-batch-by-id
-          description: "Individual input batch"
-          operations:
-            - method: GET
-              name: get-input-batch
-              description: "Get a specific input batch"
-              call: "payroll-input.get-input-batch"
-              with:
-                batchId: "rest.batchId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/earning-codes
-          name: earning-codes
-          description: "Earning code reference data"
-          operations:
-            - method: GET
-              name: list-earning-codes
-              description: "List configured earning codes"
-              call: "payroll.list-earning-codes"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/deduction-codes
-          name: deduction-codes
-          description: "Deduction code reference data"
-          operations:
-            - method: GET
-              name: list-deduction-codes
-              description: "List configured deduction codes"
-              call: "payroll.list-deduction-codes"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/tax-jurisdictions
-          name: tax-jurisdictions
-          description: "Tax jurisdiction reference data"
-          operations:
-            - method: GET
-              name: list-tax-jurisdictions
-              description: "List supported tax jurisdictions"
-              call: "payroll-tax.list-tax-jurisdictions"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/tax-jurisdictions/{jurisdictionId}
-          name: tax-jurisdiction-by-id
-          description: "Individual tax jurisdiction"
-          operations:
-            - method: GET
-              name: get-tax-jurisdiction
-              description: "Get a specific tax jurisdiction"
-              call: "payroll-tax.get-tax-jurisdiction"
-              with:
-                jurisdictionId: "rest.jurisdictionId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/tax-filings
-          name: tax-filings
-          description: "Tax filings"
-          operations:
-            - method: GET
-              name: list-tax-filings
-              description: "List tax filings"
-              call: "payroll-tax.list-tax-filings"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/tax-filings/{filingId}
-          name: tax-filing-by-id
-          description: "Individual tax filing"
-          operations:
-            - method: GET
-              name: get-tax-filing
-              description: "Get a specific tax filing"
-              call: "payroll-tax.get-tax-filing"
-              with:
-                filingId: "rest.filingId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: payroll-processing-mcp
-      transport: http
-      description: "MCP server for AI-assisted payroll processing and compensation management."
-      tools:
-        - name: list-pay-runs
-          description: "List payroll runs with optional filters by status, pay group, or date"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-pay-runs"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-pay-run
-          description: "Get details of a specific payroll run"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.get-pay-run"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-pay-run
-          description: "Initiate a new payroll run for a pay group"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll.create-pay-run"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-pay-run
-          description: "Update the status or properties of a pay run"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "payroll.update-pay-run"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: calculate-pay-run
-          description: "Trigger payroll calculations for a pay run"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: false
-          call: "payroll.calculate-pay-run"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: complete-pay-run
-          description: "Mark a pay run as completed and finalize payments"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: false
-          call: "payroll.complete-pay-run"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-pay-run-results
-          description: "Get aggregated totals for a completed pay run"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.get-pay-run-results"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-pay-run-worker-results
-          description: "List individual worker results for a pay run"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.list-pay-run-worker-results"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-pay-run-worker-result
-          description: "Get detailed result for a specific worker in a pay run"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.get-pay-run-worker-result"
-          with:
-            payRunId: "tools.payRunId"
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-pay-run-payments
-          description: "List payment transactions generated by a pay run"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.list-pay-run-payments"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-payment
-          description: "Get details of a specific payment transaction"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.get-payment"
-          with:
-            paymentId: "tools.paymentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-pay-run-tax-results
-          description: "List tax calculation results for a completed pay run"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.list-pay-run-tax-results"
-          with:
-            payRunId: "tools.payRunId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-pay-groups
-          description: "List all configured pay groups"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-pay-groups"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-pay-group
-          description: "Get details of a specific pay group"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.get-pay-group"
-          with:
-            payGroupId: "tools.payGroupId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-pay-group-workers
-          description: "List workers in a pay group"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-pay-group-workers"
-          with:
-            payGroupId: "tools.payGroupId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-worker-payroll-details
-          description: "Get payroll configuration details for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.get-worker-payroll-details"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-payslips
-          description: "List pay statements for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.list-worker-payslips"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-worker-payslip
-          description: "Get detailed payslip with earnings, deductions, and taxes"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.get-worker-payslip"
-          with:
-            workerId: "tools.workerId"
-            payslipId: "tools.payslipId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-payment-elections
-          description: "List direct deposit and payment preferences for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-results.list-worker-payment-elections"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-earnings
-          description: "List earnings records for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-worker-earnings"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-deductions
-          description: "List deductions for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-worker-deductions"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-tax-withholdings
-          description: "List tax withholding configurations for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.list-worker-tax-withholdings"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-worker-tax-withholding
-          description: "Get a specific tax withholding for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.get-worker-tax-withholding"
-          with:
-            workerId: "tools.workerId"
-            withholdingId: "tools.withholdingId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-worker-tax-withholding
-          description: "Update a tax withholding (filing status, allowances, exemptions)"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "payroll-tax.update-worker-tax-withholding"
-          with:
-            workerId: "tools.workerId"
-            withholdingId: "tools.withholdingId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-tax-elections
-          description: "List W-4 and state tax election forms for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.list-worker-tax-elections"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-worker-tax-election
-          description: "Get a specific tax election for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.get-worker-tax-election"
-          with:
-            workerId: "tools.workerId"
-            electionId: "tools.electionId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-worker-tax-election
-          description: "Submit a new W-4 or state tax election for a worker"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll-tax.create-worker-tax-election"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-worker-tax-summary
-          description: "Get year-to-date tax summary for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.get-worker-tax-summary"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-worker-time-off-inputs
-          description: "List time off inputs for a worker"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.list-worker-time-off-inputs"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-worker-time-off-input
-          description: "Submit a time off input for payroll processing"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll-input.create-worker-time-off-input"
-          with:
-            workerId: "tools.workerId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-one-time-payments
-          description: "List pending and processed one-time payments"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.list-one-time-payments"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-one-time-payment
-          description: "Get details of a specific one-time payment"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.get-one-time-payment"
-          with:
-            paymentId: "tools.paymentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-one-time-payment
-          description: "Submit a one-time payment (bonus, relocation, retroactive pay)"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll-input.create-one-time-payment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-one-time-payment
-          description: "Update a pending one-time payment"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "payroll-input.update-one-time-payment"
-          with:
-            paymentId: "tools.paymentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-one-time-payment
-          description: "Delete a pending one-time payment"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "payroll-input.delete-one-time-payment"
-          with:
-            paymentId: "tools.paymentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-payroll-adjustments
-          description: "List payroll adjustment records"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.list-payroll-adjustments"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-payroll-adjustment
-          description: "Get details of a specific payroll adjustment"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.get-payroll-adjustment"
-          with:
-            adjustmentId: "tools.adjustmentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-payroll-adjustment
-          description: "Submit a payroll correction or retroactive adjustment"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll-input.create-payroll-adjustment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-supplemental-earnings
-          description: "List supplemental earning submissions"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.list-supplemental-earnings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-supplemental-earning
-          description: "Get details of a specific supplemental earning"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.get-supplemental-earning"
-          with:
-            earningId: "tools.earningId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-supplemental-earning
-          description: "Submit a supplemental earning (bonus, commission, stipend)"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll-input.create-supplemental-earning"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-supplemental-earning
-          description: "Delete a pending supplemental earning"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "payroll-input.delete-supplemental-earning"
-          with:
-            earningId: "tools.earningId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-input-batches
-          description: "List payroll input batch submissions"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.list-input-batches"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-input-batch
-          description: "Get details of a specific input batch"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-input.get-input-batch"
-          with:
-            batchId: "tools.batchId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-input-batch
-          description: "Submit a batch of payroll inputs for bulk processing"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "payroll-input.create-input-batch"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-earning-codes
-          description: "List configured earning code types"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-earning-codes"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-deduction-codes
-          description: "List configured deduction code types"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll.list-deduction-codes"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-tax-jurisdictions
-          description: "List all supported tax jurisdictions"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.list-tax-jurisdictions"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-tax-jurisdiction
-          description: "Get details of a specific tax jurisdiction"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.get-tax-jurisdiction"
-          with:
-            jurisdictionId: "tools.jurisdictionId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-tax-filings
-          description: "List tax filing records for compliance reporting"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.list-tax-filings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-tax-filing
-          description: "Get details of a specific tax filing"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "payroll-tax.get-tax-filing"
-          with:
-            filingId: "tools.filingId"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: payroll-processing-api
+    description: Unified REST API for Workday payroll processing workflows.
+    resources:
+    - path: /v1/pay-runs
+      name: pay-runs
+      description: Payroll run lifecycle management
+      operations:
+      - method: GET
+        name: list-pay-runs
+        description: List all payroll runs with optional filters
+        call: payroll.list-pay-runs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-pay-run
+        description: Initiate a new payroll run
+        call: payroll.create-pay-run
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}
+      name: pay-run-by-id
+      description: Manage a specific pay run
+      operations:
+      - method: GET
+        name: get-pay-run
+        description: Get pay run details
+        call: payroll.get-pay-run
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update-pay-run
+        description: Update a pay run
+        call: payroll.update-pay-run
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/calculate
+      name: pay-run-calculate
+      description: Trigger payroll calculation
+      operations:
+      - method: POST
+        name: calculate-pay-run
+        description: Trigger payroll calculations for a pay run
+        call: payroll.calculate-pay-run
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/complete
+      name: pay-run-complete
+      description: Complete a pay run
+      operations:
+      - method: POST
+        name: complete-pay-run
+        description: Mark a pay run as completed
+        call: payroll.complete-pay-run
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/results
+      name: pay-run-results
+      description: Pay run result summaries
+      operations:
+      - method: GET
+        name: get-pay-run-results
+        description: Get aggregated results for a completed pay run
+        call: payroll-results.get-pay-run-results
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/worker-results
+      name: pay-run-worker-results
+      description: Worker-level results for a pay run
+      operations:
+      - method: GET
+        name: list-pay-run-worker-results
+        description: List individual worker results for a pay run
+        call: payroll-results.list-pay-run-worker-results
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/worker-results/{workerId}
+      name: pay-run-worker-result-by-id
+      description: Detailed worker result
+      operations:
+      - method: GET
+        name: get-pay-run-worker-result
+        description: Get detailed result for a worker in a pay run
+        call: payroll-results.get-pay-run-worker-result
+        with:
+          payRunId: rest.payRunId
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/payments
+      name: pay-run-payments
+      description: Payments generated by a pay run
+      operations:
+      - method: GET
+        name: list-pay-run-payments
+        description: List payments for a completed pay run
+        call: payroll-results.list-pay-run-payments
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-runs/{payRunId}/tax-results
+      name: pay-run-tax-results
+      description: Tax results for a pay run
+      operations:
+      - method: GET
+        name: list-pay-run-tax-results
+        description: List tax calculation results for a pay run
+        call: payroll-tax.list-pay-run-tax-results
+        with:
+          payRunId: rest.payRunId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-groups
+      name: pay-groups
+      description: Pay group management
+      operations:
+      - method: GET
+        name: list-pay-groups
+        description: List all pay groups
+        call: payroll.list-pay-groups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-groups/{payGroupId}
+      name: pay-group-by-id
+      description: Individual pay group
+      operations:
+      - method: GET
+        name: get-pay-group
+        description: Get a specific pay group
+        call: payroll.get-pay-group
+        with:
+          payGroupId: rest.payGroupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pay-groups/{payGroupId}/workers
+      name: pay-group-workers
+      description: Workers in a pay group
+      operations:
+      - method: GET
+        name: list-pay-group-workers
+        description: List workers in a pay group
+        call: payroll.list-pay-group-workers
+        with:
+          payGroupId: rest.payGroupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/payments/{paymentId}
+      name: payment-by-id
+      description: Individual payment
+      operations:
+      - method: GET
+        name: get-payment
+        description: Get a specific payment transaction
+        call: payroll-results.get-payment
+        with:
+          paymentId: rest.paymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/payroll-details
+      name: worker-payroll-details
+      description: Worker payroll details
+      operations:
+      - method: GET
+        name: get-worker-payroll-details
+        description: Get payroll details for a worker
+        call: payroll.get-worker-payroll-details
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/payslips
+      name: worker-payslips
+      description: Worker pay statements
+      operations:
+      - method: GET
+        name: list-worker-payslips
+        description: List payslips for a worker
+        call: payroll-results.list-worker-payslips
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/payslips/{payslipId}
+      name: worker-payslip-by-id
+      description: Individual payslip
+      operations:
+      - method: GET
+        name: get-worker-payslip
+        description: Get a specific payslip
+        call: payroll-results.get-worker-payslip
+        with:
+          workerId: rest.workerId
+          payslipId: rest.payslipId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/payment-elections
+      name: worker-payment-elections
+      description: Worker payment elections
+      operations:
+      - method: GET
+        name: list-worker-payment-elections
+        description: List payment elections for a worker
+        call: payroll-results.list-worker-payment-elections
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/earnings
+      name: worker-earnings
+      description: Worker earnings records
+      operations:
+      - method: GET
+        name: list-worker-earnings
+        description: List earnings for a worker
+        call: payroll.list-worker-earnings
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/deductions
+      name: worker-deductions
+      description: Worker deduction records
+      operations:
+      - method: GET
+        name: list-worker-deductions
+        description: List deductions for a worker
+        call: payroll.list-worker-deductions
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/tax-withholdings
+      name: worker-tax-withholdings
+      description: Worker tax withholdings
+      operations:
+      - method: GET
+        name: list-worker-tax-withholdings
+        description: List tax withholdings for a worker
+        call: payroll-tax.list-worker-tax-withholdings
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/tax-withholdings/{withholdingId}
+      name: worker-tax-withholding-by-id
+      description: Individual tax withholding
+      operations:
+      - method: GET
+        name: get-worker-tax-withholding
+        description: Get a specific tax withholding
+        call: payroll-tax.get-worker-tax-withholding
+        with:
+          workerId: rest.workerId
+          withholdingId: rest.withholdingId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update-worker-tax-withholding
+        description: Update a tax withholding
+        call: payroll-tax.update-worker-tax-withholding
+        with:
+          workerId: rest.workerId
+          withholdingId: rest.withholdingId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/tax-elections
+      name: worker-tax-elections
+      description: Worker tax elections
+      operations:
+      - method: GET
+        name: list-worker-tax-elections
+        description: List tax elections for a worker
+        call: payroll-tax.list-worker-tax-elections
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-worker-tax-election
+        description: Submit a new W-4 or state tax election
+        call: payroll-tax.create-worker-tax-election
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/tax-elections/{electionId}
+      name: worker-tax-election-by-id
+      description: Individual tax election
+      operations:
+      - method: GET
+        name: get-worker-tax-election
+        description: Get a specific tax election
+        call: payroll-tax.get-worker-tax-election
+        with:
+          workerId: rest.workerId
+          electionId: rest.electionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/tax-summary
+      name: worker-tax-summary
+      description: Worker tax summary
+      operations:
+      - method: GET
+        name: get-worker-tax-summary
+        description: Get year-to-date tax summary
+        call: payroll-tax.get-worker-tax-summary
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerId}/time-off-inputs
+      name: worker-time-off-inputs
+      description: Worker time off inputs
+      operations:
+      - method: GET
+        name: list-worker-time-off-inputs
+        description: List time off inputs for a worker
+        call: payroll-input.list-worker-time-off-inputs
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-worker-time-off-input
+        description: Submit a time off input
+        call: payroll-input.create-worker-time-off-input
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/one-time-payments
+      name: one-time-payments
+      description: One-time payment requests
+      operations:
+      - method: GET
+        name: list-one-time-payments
+        description: List one-time payment requests
+        call: payroll-input.list-one-time-payments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-one-time-payment
+        description: Submit a one-time payment
+        call: payroll-input.create-one-time-payment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/one-time-payments/{paymentId}
+      name: one-time-payment-by-id
+      description: Individual one-time payment
+      operations:
+      - method: GET
+        name: get-one-time-payment
+        description: Get a specific one-time payment
+        call: payroll-input.get-one-time-payment
+        with:
+          paymentId: rest.paymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: update-one-time-payment
+        description: Update a pending one-time payment
+        call: payroll-input.update-one-time-payment
+        with:
+          paymentId: rest.paymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-one-time-payment
+        description: Delete a pending one-time payment
+        call: payroll-input.delete-one-time-payment
+        with:
+          paymentId: rest.paymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/adjustments
+      name: adjustments
+      description: Payroll adjustments and corrections
+      operations:
+      - method: GET
+        name: list-payroll-adjustments
+        description: List payroll adjustments
+        call: payroll-input.list-payroll-adjustments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-payroll-adjustment
+        description: Submit a payroll adjustment
+        call: payroll-input.create-payroll-adjustment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/adjustments/{adjustmentId}
+      name: adjustment-by-id
+      description: Individual payroll adjustment
+      operations:
+      - method: GET
+        name: get-payroll-adjustment
+        description: Get a specific payroll adjustment
+        call: payroll-input.get-payroll-adjustment
+        with:
+          adjustmentId: rest.adjustmentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplemental-earnings
+      name: supplemental-earnings
+      description: Supplemental earnings (bonuses, commissions)
+      operations:
+      - method: GET
+        name: list-supplemental-earnings
+        description: List supplemental earnings
+        call: payroll-input.list-supplemental-earnings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-supplemental-earning
+        description: Submit a supplemental earning
+        call: payroll-input.create-supplemental-earning
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplemental-earnings/{earningId}
+      name: supplemental-earning-by-id
+      description: Individual supplemental earning
+      operations:
+      - method: GET
+        name: get-supplemental-earning
+        description: Get a specific supplemental earning
+        call: payroll-input.get-supplemental-earning
+        with:
+          earningId: rest.earningId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-supplemental-earning
+        description: Delete a pending supplemental earning
+        call: payroll-input.delete-supplemental-earning
+        with:
+          earningId: rest.earningId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/input-batches
+      name: input-batches
+      description: Batch payroll input submissions
+      operations:
+      - method: GET
+        name: list-input-batches
+        description: List input batches
+        call: payroll-input.list-input-batches
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-input-batch
+        description: Submit a batch of payroll inputs
+        call: payroll-input.create-input-batch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/input-batches/{batchId}
+      name: input-batch-by-id
+      description: Individual input batch
+      operations:
+      - method: GET
+        name: get-input-batch
+        description: Get a specific input batch
+        call: payroll-input.get-input-batch
+        with:
+          batchId: rest.batchId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/earning-codes
+      name: earning-codes
+      description: Earning code reference data
+      operations:
+      - method: GET
+        name: list-earning-codes
+        description: List configured earning codes
+        call: payroll.list-earning-codes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deduction-codes
+      name: deduction-codes
+      description: Deduction code reference data
+      operations:
+      - method: GET
+        name: list-deduction-codes
+        description: List configured deduction codes
+        call: payroll.list-deduction-codes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tax-jurisdictions
+      name: tax-jurisdictions
+      description: Tax jurisdiction reference data
+      operations:
+      - method: GET
+        name: list-tax-jurisdictions
+        description: List supported tax jurisdictions
+        call: payroll-tax.list-tax-jurisdictions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tax-jurisdictions/{jurisdictionId}
+      name: tax-jurisdiction-by-id
+      description: Individual tax jurisdiction
+      operations:
+      - method: GET
+        name: get-tax-jurisdiction
+        description: Get a specific tax jurisdiction
+        call: payroll-tax.get-tax-jurisdiction
+        with:
+          jurisdictionId: rest.jurisdictionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tax-filings
+      name: tax-filings
+      description: Tax filings
+      operations:
+      - method: GET
+        name: list-tax-filings
+        description: List tax filings
+        call: payroll-tax.list-tax-filings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tax-filings/{filingId}
+      name: tax-filing-by-id
+      description: Individual tax filing
+      operations:
+      - method: GET
+        name: get-tax-filing
+        description: Get a specific tax filing
+        call: payroll-tax.get-tax-filing
+        with:
+          filingId: rest.filingId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: payroll-processing-mcp
+    transport: http
+    description: MCP server for AI-assisted payroll processing and compensation management.
+    tools:
+    - name: list-pay-runs
+      description: List payroll runs with optional filters by status, pay group, or date
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-pay-runs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pay-run
+      description: Get details of a specific payroll run
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.get-pay-run
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-pay-run
+      description: Initiate a new payroll run for a pay group
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll.create-pay-run
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-pay-run
+      description: Update the status or properties of a pay run
+      hints:
+        readOnly: false
+        idempotent: true
+      call: payroll.update-pay-run
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: calculate-pay-run
+      description: Trigger payroll calculations for a pay run
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: false
+      call: payroll.calculate-pay-run
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-pay-run
+      description: Mark a pay run as completed and finalize payments
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: false
+      call: payroll.complete-pay-run
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pay-run-results
+      description: Get aggregated totals for a completed pay run
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.get-pay-run-results
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pay-run-worker-results
+      description: List individual worker results for a pay run
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.list-pay-run-worker-results
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pay-run-worker-result
+      description: Get detailed result for a specific worker in a pay run
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.get-pay-run-worker-result
+      with:
+        payRunId: tools.payRunId
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pay-run-payments
+      description: List payment transactions generated by a pay run
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.list-pay-run-payments
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-payment
+      description: Get details of a specific payment transaction
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.get-payment
+      with:
+        paymentId: tools.paymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pay-run-tax-results
+      description: List tax calculation results for a completed pay run
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.list-pay-run-tax-results
+      with:
+        payRunId: tools.payRunId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pay-groups
+      description: List all configured pay groups
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-pay-groups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pay-group
+      description: Get details of a specific pay group
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.get-pay-group
+      with:
+        payGroupId: tools.payGroupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pay-group-workers
+      description: List workers in a pay group
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-pay-group-workers
+      with:
+        payGroupId: tools.payGroupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-worker-payroll-details
+      description: Get payroll configuration details for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.get-worker-payroll-details
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-payslips
+      description: List pay statements for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.list-worker-payslips
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-worker-payslip
+      description: Get detailed payslip with earnings, deductions, and taxes
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.get-worker-payslip
+      with:
+        workerId: tools.workerId
+        payslipId: tools.payslipId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-payment-elections
+      description: List direct deposit and payment preferences for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-results.list-worker-payment-elections
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-earnings
+      description: List earnings records for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-worker-earnings
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-deductions
+      description: List deductions for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-worker-deductions
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-tax-withholdings
+      description: List tax withholding configurations for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.list-worker-tax-withholdings
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-worker-tax-withholding
+      description: Get a specific tax withholding for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.get-worker-tax-withholding
+      with:
+        workerId: tools.workerId
+        withholdingId: tools.withholdingId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-worker-tax-withholding
+      description: Update a tax withholding (filing status, allowances, exemptions)
+      hints:
+        readOnly: false
+        idempotent: true
+      call: payroll-tax.update-worker-tax-withholding
+      with:
+        workerId: tools.workerId
+        withholdingId: tools.withholdingId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-tax-elections
+      description: List W-4 and state tax election forms for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.list-worker-tax-elections
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-worker-tax-election
+      description: Get a specific tax election for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.get-worker-tax-election
+      with:
+        workerId: tools.workerId
+        electionId: tools.electionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-worker-tax-election
+      description: Submit a new W-4 or state tax election for a worker
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll-tax.create-worker-tax-election
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-worker-tax-summary
+      description: Get year-to-date tax summary for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.get-worker-tax-summary
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-time-off-inputs
+      description: List time off inputs for a worker
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.list-worker-time-off-inputs
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-worker-time-off-input
+      description: Submit a time off input for payroll processing
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll-input.create-worker-time-off-input
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-one-time-payments
+      description: List pending and processed one-time payments
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.list-one-time-payments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-one-time-payment
+      description: Get details of a specific one-time payment
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.get-one-time-payment
+      with:
+        paymentId: tools.paymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-one-time-payment
+      description: Submit a one-time payment (bonus, relocation, retroactive pay)
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll-input.create-one-time-payment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-one-time-payment
+      description: Update a pending one-time payment
+      hints:
+        readOnly: false
+        idempotent: true
+      call: payroll-input.update-one-time-payment
+      with:
+        paymentId: tools.paymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-one-time-payment
+      description: Delete a pending one-time payment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: payroll-input.delete-one-time-payment
+      with:
+        paymentId: tools.paymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-payroll-adjustments
+      description: List payroll adjustment records
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.list-payroll-adjustments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-payroll-adjustment
+      description: Get details of a specific payroll adjustment
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.get-payroll-adjustment
+      with:
+        adjustmentId: tools.adjustmentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-payroll-adjustment
+      description: Submit a payroll correction or retroactive adjustment
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll-input.create-payroll-adjustment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-supplemental-earnings
+      description: List supplemental earning submissions
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.list-supplemental-earnings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-supplemental-earning
+      description: Get details of a specific supplemental earning
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.get-supplemental-earning
+      with:
+        earningId: tools.earningId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-supplemental-earning
+      description: Submit a supplemental earning (bonus, commission, stipend)
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll-input.create-supplemental-earning
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-supplemental-earning
+      description: Delete a pending supplemental earning
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: payroll-input.delete-supplemental-earning
+      with:
+        earningId: tools.earningId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-input-batches
+      description: List payroll input batch submissions
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.list-input-batches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-input-batch
+      description: Get details of a specific input batch
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-input.get-input-batch
+      with:
+        batchId: tools.batchId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-input-batch
+      description: Submit a batch of payroll inputs for bulk processing
+      hints:
+        readOnly: false
+        idempotent: false
+      call: payroll-input.create-input-batch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-earning-codes
+      description: List configured earning code types
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-earning-codes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-deduction-codes
+      description: List configured deduction code types
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll.list-deduction-codes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tax-jurisdictions
+      description: List all supported tax jurisdictions
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.list-tax-jurisdictions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tax-jurisdiction
+      description: Get details of a specific tax jurisdiction
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.get-tax-jurisdiction
+      with:
+        jurisdictionId: tools.jurisdictionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tax-filings
+      description: List tax filing records for compliance reporting
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.list-tax-filings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tax-filing
+      description: Get details of a specific tax filing
+      hints:
+        readOnly: true
+        idempotent: true
+      call: payroll-tax.get-tax-filing
+      with:
+        filingId: tools.filingId
+      outputParameters:
+      - type: object
+        mapping: $.
