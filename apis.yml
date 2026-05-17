@@ -30,7 +30,7 @@ apis:
         url: https://community.workday.com/api-console
       - type: RateLimits
         url: https://doc.workday.com/admin-guide/en-us/api-reference/api-rate-limiting.html
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/workday-payroll-payroll-context.jsonld
       - type: JSONSchema
         url: json-schema/payroll-calculation-status-schema.json
@@ -187,7 +187,7 @@ apis:
         url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
       - type: OpenAPI
         url: openapi/workday-payroll-payroll-results-openapi.yml
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/workday-payroll-payroll-results-context.jsonld
       - type: JSONSchema
         url: json-schema/payroll-results-pay-period-schema.json
@@ -291,7 +291,7 @@ apis:
         url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
       - type: OpenAPI
         url: openapi/workday-payroll-payroll-input-openapi.yml
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/workday-payroll-payroll-input-context.jsonld
       - type: JSONSchema
         url: json-schema/payroll-input-adjustment-collection-schema.json
@@ -419,7 +419,7 @@ apis:
         url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
       - type: OpenAPI
         url: openapi/workday-payroll-tax-openapi.yml
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/workday-payroll-tax-context.jsonld
       - type: JSONSchema
         url: json-schema/tax-create-tax-election-request-schema.json
@@ -528,7 +528,7 @@ common:
     url: https://status.workday.com/
   - type: Security
     url: https://www.workday.com/en-us/why-workday/security.html
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/workday-payroll-context.jsonld
   - type: JSONSchema
     url: json-schema/workday-payroll-pay-run-schema.json
