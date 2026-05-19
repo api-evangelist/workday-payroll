@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll API — Workers
+  description: 'Workday Payroll API — Workers. 1 operations. Lead operation: Workday Payroll Get Worker Payroll Details. Self-contained
+    Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Workers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-workers
+    baseUri: https://api.workday.com/payroll/v1
+    description: Workday Payroll API — Workers business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-workerId-payrollDetails
+      path: /workers/{workerId}/payrollDetails
+      operations:
+      - name: getworkerpayrolldetails
+        method: GET
+        description: Workday Payroll Get Worker Payroll Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-workers-rest
+    port: 8080
+    description: REST adapter for Workday Payroll API — Workers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/workers/{workerid}/payrolldetails
+      name: workers-workerid-payrolldetails
+      description: REST surface for workers-workerId-payrollDetails.
+      operations:
+      - method: GET
+        name: getworkerpayrolldetails
+        description: Workday Payroll Get Worker Payroll Details
+        call: payroll-workers.getworkerpayrolldetails
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-workers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll API — Workers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: workday-payroll-get-worker-payroll
+      description: Workday Payroll Get Worker Payroll Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-workers.getworkerpayrolldetails
+      outputParameters:
+      - type: object
+        mapping: $.

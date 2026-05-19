@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll Input API — Time Off Inputs
+  description: 'Workday Payroll Input API — Time Off Inputs. 2 operations. Lead operation: Workday Payroll List Worker Time
+    Off Inputs. Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Time Off Inputs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-input-time-off-inputs
+    baseUri: https://api.workday.com/payroll-input/v1
+    description: Workday Payroll Input API — Time Off Inputs business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-workerId-timeOffInputs
+      path: /workers/{workerId}/timeOffInputs
+      operations:
+      - name: listworkertimeoffinputs
+        method: GET
+        description: Workday Payroll List Worker Time Off Inputs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createworkertimeoffinput
+        method: POST
+        description: Workday Payroll Create a Time Off Input
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-input-time-off-inputs-rest
+    port: 8080
+    description: REST adapter for Workday Payroll Input API — Time Off Inputs. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{workerid}/timeoffinputs
+      name: workers-workerid-timeoffinputs
+      description: REST surface for workers-workerId-timeOffInputs.
+      operations:
+      - method: GET
+        name: listworkertimeoffinputs
+        description: Workday Payroll List Worker Time Off Inputs
+        call: payroll-input-time-off-inputs.listworkertimeoffinputs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createworkertimeoffinput
+        description: Workday Payroll Create a Time Off Input
+        call: payroll-input-time-off-inputs.createworkertimeoffinput
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-input-time-off-inputs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll Input API — Time Off Inputs. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-worker-time
+      description: Workday Payroll List Worker Time Off Inputs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-input-time-off-inputs.listworkertimeoffinputs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-create-time-off
+      description: Workday Payroll Create a Time Off Input
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: payroll-input-time-off-inputs.createworkertimeoffinput
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

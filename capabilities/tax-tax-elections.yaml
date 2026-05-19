@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll Workday Tax API — Tax Elections
+  description: 'Workday Payroll Workday Tax API — Tax Elections. 3 operations. Lead operation: Workday Payroll List Worker
+    Tax Elections. Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Tax Elections
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tax-tax-elections
+    baseUri: https://api.workday.com/tax/v1
+    description: Workday Payroll Workday Tax API — Tax Elections business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-workerId-taxElections
+      path: /workers/{workerId}/taxElections
+      operations:
+      - name: listworkertaxelections
+        method: GET
+        description: Workday Payroll List Worker Tax Elections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createworkertaxelection
+        method: POST
+        description: Workday Payroll Create a Worker Tax Election
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: workers-workerId-taxElections-electionId
+      path: /workers/{workerId}/taxElections/{electionId}
+      operations:
+      - name: getworkertaxelection
+        method: GET
+        description: Workday Payroll Get a Worker Tax Election
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tax-tax-elections-rest
+    port: 8080
+    description: REST adapter for Workday Payroll Workday Tax API — Tax Elections. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{workerid}/taxelections
+      name: workers-workerid-taxelections
+      description: REST surface for workers-workerId-taxElections.
+      operations:
+      - method: GET
+        name: listworkertaxelections
+        description: Workday Payroll List Worker Tax Elections
+        call: tax-tax-elections.listworkertaxelections
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createworkertaxelection
+        description: Workday Payroll Create a Worker Tax Election
+        call: tax-tax-elections.createworkertaxelection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerid}/taxelections/{electionid}
+      name: workers-workerid-taxelections-electionid
+      description: REST surface for workers-workerId-taxElections-electionId.
+      operations:
+      - method: GET
+        name: getworkertaxelection
+        description: Workday Payroll Get a Worker Tax Election
+        call: tax-tax-elections.getworkertaxelection
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tax-tax-elections-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll Workday Tax API — Tax Elections. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-worker-tax
+      description: Workday Payroll List Worker Tax Elections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-tax-elections.listworkertaxelections
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-create-worker-tax
+      description: Workday Payroll Create a Worker Tax Election
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tax-tax-elections.createworkertaxelection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-get-worker-tax
+      description: Workday Payroll Get a Worker Tax Election
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-tax-elections.getworkertaxelection
+      outputParameters:
+      - type: object
+        mapping: $.

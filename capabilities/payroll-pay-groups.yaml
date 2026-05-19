@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll API — Pay Groups
+  description: 'Workday Payroll API — Pay Groups. 3 operations. Lead operation: Workday Payroll List Pay Groups. Self-contained
+    Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Pay Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-pay-groups
+    baseUri: https://api.workday.com/payroll/v1
+    description: Workday Payroll API — Pay Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: payGroups
+      path: /payGroups
+      operations:
+      - name: listpaygroups
+        method: GET
+        description: Workday Payroll List Pay Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payGroups-payGroupId
+      path: /payGroups/{payGroupId}
+      operations:
+      - name: getpaygroup
+        method: GET
+        description: Workday Payroll Get a Pay Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payGroups-payGroupId-workers
+      path: /payGroups/{payGroupId}/workers
+      operations:
+      - name: listpaygroupworkers
+        method: GET
+        description: Workday Payroll List Workers in a Pay Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-pay-groups-rest
+    port: 8080
+    description: REST adapter for Workday Payroll API — Pay Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/paygroups
+      name: paygroups
+      description: REST surface for payGroups.
+      operations:
+      - method: GET
+        name: listpaygroups
+        description: Workday Payroll List Pay Groups
+        call: payroll-pay-groups.listpaygroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/paygroups/{paygroupid}
+      name: paygroups-paygroupid
+      description: REST surface for payGroups-payGroupId.
+      operations:
+      - method: GET
+        name: getpaygroup
+        description: Workday Payroll Get a Pay Group
+        call: payroll-pay-groups.getpaygroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/paygroups/{paygroupid}/workers
+      name: paygroups-paygroupid-workers
+      description: REST surface for payGroups-payGroupId-workers.
+      operations:
+      - method: GET
+        name: listpaygroupworkers
+        description: Workday Payroll List Workers in a Pay Group
+        call: payroll-pay-groups.listpaygroupworkers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-pay-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll API — Pay Groups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-pay-groups
+      description: Workday Payroll List Pay Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-pay-groups.listpaygroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-get-pay-group
+      description: Workday Payroll Get a Pay Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-pay-groups.getpaygroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-list-workers-pay
+      description: Workday Payroll List Workers in a Pay Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-pay-groups.listpaygroupworkers
+      outputParameters:
+      - type: object
+        mapping: $.

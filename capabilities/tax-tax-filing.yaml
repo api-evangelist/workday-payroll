@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll Workday Tax API — Tax Filing
+  description: 'Workday Payroll Workday Tax API — Tax Filing. 2 operations. Lead operation: Workday Payroll List Tax Filings.
+    Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Tax Filing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tax-tax-filing
+    baseUri: https://api.workday.com/tax/v1
+    description: Workday Payroll Workday Tax API — Tax Filing business capability. Self-contained, no shared references.
+    resources:
+    - name: taxFilings
+      path: /taxFilings
+      operations:
+      - name: listtaxfilings
+        method: GET
+        description: Workday Payroll List Tax Filings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: taxYear
+          in: query
+          type: integer
+          description: Filter by tax year
+        - name: filingType
+          in: query
+          type: string
+          description: Filter by filing type
+        - name: jurisdiction
+          in: query
+          type: string
+          description: Filter by jurisdiction identifier
+    - name: taxFilings-filingId
+      path: /taxFilings/{filingId}
+      operations:
+      - name: gettaxfiling
+        method: GET
+        description: Workday Payroll Get a Tax Filing
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tax-tax-filing-rest
+    port: 8080
+    description: REST adapter for Workday Payroll Workday Tax API — Tax Filing. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/taxfilings
+      name: taxfilings
+      description: REST surface for taxFilings.
+      operations:
+      - method: GET
+        name: listtaxfilings
+        description: Workday Payroll List Tax Filings
+        call: tax-tax-filing.listtaxfilings
+        with:
+          taxYear: rest.taxYear
+          filingType: rest.filingType
+          jurisdiction: rest.jurisdiction
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/taxfilings/{filingid}
+      name: taxfilings-filingid
+      description: REST surface for taxFilings-filingId.
+      operations:
+      - method: GET
+        name: gettaxfiling
+        description: Workday Payroll Get a Tax Filing
+        call: tax-tax-filing.gettaxfiling
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tax-tax-filing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll Workday Tax API — Tax Filing. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-tax-filings
+      description: Workday Payroll List Tax Filings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-tax-filing.listtaxfilings
+      with:
+        taxYear: tools.taxYear
+        filingType: tools.filingType
+        jurisdiction: tools.jurisdiction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-get-tax-filing
+      description: Workday Payroll Get a Tax Filing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-tax-filing.gettaxfiling
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll API — Payroll Calculations
+  description: 'Workday Payroll API — Payroll Calculations. 1 operations. Lead operation: Workday Payroll Calculate a Pay
+    Run. Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Payroll Calculations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-payroll-calculations
+    baseUri: https://api.workday.com/payroll/v1
+    description: Workday Payroll API — Payroll Calculations business capability. Self-contained, no shared references.
+    resources:
+    - name: payRuns-payRunId-calculate
+      path: /payRuns/{payRunId}/calculate
+      operations:
+      - name: calculatepayrun
+        method: POST
+        description: Workday Payroll Calculate a Pay Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-payroll-calculations-rest
+    port: 8080
+    description: REST adapter for Workday Payroll API — Payroll Calculations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/payruns/{payrunid}/calculate
+      name: payruns-payrunid-calculate
+      description: REST surface for payRuns-payRunId-calculate.
+      operations:
+      - method: POST
+        name: calculatepayrun
+        description: Workday Payroll Calculate a Pay Run
+        call: payroll-payroll-calculations.calculatepayrun
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-payroll-calculations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll API — Payroll Calculations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: workday-payroll-calculate-pay-run
+      description: Workday Payroll Calculate a Pay Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: payroll-payroll-calculations.calculatepayrun
+      outputParameters:
+      - type: object
+        mapping: $.

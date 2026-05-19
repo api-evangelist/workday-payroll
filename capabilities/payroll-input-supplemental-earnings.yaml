@@ -1,0 +1,171 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll Input API — Supplemental Earnings
+  description: 'Workday Payroll Input API — Supplemental Earnings. 4 operations. Lead operation: Workday Payroll List Supplemental
+    Earnings. Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Supplemental Earnings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-input-supplemental-earnings
+    baseUri: https://api.workday.com/payroll-input/v1
+    description: Workday Payroll Input API — Supplemental Earnings business capability. Self-contained, no shared references.
+    resources:
+    - name: supplementalEarnings
+      path: /supplementalEarnings
+      operations:
+      - name: listsupplementalearnings
+        method: GET
+        description: Workday Payroll List Supplemental Earnings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workerId
+          in: query
+          type: string
+          description: Filter by worker identifier
+      - name: createsupplementalearning
+        method: POST
+        description: Workday Payroll Create a Supplemental Earning
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: supplementalEarnings-earningId
+      path: /supplementalEarnings/{earningId}
+      operations:
+      - name: getsupplementalearning
+        method: GET
+        description: Workday Payroll Get a Supplemental Earning
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletesupplementalearning
+        method: DELETE
+        description: Workday Payroll Delete a Supplemental Earning
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-input-supplemental-earnings-rest
+    port: 8080
+    description: REST adapter for Workday Payroll Input API — Supplemental Earnings. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/supplementalearnings
+      name: supplementalearnings
+      description: REST surface for supplementalEarnings.
+      operations:
+      - method: GET
+        name: listsupplementalearnings
+        description: Workday Payroll List Supplemental Earnings
+        call: payroll-input-supplemental-earnings.listsupplementalearnings
+        with:
+          workerId: rest.workerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsupplementalearning
+        description: Workday Payroll Create a Supplemental Earning
+        call: payroll-input-supplemental-earnings.createsupplementalearning
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supplementalearnings/{earningid}
+      name: supplementalearnings-earningid
+      description: REST surface for supplementalEarnings-earningId.
+      operations:
+      - method: GET
+        name: getsupplementalearning
+        description: Workday Payroll Get a Supplemental Earning
+        call: payroll-input-supplemental-earnings.getsupplementalearning
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesupplementalearning
+        description: Workday Payroll Delete a Supplemental Earning
+        call: payroll-input-supplemental-earnings.deletesupplementalearning
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-input-supplemental-earnings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll Input API — Supplemental Earnings. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-supplemental-earnings
+      description: Workday Payroll List Supplemental Earnings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-input-supplemental-earnings.listsupplementalearnings
+      with:
+        workerId: tools.workerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-create-supplemental-earning
+      description: Workday Payroll Create a Supplemental Earning
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: payroll-input-supplemental-earnings.createsupplementalearning
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-get-supplemental-earning
+      description: Workday Payroll Get a Supplemental Earning
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-input-supplemental-earnings.getsupplementalearning
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-delete-supplemental-earning
+      description: Workday Payroll Delete a Supplemental Earning
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: payroll-input-supplemental-earnings.deletesupplementalearning
+      outputParameters:
+      - type: object
+        mapping: $.

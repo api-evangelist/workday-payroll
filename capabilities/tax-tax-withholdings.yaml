@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll Workday Tax API — Tax Withholdings
+  description: 'Workday Payroll Workday Tax API — Tax Withholdings. 3 operations. Lead operation: Workday Payroll List Worker
+    Tax Withholdings. Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Tax Withholdings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tax-tax-withholdings
+    baseUri: https://api.workday.com/tax/v1
+    description: Workday Payroll Workday Tax API — Tax Withholdings business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-workerId-taxWithholdings
+      path: /workers/{workerId}/taxWithholdings
+      operations:
+      - name: listworkertaxwithholdings
+        method: GET
+        description: Workday Payroll List Worker Tax Withholdings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-workerId-taxWithholdings-withholdingId
+      path: /workers/{workerId}/taxWithholdings/{withholdingId}
+      operations:
+      - name: getworkertaxwithholding
+        method: GET
+        description: Workday Payroll Get a Worker Tax Withholding
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateworkertaxwithholding
+        method: PATCH
+        description: Workday Payroll Update a Worker Tax Withholding
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tax-tax-withholdings-rest
+    port: 8080
+    description: REST adapter for Workday Payroll Workday Tax API — Tax Withholdings. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{workerid}/taxwithholdings
+      name: workers-workerid-taxwithholdings
+      description: REST surface for workers-workerId-taxWithholdings.
+      operations:
+      - method: GET
+        name: listworkertaxwithholdings
+        description: Workday Payroll List Worker Tax Withholdings
+        call: tax-tax-withholdings.listworkertaxwithholdings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{workerid}/taxwithholdings/{withholdingid}
+      name: workers-workerid-taxwithholdings-withholdingid
+      description: REST surface for workers-workerId-taxWithholdings-withholdingId.
+      operations:
+      - method: GET
+        name: getworkertaxwithholding
+        description: Workday Payroll Get a Worker Tax Withholding
+        call: tax-tax-withholdings.getworkertaxwithholding
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateworkertaxwithholding
+        description: Workday Payroll Update a Worker Tax Withholding
+        call: tax-tax-withholdings.updateworkertaxwithholding
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tax-tax-withholdings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll Workday Tax API — Tax Withholdings. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-worker-tax
+      description: Workday Payroll List Worker Tax Withholdings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-tax-withholdings.listworkertaxwithholdings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-get-worker-tax
+      description: Workday Payroll Get a Worker Tax Withholding
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-tax-withholdings.getworkertaxwithholding
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-update-worker-tax
+      description: Workday Payroll Update a Worker Tax Withholding
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: tax-tax-withholdings.updateworkertaxwithholding
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

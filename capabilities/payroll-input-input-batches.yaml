@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Payroll Input API — Input Batches
+  description: 'Workday Payroll Input API — Input Batches. 3 operations. Lead operation: Workday Payroll List Input Batches.
+    Self-contained Naftiko capability covering one Workday Payroll business surface.'
+  tags:
+  - Workday Payroll
+  - Input Batches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_PAYROLL_API_KEY: WORKDAY_PAYROLL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-input-input-batches
+    baseUri: https://api.workday.com/payroll-input/v1
+    description: Workday Payroll Input API — Input Batches business capability. Self-contained, no shared references.
+    resources:
+    - name: inputBatches
+      path: /inputBatches
+      operations:
+      - name: listinputbatches
+        method: GET
+        description: Workday Payroll List Input Batches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by batch status
+      - name: createinputbatch
+        method: POST
+        description: Workday Payroll Create an Input Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: inputBatches-batchId
+      path: /inputBatches/{batchId}
+      operations:
+      - name: getinputbatch
+        method: GET
+        description: Workday Payroll Get an Input Batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_PAYROLL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-input-input-batches-rest
+    port: 8080
+    description: REST adapter for Workday Payroll Input API — Input Batches. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/inputbatches
+      name: inputbatches
+      description: REST surface for inputBatches.
+      operations:
+      - method: GET
+        name: listinputbatches
+        description: Workday Payroll List Input Batches
+        call: payroll-input-input-batches.listinputbatches
+        with:
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createinputbatch
+        description: Workday Payroll Create an Input Batch
+        call: payroll-input-input-batches.createinputbatch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/inputbatches/{batchid}
+      name: inputbatches-batchid
+      description: REST surface for inputBatches-batchId.
+      operations:
+      - method: GET
+        name: getinputbatch
+        description: Workday Payroll Get an Input Batch
+        call: payroll-input-input-batches.getinputbatch
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-input-input-batches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Payroll Input API — Input Batches. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: workday-payroll-list-input-batches
+      description: Workday Payroll List Input Batches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-input-input-batches.listinputbatches
+      with:
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-create-input-batch
+      description: Workday Payroll Create an Input Batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: payroll-input-input-batches.createinputbatch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-payroll-get-input-batch
+      description: Workday Payroll Get an Input Batch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-input-input-batches.getinputbatch
+      outputParameters:
+      - type: object
+        mapping: $.
