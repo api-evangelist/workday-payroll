@@ -1,0 +1,443 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "One-Time Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List One-time Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "query",
+                "description": "Filter by worker identifier"
+              },
+              {
+                "name": "status",
+                "value": "Pending",
+                "type": "query",
+                "description": "Filter by status"
+              }
+            ]
+          },
+          "docs": "Retrieve all one-time payment requests, optionally filtered by status, worker, or date range."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a new one-time payment request for a worker, such as a bonus, retroactive pay adjustment, or relocation allowance."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "pmt_20260502_00045",
+                "type": "path",
+                "description": "Unique identifier for the one-time payment"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific one-time payment request."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Update a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "pmt_20260502_00045",
+                "type": "path",
+                "description": "Unique identifier for the one-time payment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a pending one-time payment request."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Delete a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "pmt_20260502_00045",
+                "type": "path",
+                "description": "Unique identifier for the one-time payment"
+              }
+            ]
+          },
+          "docs": "Delete a pending one-time payment request that has not yet been processed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payroll Adjustments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Payroll Adjustments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/adjustments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "query",
+                "description": "Filter by worker identifier"
+              },
+              {
+                "name": "adjustmentType",
+                "value": "Correction",
+                "type": "query",
+                "description": "Filter by adjustment type"
+              }
+            ]
+          },
+          "docs": "Retrieve all payroll adjustment records, optionally filtered by worker, type, or status."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Payroll Adjustment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/adjustments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a payroll adjustment to correct, reverse, or reclassify previously processed payroll data."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Payroll Adjustment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/adjustments/:adjustmentId",
+            "params": [
+              {
+                "name": "adjustmentId",
+                "value": "adj_20260415_00012",
+                "type": "path",
+                "description": "Unique identifier for the payroll adjustment"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific payroll adjustment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supplemental Earnings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Supplemental Earnings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/supplementalEarnings",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "query",
+                "description": "Filter by worker identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all supplemental earning submissions, such as bonuses, commissions, and other non-regular earnings."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Supplemental Earning",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/supplementalEarnings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a supplemental earning for a worker to be included in the next payroll run."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Supplemental Earning",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/supplementalEarnings/:earningId",
+            "params": [
+              {
+                "name": "earningId",
+                "value": "ern_20260430_00301",
+                "type": "path",
+                "description": "Unique identifier for the supplemental earning"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific supplemental earning submission."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Delete a Supplemental Earning",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.workday.com/payroll-input/v1/supplementalEarnings/:earningId",
+            "params": [
+              {
+                "name": "earningId",
+                "value": "ern_20260430_00301",
+                "type": "path",
+                "description": "Unique identifier for the supplemental earning"
+              }
+            ]
+          },
+          "docs": "Delete a pending supplemental earning that has not yet been processed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Input Batches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Input Batches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/inputBatches",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "Pending",
+                "type": "query",
+                "description": "Filter by batch status"
+              }
+            ]
+          },
+          "docs": "Retrieve all payroll input batch submissions, including their processing status and validation results."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create an Input Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/inputBatches",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a batch of payroll input records for processing, supporting earnings, deductions, and time-off entries in bulk."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get an Input Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/inputBatches/:batchId",
+            "params": [
+              {
+                "name": "batchId",
+                "value": "ib_20260428_00007",
+                "type": "path",
+                "description": "Unique identifier for the input batch"
+              }
+            ]
+          },
+          "docs": "Retrieve details and status of a specific input batch submission."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Time Off Inputs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Worker Time Off Inputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/timeOffInputs",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve time off input records for a specific worker that affect payroll calculations."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Time Off Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/timeOffInputs",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a time off input for a worker to be reflected in payroll processing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
