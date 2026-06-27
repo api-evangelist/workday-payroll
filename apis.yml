@@ -29,7 +29,7 @@ apis:
         url: openapi/workday-payroll-payroll-openapi.yml
       - type: Authentication
         url: https://doc.workday.com/admin-guide/en-us/authentication/authentication.html
-      - type: APIConsole
+      - type: Console
         url: https://community.workday.com/api-console
       - type: RateLimits
         url: https://doc.workday.com/admin-guide/en-us/api-reference/api-rate-limiting.html
@@ -123,54 +123,54 @@ apis:
         url: json-structure/payroll-worker-payroll-details-structure.json
       - type: JSONStructure
         url: json-structure/payroll-worker-ref-structure.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-calculation-status-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-create-pay-run-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-deduction-code-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-deduction-code-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-deduction-code-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-deduction-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-deduction-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-earning-code-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-earning-code-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-earning-code-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-earning-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-earning-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-pay-group-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-pay-group-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-pay-group-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-pay-period-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-pay-run-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-pay-run-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-update-pay-run-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-worker-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-worker-payroll-details-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-worker-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/workday-payroll-list-pay-runs-example.json
     contact:
-      - type: support
+      - type: Support
         url: https://www.workday.com/en-us/company/customer-support.html
       - type: email
         url: support@workday.com
@@ -246,35 +246,35 @@ apis:
         url: json-structure/payroll-results-worker-result-collection-structure.json
       - type: JSONStructure
         url: json-structure/payroll-results-worker-result-structure.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-pay-period-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-pay-run-result-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payment-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payment-election-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payment-election-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payment-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payslip-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payslip-deduction-line-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payslip-earning-line-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payslip-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-payslip-tax-line-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-worker-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-worker-result-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-results-worker-result-example.json
-      - type: Example
+      - type: Examples
         url: examples/workday-payroll-get-worker-payslip-example.json
   - name: Workday Payroll Input API
     description: >-
@@ -366,43 +366,43 @@ apis:
         url: json-structure/payroll-input-update-one-time-payment-request-structure.json
       - type: JSONStructure
         url: json-structure/payroll-input-worker-ref-structure.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-adjustment-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-adjustment-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-create-adjustment-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-create-input-batch-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-create-one-time-payment-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-create-supplemental-earning-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-create-time-off-input-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-input-batch-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-input-batch-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-input-record-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-one-time-payment-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-one-time-payment-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-supplemental-earning-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-supplemental-earning-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-time-off-input-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-time-off-input-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-update-one-time-payment-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/payroll-input-worker-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/workday-payroll-create-one-time-payment-example.json
   - name: Workday Tax API
     description: API for managing payroll tax calculations, tax withholdings, and tax filing information.
@@ -480,35 +480,35 @@ apis:
         url: json-structure/tax-worker-ref-structure.json
       - type: JSONStructure
         url: json-structure/tax-worker-tax-summary-structure.json
-      - type: Example
+      - type: Examples
         url: examples/tax-create-tax-election-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-election-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-election-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-filing-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-filing-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-jurisdiction-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-jurisdiction-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-jurisdiction-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-result-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-result-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-withholding-collection-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-tax-withholding-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-update-tax-withholding-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-worker-ref-example.json
-      - type: Example
+      - type: Examples
         url: examples/tax-worker-tax-summary-example.json
 common:
   - type: DeveloperPortal
@@ -535,9 +535,9 @@ common:
     url: json-structure/workday-payroll-pay-run-structure.json
   - type: JSONStructure
     url: json-structure/workday-payroll-payslip-structure.json
-  - type: Example
+  - type: Examples
     url: examples/workday-payroll-pay-run-example.json
-  - type: Example
+  - type: Examples
     url: examples/workday-payroll-payslip-example.json
   - type: SpectralRules
     url: rules/workday-payroll-spectral-rules.yml
