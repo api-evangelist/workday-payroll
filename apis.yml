@@ -511,6 +511,14 @@ apis:
       - type: Examples
         url: examples/tax-worker-tax-summary-example.json
 common:
+  - type: TrustCenter
+    url: security/workday-payroll-trust-center.yml
+  - type: DomainSecurity
+    url: security/workday-payroll-domain-security.yml
+  - type: Authentication
+    url: authentication/workday-payroll-authentication.yml
+  - type: Blog
+    url: https://newsroom.workday.com/
   - type: DeveloperPortal
     url: https://community.workday.com/
   - type: GettingStarted
