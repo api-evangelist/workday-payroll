@@ -1,0 +1,14 @@
+{
+  "repo": "workday-payroll",
+  "feeds": [
+    {
+      "source": "https://newsroom.workday.com/",
+      "feed_url": "https://newsroom.workday.com/",
+      "title": "Workday Newsroom",
+      "saved": 0,
+      "error": "parse_failed"
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 5
+}
