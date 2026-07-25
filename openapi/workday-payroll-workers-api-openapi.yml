@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Workday Payroll Input Deductions Workers API
+  description: API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.
+  version: v1
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/customer-support.html
+    email: support@workday.com
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://api.workday.com/payroll-input/v1
+  description: Workday Payroll Input Production
+- url: https://{tenant}.workday.com/api/payroll-input/v1
+  description: Workday Payroll Input Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
+security:
+- bearerAuth: []
+tags:
+- name: Workers
+  description: Access worker payroll data and compensation details
+paths:
+  /workers/{workerId}/payrollDetails:
+    get:
+      operationId: getWorkerPayrollDetails
+      summary: Workday Payroll Get Worker Payroll Details
+      description: Retrieve payroll-specific details for a worker, including pay group assignment, payment method, and compensation summary.
+      tags:
+      - Workers
+      parameters:
+      - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Worker payroll details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkerPayrollDetails'
+              examples:
+                GetWorkerPayrollDetails200Example:
+                  summary: Default getWorkerPayrollDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    workerId: w_100542
+                    workerDescriptor: example
+                    payGroup:
+                      id: pg_weekly_usd
+                      descriptor: Weekly USD Pay Group
+                    paymentMethod: DirectDeposit
+                    annualSalary: 95000.0
+                    hourlyRate: 32.5
+                    compensationFrequency: Annual
+                    currency: USD
+                    taxJurisdiction: US-Federal
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
+  schemas:
+    PayGroupRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pay group identifier
+          example: pg_weekly_usd
+        descriptor:
+          type: string
+          description: Pay group display name
+          example: Weekly USD Pay Group
+    WorkerPayrollDetails:
+      type: object
+      properties:
+        workerId:
+          type: string
+          description: Unique worker identifier
+          example: w_100542
+        workerDescriptor:
+          type: string
+          description: Worker display name
+          example: example
+        payGroup:
+          $ref: '#/components/schemas/PayGroupRef'
+        paymentMethod:
+          type: string
+          enum:
+          - DirectDeposit
+          - Check
+          - Wire
+          description: Worker payment method
+          example: DirectDeposit
+        annualSalary:
+          type: number
+          format: double
+          description: Annual salary amount
+          example: 95000.0
+        hourlyRate:
+          type: number
+          format: double
+          description: Hourly pay rate
+          example: 32.5
+        compensationFrequency:
+          type: string
+          description: Frequency of compensation
+          example: Annual
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+        taxJurisdiction:
+          type: string
+          description: Primary tax jurisdiction
+          example: US-Federal
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+          description: Detailed error information
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker (Workday ID)
+      schema:
+        type: string
+      example: w_100542
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained through Workday authentication.
+externalDocs:
+  description: Workday Payroll Input API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html

@@ -1,0 +1,303 @@
+openapi: 3.1.0
+info:
+  title: Workday Payroll Input Deductions Tax Filing API
+  description: API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.
+  version: v1
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/customer-support.html
+    email: support@workday.com
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://api.workday.com/payroll-input/v1
+  description: Workday Payroll Input Production
+- url: https://{tenant}.workday.com/api/payroll-input/v1
+  description: Workday Payroll Input Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
+security:
+- bearerAuth: []
+tags:
+- name: Tax Filing
+  description: Access tax filing data and compliance reports
+paths:
+  /taxFilings:
+    get:
+      operationId: listTaxFilings
+      summary: Workday Payroll List Tax Filings
+      description: Retrieve tax filing records for compliance reporting, including quarterly and annual filing data.
+      tags:
+      - Tax Filing
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: taxYear
+        in: query
+        description: Filter by tax year
+        schema:
+          type: integer
+        example: 2026
+      - name: filingType
+        in: query
+        description: Filter by filing type
+        schema:
+          type: string
+          enum:
+          - Quarterly
+          - Annual
+          - Amendment
+        example: Quarterly
+      - name: jurisdiction
+        in: query
+        description: Filter by jurisdiction identifier
+        schema:
+          type: string
+        example: US-Federal
+      responses:
+        '200':
+          description: Collection of tax filings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxFilingCollection'
+              examples:
+                ListTaxFilings200Example:
+                  summary: Default listTaxFilings 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: tfl_2026q1_941
+                      filingType: Quarterly
+                      jurisdiction:
+                        id: tjur_us_federal
+                        descriptor: Weekly USD Pay Group
+                      taxYear: 2026
+                      quarter: 1
+                      formNumber: '941'
+                      totalTaxableWages: 235000.0
+                      totalTaxWithheld: 28500.0
+                      totalEmployerTax: 14583.7
+                      dueDate: '2026-04-30'
+                      filedDate: '2026-04-30'
+                      status: Draft
+                      currency: USD
+                    total: 52
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /taxFilings/{filingId}:
+    get:
+      operationId: getTaxFiling
+      summary: Workday Payroll Get a Tax Filing
+      description: Retrieve details of a specific tax filing record.
+      tags:
+      - Tax Filing
+      parameters:
+      - $ref: '#/components/parameters/filingId'
+      responses:
+        '200':
+          description: Tax filing details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxFiling'
+              examples:
+                GetTaxFiling200Example:
+                  summary: Default getTaxFiling 200 response
+                  x-microcks-default: true
+                  value:
+                    id: tfl_2026q1_941
+                    filingType: Quarterly
+                    jurisdiction:
+                      id: tjur_us_federal
+                      descriptor: Weekly USD Pay Group
+                    taxYear: 2026
+                    quarter: 1
+                    formNumber: '941'
+                    totalTaxableWages: 235000.0
+                    totalTaxWithheld: 28500.0
+                    totalEmployerTax: 14583.7
+                    dueDate: '2026-04-30'
+                    filedDate: '2026-04-30'
+                    status: Draft
+                    currency: USD
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+  schemas:
+    TaxJurisdictionRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Jurisdiction identifier
+          example: tjur_us_federal
+        descriptor:
+          type: string
+          description: Jurisdiction display name
+          example: Weekly USD Pay Group
+    TaxFiling:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tax filing
+          example: tfl_2026q1_941
+        filingType:
+          type: string
+          enum:
+          - Quarterly
+          - Annual
+          - Amendment
+          description: Type of filing
+          example: Quarterly
+        jurisdiction:
+          $ref: '#/components/schemas/TaxJurisdictionRef'
+        taxYear:
+          type: integer
+          description: Tax year
+          example: 2026
+        quarter:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Quarter (for quarterly filings)
+          example: 1
+        formNumber:
+          type: string
+          description: Tax form number (e.g., 941, 940, W-2)
+          example: '941'
+        totalTaxableWages:
+          type: number
+          format: double
+          description: Total taxable wages for the filing period
+          example: 235000.0
+        totalTaxWithheld:
+          type: number
+          format: double
+          description: Total tax withheld for the filing period
+          example: 28500.0
+        totalEmployerTax:
+          type: number
+          format: double
+          description: Total employer tax liability
+          example: 14583.7
+        dueDate:
+          type: string
+          format: date
+          description: Filing due date
+          example: '2026-04-30'
+        filedDate:
+          type: string
+          format: date
+          description: Date the filing was submitted
+          example: '2026-04-30'
+        status:
+          type: string
+          enum:
+          - Draft
+          - Pending
+          - Filed
+          - Accepted
+          - Rejected
+          description: Filing status
+          example: Draft
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
+    TaxFilingCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxFiling'
+        total:
+          type: integer
+          description: Total number of tax filings
+          example: 52
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      example: 20
+    filingId:
+      name: filingId
+      in: path
+      required: true
+      description: Unique identifier for the tax filing
+      schema:
+        type: string
+      example: tfl_2026q1_941
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained through Workday authentication.
+externalDocs:
+  description: Workday Payroll Input API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html

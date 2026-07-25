@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Workday Payroll Input Deductions Payment Elections API
+  description: API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.
+  version: v1
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/customer-support.html
+    email: support@workday.com
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://api.workday.com/payroll-input/v1
+  description: Workday Payroll Input Production
+- url: https://{tenant}.workday.com/api/payroll-input/v1
+  description: Workday Payroll Input Tenant-Specific
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
+security:
+- bearerAuth: []
+tags:
+- name: Payment Elections
+  description: Manage worker payment election and distribution details
+paths:
+  /workers/{workerId}/paymentElections:
+    get:
+      operationId: listWorkerPaymentElections
+      summary: Workday Payroll List Worker Payment Elections
+      description: Retrieve payment election details for a worker, including direct deposit accounts, distribution amounts, and payment preferences.
+      tags:
+      - Payment Elections
+      parameters:
+      - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Collection of payment elections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentElectionCollection'
+              examples:
+                ListWorkerPaymentElections200Example:
+                  summary: Default listWorkerPaymentElections 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - id: pe_w100542_primary
+                      order: 1
+                      distributionType: Amount
+                      amount: 2500.0
+                      percentage: 100.0
+                      accountType: Checking
+                      bankName: Wells Fargo
+                      lastFourDigits: '4521'
+                      currency: USD
+                      active: true
+                    total: 52
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+  schemas:
+    PaymentElectionCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentElection'
+        total:
+          type: integer
+          description: Total number of payment elections
+          example: 52
+    PaymentElection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the payment election
+          example: pe_w100542_primary
+        order:
+          type: integer
+          description: Priority order of the election
+          example: 1
+        distributionType:
+          type: string
+          enum:
+          - Amount
+          - Percentage
+          - Remainder
+          description: How payment is distributed
+          example: Amount
+        amount:
+          type: number
+          format: double
+          description: Fixed amount (when distributionType is Amount)
+          example: 2500.0
+        percentage:
+          type: number
+          format: double
+          description: Percentage of net pay (when distributionType is Percentage)
+          example: 100.0
+        accountType:
+          type: string
+          enum:
+          - Checking
+          - Savings
+          description: Bank account type
+          example: Checking
+        bankName:
+          type: string
+          description: Financial institution name
+          example: Wells Fargo
+        lastFourDigits:
+          type: string
+          description: Last four digits of account number
+          example: '4521'
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+        active:
+          type: boolean
+          description: Whether this election is currently active
+          example: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+      example: w_100542
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained through Workday authentication.
+externalDocs:
+  description: Workday Payroll Input API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
