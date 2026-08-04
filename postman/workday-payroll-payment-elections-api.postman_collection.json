@@ -1,0 +1,245 @@
+{
+  "info": {
+    "_postman_id": "53897a3a-f7d6-4eda-9c94-14017af024eb",
+    "name": "Workday Payroll Input Deductions Payment Elections API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:08.000Z",
+    "updatedAt": "2026-07-28T03:32:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-53897a3a-f7d6-4eda-9c94-14017af024eb"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{workerId}",
+          "item": [
+            {
+              "name": "paymentElections",
+              "item": [
+                {
+                  "name": "Workday Payroll List Worker Payment Elections",
+                  "id": "8fd054bf-45f9-401f-af5c-11c375bbf078",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/paymentElections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "paymentElections"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5cbfd984-93e8-43b5-af94-cdfff16647c4",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve payment election details for a worker, including direct deposit accounts, distribution amounts, and payment preferences."
+                  },
+                  "response": [
+                    {
+                      "id": "f3573d7d-f609-4b58-840f-64a131499f48",
+                      "name": "Collection of payment elections",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/paymentElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "paymentElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"distributionType\": \"Remainder\",\n      \"amount\": \"<double>\",\n      \"percentage\": \"<double>\",\n      \"accountType\": \"Savings\",\n      \"bankName\": \"<string>\",\n      \"lastFourDigits\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"distributionType\": \"Remainder\",\n      \"amount\": \"<double>\",\n      \"percentage\": \"<double>\",\n      \"accountType\": \"Savings\",\n      \"bankName\": \"<string>\",\n      \"lastFourDigits\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:09.000Z",
+                      "updatedAt": "2026-07-28T03:32:09.000Z",
+                      "uid": "35240-f3573d7d-f609-4b58-840f-64a131499f48"
+                    },
+                    {
+                      "id": "7d36a310-059d-471a-8299-de31e0814db3",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/paymentElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "paymentElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:09.000Z",
+                      "updatedAt": "2026-07-28T03:32:09.000Z",
+                      "uid": "35240-7d36a310-059d-471a-8299-de31e0814db3"
+                    },
+                    {
+                      "id": "c6779d63-23b9-4674-96b0-d07fd4ec7bc1",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/paymentElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "paymentElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:09.000Z",
+                      "updatedAt": "2026-07-28T03:32:09.000Z",
+                      "uid": "35240-c6779d63-23b9-4674-96b0-d07fd4ec7bc1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:09.000Z",
+                  "updatedAt": "2026-07-28T03:32:09.000Z",
+                  "uid": "35240-8fd054bf-45f9-401f-af5c-11c375bbf078"
+                }
+              ],
+              "id": "db43fc3a-6fd8-4588-9ee1-3275693f3212",
+              "createdAt": "2026-07-28T03:32:09.000Z",
+              "updatedAt": "2026-07-28T03:32:09.000Z",
+              "uid": "35240-db43fc3a-6fd8-4588-9ee1-3275693f3212"
+            }
+          ],
+          "id": "61fdf4eb-3ab4-4014-811c-853e64541790",
+          "createdAt": "2026-07-28T03:32:09.000Z",
+          "updatedAt": "2026-07-28T03:32:09.000Z",
+          "uid": "35240-61fdf4eb-3ab4-4014-811c-853e64541790"
+        }
+      ],
+      "id": "df737609-7d84-43b4-b593-3649d60d71a2",
+      "createdAt": "2026-07-28T03:32:09.000Z",
+      "updatedAt": "2026-07-28T03:32:09.000Z",
+      "uid": "35240-df737609-7d84-43b4-b593-3649d60d71a2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

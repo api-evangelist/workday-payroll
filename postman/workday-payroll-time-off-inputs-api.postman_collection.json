@@ -1,0 +1,600 @@
+{
+  "info": {
+    "_postman_id": "e8fec0f2-1b18-4a28-a89b-e7dccddc9c13",
+    "name": "Workday Payroll Input Deductions Time Off Inputs API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:47.000Z",
+    "updatedAt": "2026-07-28T03:32:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e8fec0f2-1b18-4a28-a89b-e7dccddc9c13"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{workerId}",
+          "item": [
+            {
+              "name": "timeOffInputs",
+              "item": [
+                {
+                  "name": "Workday Payroll List Worker Time Off Inputs",
+                  "id": "887f0cf1-913e-46b2-9b61-02e0addaed19",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "timeOffInputs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9310bfe4-4c48-4753-ba5f-7d2171c8cf07",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve time off input records for a specific worker that affect payroll calculations."
+                  },
+                  "response": [
+                    {
+                      "id": "eb6a30da-7a35-4c02-a6d4-2b1e3bd1b610",
+                      "name": "Collection of time off inputs",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"timeOffType\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"hours\": \"<double>\",\n      \"status\": \"Processed\",\n      \"paid\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"timeOffType\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"hours\": \"<double>\",\n      \"status\": \"Approved\",\n      \"paid\": \"<boolean>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-eb6a30da-7a35-4c02-a6d4-2b1e3bd1b610"
+                    },
+                    {
+                      "id": "0e307ac2-7faa-49ed-aa6d-956bbc9b3a96",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-0e307ac2-7faa-49ed-aa6d-956bbc9b3a96"
+                    },
+                    {
+                      "id": "f4921e15-8e07-4d99-8396-3046c19d3e38",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-f4921e15-8e07-4d99-8396-3046c19d3e38"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:47.000Z",
+                  "updatedAt": "2026-07-28T03:32:47.000Z",
+                  "uid": "35240-887f0cf1-913e-46b2-9b61-02e0addaed19"
+                },
+                {
+                  "name": "Workday Payroll Create a Time Off Input",
+                  "id": "74c292ac-fba5-4db2-8aba-99d19eea1e66",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"timeOffType\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"hours\": \"<double>\",\n  \"endDate\": \"<date>\",\n  \"paid\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "timeOffInputs"
+                      ],
+                      "variable": [
+                        {
+                          "id": "bd5e3a79-2a17-4464-b7be-831a3bab6a3c",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker"
+                        }
+                      ]
+                    },
+                    "description": "Submit a time off input for a worker to be reflected in payroll processing."
+                  },
+                  "response": [
+                    {
+                      "id": "1e9b3d72-607a-4d22-9443-b9e64bd3a6e4",
+                      "name": "Time off input created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"timeOffType\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"hours\": \"<double>\",\n  \"endDate\": \"<date>\",\n  \"paid\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"timeOffType\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"hours\": \"<double>\",\n  \"status\": \"Pending\",\n  \"paid\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-1e9b3d72-607a-4d22-9443-b9e64bd3a6e4"
+                    },
+                    {
+                      "id": "6f4b58de-bb97-4956-b650-bc0bd64b0c44",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"timeOffType\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"hours\": \"<double>\",\n  \"endDate\": \"<date>\",\n  \"paid\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-6f4b58de-bb97-4956-b650-bc0bd64b0c44"
+                    },
+                    {
+                      "id": "01e1ecf6-24e4-4555-9972-d4a2654038f7",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"timeOffType\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"hours\": \"<double>\",\n  \"endDate\": \"<date>\",\n  \"paid\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-01e1ecf6-24e4-4555-9972-d4a2654038f7"
+                    },
+                    {
+                      "id": "5f085736-36f9-414a-b9cf-bb8ddcc7cb99",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"timeOffType\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"hours\": \"<double>\",\n  \"endDate\": \"<date>\",\n  \"paid\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/timeOffInputs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "timeOffInputs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-5f085736-36f9-414a-b9cf-bb8ddcc7cb99"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:47.000Z",
+                  "updatedAt": "2026-07-28T03:32:47.000Z",
+                  "uid": "35240-74c292ac-fba5-4db2-8aba-99d19eea1e66"
+                }
+              ],
+              "id": "67d1c0ef-6c26-42ad-b538-6eca89640150",
+              "createdAt": "2026-07-28T03:32:47.000Z",
+              "updatedAt": "2026-07-28T03:32:47.000Z",
+              "uid": "35240-67d1c0ef-6c26-42ad-b538-6eca89640150"
+            }
+          ],
+          "id": "57ec8d15-086d-42cf-9c33-2d81238192cd",
+          "createdAt": "2026-07-28T03:32:47.000Z",
+          "updatedAt": "2026-07-28T03:32:47.000Z",
+          "uid": "35240-57ec8d15-086d-42cf-9c33-2d81238192cd"
+        }
+      ],
+      "id": "e787fff1-24da-4369-ba16-c1266fce4479",
+      "createdAt": "2026-07-28T03:32:47.000Z",
+      "updatedAt": "2026-07-28T03:32:47.000Z",
+      "uid": "35240-e787fff1-24da-4369-ba16-c1266fce4479"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

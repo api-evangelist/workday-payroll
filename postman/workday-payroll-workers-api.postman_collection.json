@@ -1,0 +1,245 @@
+{
+  "info": {
+    "_postman_id": "1c9b5877-5015-4a03-b8e0-906e6232d68d",
+    "name": "Workday Payroll Input Deductions Workers API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:48.000Z",
+    "updatedAt": "2026-07-28T03:32:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1c9b5877-5015-4a03-b8e0-906e6232d68d"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{workerId}",
+          "item": [
+            {
+              "name": "payrollDetails",
+              "item": [
+                {
+                  "name": "Workday Payroll Get Worker Payroll Details",
+                  "id": "11a31d62-d6c6-4446-ba29-1d25ef6e6e22",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/payrollDetails",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "payrollDetails"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0641215f-bf01-47a4-b196-5f391af250c5",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker (Workday ID)"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve payroll-specific details for a worker, including pay group assignment, payment method, and compensation summary."
+                  },
+                  "response": [
+                    {
+                      "id": "d6170e55-0441-4059-aa3c-6a0c4b38c457",
+                      "name": "Worker payroll details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/payrollDetails",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "payrollDetails"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"workerId\": \"<string>\",\n  \"workerDescriptor\": \"<string>\",\n  \"payGroup\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"paymentMethod\": \"Wire\",\n  \"annualSalary\": \"<double>\",\n  \"hourlyRate\": \"<double>\",\n  \"compensationFrequency\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"taxJurisdiction\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-d6170e55-0441-4059-aa3c-6a0c4b38c457"
+                    },
+                    {
+                      "id": "2b25c22d-9641-4f50-9bae-49999c59bb37",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/payrollDetails",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "payrollDetails"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-2b25c22d-9641-4f50-9bae-49999c59bb37"
+                    },
+                    {
+                      "id": "e68ba236-1aa6-4b1f-ac20-fe271e129d6b",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/payrollDetails",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "payrollDetails"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:48.000Z",
+                      "updatedAt": "2026-07-28T03:32:48.000Z",
+                      "uid": "35240-e68ba236-1aa6-4b1f-ac20-fe271e129d6b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:48.000Z",
+                  "updatedAt": "2026-07-28T03:32:48.000Z",
+                  "uid": "35240-11a31d62-d6c6-4446-ba29-1d25ef6e6e22"
+                }
+              ],
+              "id": "e391dbbb-849e-4403-ad2e-9067029d3a36",
+              "createdAt": "2026-07-28T03:32:48.000Z",
+              "updatedAt": "2026-07-28T03:32:48.000Z",
+              "uid": "35240-e391dbbb-849e-4403-ad2e-9067029d3a36"
+            }
+          ],
+          "id": "b4e7c325-643a-4e46-a1e2-95af10a7a7bf",
+          "createdAt": "2026-07-28T03:32:48.000Z",
+          "updatedAt": "2026-07-28T03:32:48.000Z",
+          "uid": "35240-b4e7c325-643a-4e46-a1e2-95af10a7a7bf"
+        }
+      ],
+      "id": "0b109175-4fe7-4d9d-b33c-56cf1544ec5d",
+      "createdAt": "2026-07-28T03:32:48.000Z",
+      "updatedAt": "2026-07-28T03:32:48.000Z",
+      "uid": "35240-0b109175-4fe7-4d9d-b33c-56cf1544ec5d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

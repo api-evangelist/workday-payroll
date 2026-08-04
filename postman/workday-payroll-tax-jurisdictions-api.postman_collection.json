@@ -1,0 +1,413 @@
+{
+  "info": {
+    "_postman_id": "010eb0fb-ba23-49c6-8c81-861cfb8cc936",
+    "name": "Workday Payroll Input Deductions Tax Jurisdictions API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:39.000Z",
+    "updatedAt": "2026-07-28T03:32:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-010eb0fb-ba23-49c6-8c81-861cfb8cc936"
+  },
+  "item": [
+    {
+      "name": "taxJurisdictions",
+      "item": [
+        {
+          "name": "{jurisdictionId}",
+          "item": [
+            {
+              "name": "Workday Payroll Get a Tax Jurisdiction",
+              "id": "f5b3e762-951e-413f-bc23-b4f635bf6bf3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/taxJurisdictions/:jurisdictionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "taxJurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f022e07b-bb52-4f81-b3ba-7dd83917ae39",
+                      "key": "jurisdictionId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the tax jurisdiction"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific tax jurisdiction, including applicable tax types and rates."
+              },
+              "response": [
+                {
+                  "id": "89160dc7-8e66-4202-bd31-8605a8c22f3e",
+                  "name": "Tax jurisdiction details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/taxJurisdictions/:jurisdictionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "taxJurisdictions",
+                        ":jurisdictionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jurisdictionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"level\": \"Local\",\n  \"country\": \"<string>\",\n  \"stateCode\": \"<string>\",\n  \"localityName\": \"<string>\",\n  \"taxTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:32:40.000Z",
+                  "updatedAt": "2026-07-28T03:32:40.000Z",
+                  "uid": "35240-89160dc7-8e66-4202-bd31-8605a8c22f3e"
+                },
+                {
+                  "id": "4cd4a274-857d-472e-b474-664b292a8698",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/taxJurisdictions/:jurisdictionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "taxJurisdictions",
+                        ":jurisdictionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jurisdictionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:40.000Z",
+                  "updatedAt": "2026-07-28T03:32:40.000Z",
+                  "uid": "35240-4cd4a274-857d-472e-b474-664b292a8698"
+                },
+                {
+                  "id": "4a1155d2-5398-49ce-8f0e-b3af2ead2beb",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/taxJurisdictions/:jurisdictionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "taxJurisdictions",
+                        ":jurisdictionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jurisdictionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:40.000Z",
+                  "updatedAt": "2026-07-28T03:32:40.000Z",
+                  "uid": "35240-4a1155d2-5398-49ce-8f0e-b3af2ead2beb"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:40.000Z",
+              "updatedAt": "2026-07-28T03:32:40.000Z",
+              "uid": "35240-f5b3e762-951e-413f-bc23-b4f635bf6bf3"
+            }
+          ],
+          "id": "30421981-3482-407b-8d9b-46f5393edf2c",
+          "createdAt": "2026-07-28T03:32:40.000Z",
+          "updatedAt": "2026-07-28T03:32:40.000Z",
+          "uid": "35240-30421981-3482-407b-8d9b-46f5393edf2c"
+        },
+        {
+          "name": "Workday Payroll List Tax Jurisdictions",
+          "id": "474c6003-0679-4d7b-8fa5-ed16d855b3e1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/taxJurisdictions?limit=20&offset=0&level=Other&country=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "taxJurisdictions"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by jurisdiction level",
+                  "key": "level",
+                  "value": "Other"
+                },
+                {
+                  "description": "Filter by country code",
+                  "key": "country",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve all configured tax jurisdictions, including federal, state, and local tax authorities."
+          },
+          "response": [
+            {
+              "id": "af549179-cbc5-48ca-ae62-82a678bbc232",
+              "name": "Collection of tax jurisdictions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/taxJurisdictions?limit=20&offset=0&level=Other&country=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "taxJurisdictions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by jurisdiction level",
+                      "key": "level",
+                      "value": "Other"
+                    },
+                    {
+                      "description": "Filter by country code",
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"level\": \"State\",\n      \"country\": \"<string>\",\n      \"stateCode\": \"<string>\",\n      \"localityName\": \"<string>\",\n      \"taxTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"level\": \"Other\",\n      \"country\": \"<string>\",\n      \"stateCode\": \"<string>\",\n      \"localityName\": \"<string>\",\n      \"taxTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:40.000Z",
+              "updatedAt": "2026-07-28T03:32:40.000Z",
+              "uid": "35240-af549179-cbc5-48ca-ae62-82a678bbc232"
+            },
+            {
+              "id": "6e86d5c8-e6c8-4ff8-b6de-4fcf3540b736",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/taxJurisdictions?limit=20&offset=0&level=Other&country=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "taxJurisdictions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by jurisdiction level",
+                      "key": "level",
+                      "value": "Other"
+                    },
+                    {
+                      "description": "Filter by country code",
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:40.000Z",
+              "updatedAt": "2026-07-28T03:32:40.000Z",
+              "uid": "35240-6e86d5c8-e6c8-4ff8-b6de-4fcf3540b736"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:40.000Z",
+          "updatedAt": "2026-07-28T03:32:40.000Z",
+          "uid": "35240-474c6003-0679-4d7b-8fa5-ed16d855b3e1"
+        }
+      ],
+      "id": "f40a4354-35aa-4dcd-a5b4-462ae973657f",
+      "createdAt": "2026-07-28T03:32:40.000Z",
+      "updatedAt": "2026-07-28T03:32:40.000Z",
+      "uid": "35240-f40a4354-35aa-4dcd-a5b4-462ae973657f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

@@ -1,0 +1,791 @@
+{
+  "info": {
+    "_postman_id": "afb791a6-9a2c-4a43-ab57-eb2fb9a2695c",
+    "name": "Workday Payroll Input Deductions Tax Withholdings API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:40.000Z",
+    "updatedAt": "2026-07-28T03:32:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-afb791a6-9a2c-4a43-ab57-eb2fb9a2695c"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{workerId}",
+          "item": [
+            {
+              "name": "taxWithholdings",
+              "item": [
+                {
+                  "name": "{withholdingId}",
+                  "item": [
+                    {
+                      "name": "Workday Payroll Get a Worker Tax Withholding",
+                      "id": "37aa152e-aa4f-4cd0-8ccf-d17dafb5ffab",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxWithholdings",
+                            ":withholdingId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e88499a7-42d8-4d88-ae1e-45075a217654",
+                              "key": "workerId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the worker"
+                            },
+                            {
+                              "id": "ee47224f-513d-427f-9277-aae2921cdf59",
+                              "key": "withholdingId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the tax withholding"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve details of a specific tax withholding configuration for a worker."
+                      },
+                      "response": [
+                        {
+                          "id": "3fef9d76-41d5-4ec8-9510-378db672cd8c",
+                          "name": "Tax withholding details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"jurisdiction\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"taxType\": \"SUTA\",\n  \"filingStatus\": \"QualifyingWidower\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\",\n  \"effectiveDate\": \"<date>\",\n  \"currency\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-3fef9d76-41d5-4ec8-9510-378db672cd8c"
+                        },
+                        {
+                          "id": "115ada53-c756-4ba4-b166-b8502e8ed5f7",
+                          "name": "Authentication required or token expired",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-115ada53-c756-4ba4-b166-b8502e8ed5f7"
+                        },
+                        {
+                          "id": "03cb804c-7a05-4fc8-acae-7af7702d5b98",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-03cb804c-7a05-4fc8-acae-7af7702d5b98"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:32:40.000Z",
+                      "updatedAt": "2026-07-28T03:32:40.000Z",
+                      "uid": "35240-37aa152e-aa4f-4cd0-8ccf-d17dafb5ffab"
+                    },
+                    {
+                      "name": "Workday Payroll Update a Worker Tax Withholding",
+                      "id": "c56ea6e5-4fd9-4c73-b74e-eeed80484812",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"filingStatus\": \"Single\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxWithholdings",
+                            ":withholdingId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c2cad8f4-c163-44be-a64b-340f0fd6b3ce",
+                              "key": "workerId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the worker"
+                            },
+                            {
+                              "id": "642335b0-5a4d-4ba8-9fc4-4eb82a7f9926",
+                              "key": "withholdingId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the tax withholding"
+                            }
+                          ]
+                        },
+                        "description": "Update a tax withholding configuration for a worker, such as changing filing status or additional withholding amounts."
+                      },
+                      "response": [
+                        {
+                          "id": "465658be-d652-4e7e-ba46-c13ff249d81e",
+                          "name": "Tax withholding updated",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"filingStatus\": \"Single\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"jurisdiction\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"taxType\": \"SUTA\",\n  \"filingStatus\": \"QualifyingWidower\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\",\n  \"effectiveDate\": \"<date>\",\n  \"currency\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-465658be-d652-4e7e-ba46-c13ff249d81e"
+                        },
+                        {
+                          "id": "5f6ccafe-9807-4576-b968-1338f80824b7",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"filingStatus\": \"Single\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-5f6ccafe-9807-4576-b968-1338f80824b7"
+                        },
+                        {
+                          "id": "41b11e9b-5641-405e-9706-4f6b186c7282",
+                          "name": "Authentication required or token expired",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"filingStatus\": \"Single\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-41b11e9b-5641-405e-9706-4f6b186c7282"
+                        },
+                        {
+                          "id": "51e3c8d2-b594-40c4-9ec7-5adc40c45178",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"filingStatus\": \"Single\",\n  \"allowances\": \"<integer>\",\n  \"additionalWithholding\": \"<double>\",\n  \"exempt\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings/:withholdingId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxWithholdings",
+                                ":withholdingId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "withholdingId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:40.000Z",
+                          "updatedAt": "2026-07-28T03:32:40.000Z",
+                          "uid": "35240-51e3c8d2-b594-40c4-9ec7-5adc40c45178"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:32:40.000Z",
+                      "updatedAt": "2026-07-28T03:32:40.000Z",
+                      "uid": "35240-c56ea6e5-4fd9-4c73-b74e-eeed80484812"
+                    }
+                  ],
+                  "id": "22215113-8cac-4cbd-a36c-9cef2d6a11dc",
+                  "createdAt": "2026-07-28T03:32:40.000Z",
+                  "updatedAt": "2026-07-28T03:32:40.000Z",
+                  "uid": "35240-22215113-8cac-4cbd-a36c-9cef2d6a11dc"
+                },
+                {
+                  "name": "Workday Payroll List Worker Tax Withholdings",
+                  "id": "c2161862-74fd-4994-9a2a-d0d070ca81db",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "taxWithholdings"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d8434004-8246-476a-aff6-9ebaec10a12f",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all tax withholding configurations for a specific worker, including federal, state, and local withholdings."
+                  },
+                  "response": [
+                    {
+                      "id": "53e7dfc4-4965-4028-8326-34c5fe63ddd9",
+                      "name": "Collection of tax withholdings",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxWithholdings"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"jurisdiction\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"taxType\": \"StateIncome\",\n      \"filingStatus\": \"MarriedFilingSeparately\",\n      \"allowances\": \"<integer>\",\n      \"additionalWithholding\": \"<double>\",\n      \"exempt\": \"<boolean>\",\n      \"effectiveDate\": \"<date>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"jurisdiction\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"taxType\": \"SocialSecurity\",\n      \"filingStatus\": \"HeadOfHousehold\",\n      \"allowances\": \"<integer>\",\n      \"additionalWithholding\": \"<double>\",\n      \"exempt\": \"<boolean>\",\n      \"effectiveDate\": \"<date>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:40.000Z",
+                      "updatedAt": "2026-07-28T03:32:40.000Z",
+                      "uid": "35240-53e7dfc4-4965-4028-8326-34c5fe63ddd9"
+                    },
+                    {
+                      "id": "d2bc36c8-f248-42f7-96cc-27b1f1571099",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxWithholdings"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:40.000Z",
+                      "updatedAt": "2026-07-28T03:32:40.000Z",
+                      "uid": "35240-d2bc36c8-f248-42f7-96cc-27b1f1571099"
+                    },
+                    {
+                      "id": "fc68416b-487d-4a16-b165-f5908246cca3",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxWithholdings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxWithholdings"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:40.000Z",
+                      "updatedAt": "2026-07-28T03:32:40.000Z",
+                      "uid": "35240-fc68416b-487d-4a16-b165-f5908246cca3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:40.000Z",
+                  "updatedAt": "2026-07-28T03:32:40.000Z",
+                  "uid": "35240-c2161862-74fd-4994-9a2a-d0d070ca81db"
+                }
+              ],
+              "id": "90fe1fe4-615b-44da-a6cb-83db6ecfcae0",
+              "createdAt": "2026-07-28T03:32:40.000Z",
+              "updatedAt": "2026-07-28T03:32:40.000Z",
+              "uid": "35240-90fe1fe4-615b-44da-a6cb-83db6ecfcae0"
+            }
+          ],
+          "id": "7f9f07a7-ed2e-4290-8a5d-0c6547dc959a",
+          "createdAt": "2026-07-28T03:32:40.000Z",
+          "updatedAt": "2026-07-28T03:32:40.000Z",
+          "uid": "35240-7f9f07a7-ed2e-4290-8a5d-0c6547dc959a"
+        }
+      ],
+      "id": "17f44edf-45ce-47bc-85b4-7fa0e7f4324b",
+      "createdAt": "2026-07-28T03:32:40.000Z",
+      "updatedAt": "2026-07-28T03:32:40.000Z",
+      "uid": "35240-17f44edf-45ce-47bc-85b4-7fa0e7f4324b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

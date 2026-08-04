@@ -1,0 +1,714 @@
+{
+  "info": {
+    "_postman_id": "7a65ec57-fbc5-4c63-8c75-d4e9ad581556",
+    "name": "Workday Payroll Input Deductions Payroll Summaries API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:13.000Z",
+    "updatedAt": "2026-07-28T03:32:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7a65ec57-fbc5-4c63-8c75-d4e9ad581556"
+  },
+  "item": [
+    {
+      "name": "payRuns",
+      "item": [
+        {
+          "name": "{payRunId}",
+          "item": [
+            {
+              "name": "results",
+              "item": [
+                {
+                  "name": "workers",
+                  "item": [
+                    {
+                      "name": "{workerId}",
+                      "item": [
+                        {
+                          "name": "Workday Payroll Get a Worker Result for a Pay Run",
+                          "id": "81a390de-9ef0-4892-8774-48bbfe5120cb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers/:workerId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "payRuns",
+                                ":payRunId",
+                                "results",
+                                "workers",
+                                ":workerId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0660bf76-de09-456d-a23a-293da4cdbb01",
+                                  "key": "payRunId",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the pay run"
+                                },
+                                {
+                                  "id": "0108f240-c867-43f3-adb7-ec21580293b1",
+                                  "key": "workerId",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the worker"
+                                }
+                              ]
+                            },
+                            "description": "Retrieve detailed results for a specific worker within a completed pay run."
+                          },
+                          "response": [
+                            {
+                              "id": "22c43d73-e28c-4d08-9c25-2edbe3923ad4",
+                              "name": "Worker result details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers/:workerId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "payRuns",
+                                    ":payRunId",
+                                    "results",
+                                    "workers",
+                                    ":workerId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "payRunId"
+                                    },
+                                    {
+                                      "key": "workerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"grossPay\": \"<double>\",\n  \"netPay\": \"<double>\",\n  \"totalEarnings\": \"<double>\",\n  \"totalDeductions\": \"<double>\",\n  \"totalTaxes\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"paymentMethod\": \"DirectDeposit\"\n}",
+                              "createdAt": "2026-07-28T03:32:14.000Z",
+                              "updatedAt": "2026-07-28T03:32:14.000Z",
+                              "uid": "35240-22c43d73-e28c-4d08-9c25-2edbe3923ad4"
+                            },
+                            {
+                              "id": "d8f6d23f-0fc7-4519-b6e6-cc76a1e6be82",
+                              "name": "Authentication required or token expired",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers/:workerId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "payRuns",
+                                    ":payRunId",
+                                    "results",
+                                    "workers",
+                                    ":workerId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "payRunId"
+                                    },
+                                    {
+                                      "key": "workerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:32:14.000Z",
+                              "updatedAt": "2026-07-28T03:32:14.000Z",
+                              "uid": "35240-d8f6d23f-0fc7-4519-b6e6-cc76a1e6be82"
+                            },
+                            {
+                              "id": "a38b21fe-47f8-4035-b82f-f5a81d1b9748",
+                              "name": "Resource not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers/:workerId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "payRuns",
+                                    ":payRunId",
+                                    "results",
+                                    "workers",
+                                    ":workerId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "payRunId"
+                                    },
+                                    {
+                                      "key": "workerId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:32:14.000Z",
+                              "updatedAt": "2026-07-28T03:32:14.000Z",
+                              "uid": "35240-a38b21fe-47f8-4035-b82f-f5a81d1b9748"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:32:14.000Z",
+                          "updatedAt": "2026-07-28T03:32:14.000Z",
+                          "uid": "35240-81a390de-9ef0-4892-8774-48bbfe5120cb"
+                        }
+                      ],
+                      "id": "325c8529-c254-44fc-8efb-d370b45e32a4",
+                      "createdAt": "2026-07-28T03:32:14.000Z",
+                      "updatedAt": "2026-07-28T03:32:14.000Z",
+                      "uid": "35240-325c8529-c254-44fc-8efb-d370b45e32a4"
+                    },
+                    {
+                      "name": "Workday Payroll List Worker-level Results for a Pay Run",
+                      "id": "d1305b85-929a-4112-90a1-857b183410ba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "results",
+                            "workers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "ea5a934e-1c24-4000-965b-35de565698c2",
+                              "key": "payRunId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the pay run"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve individual worker results for a completed pay run, including each worker's gross pay, deductions, taxes, and net pay."
+                      },
+                      "response": [
+                        {
+                          "id": "5e68b738-bfd0-4306-ace5-6bbb6e36b366",
+                          "name": "Collection of worker results",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "payRuns",
+                                ":payRunId",
+                                "results",
+                                "workers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payRunId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"grossPay\": \"<double>\",\n      \"netPay\": \"<double>\",\n      \"totalEarnings\": \"<double>\",\n      \"totalDeductions\": \"<double>\",\n      \"totalTaxes\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"paymentMethod\": \"Wire\"\n    },\n    {\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"grossPay\": \"<double>\",\n      \"netPay\": \"<double>\",\n      \"totalEarnings\": \"<double>\",\n      \"totalDeductions\": \"<double>\",\n      \"totalTaxes\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"paymentMethod\": \"Wire\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T03:32:14.000Z",
+                          "updatedAt": "2026-07-28T03:32:14.000Z",
+                          "uid": "35240-5e68b738-bfd0-4306-ace5-6bbb6e36b366"
+                        },
+                        {
+                          "id": "ad5553db-f6c3-4098-9cfa-b9453374752b",
+                          "name": "Authentication required or token expired",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "payRuns",
+                                ":payRunId",
+                                "results",
+                                "workers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payRunId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:14.000Z",
+                          "updatedAt": "2026-07-28T03:32:14.000Z",
+                          "uid": "35240-ad5553db-f6c3-4098-9cfa-b9453374752b"
+                        },
+                        {
+                          "id": "1839d621-d66e-4a29-b5fb-435671521325",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/payRuns/:payRunId/results/workers?limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "payRuns",
+                                ":payRunId",
+                                "results",
+                                "workers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of results to return",
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "description": "Number of results to skip for pagination",
+                                  "key": "offset",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payRunId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:14.000Z",
+                          "updatedAt": "2026-07-28T03:32:14.000Z",
+                          "uid": "35240-1839d621-d66e-4a29-b5fb-435671521325"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:32:14.000Z",
+                      "updatedAt": "2026-07-28T03:32:14.000Z",
+                      "uid": "35240-d1305b85-929a-4112-90a1-857b183410ba"
+                    }
+                  ],
+                  "id": "286a9b35-0f97-42e1-a3d0-7e4c0977a572",
+                  "createdAt": "2026-07-28T03:32:14.000Z",
+                  "updatedAt": "2026-07-28T03:32:14.000Z",
+                  "uid": "35240-286a9b35-0f97-42e1-a3d0-7e4c0977a572"
+                },
+                {
+                  "name": "Workday Payroll Get Pay Run Results",
+                  "id": "7b3a91b9-1a0d-4680-98a4-3585e64b53e5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId/results",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId",
+                        "results"
+                      ],
+                      "variable": [
+                        {
+                          "id": "189e55e6-ded7-4831-8fd3-e6cba406c806",
+                          "key": "payRunId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the pay run"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve aggregated results for a completed pay run, including totals for earnings, deductions, taxes, and payments."
+                  },
+                  "response": [
+                    {
+                      "id": "363d42fa-8289-472d-a7d3-8f14c5e23100",
+                      "name": "Pay run results",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/results",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "results"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"payRunId\": \"<string>\",\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"paymentDate\": \"<date>\",\n  \"totalGrossPay\": \"<double>\",\n  \"totalNetPay\": \"<double>\",\n  \"totalDeductions\": \"<double>\",\n  \"totalEmployerTaxes\": \"<double>\",\n  \"totalEmployeeTaxes\": \"<double>\",\n  \"workerCount\": \"<integer>\",\n  \"currency\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:14.000Z",
+                      "updatedAt": "2026-07-28T03:32:14.000Z",
+                      "uid": "35240-363d42fa-8289-472d-a7d3-8f14c5e23100"
+                    },
+                    {
+                      "id": "9109a60c-30e2-4d1c-9911-41cc9a373210",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/results",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "results"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:14.000Z",
+                      "updatedAt": "2026-07-28T03:32:14.000Z",
+                      "uid": "35240-9109a60c-30e2-4d1c-9911-41cc9a373210"
+                    },
+                    {
+                      "id": "11aa936e-c692-4db8-9cc4-aa48d17647c1",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/results",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "results"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:14.000Z",
+                      "updatedAt": "2026-07-28T03:32:14.000Z",
+                      "uid": "35240-11aa936e-c692-4db8-9cc4-aa48d17647c1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:14.000Z",
+                  "updatedAt": "2026-07-28T03:32:14.000Z",
+                  "uid": "35240-7b3a91b9-1a0d-4680-98a4-3585e64b53e5"
+                }
+              ],
+              "id": "a81856a6-44a6-4718-9a1d-b563770995b6",
+              "createdAt": "2026-07-28T03:32:14.000Z",
+              "updatedAt": "2026-07-28T03:32:14.000Z",
+              "uid": "35240-a81856a6-44a6-4718-9a1d-b563770995b6"
+            }
+          ],
+          "id": "bf7857d0-77a6-4d0f-885f-a9b343e90c86",
+          "createdAt": "2026-07-28T03:32:14.000Z",
+          "updatedAt": "2026-07-28T03:32:14.000Z",
+          "uid": "35240-bf7857d0-77a6-4d0f-885f-a9b343e90c86"
+        }
+      ],
+      "id": "730c937e-d5e0-48cf-b6a7-6d4a7198a364",
+      "createdAt": "2026-07-28T03:32:14.000Z",
+      "updatedAt": "2026-07-28T03:32:14.000Z",
+      "uid": "35240-730c937e-d5e0-48cf-b6a7-6d4a7198a364"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

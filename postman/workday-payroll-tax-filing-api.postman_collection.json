@@ -1,0 +1,428 @@
+{
+  "info": {
+    "_postman_id": "09f4d033-53d2-407f-8229-012617f1d761",
+    "name": "Workday Payroll Input Deductions Tax Filing API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:38.000Z",
+    "updatedAt": "2026-07-28T03:32:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-09f4d033-53d2-407f-8229-012617f1d761"
+  },
+  "item": [
+    {
+      "name": "taxFilings",
+      "item": [
+        {
+          "name": "{filingId}",
+          "item": [
+            {
+              "name": "Workday Payroll Get a Tax Filing",
+              "id": "93fe4eb2-5751-4612-984b-6cceab94aff9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/taxFilings/:filingId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "taxFilings",
+                    ":filingId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3bc5b5f8-ad33-4313-bcac-87fb3f56336a",
+                      "key": "filingId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the tax filing"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific tax filing record."
+              },
+              "response": [
+                {
+                  "id": "5913fac4-cf3b-4709-9b4b-14452d53359a",
+                  "name": "Tax filing details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/taxFilings/:filingId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "taxFilings",
+                        ":filingId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "filingId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"filingType\": \"Quarterly\",\n  \"jurisdiction\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"taxYear\": \"<integer>\",\n  \"quarter\": \"<integer>\",\n  \"formNumber\": \"<string>\",\n  \"totalTaxableWages\": \"<double>\",\n  \"totalTaxWithheld\": \"<double>\",\n  \"totalEmployerTax\": \"<double>\",\n  \"dueDate\": \"<date>\",\n  \"filedDate\": \"<date>\",\n  \"status\": \"Rejected\",\n  \"currency\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:39.000Z",
+                  "updatedAt": "2026-07-28T03:32:39.000Z",
+                  "uid": "35240-5913fac4-cf3b-4709-9b4b-14452d53359a"
+                },
+                {
+                  "id": "71b1a999-8844-4f68-9a83-e19a7967b0ef",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/taxFilings/:filingId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "taxFilings",
+                        ":filingId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "filingId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:39.000Z",
+                  "updatedAt": "2026-07-28T03:32:39.000Z",
+                  "uid": "35240-71b1a999-8844-4f68-9a83-e19a7967b0ef"
+                },
+                {
+                  "id": "3472dfec-feea-42f0-bac3-9320b6d0ec28",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/taxFilings/:filingId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "taxFilings",
+                        ":filingId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "filingId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:39.000Z",
+                  "updatedAt": "2026-07-28T03:32:39.000Z",
+                  "uid": "35240-3472dfec-feea-42f0-bac3-9320b6d0ec28"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:39.000Z",
+              "updatedAt": "2026-07-28T03:32:39.000Z",
+              "uid": "35240-93fe4eb2-5751-4612-984b-6cceab94aff9"
+            }
+          ],
+          "id": "f9d7d354-75b7-4057-9354-a4eaf265c803",
+          "createdAt": "2026-07-28T03:32:39.000Z",
+          "updatedAt": "2026-07-28T03:32:39.000Z",
+          "uid": "35240-f9d7d354-75b7-4057-9354-a4eaf265c803"
+        },
+        {
+          "name": "Workday Payroll List Tax Filings",
+          "id": "898b38b7-040f-4c72-90d6-da3043a61845",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/taxFilings?limit=20&offset=0&taxYear=<integer>&filingType=Quarterly&jurisdiction=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "taxFilings"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by tax year",
+                  "key": "taxYear",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by filing type",
+                  "key": "filingType",
+                  "value": "Quarterly"
+                },
+                {
+                  "description": "Filter by jurisdiction identifier",
+                  "key": "jurisdiction",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve tax filing records for compliance reporting, including quarterly and annual filing data."
+          },
+          "response": [
+            {
+              "id": "8fedf7ca-eba3-4272-8556-9dd8402a7f0b",
+              "name": "Collection of tax filings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/taxFilings?limit=20&offset=0&taxYear=<integer>&filingType=Quarterly&jurisdiction=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "taxFilings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by tax year",
+                      "key": "taxYear",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by filing type",
+                      "key": "filingType",
+                      "value": "Quarterly"
+                    },
+                    {
+                      "description": "Filter by jurisdiction identifier",
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"filingType\": \"Quarterly\",\n      \"jurisdiction\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"taxYear\": \"<integer>\",\n      \"quarter\": \"<integer>\",\n      \"formNumber\": \"<string>\",\n      \"totalTaxableWages\": \"<double>\",\n      \"totalTaxWithheld\": \"<double>\",\n      \"totalEmployerTax\": \"<double>\",\n      \"dueDate\": \"<date>\",\n      \"filedDate\": \"<date>\",\n      \"status\": \"Pending\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"filingType\": \"Amendment\",\n      \"jurisdiction\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"taxYear\": \"<integer>\",\n      \"quarter\": \"<integer>\",\n      \"formNumber\": \"<string>\",\n      \"totalTaxableWages\": \"<double>\",\n      \"totalTaxWithheld\": \"<double>\",\n      \"totalEmployerTax\": \"<double>\",\n      \"dueDate\": \"<date>\",\n      \"filedDate\": \"<date>\",\n      \"status\": \"Filed\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:39.000Z",
+              "updatedAt": "2026-07-28T03:32:39.000Z",
+              "uid": "35240-8fedf7ca-eba3-4272-8556-9dd8402a7f0b"
+            },
+            {
+              "id": "6b738f62-b598-4848-af2d-59d40cac02aa",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/taxFilings?limit=20&offset=0&taxYear=<integer>&filingType=Quarterly&jurisdiction=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "taxFilings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by tax year",
+                      "key": "taxYear",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by filing type",
+                      "key": "filingType",
+                      "value": "Quarterly"
+                    },
+                    {
+                      "description": "Filter by jurisdiction identifier",
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:39.000Z",
+              "updatedAt": "2026-07-28T03:32:39.000Z",
+              "uid": "35240-6b738f62-b598-4848-af2d-59d40cac02aa"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:39.000Z",
+          "updatedAt": "2026-07-28T03:32:39.000Z",
+          "uid": "35240-898b38b7-040f-4c72-90d6-da3043a61845"
+        }
+      ],
+      "id": "2ef0e144-03d4-41a9-af4f-319b5fa7fff8",
+      "createdAt": "2026-07-28T03:32:39.000Z",
+      "updatedAt": "2026-07-28T03:32:39.000Z",
+      "uid": "35240-2ef0e144-03d4-41a9-af4f-319b5fa7fff8"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

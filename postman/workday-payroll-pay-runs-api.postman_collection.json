@@ -1,0 +1,1278 @@
+{
+  "info": {
+    "_postman_id": "aeaa243f-cb3c-4081-b355-560e5412e58a",
+    "name": "Workday Payroll Input Deductions Pay Runs API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:08.000Z",
+    "updatedAt": "2026-07-28T03:32:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-aeaa243f-cb3c-4081-b355-560e5412e58a"
+  },
+  "item": [
+    {
+      "name": "payRuns",
+      "item": [
+        {
+          "name": "{payRunId}",
+          "item": [
+            {
+              "name": "complete",
+              "item": [
+                {
+                  "name": "Workday Payroll Complete a Pay Run",
+                  "id": "cdce1ddf-704f-427f-ad94-51555adb8220",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId/complete",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId",
+                        "complete"
+                      ],
+                      "variable": [
+                        {
+                          "id": "427a58ac-7c9f-46cd-8380-2d9a633b3aa5",
+                          "key": "payRunId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the pay run"
+                        }
+                      ]
+                    },
+                    "description": "Mark a pay run as completed, finalizing all payroll calculations and preparing payments for distribution."
+                  },
+                  "response": [
+                    {
+                      "id": "7bb3494b-603f-4540-9c95-13826165a75e",
+                      "name": "Pay run completed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/complete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "complete"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"payGroup\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"status\": \"Completed\",\n  \"runCategory\": \"OffCycle\",\n  \"paymentDate\": \"<date>\",\n  \"totalGrossPay\": \"<double>\",\n  \"totalNetPay\": \"<double>\",\n  \"totalDeductions\": \"<double>\",\n  \"totalTaxes\": \"<double>\",\n  \"workerCount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"createdOn\": \"<dateTime>\",\n  \"completedOn\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:32:08.000Z",
+                      "updatedAt": "2026-07-28T03:32:08.000Z",
+                      "uid": "35240-7bb3494b-603f-4540-9c95-13826165a75e"
+                    },
+                    {
+                      "id": "7292c2fb-b0cf-4afe-bbc0-45aeffe62b15",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/complete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "complete"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:08.000Z",
+                      "updatedAt": "2026-07-28T03:32:08.000Z",
+                      "uid": "35240-7292c2fb-b0cf-4afe-bbc0-45aeffe62b15"
+                    },
+                    {
+                      "id": "eacde74d-5b87-4838-a309-c7fbcaab0288",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/complete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "complete"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:08.000Z",
+                      "updatedAt": "2026-07-28T03:32:08.000Z",
+                      "uid": "35240-eacde74d-5b87-4838-a309-c7fbcaab0288"
+                    },
+                    {
+                      "id": "5bb5e517-3bb3-4442-865c-2c0171958a16",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/complete",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "complete"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:08.000Z",
+                      "updatedAt": "2026-07-28T03:32:08.000Z",
+                      "uid": "35240-5bb5e517-3bb3-4442-865c-2c0171958a16"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-cdce1ddf-704f-427f-ad94-51555adb8220"
+                }
+              ],
+              "id": "89f18ea9-a854-4a5e-8ec6-768bcd5a1904",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-89f18ea9-a854-4a5e-8ec6-768bcd5a1904"
+            },
+            {
+              "name": "Workday Payroll Get a Pay Run",
+              "id": "7c989405-cdc0-4342-b20b-9b0f6cd756e0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns/:payRunId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns",
+                    ":payRunId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "837bf7a7-e9b0-43bf-b0da-2b606ba1c613",
+                      "key": "payRunId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the pay run"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific payroll run by its identifier."
+              },
+              "response": [
+                {
+                  "id": "7dfee3d7-2458-44c5-b731-21db9229bc10",
+                  "name": "Pay run details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"payGroup\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"status\": \"Completed\",\n  \"runCategory\": \"OffCycle\",\n  \"paymentDate\": \"<date>\",\n  \"totalGrossPay\": \"<double>\",\n  \"totalNetPay\": \"<double>\",\n  \"totalDeductions\": \"<double>\",\n  \"totalTaxes\": \"<double>\",\n  \"workerCount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"createdOn\": \"<dateTime>\",\n  \"completedOn\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-7dfee3d7-2458-44c5-b731-21db9229bc10"
+                },
+                {
+                  "id": "21c7b9cd-8baf-4d3a-8993-ea53c2343055",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-21c7b9cd-8baf-4d3a-8993-ea53c2343055"
+                },
+                {
+                  "id": "b05e2a92-7bdc-425b-a3a4-fdcf4764a850",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-b05e2a92-7bdc-425b-a3a4-fdcf4764a850"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-7c989405-cdc0-4342-b20b-9b0f6cd756e0"
+            },
+            {
+              "name": "Workday Payroll Update a Pay Run",
+              "id": "e25a88ea-ef27-4a8e-af7b-06c20f770bea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"Draft\",\n  \"paymentDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns/:payRunId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns",
+                    ":payRunId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8fd86b74-24c7-4e18-a04c-8e44b6fe26e2",
+                      "key": "payRunId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the pay run"
+                    }
+                  ]
+                },
+                "description": "Update the status or properties of an existing pay run."
+              },
+              "response": [
+                {
+                  "id": "6a021fef-7f97-4087-858b-d79e90e916ae",
+                  "name": "Pay run updated",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"Draft\",\n  \"paymentDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"payGroup\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"status\": \"Completed\",\n  \"runCategory\": \"OffCycle\",\n  \"paymentDate\": \"<date>\",\n  \"totalGrossPay\": \"<double>\",\n  \"totalNetPay\": \"<double>\",\n  \"totalDeductions\": \"<double>\",\n  \"totalTaxes\": \"<double>\",\n  \"workerCount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"createdOn\": \"<dateTime>\",\n  \"completedOn\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-6a021fef-7f97-4087-858b-d79e90e916ae"
+                },
+                {
+                  "id": "fd5880dc-2af3-4ce1-86e9-58aa6d1078e2",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"Draft\",\n  \"paymentDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-fd5880dc-2af3-4ce1-86e9-58aa6d1078e2"
+                },
+                {
+                  "id": "ae6f06d5-3663-45e2-8c6f-4c684fe487fe",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"Draft\",\n  \"paymentDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-ae6f06d5-3663-45e2-8c6f-4c684fe487fe"
+                },
+                {
+                  "id": "1dd45ece-7f16-4eea-9ed3-894e2aa190da",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"Draft\",\n  \"paymentDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payRunId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:08.000Z",
+                  "updatedAt": "2026-07-28T03:32:08.000Z",
+                  "uid": "35240-1dd45ece-7f16-4eea-9ed3-894e2aa190da"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-e25a88ea-ef27-4a8e-af7b-06c20f770bea"
+            }
+          ],
+          "id": "04719550-a02b-4f23-b214-d2279eba27f9",
+          "createdAt": "2026-07-28T03:32:08.000Z",
+          "updatedAt": "2026-07-28T03:32:08.000Z",
+          "uid": "35240-04719550-a02b-4f23-b214-d2279eba27f9"
+        },
+        {
+          "name": "Workday Payroll List Pay Runs",
+          "id": "0e1823c4-3946-4799-96da-48ef95903666",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payRuns?limit=20&offset=0&payGroupId=<string>&status=Completed&fromDate=<date>&toDate=<date>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payRuns"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by pay group identifier",
+                  "key": "payGroupId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by pay run status",
+                  "key": "status",
+                  "value": "Completed"
+                },
+                {
+                  "description": "Filter pay runs starting from this date",
+                  "key": "fromDate",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Filter pay runs up to this date",
+                  "key": "toDate",
+                  "value": "<date>"
+                }
+              ]
+            },
+            "description": "Retrieve a collection of payroll runs, optionally filtered by status, pay group, or date range."
+          },
+          "response": [
+            {
+              "id": "5590351a-ed99-4331-b0f3-f62f636ccc1e",
+              "name": "Collection of pay runs",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns?limit=20&offset=0&payGroupId=<string>&status=Completed&fromDate=<date>&toDate=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by pay group identifier",
+                      "key": "payGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by pay run status",
+                      "key": "status",
+                      "value": "Completed"
+                    },
+                    {
+                      "description": "Filter pay runs starting from this date",
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter pay runs up to this date",
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"payGroup\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"payPeriod\": {\n        \"startDate\": \"<date>\",\n        \"endDate\": \"<date>\"\n      },\n      \"status\": \"InProgress\",\n      \"runCategory\": \"Regular\",\n      \"paymentDate\": \"<date>\",\n      \"totalGrossPay\": \"<double>\",\n      \"totalNetPay\": \"<double>\",\n      \"totalDeductions\": \"<double>\",\n      \"totalTaxes\": \"<double>\",\n      \"workerCount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"createdOn\": \"<dateTime>\",\n      \"completedOn\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"payGroup\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"payPeriod\": {\n        \"startDate\": \"<date>\",\n        \"endDate\": \"<date>\"\n      },\n      \"status\": \"Cancelled\",\n      \"runCategory\": \"OffCycle\",\n      \"paymentDate\": \"<date>\",\n      \"totalGrossPay\": \"<double>\",\n      \"totalNetPay\": \"<double>\",\n      \"totalDeductions\": \"<double>\",\n      \"totalTaxes\": \"<double>\",\n      \"workerCount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"createdOn\": \"<dateTime>\",\n      \"completedOn\": \"<dateTime>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-5590351a-ed99-4331-b0f3-f62f636ccc1e"
+            },
+            {
+              "id": "f6b50a3a-38be-49b2-8ef9-897f8806269e",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns?limit=20&offset=0&payGroupId=<string>&status=Completed&fromDate=<date>&toDate=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by pay group identifier",
+                      "key": "payGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by pay run status",
+                      "key": "status",
+                      "value": "Completed"
+                    },
+                    {
+                      "description": "Filter pay runs starting from this date",
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter pay runs up to this date",
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-f6b50a3a-38be-49b2-8ef9-897f8806269e"
+            },
+            {
+              "id": "85f38745-92e6-4860-94e9-0cd1fbb1130e",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns?limit=20&offset=0&payGroupId=<string>&status=Completed&fromDate=<date>&toDate=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by pay group identifier",
+                      "key": "payGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by pay run status",
+                      "key": "status",
+                      "value": "Completed"
+                    },
+                    {
+                      "description": "Filter pay runs starting from this date",
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter pay runs up to this date",
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-85f38745-92e6-4860-94e9-0cd1fbb1130e"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:08.000Z",
+          "updatedAt": "2026-07-28T03:32:08.000Z",
+          "uid": "35240-0e1823c4-3946-4799-96da-48ef95903666"
+        },
+        {
+          "name": "Workday Payroll Create a Pay Run",
+          "id": "ef9e44a2-4675-41ed-a865-04879a7dccb8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payGroupId\": \"<string>\",\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"runCategory\": \"Regular\",\n  \"paymentDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/payRuns",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payRuns"
+              ]
+            },
+            "description": "Initiate a new payroll run for a specified pay group and pay period."
+          },
+          "response": [
+            {
+              "id": "de923017-fb56-4302-bdde-17fcf628b1ff",
+              "name": "Pay run created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payGroupId\": \"<string>\",\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"runCategory\": \"Regular\",\n  \"paymentDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"payGroup\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"status\": \"Completed\",\n  \"runCategory\": \"OffCycle\",\n  \"paymentDate\": \"<date>\",\n  \"totalGrossPay\": \"<double>\",\n  \"totalNetPay\": \"<double>\",\n  \"totalDeductions\": \"<double>\",\n  \"totalTaxes\": \"<double>\",\n  \"workerCount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"createdOn\": \"<dateTime>\",\n  \"completedOn\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-de923017-fb56-4302-bdde-17fcf628b1ff"
+            },
+            {
+              "id": "f552e33e-a597-47be-b3a4-41a5a9de1bc0",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payGroupId\": \"<string>\",\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"runCategory\": \"Regular\",\n  \"paymentDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-f552e33e-a597-47be-b3a4-41a5a9de1bc0"
+            },
+            {
+              "id": "e59caf3f-0dcb-4716-9d0b-47e521eb63d0",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payGroupId\": \"<string>\",\n  \"payPeriod\": {\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\"\n  },\n  \"runCategory\": \"Regular\",\n  \"paymentDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payRuns",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payRuns"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:08.000Z",
+              "updatedAt": "2026-07-28T03:32:08.000Z",
+              "uid": "35240-e59caf3f-0dcb-4716-9d0b-47e521eb63d0"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:08.000Z",
+          "updatedAt": "2026-07-28T03:32:08.000Z",
+          "uid": "35240-ef9e44a2-4675-41ed-a865-04879a7dccb8"
+        }
+      ],
+      "id": "f8bfa443-88e3-4ac0-8038-bd633dbc4635",
+      "createdAt": "2026-07-28T03:32:08.000Z",
+      "updatedAt": "2026-07-28T03:32:08.000Z",
+      "uid": "35240-f8bfa443-88e3-4ac0-8038-bd633dbc4635"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

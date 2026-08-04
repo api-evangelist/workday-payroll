@@ -1,0 +1,453 @@
+{
+  "info": {
+    "_postman_id": "a7bdb698-296e-4a02-9be7-40bad92182fe",
+    "name": "Workday Payroll Input Deductions Earnings API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:02.000Z",
+    "updatedAt": "2026-07-28T03:32:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a7bdb698-296e-4a02-9be7-40bad92182fe"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{workerId}",
+          "item": [
+            {
+              "name": "earnings",
+              "item": [
+                {
+                  "name": "Workday Payroll List Worker Earnings",
+                  "id": "a253ea4a-0bde-40c4-aa82-7b7d6079a974",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/earnings?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "earnings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "3b7d3697-7aa7-4827-85c2-adaefe01ff48",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker (Workday ID)"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all earnings records for a specific worker, including regular pay, overtime, bonuses, and other earning types."
+                  },
+                  "response": [
+                    {
+                      "id": "b485f059-145e-45e5-a3bc-ea4b8e418e41",
+                      "name": "Collection of worker earnings",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/earnings?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "earnings"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"earningCode\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"rate\": \"<double>\",\n      \"effectiveDate\": \"<date>\",\n      \"payPeriod\": {\n        \"startDate\": \"<date>\",\n        \"endDate\": \"<date>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"earningCode\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"rate\": \"<double>\",\n      \"effectiveDate\": \"<date>\",\n      \"payPeriod\": {\n        \"startDate\": \"<date>\",\n        \"endDate\": \"<date>\"\n      }\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:02.000Z",
+                      "updatedAt": "2026-07-28T03:32:02.000Z",
+                      "uid": "35240-b485f059-145e-45e5-a3bc-ea4b8e418e41"
+                    },
+                    {
+                      "id": "642b6d0a-ab1c-4733-8974-30f33c4ad88c",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/earnings?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "earnings"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:02.000Z",
+                      "updatedAt": "2026-07-28T03:32:02.000Z",
+                      "uid": "35240-642b6d0a-ab1c-4733-8974-30f33c4ad88c"
+                    },
+                    {
+                      "id": "be724c06-2c4b-4e3f-94b8-247d2d898193",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/earnings?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "earnings"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:02.000Z",
+                      "updatedAt": "2026-07-28T03:32:02.000Z",
+                      "uid": "35240-be724c06-2c4b-4e3f-94b8-247d2d898193"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:02.000Z",
+                  "updatedAt": "2026-07-28T03:32:02.000Z",
+                  "uid": "35240-a253ea4a-0bde-40c4-aa82-7b7d6079a974"
+                }
+              ],
+              "id": "8df677a2-c948-43aa-aede-fffb10131bbc",
+              "createdAt": "2026-07-28T03:32:02.000Z",
+              "updatedAt": "2026-07-28T03:32:02.000Z",
+              "uid": "35240-8df677a2-c948-43aa-aede-fffb10131bbc"
+            }
+          ],
+          "id": "44b07521-af42-443c-80c3-4869cf0907c5",
+          "createdAt": "2026-07-28T03:32:02.000Z",
+          "updatedAt": "2026-07-28T03:32:02.000Z",
+          "uid": "35240-44b07521-af42-443c-80c3-4869cf0907c5"
+        }
+      ],
+      "id": "9f5937ed-660c-4b79-ad0e-ed0cbe2b23ba",
+      "createdAt": "2026-07-28T03:32:02.000Z",
+      "updatedAt": "2026-07-28T03:32:02.000Z",
+      "uid": "35240-9f5937ed-660c-4b79-ad0e-ed0cbe2b23ba"
+    },
+    {
+      "name": "earningCodes",
+      "item": [
+        {
+          "name": "Workday Payroll List Earning Codes",
+          "id": "d5e5f074-3d14-4170-ae82-15a5cf1d4846",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/earningCodes?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "earningCodes"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Retrieve all configured earning codes that define types of compensation such as regular pay, overtime, and bonuses."
+          },
+          "response": [
+            {
+              "id": "c2a42e76-970c-4534-ba1c-79519a7e1b55",
+              "name": "Collection of earning codes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/earningCodes?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "earningCodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"type\": \"PTO\",\n      \"taxable\": \"<boolean>\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"type\": \"PTO\",\n      \"taxable\": \"<boolean>\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:02.000Z",
+              "updatedAt": "2026-07-28T03:32:02.000Z",
+              "uid": "35240-c2a42e76-970c-4534-ba1c-79519a7e1b55"
+            },
+            {
+              "id": "b98710a4-3f57-49c7-a286-d7613afab7c2",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/earningCodes?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "earningCodes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:02.000Z",
+              "updatedAt": "2026-07-28T03:32:02.000Z",
+              "uid": "35240-b98710a4-3f57-49c7-a286-d7613afab7c2"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:02.000Z",
+          "updatedAt": "2026-07-28T03:32:02.000Z",
+          "uid": "35240-d5e5f074-3d14-4170-ae82-15a5cf1d4846"
+        }
+      ],
+      "id": "28adb6de-271b-46b0-af54-7af9dc7f8fc1",
+      "createdAt": "2026-07-28T03:32:02.000Z",
+      "updatedAt": "2026-07-28T03:32:02.000Z",
+      "uid": "35240-28adb6de-271b-46b0-af54-7af9dc7f8fc1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

@@ -1,0 +1,768 @@
+{
+  "info": {
+    "_postman_id": "6a75aaf7-8a7d-48ab-a950-6d0c3b4830ef",
+    "name": "Workday Payroll Input Deductions Tax Elections API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:37.000Z",
+    "updatedAt": "2026-07-28T03:32:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6a75aaf7-8a7d-48ab-a950-6d0c3b4830ef"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{workerId}",
+          "item": [
+            {
+              "name": "taxElections",
+              "item": [
+                {
+                  "name": "{electionId}",
+                  "item": [
+                    {
+                      "name": "Workday Payroll Get a Worker Tax Election",
+                      "id": "7df92ad2-76df-451d-bcd0-d5b66397ca8b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections/:electionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections",
+                            ":electionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "49159d9f-216e-4ce5-adbb-0952915b37cd",
+                              "key": "workerId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the worker"
+                            },
+                            {
+                              "id": "e55aede9-7b49-4ce2-9ed8-99ff896459a0",
+                              "key": "electionId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the tax election"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve details of a specific tax election for a worker."
+                      },
+                      "response": [
+                        {
+                          "id": "12fd97d8-199e-4355-bb83-1fdb0d2d45bb",
+                          "name": "Tax election details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxElections/:electionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxElections",
+                                ":electionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "electionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"formType\": \"StateWithholding\",\n  \"jurisdiction\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\",\n  \"submittedOn\": \"<dateTime>\",\n  \"status\": \"Voided\"\n}",
+                          "createdAt": "2026-07-28T03:32:38.000Z",
+                          "updatedAt": "2026-07-28T03:32:38.000Z",
+                          "uid": "35240-12fd97d8-199e-4355-bb83-1fdb0d2d45bb"
+                        },
+                        {
+                          "id": "97d73924-4e2c-4858-ba84-85a6cc95ac0b",
+                          "name": "Authentication required or token expired",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxElections/:electionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxElections",
+                                ":electionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "electionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:38.000Z",
+                          "updatedAt": "2026-07-28T03:32:38.000Z",
+                          "uid": "35240-97d73924-4e2c-4858-ba84-85a6cc95ac0b"
+                        },
+                        {
+                          "id": "09142115-50f7-4d2d-97bb-52f42fc9a1ff",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/workers/:workerId/taxElections/:electionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workers",
+                                ":workerId",
+                                "taxElections",
+                                ":electionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workerId"
+                                },
+                                {
+                                  "key": "electionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:32:38.000Z",
+                          "updatedAt": "2026-07-28T03:32:38.000Z",
+                          "uid": "35240-09142115-50f7-4d2d-97bb-52f42fc9a1ff"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-7df92ad2-76df-451d-bcd0-d5b66397ca8b"
+                    }
+                  ],
+                  "id": "ad71411b-63d1-445b-9798-15feb9740de9",
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-ad71411b-63d1-445b-9798-15feb9740de9"
+                },
+                {
+                  "name": "Workday Payroll List Worker Tax Elections",
+                  "id": "df83aba0-5032-4f15-922d-e60e54d5583b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "taxElections"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0eb1300d-b912-4af4-8f94-a7182d6a498b",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all tax elections for a worker, including federal W-4 data, state withholding elections, and local tax elections."
+                  },
+                  "response": [
+                    {
+                      "id": "1b8089d3-bff5-485a-8672-fcdb05b6529e",
+                      "name": "Collection of tax elections",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"formType\": \"LocalWithholding\",\n      \"jurisdiction\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"filingStatus\": \"<string>\",\n      \"multipleJobs\": \"<boolean>\",\n      \"dependentsAmount\": \"<double>\",\n      \"otherIncome\": \"<double>\",\n      \"deductions\": \"<double>\",\n      \"additionalWithholding\": \"<double>\",\n      \"effectiveDate\": \"<date>\",\n      \"submittedOn\": \"<dateTime>\",\n      \"status\": \"Voided\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"formType\": \"LocalWithholding\",\n      \"jurisdiction\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"filingStatus\": \"<string>\",\n      \"multipleJobs\": \"<boolean>\",\n      \"dependentsAmount\": \"<double>\",\n      \"otherIncome\": \"<double>\",\n      \"deductions\": \"<double>\",\n      \"additionalWithholding\": \"<double>\",\n      \"effectiveDate\": \"<date>\",\n      \"submittedOn\": \"<dateTime>\",\n      \"status\": \"Superseded\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-1b8089d3-bff5-485a-8672-fcdb05b6529e"
+                    },
+                    {
+                      "id": "a063e60a-5cd8-498f-9266-2691e7cbed54",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-a063e60a-5cd8-498f-9266-2691e7cbed54"
+                    },
+                    {
+                      "id": "ee562939-61fc-41bc-be73-a75cefe92664",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-ee562939-61fc-41bc-be73-a75cefe92664"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-df83aba0-5032-4f15-922d-e60e54d5583b"
+                },
+                {
+                  "name": "Workday Payroll Create a Worker Tax Election",
+                  "id": "76c4481f-0895-4468-bb68-22d35130609c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"formType\": \"W4\",\n  \"jurisdictionId\": \"<string>\",\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":workerId",
+                        "taxElections"
+                      ],
+                      "variable": [
+                        {
+                          "id": "922cdc9c-7603-4792-bd95-f5f800ab2ea5",
+                          "key": "workerId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the worker"
+                        }
+                      ]
+                    },
+                    "description": "Submit a new tax election for a worker, such as a W-4 update or state withholding form change."
+                  },
+                  "response": [
+                    {
+                      "id": "d3e3b3af-f5f6-4e57-a12b-4f7937b4d41a",
+                      "name": "Tax election created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"formType\": \"W4\",\n  \"jurisdictionId\": \"<string>\",\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"formType\": \"StateWithholding\",\n  \"jurisdiction\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\",\n  \"submittedOn\": \"<dateTime>\",\n  \"status\": \"Voided\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-d3e3b3af-f5f6-4e57-a12b-4f7937b4d41a"
+                    },
+                    {
+                      "id": "cbdd2c76-e5c1-4f4f-a6f7-2b3385fd123e",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"formType\": \"W4\",\n  \"jurisdictionId\": \"<string>\",\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-cbdd2c76-e5c1-4f4f-a6f7-2b3385fd123e"
+                    },
+                    {
+                      "id": "2200d522-0f8b-48b7-b6e2-47522da653c9",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"formType\": \"W4\",\n  \"jurisdictionId\": \"<string>\",\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-2200d522-0f8b-48b7-b6e2-47522da653c9"
+                    },
+                    {
+                      "id": "045c0cc9-839e-465f-b2b8-6f8fb93c67a8",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"formType\": \"W4\",\n  \"jurisdictionId\": \"<string>\",\n  \"filingStatus\": \"<string>\",\n  \"multipleJobs\": \"<boolean>\",\n  \"dependentsAmount\": \"<double>\",\n  \"otherIncome\": \"<double>\",\n  \"deductions\": \"<double>\",\n  \"additionalWithholding\": \"<double>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:workerId/taxElections",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":workerId",
+                            "taxElections"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:38.000Z",
+                      "updatedAt": "2026-07-28T03:32:38.000Z",
+                      "uid": "35240-045c0cc9-839e-465f-b2b8-6f8fb93c67a8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-76c4481f-0895-4468-bb68-22d35130609c"
+                }
+              ],
+              "id": "3ba6326d-5e99-49be-8bab-00c2d8473f8a",
+              "createdAt": "2026-07-28T03:32:38.000Z",
+              "updatedAt": "2026-07-28T03:32:38.000Z",
+              "uid": "35240-3ba6326d-5e99-49be-8bab-00c2d8473f8a"
+            }
+          ],
+          "id": "5ddafcdc-62b8-445c-9d3b-8e90f7d63726",
+          "createdAt": "2026-07-28T03:32:38.000Z",
+          "updatedAt": "2026-07-28T03:32:38.000Z",
+          "uid": "35240-5ddafcdc-62b8-445c-9d3b-8e90f7d63726"
+        }
+      ],
+      "id": "cc46e3ab-61f5-4a0b-b23e-abfaaa33871f",
+      "createdAt": "2026-07-28T03:32:38.000Z",
+      "updatedAt": "2026-07-28T03:32:38.000Z",
+      "uid": "35240-cc46e3ab-61f5-4a0b-b23e-abfaaa33871f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

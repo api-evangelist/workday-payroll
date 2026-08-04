@@ -1,0 +1,294 @@
+{
+  "info": {
+    "_postman_id": "6137bc5e-5052-4583-9b9f-c2131abdc6b7",
+    "name": "Workday Payroll Input Deductions Payroll Calculations API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:12.000Z",
+    "updatedAt": "2026-07-28T03:32:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6137bc5e-5052-4583-9b9f-c2131abdc6b7"
+  },
+  "item": [
+    {
+      "name": "payRuns",
+      "item": [
+        {
+          "name": "{payRunId}",
+          "item": [
+            {
+              "name": "calculate",
+              "item": [
+                {
+                  "name": "Workday Payroll Calculate a Pay Run",
+                  "id": "89a11fa0-f89e-4f3f-aae2-c5e3128328b3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payRuns/:payRunId/calculate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payRuns",
+                        ":payRunId",
+                        "calculate"
+                      ],
+                      "variable": [
+                        {
+                          "id": "82bf446d-54fc-4440-ac99-67fb3d6ef6f9",
+                          "key": "payRunId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the pay run"
+                        }
+                      ]
+                    },
+                    "description": "Trigger payroll calculations for a specific pay run, processing all earnings, deductions, and taxes for included workers."
+                  },
+                  "response": [
+                    {
+                      "id": "7be0be78-cecc-4f91-bcf1-ec570420e1dd",
+                      "name": "Calculation initiated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/calculate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "calculate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"payRunId\": \"<string>\",\n  \"status\": \"Completed\",\n  \"startedAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\",\n      \"details\": [\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\",\n      \"details\": [\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"message\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-7be0be78-cecc-4f91-bcf1-ec570420e1dd"
+                    },
+                    {
+                      "id": "a569ad12-cb76-4f4d-802e-51da02fbcbaf",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/calculate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "calculate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-a569ad12-cb76-4f4d-802e-51da02fbcbaf"
+                    },
+                    {
+                      "id": "c3cc2902-0f33-429f-916c-d73d33f2c764",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/calculate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "calculate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-c3cc2902-0f33-429f-916c-d73d33f2c764"
+                    },
+                    {
+                      "id": "deac0095-71d2-4b15-9204-bbf9d81debc9",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payRuns/:payRunId/calculate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payRuns",
+                            ":payRunId",
+                            "calculate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payRunId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-deac0095-71d2-4b15-9204-bbf9d81debc9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:13.000Z",
+                  "updatedAt": "2026-07-28T03:32:13.000Z",
+                  "uid": "35240-89a11fa0-f89e-4f3f-aae2-c5e3128328b3"
+                }
+              ],
+              "id": "77f58741-f9b2-405f-b59c-096a94544300",
+              "createdAt": "2026-07-28T03:32:13.000Z",
+              "updatedAt": "2026-07-28T03:32:13.000Z",
+              "uid": "35240-77f58741-f9b2-405f-b59c-096a94544300"
+            }
+          ],
+          "id": "5908eb17-11ec-4c6e-971b-35a4369ec15f",
+          "createdAt": "2026-07-28T03:32:13.000Z",
+          "updatedAt": "2026-07-28T03:32:13.000Z",
+          "uid": "35240-5908eb17-11ec-4c6e-971b-35a4369ec15f"
+        }
+      ],
+      "id": "ee8407ac-f943-4cca-a349-6491ffd249ee",
+      "createdAt": "2026-07-28T03:32:13.000Z",
+      "updatedAt": "2026-07-28T03:32:13.000Z",
+      "uid": "35240-ee8407ac-f943-4cca-a349-6491ffd249ee"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

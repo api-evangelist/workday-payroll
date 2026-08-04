@@ -1,0 +1,611 @@
+{
+  "info": {
+    "_postman_id": "e8a6297b-4e74-41b7-a7a5-7128bd51a7ba",
+    "name": "Workday Payroll Input Deductions Input Batches API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:02.000Z",
+    "updatedAt": "2026-07-28T03:32:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e8a6297b-4e74-41b7-a7a5-7128bd51a7ba"
+  },
+  "item": [
+    {
+      "name": "inputBatches",
+      "item": [
+        {
+          "name": "{batchId}",
+          "item": [
+            {
+              "name": "Workday Payroll Get an Input Batch",
+              "id": "616efcb0-3fd6-4911-b094-273a592538b6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/inputBatches/:batchId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inputBatches",
+                    ":batchId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "edaa0b3a-c870-41ef-83d1-36de7af35bb1",
+                      "key": "batchId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the input batch"
+                    }
+                  ]
+                },
+                "description": "Retrieve details and status of a specific input batch submission."
+              },
+              "response": [
+                {
+                  "id": "8d0a91e7-0804-4311-9703-55100fabfb49",
+                  "name": "Input batch details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/inputBatches/:batchId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "inputBatches",
+                        ":batchId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "batchId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"Failed\",\n  \"recordCount\": \"<integer>\",\n  \"validRecords\": \"<integer>\",\n  \"failedRecords\": \"<integer>\",\n  \"submittedOn\": \"<dateTime>\",\n  \"completedOn\": \"<dateTime>\",\n  \"submittedBy\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:03.000Z",
+                  "updatedAt": "2026-07-28T03:32:03.000Z",
+                  "uid": "35240-8d0a91e7-0804-4311-9703-55100fabfb49"
+                },
+                {
+                  "id": "9e834d72-9014-4904-9bfb-86944bacb668",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/inputBatches/:batchId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "inputBatches",
+                        ":batchId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "batchId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:03.000Z",
+                  "updatedAt": "2026-07-28T03:32:03.000Z",
+                  "uid": "35240-9e834d72-9014-4904-9bfb-86944bacb668"
+                },
+                {
+                  "id": "87f6851b-f46f-44e1-b5d6-8c3174b34216",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/inputBatches/:batchId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "inputBatches",
+                        ":batchId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "batchId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:03.000Z",
+                  "updatedAt": "2026-07-28T03:32:03.000Z",
+                  "uid": "35240-87f6851b-f46f-44e1-b5d6-8c3174b34216"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:03.000Z",
+              "updatedAt": "2026-07-28T03:32:03.000Z",
+              "uid": "35240-616efcb0-3fd6-4911-b094-273a592538b6"
+            }
+          ],
+          "id": "00a0f25a-14a9-4190-b4b7-d2090e43b822",
+          "createdAt": "2026-07-28T03:32:03.000Z",
+          "updatedAt": "2026-07-28T03:32:03.000Z",
+          "uid": "35240-00a0f25a-14a9-4190-b4b7-d2090e43b822"
+        },
+        {
+          "name": "Workday Payroll List Input Batches",
+          "id": "e24081aa-0cec-4670-8d90-e203b3cd725c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/inputBatches?limit=20&offset=0&status=Validated",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inputBatches"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by batch status",
+                  "key": "status",
+                  "value": "Validated"
+                }
+              ]
+            },
+            "description": "Retrieve all payroll input batch submissions, including their processing status and validation results."
+          },
+          "response": [
+            {
+              "id": "85311f67-87ed-4933-8bc5-953c65c85ee9",
+              "name": "Collection of input batches",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/inputBatches?limit=20&offset=0&status=Validated",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inputBatches"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by batch status",
+                      "key": "status",
+                      "value": "Validated"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"Validated\",\n      \"recordCount\": \"<integer>\",\n      \"validRecords\": \"<integer>\",\n      \"failedRecords\": \"<integer>\",\n      \"submittedOn\": \"<dateTime>\",\n      \"completedOn\": \"<dateTime>\",\n      \"submittedBy\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"Failed\",\n      \"recordCount\": \"<integer>\",\n      \"validRecords\": \"<integer>\",\n      \"failedRecords\": \"<integer>\",\n      \"submittedOn\": \"<dateTime>\",\n      \"completedOn\": \"<dateTime>\",\n      \"submittedBy\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:03.000Z",
+              "updatedAt": "2026-07-28T03:32:03.000Z",
+              "uid": "35240-85311f67-87ed-4933-8bc5-953c65c85ee9"
+            },
+            {
+              "id": "70e26a1c-c04d-4c1b-8adf-67bf30ee4151",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/inputBatches?limit=20&offset=0&status=Validated",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inputBatches"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by batch status",
+                      "key": "status",
+                      "value": "Validated"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:03.000Z",
+              "updatedAt": "2026-07-28T03:32:03.000Z",
+              "uid": "35240-70e26a1c-c04d-4c1b-8adf-67bf30ee4151"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:03.000Z",
+          "updatedAt": "2026-07-28T03:32:03.000Z",
+          "uid": "35240-e24081aa-0cec-4670-8d90-e203b3cd725c"
+        },
+        {
+          "name": "Workday Payroll Create an Input Batch",
+          "id": "3901aeae-6358-4378-86fc-ebf10555c7f9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"records\": [\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Deduction\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    },\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Earning\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inputBatches",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inputBatches"
+              ]
+            },
+            "description": "Submit a batch of payroll input records for processing, supporting earnings, deductions, and time-off entries in bulk."
+          },
+          "response": [
+            {
+              "id": "b7bb790b-8011-4c89-9991-039834dc66e6",
+              "name": "Input batch created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"records\": [\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Deduction\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    },\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Earning\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/inputBatches",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inputBatches"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"Failed\",\n  \"recordCount\": \"<integer>\",\n  \"validRecords\": \"<integer>\",\n  \"failedRecords\": \"<integer>\",\n  \"submittedOn\": \"<dateTime>\",\n  \"completedOn\": \"<dateTime>\",\n  \"submittedBy\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:03.000Z",
+              "updatedAt": "2026-07-28T03:32:03.000Z",
+              "uid": "35240-b7bb790b-8011-4c89-9991-039834dc66e6"
+            },
+            {
+              "id": "848f06db-74bb-45da-a3cd-24ae4cafc0ca",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"records\": [\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Deduction\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    },\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Earning\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/inputBatches",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inputBatches"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:03.000Z",
+              "updatedAt": "2026-07-28T03:32:03.000Z",
+              "uid": "35240-848f06db-74bb-45da-a3cd-24ae4cafc0ca"
+            },
+            {
+              "id": "bdafdee2-6f5b-44ab-90b8-14234052e2e7",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"records\": [\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Deduction\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    },\n    {\n      \"workerId\": \"<string>\",\n      \"inputType\": \"Earning\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"hours\": \"<double>\",\n      \"effectiveDate\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/inputBatches",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inputBatches"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:03.000Z",
+              "updatedAt": "2026-07-28T03:32:03.000Z",
+              "uid": "35240-bdafdee2-6f5b-44ab-90b8-14234052e2e7"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:03.000Z",
+          "updatedAt": "2026-07-28T03:32:03.000Z",
+          "uid": "35240-3901aeae-6358-4378-86fc-ebf10555c7f9"
+        }
+      ],
+      "id": "c42e23a6-682a-4e1c-ba6c-218c4c9acbf9",
+      "createdAt": "2026-07-28T03:32:03.000Z",
+      "updatedAt": "2026-07-28T03:32:03.000Z",
+      "uid": "35240-c42e23a6-682a-4e1c-ba6c-218c4c9acbf9"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

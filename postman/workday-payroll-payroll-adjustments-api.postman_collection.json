@@ -1,0 +1,626 @@
+{
+  "info": {
+    "_postman_id": "48dbbb87-bcf3-4a5f-b2ae-2d20a1003545",
+    "name": "Workday Payroll Input Deductions Payroll Adjustments API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:12.000Z",
+    "updatedAt": "2026-07-28T03:32:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-48dbbb87-bcf3-4a5f-b2ae-2d20a1003545"
+  },
+  "item": [
+    {
+      "name": "adjustments",
+      "item": [
+        {
+          "name": "{adjustmentId}",
+          "item": [
+            {
+              "name": "Workday Payroll Get a Payroll Adjustment",
+              "id": "2b2b2b1e-8fa2-43b6-b69d-db03c5a731b3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adjustments/:adjustmentId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adjustments",
+                    ":adjustmentId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "63d098e4-2e57-4c45-87d4-01ca5f3a3b06",
+                      "key": "adjustmentId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the payroll adjustment"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific payroll adjustment."
+              },
+              "response": [
+                {
+                  "id": "17dc8455-88d9-4d0d-bc6b-f0e31d22d30d",
+                  "name": "Adjustment details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adjustments/:adjustmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adjustments",
+                        ":adjustmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "adjustmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"adjustmentType\": \"Retroactive\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"status\": \"Rejected\",\n  \"createdOn\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:32:12.000Z",
+                  "updatedAt": "2026-07-28T03:32:12.000Z",
+                  "uid": "35240-17dc8455-88d9-4d0d-bc6b-f0e31d22d30d"
+                },
+                {
+                  "id": "b3e822e2-05e3-415d-b82f-a8551781d72c",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adjustments/:adjustmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adjustments",
+                        ":adjustmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "adjustmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:12.000Z",
+                  "updatedAt": "2026-07-28T03:32:12.000Z",
+                  "uid": "35240-b3e822e2-05e3-415d-b82f-a8551781d72c"
+                },
+                {
+                  "id": "c7dc8e0b-8677-4506-8d0c-32d9200e9649",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adjustments/:adjustmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adjustments",
+                        ":adjustmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "adjustmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:12.000Z",
+                  "updatedAt": "2026-07-28T03:32:12.000Z",
+                  "uid": "35240-c7dc8e0b-8677-4506-8d0c-32d9200e9649"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:12.000Z",
+              "updatedAt": "2026-07-28T03:32:12.000Z",
+              "uid": "35240-2b2b2b1e-8fa2-43b6-b69d-db03c5a731b3"
+            }
+          ],
+          "id": "086034af-d669-48ee-ad31-fb0605778009",
+          "createdAt": "2026-07-28T03:32:12.000Z",
+          "updatedAt": "2026-07-28T03:32:12.000Z",
+          "uid": "35240-086034af-d669-48ee-ad31-fb0605778009"
+        },
+        {
+          "name": "Workday Payroll List Payroll Adjustments",
+          "id": "23ed068c-751f-477d-ac2b-845ae50d786f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/adjustments?limit=20&offset=0&workerId=<string>&adjustmentType=Correction",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "adjustments"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by worker identifier",
+                  "key": "workerId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by adjustment type",
+                  "key": "adjustmentType",
+                  "value": "Correction"
+                }
+              ]
+            },
+            "description": "Retrieve all payroll adjustment records, optionally filtered by worker, type, or status."
+          },
+          "response": [
+            {
+              "id": "1455f2e7-1968-4aeb-ab29-518b2566da43",
+              "name": "Collection of payroll adjustments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adjustments?limit=20&offset=0&workerId=<string>&adjustmentType=Correction",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adjustments"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by worker identifier",
+                      "key": "workerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by adjustment type",
+                      "key": "adjustmentType",
+                      "value": "Correction"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"adjustmentType\": \"Retroactive\",\n      \"originalPayRunId\": \"<string>\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"effectiveDate\": \"<date>\",\n      \"status\": \"Rejected\",\n      \"createdOn\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"adjustmentType\": \"Reclass\",\n      \"originalPayRunId\": \"<string>\",\n      \"earningCode\": \"<string>\",\n      \"deductionCode\": \"<string>\",\n      \"amount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"effectiveDate\": \"<date>\",\n      \"status\": \"Processed\",\n      \"createdOn\": \"<dateTime>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:12.000Z",
+              "updatedAt": "2026-07-28T03:32:12.000Z",
+              "uid": "35240-1455f2e7-1968-4aeb-ab29-518b2566da43"
+            },
+            {
+              "id": "ff6daaf5-09c7-4955-8263-bfbcec4f4359",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adjustments?limit=20&offset=0&workerId=<string>&adjustmentType=Correction",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adjustments"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by worker identifier",
+                      "key": "workerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by adjustment type",
+                      "key": "adjustmentType",
+                      "value": "Correction"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:12.000Z",
+              "updatedAt": "2026-07-28T03:32:12.000Z",
+              "uid": "35240-ff6daaf5-09c7-4955-8263-bfbcec4f4359"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:12.000Z",
+          "updatedAt": "2026-07-28T03:32:12.000Z",
+          "uid": "35240-23ed068c-751f-477d-ac2b-845ae50d786f"
+        },
+        {
+          "name": "Workday Payroll Create a Payroll Adjustment",
+          "id": "34b1420e-53dc-48fc-bd69-48bdd8586cb6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workerId\": \"<string>\",\n  \"adjustmentType\": \"Reversal\",\n  \"amount\": \"<double>\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/adjustments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "adjustments"
+              ]
+            },
+            "description": "Submit a payroll adjustment to correct, reverse, or reclassify previously processed payroll data."
+          },
+          "response": [
+            {
+              "id": "c37b9f6d-5918-41d3-a277-777641dc239d",
+              "name": "Adjustment created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"<string>\",\n  \"adjustmentType\": \"Reversal\",\n  \"amount\": \"<double>\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/adjustments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adjustments"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"adjustmentType\": \"Retroactive\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"status\": \"Rejected\",\n  \"createdOn\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T03:32:12.000Z",
+              "updatedAt": "2026-07-28T03:32:12.000Z",
+              "uid": "35240-c37b9f6d-5918-41d3-a277-777641dc239d"
+            },
+            {
+              "id": "99a1133f-9359-4b20-9929-565300355423",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"<string>\",\n  \"adjustmentType\": \"Reversal\",\n  \"amount\": \"<double>\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/adjustments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adjustments"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:12.000Z",
+              "updatedAt": "2026-07-28T03:32:12.000Z",
+              "uid": "35240-99a1133f-9359-4b20-9929-565300355423"
+            },
+            {
+              "id": "1a11ee92-580b-477a-b2da-278c59054cb6",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"<string>\",\n  \"adjustmentType\": \"Reversal\",\n  \"amount\": \"<double>\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/adjustments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adjustments"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:12.000Z",
+              "updatedAt": "2026-07-28T03:32:12.000Z",
+              "uid": "35240-1a11ee92-580b-477a-b2da-278c59054cb6"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:12.000Z",
+          "updatedAt": "2026-07-28T03:32:12.000Z",
+          "uid": "35240-34b1420e-53dc-48fc-bd69-48bdd8586cb6"
+        }
+      ],
+      "id": "cd0345a7-f26b-4496-90ea-56ffedf7859e",
+      "createdAt": "2026-07-28T03:32:12.000Z",
+      "updatedAt": "2026-07-28T03:32:12.000Z",
+      "uid": "35240-cd0345a7-f26b-4496-90ea-56ffedf7859e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

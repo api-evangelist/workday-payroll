@@ -1,0 +1,786 @@
+{
+  "info": {
+    "_postman_id": "f250f79d-140c-4ecf-83b2-d53c3c2ccbf2",
+    "name": "Workday Payroll Input Deductions Supplemental Earnings API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:30.000Z",
+    "updatedAt": "2026-07-28T03:32:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f250f79d-140c-4ecf-83b2-d53c3c2ccbf2"
+  },
+  "item": [
+    {
+      "name": "supplementalEarnings",
+      "item": [
+        {
+          "name": "{earningId}",
+          "item": [
+            {
+              "name": "Workday Payroll Get a Supplemental Earning",
+              "id": "b62253ce-6dca-4fcf-a9c9-708ef113570f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings",
+                    ":earningId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "569dffeb-967a-4b01-a777-b3b3e163e4ec",
+                      "key": "earningId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the supplemental earning"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific supplemental earning submission."
+              },
+              "response": [
+                {
+                  "id": "0cdb4408-32a9-40a9-8532-8fbe9145ab71",
+                  "name": "Supplemental earning details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplementalEarnings",
+                        ":earningId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "earningId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"earningCode\": \"<string>\",\n  \"type\": \"Allowance\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"status\": \"Processed\",\n  \"reason\": \"<string>\",\n  \"createdOn\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:32:31.000Z",
+                  "updatedAt": "2026-07-28T03:32:31.000Z",
+                  "uid": "35240-0cdb4408-32a9-40a9-8532-8fbe9145ab71"
+                },
+                {
+                  "id": "9d3ef18e-f2bd-4057-8dd3-33736467a4aa",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplementalEarnings",
+                        ":earningId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "earningId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:31.000Z",
+                  "updatedAt": "2026-07-28T03:32:31.000Z",
+                  "uid": "35240-9d3ef18e-f2bd-4057-8dd3-33736467a4aa"
+                },
+                {
+                  "id": "e3ed846e-b143-41b0-8291-9b725bdb20a7",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplementalEarnings",
+                        ":earningId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "earningId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:31.000Z",
+                  "updatedAt": "2026-07-28T03:32:31.000Z",
+                  "uid": "35240-e3ed846e-b143-41b0-8291-9b725bdb20a7"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-b62253ce-6dca-4fcf-a9c9-708ef113570f"
+            },
+            {
+              "name": "Workday Payroll Delete a Supplemental Earning",
+              "id": "1e5643f1-7cb9-42f3-8585-f1d51aa67961",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings",
+                    ":earningId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "378edf9d-1fb9-43ce-89d1-29bde852a885",
+                      "key": "earningId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the supplemental earning"
+                    }
+                  ]
+                },
+                "description": "Delete a pending supplemental earning that has not yet been processed."
+              },
+              "response": [
+                {
+                  "id": "88399ed5-15d3-4277-8cbd-9eaa4d265322",
+                  "name": "Supplemental earning deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplementalEarnings",
+                        ":earningId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "earningId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:32:31.000Z",
+                  "updatedAt": "2026-07-28T03:32:31.000Z",
+                  "uid": "35240-88399ed5-15d3-4277-8cbd-9eaa4d265322"
+                },
+                {
+                  "id": "ae7ab99e-fd79-4080-92fc-bc2bbe598b58",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplementalEarnings",
+                        ":earningId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "earningId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:31.000Z",
+                  "updatedAt": "2026-07-28T03:32:31.000Z",
+                  "uid": "35240-ae7ab99e-fd79-4080-92fc-bc2bbe598b58"
+                },
+                {
+                  "id": "2ccd3317-88fc-4478-bd7f-86b0f7f1227a",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/supplementalEarnings/:earningId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "supplementalEarnings",
+                        ":earningId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "earningId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:31.000Z",
+                  "updatedAt": "2026-07-28T03:32:31.000Z",
+                  "uid": "35240-2ccd3317-88fc-4478-bd7f-86b0f7f1227a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-1e5643f1-7cb9-42f3-8585-f1d51aa67961"
+            }
+          ],
+          "id": "5d139c02-9416-40ae-aa31-65916ef609d0",
+          "createdAt": "2026-07-28T03:32:31.000Z",
+          "updatedAt": "2026-07-28T03:32:31.000Z",
+          "uid": "35240-5d139c02-9416-40ae-aa31-65916ef609d0"
+        },
+        {
+          "name": "Workday Payroll List Supplemental Earnings",
+          "id": "5134ccd1-f9c2-4301-b1f4-52392c2d42bb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/supplementalEarnings?limit=20&offset=0&workerId=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "supplementalEarnings"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Filter by worker identifier",
+                  "key": "workerId",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve all supplemental earning submissions, such as bonuses, commissions, and other non-regular earnings."
+          },
+          "response": [
+            {
+              "id": "66d94f3f-d4ee-417e-a355-74d69909818f",
+              "name": "Collection of supplemental earnings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings?limit=20&offset=0&workerId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by worker identifier",
+                      "key": "workerId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"earningCode\": \"<string>\",\n      \"type\": \"Commission\",\n      \"amount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"effectiveDate\": \"<date>\",\n      \"status\": \"Pending\",\n      \"reason\": \"<string>\",\n      \"createdOn\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"earningCode\": \"<string>\",\n      \"type\": \"Other\",\n      \"amount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"effectiveDate\": \"<date>\",\n      \"status\": \"Approved\",\n      \"reason\": \"<string>\",\n      \"createdOn\": \"<dateTime>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-66d94f3f-d4ee-417e-a355-74d69909818f"
+            },
+            {
+              "id": "2a68a0cd-71c4-489d-b5c8-b6517e34aceb",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings?limit=20&offset=0&workerId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Filter by worker identifier",
+                      "key": "workerId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-2a68a0cd-71c4-489d-b5c8-b6517e34aceb"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:31.000Z",
+          "updatedAt": "2026-07-28T03:32:31.000Z",
+          "uid": "35240-5134ccd1-f9c2-4301-b1f4-52392c2d42bb"
+        },
+        {
+          "name": "Workday Payroll Create a Supplemental Earning",
+          "id": "b2202199-ba61-4a27-ae0f-69a13830dd3d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workerId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"type\": \"Allowance\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/supplementalEarnings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "supplementalEarnings"
+              ]
+            },
+            "description": "Submit a supplemental earning for a worker to be included in the next payroll run."
+          },
+          "response": [
+            {
+              "id": "1dc7df04-48a5-40fc-ad94-616a62e24b06",
+              "name": "Supplemental earning created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"type\": \"Allowance\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"earningCode\": \"<string>\",\n  \"type\": \"Allowance\",\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"status\": \"Processed\",\n  \"reason\": \"<string>\",\n  \"createdOn\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-1dc7df04-48a5-40fc-ad94-616a62e24b06"
+            },
+            {
+              "id": "021c2e2b-05b1-49ec-aa4d-52363a4e1fb5",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"type\": \"Allowance\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-021c2e2b-05b1-49ec-aa4d-52363a4e1fb5"
+            },
+            {
+              "id": "275851ea-8179-477f-b43a-adb463584ea1",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"type\": \"Allowance\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/supplementalEarnings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "supplementalEarnings"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:31.000Z",
+              "updatedAt": "2026-07-28T03:32:31.000Z",
+              "uid": "35240-275851ea-8179-477f-b43a-adb463584ea1"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:31.000Z",
+          "updatedAt": "2026-07-28T03:32:31.000Z",
+          "uid": "35240-b2202199-ba61-4a27-ae0f-69a13830dd3d"
+        }
+      ],
+      "id": "5e42f8b4-7fe6-4b28-8e93-430f12efed15",
+      "createdAt": "2026-07-28T03:32:31.000Z",
+      "updatedAt": "2026-07-28T03:32:31.000Z",
+      "uid": "35240-5e42f8b4-7fe6-4b28-8e93-430f12efed15"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "provider": "workday-payroll",
+  "sources": [
+    "workday-payroll-deductions-api-openapi.yml",
+    "workday-payroll-earnings-api-openapi.yml",
+    "workday-payroll-input-batches-api-openapi.yml",
+    "workday-payroll-one-time-payments-api-openapi.yml",
+    "workday-payroll-pay-groups-api-openapi.yml",
+    "workday-payroll-pay-runs-api-openapi.yml",
+    "workday-payroll-payment-elections-api-openapi.yml",
+    "workday-payroll-payment-results-api-openapi.yml",
+    "workday-payroll-payroll-adjustments-api-openapi.yml",
+    "workday-payroll-payroll-calculations-api-openapi.yml",
+    "workday-payroll-payroll-summaries-api-openapi.yml",
+    "workday-payroll-payslips-api-openapi.yml",
+    "workday-payroll-supplemental-earnings-api-openapi.yml",
+    "workday-payroll-tax-calculations-api-openapi.yml",
+    "workday-payroll-tax-elections-api-openapi.yml",
+    "workday-payroll-tax-filing-api-openapi.yml",
+    "workday-payroll-tax-jurisdictions-api-openapi.yml",
+    "workday-payroll-tax-withholdings-api-openapi.yml",
+    "workday-payroll-time-off-inputs-api-openapi.yml",
+    "workday-payroll-workers-api-openapi.yml",
+    "workday-repos/asor/versions/v1.2.json"
+  ],
+  "outputs": [
+    "workday-payroll-deductions-api-openapi.yml",
+    "workday-payroll-earnings-api-openapi.yml",
+    "workday-payroll-input-batches-api-openapi.yml",
+    "workday-payroll-one-time-payments-api-openapi.yml",
+    "workday-payroll-pay-groups-api-openapi.yml",
+    "workday-payroll-pay-runs-api-openapi.yml",
+    "workday-payroll-payment-elections-api-openapi.yml",
+    "workday-payroll-payment-results-api-openapi.yml",
+    "workday-payroll-payroll-adjustments-api-openapi.yml",
+    "workday-payroll-payroll-calculations-api-openapi.yml",
+    "workday-payroll-payroll-summaries-api-openapi.yml",
+    "workday-payroll-payslips-api-openapi.yml",
+    "workday-payroll-supplemental-earnings-api-openapi.yml",
+    "workday-payroll-tax-calculations-api-openapi.yml",
+    "workday-payroll-tax-elections-api-openapi.yml",
+    "workday-payroll-tax-filing-api-openapi.yml",
+    "workday-payroll-tax-jurisdictions-api-openapi.yml",
+    "workday-payroll-tax-withholdings-api-openapi.yml",
+    "workday-payroll-time-off-inputs-api-openapi.yml",
+    "workday-payroll-workers-api-openapi.yml",
+    "workday-payroll-agentdefinition-api-openapi.yml"
+  ],
+  "archived": [
+    "archived workday-repos/asor/versions/v1.2.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "discovered stray spec: workday-repos/asor/versions/v1.2.json"
+  ],
+  "skipped": []
+}

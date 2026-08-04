@@ -1,0 +1,628 @@
+{
+  "info": {
+    "_postman_id": "4b725cf0-7995-477e-a6a4-d0edc0168822",
+    "name": "Workday Payroll Input Deductions Pay Groups API",
+    "description": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:06.000Z",
+    "updatedAt": "2026-07-28T03:32:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4b725cf0-7995-477e-a6a4-d0edc0168822"
+  },
+  "item": [
+    {
+      "name": "payGroups",
+      "item": [
+        {
+          "name": "{payGroupId}",
+          "item": [
+            {
+              "name": "workers",
+              "item": [
+                {
+                  "name": "Workday Payroll List Workers in a Pay Group",
+                  "id": "817ebb82-1922-4f08-af75-4f8241eab58c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payGroups/:payGroupId/workers?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payGroups",
+                        ":payGroupId",
+                        "workers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9e71fee2-1445-4669-9e07-6c6fbad65afe",
+                          "key": "payGroupId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the pay group"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all workers assigned to a specific pay group."
+                  },
+                  "response": [
+                    {
+                      "id": "9252bb95-2ecf-4970-8cb1-994e7616d61a",
+                      "name": "Collection of workers in the pay group",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payGroups/:payGroupId/workers?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payGroups",
+                            ":payGroupId",
+                            "workers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "payGroupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-9252bb95-2ecf-4970-8cb1-994e7616d61a"
+                    },
+                    {
+                      "id": "18528d01-43e6-476d-ae7a-514d2a2b531e",
+                      "name": "Authentication required or token expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payGroups/:payGroupId/workers?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payGroups",
+                            ":payGroupId",
+                            "workers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "payGroupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-18528d01-43e6-476d-ae7a-514d2a2b531e"
+                    },
+                    {
+                      "id": "20797fea-13f4-428e-8873-103490e95aa1",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/payGroups/:payGroupId/workers?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payGroups",
+                            ":payGroupId",
+                            "workers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of results to skip for pagination",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "payGroupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-20797fea-13f4-428e-8873-103490e95aa1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-817ebb82-1922-4f08-af75-4f8241eab58c"
+                }
+              ],
+              "id": "a6b297f9-9ecb-490f-bf7b-516e1e24d9c6",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-a6b297f9-9ecb-490f-bf7b-516e1e24d9c6"
+            },
+            {
+              "name": "Workday Payroll Get a Pay Group",
+              "id": "b96f46ed-a840-4b2f-92df-81f3ffa032bf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payGroups/:payGroupId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payGroups",
+                    ":payGroupId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "daf06e71-460e-4cfa-aa92-cfdff8a0f50d",
+                      "key": "payGroupId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the pay group"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific pay group by its identifier."
+              },
+              "response": [
+                {
+                  "id": "cf40c45b-4e23-4b71-8b7d-232bf52d905d",
+                  "name": "Pay group details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payGroups/:payGroupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payGroups",
+                        ":payGroupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payGroupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"payFrequency\": \"Weekly\",\n  \"currency\": \"<string>\",\n  \"country\": \"<string>\",\n  \"runCategory\": \"<string>\",\n  \"workerCount\": \"<integer>\",\n  \"inactive\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-cf40c45b-4e23-4b71-8b7d-232bf52d905d"
+                },
+                {
+                  "id": "0621dd1b-b717-47c9-adea-7bfcc467ee74",
+                  "name": "Authentication required or token expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payGroups/:payGroupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payGroups",
+                        ":payGroupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payGroupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-0621dd1b-b717-47c9-adea-7bfcc467ee74"
+                },
+                {
+                  "id": "59d1da47-1160-4224-b7c0-05b766d19351",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payGroups/:payGroupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payGroups",
+                        ":payGroupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "payGroupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-59d1da47-1160-4224-b7c0-05b766d19351"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-b96f46ed-a840-4b2f-92df-81f3ffa032bf"
+            }
+          ],
+          "id": "abf4dee2-5e6e-4a5f-a197-3d3064f3bcd3",
+          "createdAt": "2026-07-28T03:32:07.000Z",
+          "updatedAt": "2026-07-28T03:32:07.000Z",
+          "uid": "35240-abf4dee2-5e6e-4a5f-a197-3d3064f3bcd3"
+        },
+        {
+          "name": "Workday Payroll List Pay Groups",
+          "id": "46d2c79f-06da-4c3b-8656-10de3b1555c3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payGroups?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payGroups"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "Number of results to skip for pagination",
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Retrieve all configured pay groups, which organize workers for payroll processing by frequency, currency, or other criteria."
+          },
+          "response": [
+            {
+              "id": "87de5c6c-408b-4a2f-bc76-f9545a041b86",
+              "name": "Collection of pay groups",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payGroups?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payGroups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"payFrequency\": \"BiWeekly\",\n      \"currency\": \"<string>\",\n      \"country\": \"<string>\",\n      \"runCategory\": \"<string>\",\n      \"workerCount\": \"<integer>\",\n      \"inactive\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"payFrequency\": \"BiWeekly\",\n      \"currency\": \"<string>\",\n      \"country\": \"<string>\",\n      \"runCategory\": \"<string>\",\n      \"workerCount\": \"<integer>\",\n      \"inactive\": \"<boolean>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-87de5c6c-408b-4a2f-bc76-f9545a041b86"
+            },
+            {
+              "id": "ed5e6156-d6a3-4269-8b18-22be2b7c5a00",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payGroups?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payGroups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-ed5e6156-d6a3-4269-8b18-22be2b7c5a00"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:07.000Z",
+          "updatedAt": "2026-07-28T03:32:07.000Z",
+          "uid": "35240-46d2c79f-06da-4c3b-8656-10de3b1555c3"
+        }
+      ],
+      "id": "e542bfd5-1016-4584-b618-6955f64ab108",
+      "createdAt": "2026-07-28T03:32:07.000Z",
+      "updatedAt": "2026-07-28T03:32:07.000Z",
+      "uid": "35240-e542bfd5-1016-4584-b618-6955f64ab108"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.workday.com/payroll-input/v1"
+    }
+  ]
+}
