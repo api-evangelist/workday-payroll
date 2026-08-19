@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Pay Runs API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pay Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Pay Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/payRuns",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "payGroupId",
+                "value": "pg_weekly_usd",
+                "type": "query",
+                "description": "Filter by pay group identifier"
+              },
+              {
+                "name": "status",
+                "value": "Draft",
+                "type": "query",
+                "description": "Filter by pay run status"
+              },
+              {
+                "name": "fromDate",
+                "value": "2026-04-30",
+                "type": "query",
+                "description": "Filter pay runs starting from this date"
+              },
+              {
+                "name": "toDate",
+                "value": "2026-04-30",
+                "type": "query",
+                "description": "Filter pay runs up to this date"
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of payroll runs, optionally filtered by status, pay group, or date range."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Pay Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/payRuns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a new payroll run for a specified pay group and pay period."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Pay Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/payRuns/:payRunId",
+            "params": [
+              {
+                "name": "payRunId",
+                "value": "pr_20260430_weekly_001",
+                "type": "path",
+                "description": "Unique identifier for the pay run"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific payroll run by its identifier."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Update a Pay Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.workday.com/payroll-input/v1/payRuns/:payRunId",
+            "params": [
+              {
+                "name": "payRunId",
+                "value": "pr_20260430_weekly_001",
+                "type": "path",
+                "description": "Unique identifier for the pay run"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status or properties of an existing pay run."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Complete a Pay Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/payRuns/:payRunId/complete",
+            "params": [
+              {
+                "name": "payRunId",
+                "value": "pr_20260430_weekly_001",
+                "type": "path",
+                "description": "Unique identifier for the pay run"
+              }
+            ]
+          },
+          "docs": "Mark a pay run as completed, finalizing all payroll calculations and preparing payments for distribution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

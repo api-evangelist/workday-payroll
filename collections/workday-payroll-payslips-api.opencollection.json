@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Payslips API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payslips",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Worker Payslips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/payslips",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "fromDate",
+                "value": "2026-04-30",
+                "type": "query",
+                "description": "Filter payslips from this date"
+              },
+              {
+                "name": "toDate",
+                "value": "2026-04-30",
+                "type": "query",
+                "description": "Filter payslips up to this date"
+              }
+            ]
+          },
+          "docs": "Retrieve all payslips for a specific worker, with optional filtering by date range or pay period."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Worker Payslip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/payslips/:payslipId",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "payslipId",
+                "value": "ps_w100542_20260430",
+                "type": "path",
+                "description": "Unique identifier for the payslip"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed payslip information for a specific pay period, including earnings, deductions, taxes, and net pay."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

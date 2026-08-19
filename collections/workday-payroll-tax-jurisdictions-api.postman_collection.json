@@ -1,0 +1,421 @@
+{
+  "item": [
+    {
+      "id": "426ff31b-d7d4-4825-b6c5-2df429b62910",
+      "name": "Tax Jurisdictions",
+      "description": {
+        "content": "Retrieve tax jurisdiction and authority information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc024690-a069-4f79-a65c-3bbfa7eccf1e",
+          "name": "Workday Payroll List Tax Jurisdictions",
+          "request": {
+            "name": "Workday Payroll List Tax Jurisdictions",
+            "description": {
+              "content": "Retrieve all configured tax jurisdictions, including federal, state, and local tax authorities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "taxJurisdictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "level",
+                  "value": "<string>",
+                  "description": "Filter by jurisdiction level"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Filter by country code"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de34b44d-583d-4e25-9340-962ff801eb5f",
+              "name": "Collection of tax jurisdictions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxJurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "level",
+                      "value": "Federal"
+                    },
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"tjur_us_federal\",\n      \"descriptor\": \"Weekly USD Pay Group\",\n      \"level\": \"Federal\",\n      \"country\": \"US\",\n      \"stateCode\": \"CA\",\n      \"localityName\": \"San Francisco\",\n      \"taxTypes\": [\n        \"FederalIncome\"\n      ],\n      \"active\": true\n    }\n  ],\n  \"total\": 52\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ca6200-f392-461f-bee1-957b48e40860",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxJurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "level",
+                      "value": "Federal"
+                    },
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d378e36e-ac34-42cc-ad95-1fa3e76c4435",
+          "name": "Workday Payroll Get a Tax Jurisdiction",
+          "request": {
+            "name": "Workday Payroll Get a Tax Jurisdiction",
+            "description": {
+              "content": "Retrieve details of a specific tax jurisdiction, including applicable tax types and rates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "taxJurisdictions",
+                ":jurisdictionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jurisdictionId",
+                  "description": "(Required) Unique identifier for the tax jurisdiction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce5fe316-c0da-4ac4-bb0c-5b4ff40745b8",
+              "name": "Tax jurisdiction details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxJurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jurisdictionId",
+                      "description": "(Required) Unique identifier for the tax jurisdiction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"tjur_us_federal\",\n  \"descriptor\": \"Weekly USD Pay Group\",\n  \"level\": \"Federal\",\n  \"country\": \"US\",\n  \"stateCode\": \"CA\",\n  \"localityName\": \"San Francisco\",\n  \"taxTypes\": [\n    \"FederalIncome\"\n  ],\n  \"active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7d8a004-15d9-4194-9677-b4ea93ce3c92",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxJurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jurisdictionId",
+                      "description": "(Required) Unique identifier for the tax jurisdiction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71d2552b-a953-45a9-8fda-7ef4f14a949b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "taxJurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jurisdictionId",
+                      "description": "(Required) Unique identifier for the tax jurisdiction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.workday.com/payroll-input/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e1661e9-6ab4-4bab-9c35-0cfc398d3d78",
+    "name": "Workday Payroll Input Deductions Tax Jurisdictions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}

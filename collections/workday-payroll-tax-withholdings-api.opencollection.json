@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Tax Withholdings API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Withholdings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Worker Tax Withholdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/taxWithholdings",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              }
+            ]
+          },
+          "docs": "Retrieve all tax withholding configurations for a specific worker, including federal, state, and local withholdings."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Worker Tax Withholding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/taxWithholdings/:withholdingId",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "withholdingId",
+                "value": "twh_w100542_federal",
+                "type": "path",
+                "description": "Unique identifier for the tax withholding"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific tax withholding configuration for a worker."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Update a Worker Tax Withholding",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/taxWithholdings/:withholdingId",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "withholdingId",
+                "value": "twh_w100542_federal",
+                "type": "path",
+                "description": "Unique identifier for the tax withholding"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a tax withholding configuration for a worker, such as changing filing status or additional withholding amounts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

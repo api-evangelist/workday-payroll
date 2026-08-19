@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Tax Elections API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Elections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Worker Tax Elections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/taxElections",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              }
+            ]
+          },
+          "docs": "Retrieve all tax elections for a worker, including federal W-4 data, state withholding elections, and local tax elections."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Worker Tax Election",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/taxElections",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a new tax election for a worker, such as a W-4 update or state withholding form change."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Worker Tax Election",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/taxElections/:electionId",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "electionId",
+                "value": "tel_w100542_w4_2026",
+                "type": "path",
+                "description": "Unique identifier for the tax election"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific tax election for a worker."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

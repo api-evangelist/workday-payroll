@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions agentDefinition API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentDefinition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/agentDefinition"
+          },
+          "docs": "This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills. Each definition can contain many Skills, and in those Skills they *may* contain Tools based on the Invocation / Execution Type. Generally REST APIs will be listed here.\n\n<b>Secured by:</b> Development, Setup: Agents"
+        },
+        {
+          "info": {
+            "name": "Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/agentDefinition",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday, while also highlighting the specific Workday APIs/Resources that the Agent is allowed access to. It will update an existing instance IF one already exists with the same *name*, *provider organization*, and *version*.\n\n<b>Secured by:</b> Development, Setup: Agents"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

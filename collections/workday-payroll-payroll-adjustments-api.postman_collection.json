@@ -1,0 +1,622 @@
+{
+  "item": [
+    {
+      "id": "c28f5115-a6f2-4307-b393-9ed756594b05",
+      "name": "Payroll Adjustments",
+      "description": {
+        "content": "Create and manage payroll adjustments and corrections",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35eb53b3-10a8-4249-b9c2-c476792ba6af",
+          "name": "Workday Payroll List Payroll Adjustments",
+          "request": {
+            "name": "Workday Payroll List Payroll Adjustments",
+            "description": {
+              "content": "Retrieve all payroll adjustment records, optionally filtered by worker, type, or status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adjustments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "workerId",
+                  "value": "<string>",
+                  "description": "Filter by worker identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "adjustmentType",
+                  "value": "<string>",
+                  "description": "Filter by adjustment type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57b4a95b-1af2-443d-83c3-dd2936cc4e0f",
+              "name": "Collection of payroll adjustments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "workerId",
+                      "value": "w_100542"
+                    },
+                    {
+                      "key": "adjustmentType",
+                      "value": "Correction"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"adj_20260415_00012\",\n      \"worker\": {\n        \"id\": \"w_100542\",\n        \"descriptor\": \"Weekly USD Pay Group\"\n      },\n      \"adjustmentType\": \"Correction\",\n      \"originalPayRunId\": \"pr_20260430_weekly_001\",\n      \"earningCode\": \"REGULAR\",\n      \"deductionCode\": \"MEDICAL_PRETAX\",\n      \"amount\": 2500,\n      \"currency\": \"USD\",\n      \"reason\": \"Q1 2026 performance bonus\",\n      \"effectiveDate\": \"2026-04-30\",\n      \"status\": \"Pending\",\n      \"createdOn\": \"2026-04-30T16:45:00Z\"\n    }\n  ],\n  \"total\": 52\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e76c524-d65f-4e37-b1fb-b96336716f4c",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "workerId",
+                      "value": "w_100542"
+                    },
+                    {
+                      "key": "adjustmentType",
+                      "value": "Correction"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bee091d4-d8f8-4cb6-bc24-95da4f71ed2b",
+          "name": "Workday Payroll Create a Payroll Adjustment",
+          "request": {
+            "name": "Workday Payroll Create a Payroll Adjustment",
+            "description": {
+              "content": "Submit a payroll adjustment to correct, reverse, or reclassify previously processed payroll data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adjustments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workerId\": \"<string>\",\n  \"adjustmentType\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"originalPayRunId\": \"<string>\",\n  \"earningCode\": \"<string>\",\n  \"deductionCode\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"effectiveDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "00e99233-9f56-4d37-9877-1f4d00f6aab9",
+              "name": "Adjustment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"w_100542\",\n  \"adjustmentType\": \"Correction\",\n  \"originalPayRunId\": \"pr_20260430_weekly_001\",\n  \"earningCode\": \"REGULAR\",\n  \"deductionCode\": \"MEDICAL_PRETAX\",\n  \"amount\": 2500,\n  \"currency\": \"USD\",\n  \"reason\": \"Q1 2026 performance bonus\",\n  \"effectiveDate\": \"2026-04-30\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"adj_20260415_00012\",\n  \"worker\": {\n    \"id\": \"w_100542\",\n    \"descriptor\": \"Weekly USD Pay Group\"\n  },\n  \"adjustmentType\": \"Correction\",\n  \"originalPayRunId\": \"pr_20260430_weekly_001\",\n  \"earningCode\": \"REGULAR\",\n  \"deductionCode\": \"MEDICAL_PRETAX\",\n  \"amount\": 2500,\n  \"currency\": \"USD\",\n  \"reason\": \"Q1 2026 performance bonus\",\n  \"effectiveDate\": \"2026-04-30\",\n  \"status\": \"Pending\",\n  \"createdOn\": \"2026-04-30T16:45:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f02a1cd-4238-4d9d-9226-102555efdb17",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"w_100542\",\n  \"adjustmentType\": \"Correction\",\n  \"originalPayRunId\": \"pr_20260430_weekly_001\",\n  \"earningCode\": \"REGULAR\",\n  \"deductionCode\": \"MEDICAL_PRETAX\",\n  \"amount\": 2500,\n  \"currency\": \"USD\",\n  \"reason\": \"Q1 2026 performance bonus\",\n  \"effectiveDate\": \"2026-04-30\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4fc40f8-6448-4610-8cb9-44ea11563f47",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workerId\": \"w_100542\",\n  \"adjustmentType\": \"Correction\",\n  \"originalPayRunId\": \"pr_20260430_weekly_001\",\n  \"earningCode\": \"REGULAR\",\n  \"deductionCode\": \"MEDICAL_PRETAX\",\n  \"amount\": 2500,\n  \"currency\": \"USD\",\n  \"reason\": \"Q1 2026 performance bonus\",\n  \"effectiveDate\": \"2026-04-30\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82703b14-a9e9-46f8-af7e-9fe6f0b63bf6",
+          "name": "Workday Payroll Get a Payroll Adjustment",
+          "request": {
+            "name": "Workday Payroll Get a Payroll Adjustment",
+            "description": {
+              "content": "Retrieve details of a specific payroll adjustment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "adjustments",
+                ":adjustmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adjustmentId",
+                  "description": "(Required) Unique identifier for the payroll adjustment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa061a30-79e3-46c4-b89e-faf9075dd48d",
+              "name": "Adjustment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments",
+                    ":adjustmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adjustmentId",
+                      "description": "(Required) Unique identifier for the payroll adjustment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"adj_20260415_00012\",\n  \"worker\": {\n    \"id\": \"w_100542\",\n    \"descriptor\": \"Weekly USD Pay Group\"\n  },\n  \"adjustmentType\": \"Correction\",\n  \"originalPayRunId\": \"pr_20260430_weekly_001\",\n  \"earningCode\": \"REGULAR\",\n  \"deductionCode\": \"MEDICAL_PRETAX\",\n  \"amount\": 2500,\n  \"currency\": \"USD\",\n  \"reason\": \"Q1 2026 performance bonus\",\n  \"effectiveDate\": \"2026-04-30\",\n  \"status\": \"Pending\",\n  \"createdOn\": \"2026-04-30T16:45:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3e9e30a-28aa-4f88-8b4a-a440da31a12e",
+              "name": "Authentication required or token expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments",
+                    ":adjustmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adjustmentId",
+                      "description": "(Required) Unique identifier for the payroll adjustment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ce181b3-b621-4a2d-ba96-bb45f5ca0665",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "adjustments",
+                    ":adjustmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adjustmentId",
+                      "description": "(Required) Unique identifier for the payroll adjustment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"INVALID_REQUEST\",\n  \"message\": \"Validation failed for the provided fields.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.workday.com/payroll-input/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f336a3d9-aee1-4edc-927b-0401a393ec57",
+    "name": "Workday Payroll Input Deductions Payroll Adjustments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}

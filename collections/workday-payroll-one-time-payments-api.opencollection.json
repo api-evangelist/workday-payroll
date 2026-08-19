@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions One-Time Payments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "One-Time Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List One-time Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "query",
+                "description": "Filter by worker identifier"
+              },
+              {
+                "name": "status",
+                "value": "Pending",
+                "type": "query",
+                "description": "Filter by status"
+              }
+            ]
+          },
+          "docs": "Retrieve all one-time payment requests, optionally filtered by status, worker, or date range."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a new one-time payment request for a worker, such as a bonus, retroactive pay adjustment, or relocation allowance."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "pmt_20260502_00045",
+                "type": "path",
+                "description": "Unique identifier for the one-time payment"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific one-time payment request."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Update a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "pmt_20260502_00045",
+                "type": "path",
+                "description": "Unique identifier for the one-time payment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a pending one-time payment request."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Delete a One-time Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.workday.com/payroll-input/v1/oneTimePayments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "pmt_20260502_00045",
+                "type": "path",
+                "description": "Unique identifier for the one-time payment"
+              }
+            ]
+          },
+          "docs": "Delete a pending one-time payment request that has not yet been processed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

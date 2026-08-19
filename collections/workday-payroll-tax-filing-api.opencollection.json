@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Tax Filing API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Filing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Tax Filings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/taxFilings",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "taxYear",
+                "value": "2026",
+                "type": "query",
+                "description": "Filter by tax year"
+              },
+              {
+                "name": "filingType",
+                "value": "Quarterly",
+                "type": "query",
+                "description": "Filter by filing type"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "US-Federal",
+                "type": "query",
+                "description": "Filter by jurisdiction identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve tax filing records for compliance reporting, including quarterly and annual filing data."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Tax Filing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/taxFilings/:filingId",
+            "params": [
+              {
+                "name": "filingId",
+                "value": "tfl_2026q1_941",
+                "type": "path",
+                "description": "Unique identifier for the tax filing"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific tax filing record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

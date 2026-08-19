@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Payroll Calculations API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payroll Calculations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll Calculate a Pay Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/payRuns/:payRunId/calculate",
+            "params": [
+              {
+                "name": "payRunId",
+                "value": "pr_20260430_weekly_001",
+                "type": "path",
+                "description": "Unique identifier for the pay run"
+              }
+            ]
+          },
+          "docs": "Trigger payroll calculations for a specific pay run, processing all earnings, deductions, and taxes for included workers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

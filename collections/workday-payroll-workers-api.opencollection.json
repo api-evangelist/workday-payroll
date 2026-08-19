@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Workers API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll Get Worker Payroll Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/payrollDetails",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker (Workday ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve payroll-specific details for a worker, including pay group assignment, payment method, and compensation summary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

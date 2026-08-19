@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Time Off Inputs API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Off Inputs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Worker Time Off Inputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/timeOffInputs",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve time off input records for a specific worker that affect payroll calculations."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Time Off Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/workers/:workerId/timeOffInputs",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "path",
+                "description": "Unique identifier for the worker"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a time off input for a worker to be reflected in payroll processing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

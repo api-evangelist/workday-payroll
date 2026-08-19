@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Payroll Adjustments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payroll Adjustments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Payroll Adjustments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/adjustments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "workerId",
+                "value": "w_100542",
+                "type": "query",
+                "description": "Filter by worker identifier"
+              },
+              {
+                "name": "adjustmentType",
+                "value": "Correction",
+                "type": "query",
+                "description": "Filter by adjustment type"
+              }
+            ]
+          },
+          "docs": "Retrieve all payroll adjustment records, optionally filtered by worker, type, or status."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Create a Payroll Adjustment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.workday.com/payroll-input/v1/adjustments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a payroll adjustment to correct, reverse, or reclassify previously processed payroll data."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Payroll Adjustment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/adjustments/:adjustmentId",
+            "params": [
+              {
+                "name": "adjustmentId",
+                "value": "adj_20260415_00012",
+                "type": "path",
+                "description": "Unique identifier for the payroll adjustment"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific payroll adjustment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

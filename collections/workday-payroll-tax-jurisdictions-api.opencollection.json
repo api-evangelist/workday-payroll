@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Payroll Input Deductions Tax Jurisdictions API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Jurisdictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Payroll List Tax Jurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/taxJurisdictions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "level",
+                "value": "Federal",
+                "type": "query",
+                "description": "Filter by jurisdiction level"
+              },
+              {
+                "name": "country",
+                "value": "US",
+                "type": "query",
+                "description": "Filter by country code"
+              }
+            ]
+          },
+          "docs": "Retrieve all configured tax jurisdictions, including federal, state, and local tax authorities."
+        },
+        {
+          "info": {
+            "name": "Workday Payroll Get a Tax Jurisdiction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.workday.com/payroll-input/v1/taxJurisdictions/:jurisdictionId",
+            "params": [
+              {
+                "name": "jurisdictionId",
+                "value": "tjur_us_federal",
+                "type": "path",
+                "description": "Unique identifier for the tax jurisdiction"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific tax jurisdiction, including applicable tax types and rates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

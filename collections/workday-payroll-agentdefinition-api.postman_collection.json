@@ -1,0 +1,1736 @@
+{
+  "item": [
+    {
+      "id": "3b64ec4b-7d85-41fc-9dfc-e2026b5fe3be",
+      "name": "agentDefinition",
+      "description": {
+        "content": "To view and maintain Agent Definitions with the Agent System of Record.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6e3d734-ef12-44a8-85f8-c37c83c40539",
+          "name": "This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills.",
+          "request": {
+            "name": "This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills.",
+            "description": {
+              "content": "This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills. Each definition can contain many Skills, and in those Skills they *may* contain Tools based on the Invocation / Execution Type. Generally REST APIs will be listed here.\n\n<b>Secured by:</b> Development, Setup: Agents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agentDefinition"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa5914b0-4a97-49bb-8595-402e2bc95a41",
+              "name": "Successful response. A successful response can return no matched data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2812,\n  \"data\": [\n    {\n      \"description\": \"This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.\",\n      \"name\": \"Financial Audit Agent\",\n      \"skills\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"url\": \"https://example.com/agent/finance\",\n      \"version\": \"1.0.0\",\n      \"overview\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"defaultInputModes\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"id\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"documentationUrl\": \"https://agent.company.com/agent1/doc\",\n      \"capabilities\": {\n        \"pushNotifications\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"stateTransitionHistory\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"streaming\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"externalTenantID\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"externalAgentID\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"provider\": {\n        \"id\": \"|=Z)@Q\",\n        \"descriptor\": \"string\",\n        \"href\": \"string\"\n      },\n      \"iconUrl\": \"https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png\",\n      \"workdayConfig\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"supportsAuthenticatedExtendedCard\": true,\n      \"platform\": {\n        \"reference_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"descriptor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"defaultOutputModes\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ]\n    },\n    {\n      \"description\": \"This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.\",\n      \"name\": \"Financial Audit Agent\",\n      \"skills\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"url\": \"https://example.com/agent/finance\",\n      \"version\": \"1.0.0\",\n      \"overview\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"defaultInputModes\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"id\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"documentationUrl\": \"https://agent.company.com/agent1/doc\",\n      \"capabilities\": {\n        \"pushNotifications\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"stateTransitionHistory\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"streaming\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"externalTenantID\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"externalAgentID\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"provider\": {\n        \"id\": \"0UT51=W\",\n        \"descriptor\": \"string\",\n        \"href\": \"string\"\n      },\n      \"iconUrl\": \"https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png\",\n      \"workdayConfig\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"supportsAuthenticatedExtendedCard\": true,\n      \"platform\": {\n        \"reference_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"descriptor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"defaultOutputModes\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87614ac0-85ca-47dc-8e17-2ed2c8bb471f",
+              "name": "Invalid request. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "149ece23-c643-41ef-bf0d-ba99861ff20f",
+              "name": "Unauthorized: Missing or invalid credentials. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0a16d72-e25d-4dbd-9c00-dec4da4b75c7",
+              "name": "User has insufficient permissions. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41b50316-deb7-4824-b120-30b730b255a9",
+              "name": "Resource not found. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c5caedd-096a-4d72-8d7f-5755a18d1417",
+              "name": "An error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"field\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f58abdda-8713-4468-9edc-b861eba19214",
+          "name": "Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday.",
+          "request": {
+            "name": "Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday.",
+            "description": {
+              "content": "Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday, while also highlighting the specific Workday APIs/Resources that the Agent is allowed access to. It will update an existing instance IF one already exists with the same *name*, *provider organization*, and *version*.\n\n<b>Secured by:</b> Development, Setup: Agents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agentDefinition"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "skills",
+                  "value": "[{\"description\":\"<string>\",\"id\":\"<string>\",\"name\":\"<string>\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"<string>\",\"id\":\"<string>\",\"name\":\"<string>\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "version",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "overview",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "defaultInputModes",
+                  "value": "[{\"type\":\"<string>\",\"id\":\"<string>\"},{\"type\":\"<string>\",\"id\":\"<string>\"}]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "documentationUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "capabilities",
+                  "value": "<object>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "externalTenantID",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "externalAgentID",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "provider",
+                  "value": "<object>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "iconUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "workdayConfig",
+                  "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"<string>\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"<string>\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"<string>\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"<string>\"}]",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "supportsAuthenticatedExtendedCard",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "platform",
+                  "value": "<object>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "defaultOutputModes",
+                  "value": "[{\"type\":\"<string>\",\"id\":\"<string>\"},{\"type\":\"<string>\",\"id\":\"<string>\"}]",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d91caaa7-4215-4462-88f3-a48e7688d752",
+              "name": "Resource created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Financial Audit Agent",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "skills",
+                      "value": "[{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/agent/finance",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "1.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "overview",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultInputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "documentationUrl",
+                      "value": "https://agent.company.com/agent1/doc",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "capabilities",
+                      "value": "{\"pushNotifications\":true,\"stateTransitionHistory\":true,\"streaming\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalTenantID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalAgentID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "provider",
+                      "value": "{\"id\":\"1e9c06e1f25ade52e8040a33012c852a\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "iconUrl",
+                      "value": "https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "workdayConfig",
+                      "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "supportsAuthenticatedExtendedCard",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "platform",
+                      "value": "{\"reference_id\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"descriptor\":\"Lorem ipsum dolor sit ame\",\"id\":\"string\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultOutputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.\",\n  \"name\": \"Financial Audit Agent\",\n  \"skills\": [\n    {\n      \"description\": \"This skill analyzes many financial documents in the boundary for the supervisory org.\",\n      \"id\": \"1234\",\n      \"name\": \"Financial Audit Analyzer\",\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"inputModes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"outputModes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    {\n      \"description\": \"This skill analyzes many financial documents in the boundary for the supervisory org.\",\n      \"id\": \"1234\",\n      \"name\": \"Financial Audit Analyzer\",\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"inputModes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"outputModes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  ],\n  \"url\": \"https://example.com/agent/finance\",\n  \"version\": \"1.0.0\",\n  \"overview\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n  \"defaultInputModes\": [\n    {\n      \"type\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"id\": \"string\"\n    }\n  ],\n  \"id\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n  \"documentationUrl\": \"https://agent.company.com/agent1/doc\",\n  \"capabilities\": {\n    \"pushNotifications\": true,\n    \"stateTransitionHistory\": true,\n    \"streaming\": true\n  },\n  \"externalTenantID\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n  \"externalAgentID\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n  \"provider\": {\n    \"id\": \"18e1cebedfed2d0918b126cda7190238\",\n    \"descriptor\": \"string\",\n    \"href\": \"string\"\n  },\n  \"iconUrl\": \"https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png\",\n  \"workdayConfig\": [\n    {\n      \"workdayResources\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"skillId\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"executionMode\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"workdayResources\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"skillId\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n      \"executionMode\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"supportsAuthenticatedExtendedCard\": true,\n  \"platform\": {\n    \"reference_id\": \"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\n    \"descriptor\": \"Lorem ipsum dolor sit ame\",\n    \"id\": \"string\"\n  },\n  \"defaultOutputModes\": [\n    {\n      \"type\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5320758f-4a3e-40be-bd56-079c23b70f8e",
+              "name": "Invalid request. (https://community.workday.com/rest/error-messages)\nError Code | Validation Message\n--- | ---\nA161 | You can't select Workday as the agent platform for third-party agents. Select a different platform.\nA2849 | Create an agent ID sequence generator using the Edit Tenant Setup - System task before registering agents.\nA3015 | The External Agent ID must be unique for Agent Definitions with the same Provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Financial Audit Agent",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "skills",
+                      "value": "[{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/agent/finance",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "1.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "overview",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultInputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "documentationUrl",
+                      "value": "https://agent.company.com/agent1/doc",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "capabilities",
+                      "value": "{\"pushNotifications\":true,\"stateTransitionHistory\":true,\"streaming\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalTenantID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalAgentID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "provider",
+                      "value": "{\"id\":\"1e9c06e1f25ade52e8040a33012c852a\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "iconUrl",
+                      "value": "https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "workdayConfig",
+                      "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "supportsAuthenticatedExtendedCard",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "platform",
+                      "value": "{\"reference_id\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"descriptor\":\"Lorem ipsum dolor sit ame\",\"id\":\"string\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultOutputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f89141b-4706-4ad9-a149-0f80e4a5be94",
+              "name": "Unauthorized: Missing or invalid credentials. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Financial Audit Agent",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "skills",
+                      "value": "[{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/agent/finance",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "1.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "overview",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultInputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "documentationUrl",
+                      "value": "https://agent.company.com/agent1/doc",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "capabilities",
+                      "value": "{\"pushNotifications\":true,\"stateTransitionHistory\":true,\"streaming\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalTenantID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalAgentID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "provider",
+                      "value": "{\"id\":\"1e9c06e1f25ade52e8040a33012c852a\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "iconUrl",
+                      "value": "https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "workdayConfig",
+                      "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "supportsAuthenticatedExtendedCard",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "platform",
+                      "value": "{\"reference_id\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"descriptor\":\"Lorem ipsum dolor sit ame\",\"id\":\"string\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultOutputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6fa7779-c6c2-404b-972a-6fc97ca2500a",
+              "name": "User has insufficient permissions. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Financial Audit Agent",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "skills",
+                      "value": "[{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/agent/finance",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "1.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "overview",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultInputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "documentationUrl",
+                      "value": "https://agent.company.com/agent1/doc",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "capabilities",
+                      "value": "{\"pushNotifications\":true,\"stateTransitionHistory\":true,\"streaming\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalTenantID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalAgentID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "provider",
+                      "value": "{\"id\":\"1e9c06e1f25ade52e8040a33012c852a\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "iconUrl",
+                      "value": "https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "workdayConfig",
+                      "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "supportsAuthenticatedExtendedCard",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "platform",
+                      "value": "{\"reference_id\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"descriptor\":\"Lorem ipsum dolor sit ame\",\"id\":\"string\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultOutputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9635f2ee-3686-46e5-8e1c-8b0d01685389",
+              "name": "Resource not found. (https://community.workday.com/rest/error-messages)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Financial Audit Agent",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "skills",
+                      "value": "[{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/agent/finance",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "1.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "overview",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultInputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "documentationUrl",
+                      "value": "https://agent.company.com/agent1/doc",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "capabilities",
+                      "value": "{\"pushNotifications\":true,\"stateTransitionHistory\":true,\"streaming\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalTenantID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalAgentID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "provider",
+                      "value": "{\"id\":\"1e9c06e1f25ade52e8040a33012c852a\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "iconUrl",
+                      "value": "https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "workdayConfig",
+                      "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "supportsAuthenticatedExtendedCard",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "platform",
+                      "value": "{\"reference_id\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"descriptor\":\"Lorem ipsum dolor sit ame\",\"id\":\"string\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultOutputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    },\n    {\n      \"error\": \"string\",\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"path\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cd2ef54-5815-4249-b1a3-9c3349f939e3",
+              "name": "An error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agentDefinition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "This Financial Audit Agent acts as a safeguard, offering an independent review that instills confidence in financial information.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Financial Audit Agent",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "skills",
+                      "value": "[{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]},{\"description\":\"This skill analyzes many financial documents in the boundary for the supervisory org.\",\"id\":\"1234\",\"name\":\"Financial Audit Analyzer\",\"tags\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"inputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"outputModes\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}]}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/agent/finance",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "1.0.0",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "overview",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultInputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "documentationUrl",
+                      "value": "https://agent.company.com/agent1/doc",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "capabilities",
+                      "value": "{\"pushNotifications\":true,\"stateTransitionHistory\":true,\"streaming\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalTenantID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "externalAgentID",
+                      "value": "Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "provider",
+                      "value": "{\"id\":\"1e9c06e1f25ade52e8040a33012c852a\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "iconUrl",
+                      "value": "https://cdn1.iconfinder.com/data/icons/material-design-icons-light/24/link-variant-512.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "workdayConfig",
+                      "value": "[{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"},{\"workdayResources\":[{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"}],\"skillId\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"executionMode\":{\"value\":\"<Error: Too many levels of nesting to fake this schema>\"},\"id\":\"string\"}]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "supportsAuthenticatedExtendedCard",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "platform",
+                      "value": "{\"reference_id\":\"Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.\",\"descriptor\":\"Lorem ipsum dolor sit ame\",\"id\":\"string\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultOutputModes",
+                      "value": "[{\"type\":\"string\",\"id\":\"string\"},{\"type\":\"string\",\"id\":\"string\"}]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"field\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.workday.com/payroll-input/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "108c106e-4f63-4f1f-868e-e0889eb9d2a4",
+    "name": "Workday Payroll Input Deductions agentDefinition API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}
