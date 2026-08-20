@@ -27,7 +27,8 @@ apis:
   description: To view and maintain Agent Definitions with the Agent System of Record.
   humanURL: https://www.workday.com/en-us/products/payroll-management.html
   baseURL: https://api.workday.com/payroll/v1
-  tags:
+  tags: []
+  tags_raw:
   - agentDefinition
   properties:
   - type: OpenAPI
@@ -9514,6 +9515,13 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 tags:
+  - Compensation
+  - Enterprise
+  - Human Resources
+  - Payroll
+  - Software-as-a-Service
+  - Tax
+tags_raw:
   - Compensation
   - Enterprise
   - Human Resources
