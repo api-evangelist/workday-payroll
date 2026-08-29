@@ -3,6 +3,18 @@ name: Workday Payroll
 description: >-
   Workday Payroll provides comprehensive APIs for managing payroll operations, employee compensation, tax calculations,
   and payment processing within the Workday platform.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
