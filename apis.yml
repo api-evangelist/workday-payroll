@@ -1,8 +1,7 @@
 aid: workday-payroll
 name: Workday Payroll
-description: >-
-  Workday Payroll provides comprehensive APIs for managing payroll operations, employee compensation, tax calculations,
-  and payment processing within the Workday platform.
+description: Workday Payroll provides comprehensive APIs for managing payroll operations, employee compensation,
+  tax calculations, and payment processing within the Workday platform.
 deliveryModel:
   model: saas
   open_source: false
@@ -32,7 +31,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/workday-payroll.png
 url: https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: workday-payroll:workday-payroll-agentdefinition-api
@@ -4051,7 +4050,7 @@ apis:
   - type: Examples
     url: examples/tax-worker-tax-summary-example.json
 - aid: workday-payroll:workday-payroll-payroll-adjustments-api
-  name: Workday Payroll Payroll Adjustments API
+  name: Workday Payroll Adjustments API
   description: Create and manage payroll adjustments and corrections
   humanURL: https://www.workday.com/en-us/products/payroll-management.html
   baseURL: https://api.workday.com/payroll/v1
@@ -4497,7 +4496,7 @@ apis:
   - type: Examples
     url: examples/tax-worker-tax-summary-example.json
 - aid: workday-payroll:workday-payroll-payroll-calculations-api
-  name: Workday Payroll Payroll Calculations API
+  name: Workday Payroll Calculations API
   description: Trigger and monitor payroll calculation processes
   humanURL: https://www.workday.com/en-us/products/payroll-management.html
   baseURL: https://api.workday.com/payroll/v1
@@ -4943,7 +4942,7 @@ apis:
   - type: Examples
     url: examples/tax-worker-tax-summary-example.json
 - aid: workday-payroll:workday-payroll-payroll-summaries-api
-  name: Workday Payroll Payroll Summaries API
+  name: Workday Payroll Summaries API
   description: Access aggregated payroll result summaries
   humanURL: https://www.workday.com/en-us/products/payroll-management.html
   baseURL: https://api.workday.com/payroll/v1
@@ -9403,143 +9402,151 @@ apis:
   - type: Examples
     url: examples/tax-worker-tax-summary-example.json
 common:
-  - type: Website
-    url: https://www.workday.com/
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/workday-payroll/overview
-  - type: AgenticAccess
-    url: agentic-access/workday-payroll-agentic-access.yml
-  - type: TrustCenter
-    url: security/workday-payroll-trust-center.yml
-  - type: DomainSecurity
-    url: security/workday-payroll-domain-security.yml
-  - type: Authentication
-    url: authentication/workday-payroll-authentication.yml
-  - type: Blog
-    url: https://newsroom.workday.com/
-  - type: DeveloperPortal
-    url: https://community.workday.com/
-  - type: GettingStarted
-    url: https://doc.workday.com/developer/studio/en-us/getting-started.html
-  - type: Authentication
-    url: https://doc.workday.com/admin-guide/en-us/authentication/authentication.html
-  - type: TermsOfService
-    url: https://www.workday.com/en-us/legal.html
-  - type: PrivacyPolicy
-    url: https://www.workday.com/en-us/privacy.html
-  - type: StatusPage
-    url: https://status.workday.com/
-  - type: Security
-    url: https://www.workday.com/en-us/why-workday/security.html
-  - type: JSONLD
-    url: json-ld/workday-payroll-context.jsonld
-  - type: JSONSchema
-    url: json-schema/workday-payroll-pay-run-schema.json
-  - type: JSONSchema
-    url: json-schema/workday-payroll-payslip-schema.json
-  - type: JSONStructure
-    url: json-structure/workday-payroll-pay-run-structure.json
-  - type: JSONStructure
-    url: json-structure/workday-payroll-payslip-structure.json
-  - type: Examples
-    url: examples/workday-payroll-pay-run-example.json
-  - type: Examples
-    url: examples/workday-payroll-payslip-example.json
-  - type: SpectralRules
-    url: rules/workday-payroll-spectral-rules.yml
-  - type: Vocabulary
-    url: vocabulary/workday-payroll-vocabulary.yml
-  - type: Tools
-    url: https://github.com/Workday/raas-python
-    title: Report-as-a-Service Python Client
-  - type: Tools
-    url: https://github.com/Workday/everywhere
-    title: Workday Everywhere SDK
-  - type: Tools
-    url: https://github.com/Workday/asor
-    title: Agent System of Record API
-  - type: Features
-    data:
-      - name: Global Payroll Engine
-        description: >-
-          Process payroll across multiple countries with configurable calculation logic, pay components, and statutory
-          rules.
-      - name: Pay Run Management
-        description: Create, schedule, and execute payroll runs with full visibility into calculation status and results.
-      - name: Earnings and Deductions
-        description: Configure and apply earnings, deductions, accumulations, and balances per worker, organization, or pay group.
-      - name: Tax Calculation and Withholding
-        description: >-
-          Automated tax calculations and withholdings with support for federal, state, local, and international
-          jurisdictions.
-      - name: Payroll Input Processing
-        description: Submit one-time payments, retroactive adjustments, and supplemental earnings outside of scheduled pay runs.
-      - name: Payslip Generation
-        description: Produce worker-facing payslips and pay statements with detailed breakdowns of earnings, deductions, and taxes.
-      - name: Compliance Reporting
-        description: Generate statutory and compliance reports including tax filings, year-end forms, and audit trails.
-      - name: Worker Self-Service
-        description: >-
-          Surface pay history, payslips, and tax documents to workers via Workday Mobile and the Workday user
-          experience.
-  - type: UseCases
-    data:
-      - name: Multi-Country Payroll Operations
-        description: Run payroll for a global workforce across regions while standardizing on a single platform and data model.
-      - name: Payroll Cycle Automation
-        description: Schedule, execute, and audit recurring payroll runs end-to-end with minimal manual intervention.
-      - name: One-Time Payments and Adjustments
-        description: Submit bonuses, retroactive pay, and corrections programmatically through the Payroll Input API.
-      - name: Tax Filing and Compliance
-        description: Calculate withholdings and produce data feeds for statutory tax filings and year-end reporting.
-      - name: Pay Data Integration
-        description: Sync payroll results into general ledger, banking, benefits, and analytics systems downstream of payroll runs.
-      - name: Worker Pay Transparency
-        description: Provide workers with secure programmatic access to payslips, year-to-date totals, and tax forms.
-  - type: Integrations
-    data:
-      - name: Workday Human Capital Management
-        description: Integrated source of worker, organization, compensation, and time tracking data feeding payroll calculations.
-      - name: Workday Financial Management
-        description: Posts payroll journal entries and accruals into the Workday general ledger.
-      - name: Workday Time Tracking
-        description: Feeds approved time and absence data into payroll calculations.
-      - name: Workday Benefits
-        description: Provides benefit elections and deductions consumed by payroll.
-      - name: Workday Studio
-        description: Visual integration tool for building inbound and outbound payroll integrations.
-      - name: Workday Cloud Connect for Third-Party Payroll
-        description: Pre-built integrations to third-party payroll providers and tax filing services.
-      - name: Banking and Payment Networks
-        description: Generates ACH and international payment files for direct deposit and payroll disbursements.
-  - type: Solutions
-    data:
-      - name: Workday Payroll for the U.S.
-        description: >-
-          Full-service payroll solution for U.S. employers including federal, state, and local tax calculation and
-          filing support.
-      - name: Workday Payroll for Canada
-        description: Payroll solution covering Canadian federal and provincial requirements.
-      - name: Workday Payroll for the U.K.
-        description: U.K. payroll with HMRC reporting and statutory pay support.
-      - name: Workday Payroll for France
-        description: French payroll covering DSN reporting and statutory rules.
-      - name: Workday Cloud Connect for Third-Party Payroll
-        description: Connectors and data feeds for customers running payroll on a third-party provider while using Workday HCM.
+- type: Website
+  url: https://www.workday.com/
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/workday-payroll/overview
+- type: AgenticAccess
+  url: agentic-access/workday-payroll-agentic-access.yml
+- type: TrustCenter
+  url: security/workday-payroll-trust-center.yml
+- type: DomainSecurity
+  url: security/workday-payroll-domain-security.yml
+- type: Authentication
+  url: authentication/workday-payroll-authentication.yml
+- type: Blog
+  url: https://newsroom.workday.com/
+- type: DeveloperPortal
+  url: https://community.workday.com/
+- type: GettingStarted
+  url: https://doc.workday.com/developer/studio/en-us/getting-started.html
+- type: Authentication
+  url: https://doc.workday.com/admin-guide/en-us/authentication/authentication.html
+- type: TermsOfService
+  url: https://www.workday.com/en-us/legal.html
+- type: PrivacyPolicy
+  url: https://www.workday.com/en-us/privacy.html
+- type: StatusPage
+  url: https://status.workday.com/
+- type: Security
+  url: https://www.workday.com/en-us/why-workday/security.html
+- type: JSONLD
+  url: json-ld/workday-payroll-context.jsonld
+- type: JSONSchema
+  url: json-schema/workday-payroll-pay-run-schema.json
+- type: JSONSchema
+  url: json-schema/workday-payroll-payslip-schema.json
+- type: JSONStructure
+  url: json-structure/workday-payroll-pay-run-structure.json
+- type: JSONStructure
+  url: json-structure/workday-payroll-payslip-structure.json
+- type: Examples
+  url: examples/workday-payroll-pay-run-example.json
+- type: Examples
+  url: examples/workday-payroll-payslip-example.json
+- type: SpectralRules
+  url: rules/workday-payroll-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/workday-payroll-vocabulary.yml
+- type: Tools
+  url: https://github.com/Workday/raas-python
+  title: Report-as-a-Service Python Client
+- type: Tools
+  url: https://github.com/Workday/everywhere
+  title: Workday Everywhere SDK
+- type: Tools
+  url: https://github.com/Workday/asor
+  title: Agent System of Record API
+- type: Features
+  data:
+  - name: Global Payroll Engine
+    description: Process payroll across multiple countries with configurable calculation logic, pay components,
+      and statutory rules.
+  - name: Pay Run Management
+    description: Create, schedule, and execute payroll runs with full visibility into calculation status
+      and results.
+  - name: Earnings and Deductions
+    description: Configure and apply earnings, deductions, accumulations, and balances per worker, organization,
+      or pay group.
+  - name: Tax Calculation and Withholding
+    description: Automated tax calculations and withholdings with support for federal, state, local, and
+      international jurisdictions.
+  - name: Payroll Input Processing
+    description: Submit one-time payments, retroactive adjustments, and supplemental earnings outside
+      of scheduled pay runs.
+  - name: Payslip Generation
+    description: Produce worker-facing payslips and pay statements with detailed breakdowns of earnings,
+      deductions, and taxes.
+  - name: Compliance Reporting
+    description: Generate statutory and compliance reports including tax filings, year-end forms, and
+      audit trails.
+  - name: Worker Self-Service
+    description: Surface pay history, payslips, and tax documents to workers via Workday Mobile and the
+      Workday user experience.
+- type: UseCases
+  data:
+  - name: Multi-Country Payroll Operations
+    description: Run payroll for a global workforce across regions while standardizing on a single platform
+      and data model.
+  - name: Payroll Cycle Automation
+    description: Schedule, execute, and audit recurring payroll runs end-to-end with minimal manual intervention.
+  - name: One-Time Payments and Adjustments
+    description: Submit bonuses, retroactive pay, and corrections programmatically through the Payroll
+      Input API.
+  - name: Tax Filing and Compliance
+    description: Calculate withholdings and produce data feeds for statutory tax filings and year-end
+      reporting.
+  - name: Pay Data Integration
+    description: Sync payroll results into general ledger, banking, benefits, and analytics systems downstream
+      of payroll runs.
+  - name: Worker Pay Transparency
+    description: Provide workers with secure programmatic access to payslips, year-to-date totals, and
+      tax forms.
+- type: Integrations
+  data:
+  - name: Workday Human Capital Management
+    description: Integrated source of worker, organization, compensation, and time tracking data feeding
+      payroll calculations.
+  - name: Workday Financial Management
+    description: Posts payroll journal entries and accruals into the Workday general ledger.
+  - name: Workday Time Tracking
+    description: Feeds approved time and absence data into payroll calculations.
+  - name: Workday Benefits
+    description: Provides benefit elections and deductions consumed by payroll.
+  - name: Workday Studio
+    description: Visual integration tool for building inbound and outbound payroll integrations.
+  - name: Workday Cloud Connect for Third-Party Payroll
+    description: Pre-built integrations to third-party payroll providers and tax filing services.
+  - name: Banking and Payment Networks
+    description: Generates ACH and international payment files for direct deposit and payroll disbursements.
+- type: Solutions
+  data:
+  - name: Workday Payroll for the U.S.
+    description: Full-service payroll solution for U.S. employers including federal, state, and local
+      tax calculation and filing support.
+  - name: Workday Payroll for Canada
+    description: Payroll solution covering Canadian federal and provincial requirements.
+  - name: Workday Payroll for the U.K.
+    description: U.K. payroll with HMRC reporting and statutory pay support.
+  - name: Workday Payroll for France
+    description: French payroll covering DSN reporting and statutory rules.
+  - name: Workday Cloud Connect for Third-Party Payroll
+    description: Connectors and data feeds for customers running payroll on a third-party provider while
+      using Workday HCM.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 tags:
-  - Compensation
-  - Enterprise
-  - Human Resources
-  - Payroll
-  - Software-as-a-Service
-  - Tax
+- Compensation
+- Enterprise
+- Human Resources
+- Payroll
+- Software-as-a-Service
+- Tax
 tags_raw:
-  - Compensation
-  - Enterprise
-  - Human Resources
-  - Payroll
-  - SaaS
-  - Tax
+- Compensation
+- Enterprise
+- Human Resources
+- Payroll
+- SaaS
+- Tax
