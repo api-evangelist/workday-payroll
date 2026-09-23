@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Payroll Input Deductions Payment Results API
-  description: API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.
+  title: Workday Payroll Results Payment Results API
+  description: API for retrieving payroll calculation results, payment details, payslip data, and historical payroll information within the Workday platform.
   version: v1
   contact:
     name: Workday Support
@@ -9,10 +9,10 @@ info:
     email: support@workday.com
   termsOfService: https://www.workday.com/en-us/legal.html
 servers:
-- url: https://api.workday.com/payroll-input/v1
-  description: Workday Payroll Input Production
-- url: https://{tenant}.workday.com/api/payroll-input/v1
-  description: Workday Payroll Input Tenant-Specific
+- url: https://api.workday.com/payroll-results/v1
+  description: Workday Payroll Results Production
+- url: https://{tenant}.workday.com/api/payroll-results/v1
+  description: Workday Payroll Results Tenant-Specific
   variables:
     tenant:
       description: Workday tenant identifier
@@ -117,6 +117,16 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      example: 20
     paymentId:
       name: paymentId
       in: path
@@ -142,16 +152,6 @@ components:
       schema:
         type: string
       example: pr_20260430_weekly_001
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-      example: 20
   responses:
     Unauthorized:
       description: Authentication required or token expired
@@ -191,17 +191,6 @@ components:
           type: integer
           description: Total number of payments
           example: 52
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Worker identifier
-          example: w_100542
-        descriptor:
-          type: string
-          description: Worker display name
-          example: Weekly USD Pay Group
     Payment:
       type: object
       properties:
@@ -286,6 +275,17 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Worker identifier
+          example: w_100542
+        descriptor:
+          type: string
+          description: Worker display name
+          example: Weekly USD Pay Group
   securitySchemes:
     bearerAuth:
       type: http
@@ -293,5 +293,5 @@ components:
       bearerFormat: JWT
       description: OAuth 2.0 bearer token obtained through Workday authentication.
 externalDocs:
-  description: Workday Payroll Input API Documentation
+  description: Workday Payroll Results API Documentation
   url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html

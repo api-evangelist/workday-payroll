@@ -1,24 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Payroll Input Deductions agentDefinition API
-  description: API for submitting and managing payroll input data within the Workday platform, including one-time payments, payroll adjustments, supplemental earnings, and batch input submissions.
+  title: asor Agent Definition API
+  description: The Agent System of Record Service is used to create and maintain Agent Definitions in Workday.
   version: v1
-  contact:
-    name: Workday Support
-    url: https://www.workday.com/en-us/company/customer-support.html
-    email: support@workday.com
-  termsOfService: https://www.workday.com/en-us/legal.html
+  x-workday-internal-source: xo
+  x-workday-internal-routing: Public
+  x-workday-internal-protected-usage-enabled: false
+  x-workday-internal-service-container-id: e4af3c6fa94010001113b6524d520000
 servers:
-- url: https://api.workday.com/payroll-input/v1
-  description: Workday Payroll Input Production
-- url: https://{tenant}.workday.com/api/payroll-input/v1
-  description: Workday Payroll Input Tenant-Specific
-  variables:
-    tenant:
-      description: Workday tenant identifier
-      default: your-tenant
-security:
-- bearerAuth: []
+- url: https://api.workday.com/asor/v1
 tags:
 - name: agentDefinition
   description: To view and maintain Agent Definitions with the Agent System of Record.
@@ -28,11 +18,11 @@ paths:
     get:
       tags:
       - agentDefinition
-      summary: This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills.
+      summary: This operation returns the specific Agent Definition including Skills and…
       description: 'This operation returns the specific Agent Definition including Skills and certain Tools used in those Skills. Each definition can contain many Skills, and in those Skills they *may* contain Tools based on the Invocation / Execution Type. Generally REST APIs will be listed here.
 
 
-        <b>Secured by:</b> Development, Setup: Agents'
+        Secured by: Development, Setup: Agents'
       responses:
         '200':
           description: Successful response. A successful response can return no matched data.
@@ -80,14 +70,16 @@ paths:
                 $ref: '#/components/schemas/ERROR_MODEL_REFERENCE'
       x-workday-confidence-level: Exotic
       x-workday-internal-try-enabled: 'false'
+      operationId: getAgentDefinition
+      x-operation-id-source: derived
     post:
       tags:
       - agentDefinition
-      summary: Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday.
+      summary: Based on the A2A Agent Card specification, this REST operation allows you to…
       description: 'Based on the A2A Agent Card specification, this REST operation allows you to create an Agent Definition in Workday, while also highlighting the specific Workday APIs/Resources that the Agent is allowed access to. It will update an existing instance IF one already exists with the same *name*, *provider organization*, and *version*.
 
 
-        <b>Secured by:</b> Development, Setup: Agents'
+        Secured by: Development, Setup: Agents'
       requestBody:
         content:
           multipart/form-data:
@@ -139,8 +131,159 @@ paths:
                 $ref: '#/components/schemas/ERROR_MODEL_REFERENCE'
       x-workday-confidence-level: Exotic
       x-workday-internal-try-enabled: 'false'
+      operationId: postAgentDefinition
+      x-operation-id-source: derived
 components:
   schemas:
+    executionMode_d785eba56e9c10003761356522e00000:
+      description: The Execution Mode this Skill is operating in. Either Ambient, or Delegate.
+      allOf:
+      - $ref: '#/components/schemas/INSTANCE_MODEL_REFERENCE'
+      - type: object
+    tools_a81e152b86021000158c36e9bbdc0001:
+      allOf:
+      - $ref: '#/components/schemas/workdayTool_a81e152b86021000158aa15c84900000'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id for Secured (All) (Derived)
+    agentSkillResource_881e3f87712810000d1ba8a0a0510000:
+      allOf:
+      - type: object
+        properties:
+          workdayResources:
+            type: array
+            description: List of Workday Resources used by this agents skill.
+            items:
+              $ref: '#/components/schemas/workdayResources_881e3f877128100010fb617ba5260000'
+            x-workday-type: Multi-instance
+          skillId:
+            type: string
+            description: Unique identifier for the agent's skill.
+            example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
+            x-workday-type: Text
+          executionMode:
+            $ref: '#/components/schemas/executionMode_d785eba56e9c10003761356522e00000'
+    capabilities_799da24a09dd10000e3a424ec7340000:
+      description: Optional capabilities supported by the agent.
+      allOf:
+      - $ref: '#/components/schemas/agentCapabilites_799da24a09dd10000e37766515630000'
+      - type: object
+    outputModes_71f49719113310002d148ce3f5370000:
+      allOf:
+      - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id for Mime Type (Derived)
+    skills_881e3f87712810000d1cfd55ee0d0000:
+      allOf:
+      - $ref: '#/components/schemas/agentSkill_881e3f87712810000d0bf06dae650000'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id for Agent Definition Skill (Derived)
+    workdayResource_2e69afd4e86c10001fae2831c6da0000:
+      allOf:
+      - type: object
+        properties:
+          descriptor:
+            type: string
+            description: The display name of the instance
+            example: Lorem ipsum dolor sit ame
+          id:
+            type: string
+            description: The id for Agent Resource (Derived)
+    workdayConfig_881e3f87712810000d1cfd55ee0d0001:
+      allOf:
+      - $ref: '#/components/schemas/agentSkillResource_881e3f87712810000d1ba8a0a0510000'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id for Agent Definition Skill (Derived)
+    agentSkill_881e3f87712810000d0bf06dae650000:
+      allOf:
+      - required:
+        - description
+        - id
+        - name
+        type: object
+        properties:
+          tags:
+            type: array
+            description: Set of tagwords describing classes of capabilities for this specific skill.
+            items:
+              $ref: '#/components/schemas/tags_71f49719113310002d148ce3f5370002'
+            x-workday-type: Multi-instance
+          inputModes:
+            type: array
+            description: The set of interaction modes that the skill supports (if different than the default).
+            items:
+              $ref: '#/components/schemas/inputModes_71f49719113310002d148ce3f5370001'
+            x-workday-type: Multi-instance
+          outputModes:
+            type: array
+            description: Supported media types for output.
+            items:
+              $ref: '#/components/schemas/outputModes_71f49719113310002d148ce3f5370000'
+            x-workday-type: Multi-instance
+          description:
+            type: string
+            description: Description of the skill - will be used by the client or a human as a hint to understand what the skill does.
+            example: This skill analyzes many financial documents in the boundary for the supervisory org.
+            x-workday-type: Text
+          id:
+            type: string
+            description: Unique identifier for the agent's skill.
+            example: '1234'
+            x-workday-type: Text
+          name:
+            type: string
+            description: Human readable name of the skill.
+            example: Financial Audit Analyzer
+            x-workday-type: Text
+    agentSkillTag_71f49719113310002d130aa875ca0000:
+      allOf:
+      - required:
+        - tag
+        type: object
+        properties:
+          tag:
+            type: string
+            description: Will be used by the client as a hint to understand how the skill can be used.
+            example: '[{"tag":"cooking"}, {"tag":"customer support"}]'
+            x-workday-type: Text
+    skillTools_881e3f877128100010f2ba3820a20000:
+      allOf:
+      - required:
+        - description
+        - tool_name
+        type: object
+        properties:
+          description:
+            type: string
+            description: Description of the Operation.
+            example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
+            x-workday-type: Text
+            x-workday-confidence-level: Exotic
+          agent_resource:
+            $ref: '#/components/schemas/agent_resource_2e69afd4e86c10001ad2755763bc0000'
+          tool_name:
+            type: string
+            description: Name of the Operation.
+            example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
+            x-workday-type: Text
+            x-workday-confidence-level: Exotic
+          tools:
+            type: array
+            description: Any related Workday Securable Items used by the Workday Resource.
+            items:
+              $ref: '#/components/schemas/tools_a81e152b86021000158c36e9bbdc0001'
+            x-workday-type: Multi-instance
     mimeType_71f4971911331000139693324a560000:
       allOf:
       - type: object
@@ -151,6 +294,73 @@ components:
             description: Supported media type.
             example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
             x-workday-type: Text
+    defaultOutputModes_71f497191133100013c9a17716d50001:
+      allOf:
+      - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id for Mime Type (Derived)
+    INSTANCE_MODEL_REFERENCE:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          pattern: ^(([0-9a-f]{32})|(\S+=\S+))$
+          type: string
+          description: Workday Id or Reference Id of the instance.
+        descriptor:
+          type: string
+          description: The display name of the instance
+          readOnly: true
+        href:
+          type: string
+          description: A link to the instance
+          readOnly: true
+    agentCapabilites_799da24a09dd10000e37766515630000:
+      allOf:
+      - type: object
+        properties:
+          pushNotifications:
+            type: boolean
+            description: true if the agent can notify updates to client.
+            example: true
+            x-workday-type: Boolean
+          stateTransitionHistory:
+            type: boolean
+            description: true if the agent exposes status change history for tasks.
+            example: true
+            x-workday-type: Boolean
+          streaming:
+            type: boolean
+            description: true if the agent supports SSE.
+            example: true
+            x-workday-type: Boolean
+    provider_799da24a09dd10000b827743c6f40000:
+      description: The service provider of the agent
+      allOf:
+      - $ref: '#/components/schemas/INSTANCE_MODEL_REFERENCE'
+      - type: object
+    agent_resource_2e69afd4e86c10001ad2755763bc0000:
+      description: The Workday Resource for this Tools if applicable.
+      allOf:
+      - $ref: '#/components/schemas/workdayResource_2e69afd4e86c10001fae2831c6da0000'
+      - type: object
+    workdayResources_881e3f877128100010fb617ba5260000:
+      allOf:
+      - $ref: '#/components/schemas/skillTools_881e3f877128100010f2ba3820a20000'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id for Agent Tool (Derived)
+    platform_ca94626efa9010003262e35486130000:
+      description: The platform of the agent.
+      allOf:
+      - $ref: '#/components/schemas/agentPlatform_aa793a5c168d1000143f8b9f05c50000'
+      - type: object
     agentPlatform_aa793a5c168d1000143f8b9f05c50000:
       allOf:
       - type: object
@@ -167,29 +377,31 @@ components:
           id:
             type: string
             description: Workday Id or Reference Id of the instance.
-    tools_a81e152b86021000158c36e9bbdc0001:
+    defaultInputModes_71f497191133100013c9a17716d50000:
       allOf:
-      - $ref: '#/components/schemas/workdayTool_a81e152b86021000158aa15c84900000'
+      - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
       - type: object
         properties:
           id:
             type: string
-            description: The id for Secured (All) (Derived)
-    provider_799da24a09dd10000b827743c6f40000:
-      description: The service provider of the agent
-      allOf:
-      - $ref: '#/components/schemas/INSTANCE_MODEL_REFERENCE'
-      - type: object
-    platform_ca94626efa9010003262e35486130000:
-      description: The platform of the agent.
-      allOf:
-      - $ref: '#/components/schemas/agentPlatform_aa793a5c168d1000143f8b9f05c50000'
-      - type: object
-    capabilities_799da24a09dd10000e3a424ec7340000:
-      description: Optional capabilities supported by the agent.
-      allOf:
-      - $ref: '#/components/schemas/agentCapabilites_799da24a09dd10000e37766515630000'
-      - type: object
+            description: The id for Mime Type (Derived)
+    ERROR_MODEL_REFERENCE:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          type: string
+          description: A description of the error
+        code:
+          type: string
+          description: The code that corresponds to the error message. Use the error code to drive programmatic error-handling behavior. Don't use error message strings for this purpose because they are subject to change
+        field:
+          type: string
+          description: The field related to the error
+        path:
+          type: string
+          description: The path of the field related to the error
     agentCardAndTools_a5967cb3b88b10001f7a6900b0d90000:
       allOf:
       - required:
@@ -288,142 +500,14 @@ components:
             items:
               $ref: '#/components/schemas/defaultOutputModes_71f497191133100013c9a17716d50001'
             x-workday-type: Multi-instance
-    workdayConfig_881e3f87712810000d1cfd55ee0d0001:
+    tags_71f49719113310002d148ce3f5370002:
       allOf:
-      - $ref: '#/components/schemas/agentSkillResource_881e3f87712810000d1ba8a0a0510000'
+      - $ref: '#/components/schemas/agentSkillTag_71f49719113310002d130aa875ca0000'
       - type: object
         properties:
           id:
             type: string
-            description: The id for Agent Definition Skill (Derived)
-    agent_resource_2e69afd4e86c10001ad2755763bc0000:
-      description: The Workday Resource for this Tools if applicable.
-      allOf:
-      - $ref: '#/components/schemas/workdayResource_2e69afd4e86c10001fae2831c6da0000'
-      - type: object
-    agentCapabilites_799da24a09dd10000e37766515630000:
-      allOf:
-      - type: object
-        properties:
-          pushNotifications:
-            type: boolean
-            description: true if the agent can notify updates to client.
-            example: true
-            x-workday-type: Boolean
-          stateTransitionHistory:
-            type: boolean
-            description: true if the agent exposes status change history for tasks.
-            example: true
-            x-workday-type: Boolean
-          streaming:
-            type: boolean
-            description: true if the agent supports SSE.
-            example: true
-            x-workday-type: Boolean
-    agentSkillResource_881e3f87712810000d1ba8a0a0510000:
-      allOf:
-      - type: object
-        properties:
-          workdayResources:
-            type: array
-            description: List of Workday Resources used by this agents skill.
-            items:
-              $ref: '#/components/schemas/workdayResources_881e3f877128100010fb617ba5260000'
-            x-workday-type: Multi-instance
-          skillId:
-            type: string
-            description: Unique identifier for the agent's skill.
-            example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
-            x-workday-type: Text
-          executionMode:
-            $ref: '#/components/schemas/executionMode_d785eba56e9c10003761356522e00000'
-    outputModes_71f49719113310002d148ce3f5370000:
-      allOf:
-      - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The id for Mime Type (Derived)
-    workdayResource_2e69afd4e86c10001fae2831c6da0000:
-      allOf:
-      - type: object
-        properties:
-          descriptor:
-            type: string
-            description: The display name of the instance
-            example: Lorem ipsum dolor sit ame
-          id:
-            type: string
-            description: The id for Agent Resource (Derived)
-    defaultInputModes_71f497191133100013c9a17716d50000:
-      allOf:
-      - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The id for Mime Type (Derived)
-    INSTANCE_MODEL_REFERENCE:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          pattern: ^(([0-9a-f]{32})|(\S+=\S+))$
-          type: string
-          description: Workday Id or Reference Id of the instance.
-        descriptor:
-          type: string
-          description: The display name of the instance
-          readOnly: true
-        href:
-          type: string
-          description: A link to the instance
-          readOnly: true
-    skills_881e3f87712810000d1cfd55ee0d0000:
-      allOf:
-      - $ref: '#/components/schemas/agentSkill_881e3f87712810000d0bf06dae650000'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The id for Agent Definition Skill (Derived)
-    skillTools_881e3f877128100010f2ba3820a20000:
-      allOf:
-      - required:
-        - description
-        - tool_name
-        type: object
-        properties:
-          description:
-            type: string
-            description: Description of the Operation.
-            example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
-            x-workday-type: Text
-            x-workday-confidence-level: Exotic
-          agent_resource:
-            $ref: '#/components/schemas/agent_resource_2e69afd4e86c10001ad2755763bc0000'
-          tool_name:
-            type: string
-            description: Name of the Operation.
-            example: Lorem ipsum dolor sit amet, cum choro singulis consectetuer ut, ubique iisque contentiones ex duo. Quo lorem etiam eu.
-            x-workday-type: Text
-            x-workday-confidence-level: Exotic
-          tools:
-            type: array
-            description: Any related Workday Securable Items used by the Workday Resource.
-            items:
-              $ref: '#/components/schemas/tools_a81e152b86021000158c36e9bbdc0001'
-            x-workday-type: Multi-instance
-    workdayResources_881e3f877128100010fb617ba5260000:
-      allOf:
-      - $ref: '#/components/schemas/skillTools_881e3f877128100010f2ba3820a20000'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The id for Agent Tool (Derived)
+            description: The id for Agent Definition Skill Tag (Derived)
     inputModes_71f49719113310002d148ce3f5370001:
       allOf:
       - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
@@ -457,102 +541,10 @@ components:
             description: An array of validation errors
             items:
               $ref: '#/components/schemas/ERROR_MODEL_REFERENCE'
-    defaultOutputModes_71f497191133100013c9a17716d50001:
-      allOf:
-      - $ref: '#/components/schemas/mimeType_71f4971911331000139693324a560000'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The id for Mime Type (Derived)
-    tags_71f49719113310002d148ce3f5370002:
-      allOf:
-      - $ref: '#/components/schemas/agentSkillTag_71f49719113310002d130aa875ca0000'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: The id for Agent Definition Skill Tag (Derived)
-    ERROR_MODEL_REFERENCE:
-      required:
-      - error
-      type: object
-      properties:
-        error:
-          type: string
-          description: A description of the error
-        code:
-          type: string
-          description: The code that corresponds to the error message. Use the error code to drive programmatic error-handling behavior. Don't use error message strings for this purpose because they are subject to change
-        field:
-          type: string
-          description: The field related to the error
-        path:
-          type: string
-          description: The path of the field related to the error
-    agentSkill_881e3f87712810000d0bf06dae650000:
-      allOf:
-      - required:
-        - description
-        - id
-        - name
-        type: object
-        properties:
-          tags:
-            type: array
-            description: Set of tagwords describing classes of capabilities for this specific skill.
-            items:
-              $ref: '#/components/schemas/tags_71f49719113310002d148ce3f5370002'
-            x-workday-type: Multi-instance
-          inputModes:
-            type: array
-            description: The set of interaction modes that the skill supports (if different than the default).
-            items:
-              $ref: '#/components/schemas/inputModes_71f49719113310002d148ce3f5370001'
-            x-workday-type: Multi-instance
-          outputModes:
-            type: array
-            description: Supported media types for output.
-            items:
-              $ref: '#/components/schemas/outputModes_71f49719113310002d148ce3f5370000'
-            x-workday-type: Multi-instance
-          description:
-            type: string
-            description: Description of the skill - will be used by the client or a human as a hint to understand what the skill does.
-            example: This skill analyzes many financial documents in the boundary for the supervisory org.
-            x-workday-type: Text
-          id:
-            type: string
-            description: Unique identifier for the agent's skill.
-            example: '1234'
-            x-workday-type: Text
-          name:
-            type: string
-            description: Human readable name of the skill.
-            example: Financial Audit Analyzer
-            x-workday-type: Text
-    executionMode_d785eba56e9c10003761356522e00000:
-      description: The Execution Mode this Skill is operating in. Either Ambient, or Delegate.
-      allOf:
-      - $ref: '#/components/schemas/INSTANCE_MODEL_REFERENCE'
-      - type: object
-    agentSkillTag_71f49719113310002d130aa875ca0000:
-      allOf:
-      - required:
-        - tag
-        type: object
-        properties:
-          tag:
-            type: string
-            description: Will be used by the client as a hint to understand how the skill can be used.
-            example: '[{"tag":"cooking"}, {"tag":"customer support"}]'
-            x-workday-type: Text
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: OAuth 2.0 bearer token obtained through Workday authentication.
-externalDocs:
-  description: Workday Payroll Input API Documentation
-  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+    OAuth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://i-xxxxxxxxxxxxxxxxx.workdaysuv.com/super/authorize
+          scopes: {}
