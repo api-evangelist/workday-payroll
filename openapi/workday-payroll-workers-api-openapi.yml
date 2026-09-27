@@ -75,27 +75,6 @@ components:
           type: string
           description: Pay group display name
           example: Weekly USD Pay Group
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-          description: Detailed error information
     WorkerPayrollDetails:
       type: object
       properties:
@@ -139,6 +118,27 @@ components:
           type: string
           description: Primary tax jurisdiction
           example: US-Federal
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+          description: Detailed error information
   responses:
     Unauthorized:
       description: Authentication required or token expired

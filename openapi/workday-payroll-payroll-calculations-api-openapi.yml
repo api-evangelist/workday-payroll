@@ -65,77 +65,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or token expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            UnauthorizedExample:
-              summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-                details:
-                - field: amount
-                  message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-                details:
-                - field: amount
-                  message: Validation failed for the provided fields.
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            BadRequestExample:
-              summary: Default BadRequest response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-                details:
-                - field: amount
-                  message: Validation failed for the provided fields.
+  parameters:
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+      example: pr_20260430_weekly_001
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-          description: Detailed error information
     CalculationStatus:
       type: object
       properties:
@@ -171,15 +110,76 @@ components:
           items:
             $ref: '#/components/schemas/Error'
           description: Any errors encountered during calculation
-  parameters:
-    payRunId:
-      name: payRunId
-      in: path
-      required: true
-      description: Unique identifier for the pay run
-      schema:
-        type: string
-      example: pr_20260430_weekly_001
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+          description: Detailed error information
+  responses:
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
   securitySchemes:
     bearerAuth:
       type: http

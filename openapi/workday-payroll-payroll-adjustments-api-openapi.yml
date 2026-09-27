@@ -185,147 +185,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-      example: 20
-    adjustmentId:
-      name: adjustmentId
-      in: path
-      required: true
-      description: Unique identifier for the payroll adjustment
-      schema:
-        type: string
-      example: adj_20260415_00012
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-      example: 0
-  responses:
-    Unauthorized:
-      description: Authentication required or token expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            UnauthorizedExample:
-              summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            BadRequestExample:
-              summary: Default BadRequest response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
-    AdjustmentCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Adjustment'
-        total:
-          type: integer
-          description: Total number of adjustments
-          example: 52
-    CreateAdjustmentRequest:
-      type: object
-      required:
-      - workerId
-      - adjustmentType
-      - amount
-      properties:
-        workerId:
-          type: string
-          description: Worker identifier
-          example: w_100542
-        adjustmentType:
-          type: string
-          enum:
-          - Correction
-          - Retroactive
-          - Reversal
-          - Reclass
-          description: Type of adjustment
-          example: Correction
-        originalPayRunId:
-          type: string
-          description: Original pay run being adjusted
-          example: pr_20260430_weekly_001
-        earningCode:
-          type: string
-          description: Earning code to adjust
-          example: REGULAR
-        deductionCode:
-          type: string
-          description: Deduction code to adjust
-          example: MEDICAL_PRETAX
-        amount:
-          type: number
-          format: double
-          description: Adjustment amount
-          example: 2500.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: USD
-        reason:
-          type: string
-          description: Reason for the adjustment
-          example: Q1 2026 performance bonus
-        effectiveDate:
-          type: string
-          format: date
-          description: Effective date
-          example: '2026-04-30'
     Adjustment:
       type: object
       properties:
@@ -388,6 +248,78 @@ components:
           format: date-time
           description: When the adjustment was created
           example: '2026-04-30T16:45:00Z'
+    CreateAdjustmentRequest:
+      type: object
+      required:
+      - workerId
+      - adjustmentType
+      - amount
+      properties:
+        workerId:
+          type: string
+          description: Worker identifier
+          example: w_100542
+        adjustmentType:
+          type: string
+          enum:
+          - Correction
+          - Retroactive
+          - Reversal
+          - Reclass
+          description: Type of adjustment
+          example: Correction
+        originalPayRunId:
+          type: string
+          description: Original pay run being adjusted
+          example: pr_20260430_weekly_001
+        earningCode:
+          type: string
+          description: Earning code to adjust
+          example: REGULAR
+        deductionCode:
+          type: string
+          description: Deduction code to adjust
+          example: MEDICAL_PRETAX
+        amount:
+          type: number
+          format: double
+          description: Adjustment amount
+          example: 2500.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+        reason:
+          type: string
+          description: Reason for the adjustment
+          example: Q1 2026 performance bonus
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+          example: '2026-04-30'
+    AdjustmentCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Adjustment'
+        total:
+          type: integer
+          description: Total number of adjustments
+          example: 52
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
     WorkerRef:
       type: object
       properties:
@@ -399,6 +331,74 @@ components:
           type: string
           description: Worker display name
           example: Weekly USD Pay Group
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      example: 20
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
+    adjustmentId:
+      name: adjustmentId
+      in: path
+      required: true
+      description: Unique identifier for the payroll adjustment
+      schema:
+        type: string
+      example: adj_20260415_00012
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   securitySchemes:
     bearerAuth:
       type: http

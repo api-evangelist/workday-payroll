@@ -139,6 +139,36 @@ components:
           type: string
           description: Deduction code display name
           example: Weekly USD Pay Group
+    DeductionCode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the deduction code
+          example: MEDICAL_PRETAX
+        descriptor:
+          type: string
+          description: Display name of the deduction code
+          example: Weekly USD Pay Group
+        type:
+          type: string
+          enum:
+          - Benefit
+          - Retirement
+          - Garnishment
+          - Tax
+          - Voluntary
+          - Other
+          description: Category of the deduction
+          example: Benefit
+        preTax:
+          type: boolean
+          description: Whether this deduction is pre-tax by default
+          example: true
+        active:
+          type: boolean
+          description: Whether the deduction code is currently active
+          example: true
     DeductionCollection:
       type: object
       properties:
@@ -182,36 +212,6 @@ components:
           type: integer
           description: Total number of deduction codes
           example: 52
-    DeductionCode:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the deduction code
-          example: MEDICAL_PRETAX
-        descriptor:
-          type: string
-          description: Display name of the deduction code
-          example: Weekly USD Pay Group
-        type:
-          type: string
-          enum:
-          - Benefit
-          - Retirement
-          - Garnishment
-          - Tax
-          - Voluntary
-          - Other
-          description: Category of the deduction
-          example: Benefit
-        preTax:
-          type: boolean
-          description: Whether this deduction is pre-tax by default
-          example: true
-        active:
-          type: boolean
-          description: Whether the deduction code is currently active
-          example: true
     Deduction:
       type: object
       properties:

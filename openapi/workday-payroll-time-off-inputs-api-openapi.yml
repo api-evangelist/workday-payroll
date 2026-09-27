@@ -132,14 +132,6 @@ components:
         maximum: 100
         default: 20
       example: 20
-    workerId:
-      name: workerId
-      in: path
-      required: true
-      description: Unique identifier for the worker
-      schema:
-        type: string
-      example: w_100542
     offset:
       name: offset
       in: query
@@ -149,7 +141,56 @@ components:
         minimum: 0
         default: 0
       example: 0
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+      example: w_100542
   schemas:
+    CreateTimeOffInputRequest:
+      type: object
+      required:
+      - timeOffType
+      - startDate
+      - hours
+      properties:
+        timeOffType:
+          type: string
+          description: Type of time off
+          example: Vacation
+        startDate:
+          type: string
+          format: date
+          description: Start date
+          example: '2026-04-30'
+        endDate:
+          type: string
+          format: date
+          description: End date
+          example: '2026-04-30'
+        hours:
+          type: number
+          format: double
+          description: Hours of time off
+          example: 40.0
+        paid:
+          type: boolean
+          description: Whether the time off is paid
+          example: true
+    TimeOffInputCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeOffInput'
+        total:
+          type: integer
+          description: Total number of time off inputs
+          example: 52
     TimeOffInput:
       type: object
       properties:
@@ -201,47 +242,6 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-    CreateTimeOffInputRequest:
-      type: object
-      required:
-      - timeOffType
-      - startDate
-      - hours
-      properties:
-        timeOffType:
-          type: string
-          description: Type of time off
-          example: Vacation
-        startDate:
-          type: string
-          format: date
-          description: Start date
-          example: '2026-04-30'
-        endDate:
-          type: string
-          format: date
-          description: End date
-          example: '2026-04-30'
-        hours:
-          type: number
-          format: double
-          description: Hours of time off
-          example: 40.0
-        paid:
-          type: boolean
-          description: Whether the time off is paid
-          example: true
-    TimeOffInputCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeOffInput'
-        total:
-          type: integer
-          description: Total number of time off inputs
-          example: 52
     WorkerRef:
       type: object
       properties:
@@ -267,19 +267,6 @@ components:
               value:
                 error: INVALID_REQUEST
                 message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
     BadRequest:
       description: Invalid request parameters
       content:
@@ -289,6 +276,19 @@ components:
           examples:
             BadRequestExample:
               summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
               x-microcks-default: true
               value:
                 error: INVALID_REQUEST

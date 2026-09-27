@@ -323,46 +323,18 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-      example: 20
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-      example: 0
-    payRunId:
-      name: payRunId
-      in: path
-      required: true
-      description: Unique identifier for the pay run
-      schema:
-        type: string
-      example: pr_20260430_weekly_001
   schemas:
-    PayRunCollection:
+    PayGroupRef:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PayRun'
-        total:
-          type: integer
-          description: Total number of pay runs matching the query
-          example: 52
+        id:
+          type: string
+          description: Pay group identifier
+          example: pg_weekly_usd
+        descriptor:
+          type: string
+          description: Pay group display name
+          example: Weekly USD Pay Group
     PayRun:
       type: object
       properties:
@@ -438,6 +410,19 @@ components:
           format: date-time
           description: When the pay run was completed
           example: '2026-04-30T16:45:00Z'
+    PayPeriod:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+          description: Start date of the pay period
+          example: '2026-04-30'
+        endDate:
+          type: string
+          format: date
+          description: End date of the pay period
+          example: '2026-04-30'
     CreatePayRunRequest:
       type: object
       required:
@@ -464,17 +449,21 @@ components:
           format: date
           description: Desired payment date
           example: '2026-04-30'
-    PayGroupRef:
+    UpdatePayRunRequest:
       type: object
       properties:
-        id:
+        status:
           type: string
-          description: Pay group identifier
-          example: pg_weekly_usd
-        descriptor:
+          enum:
+          - Draft
+          - Cancelled
+          description: Updated status for the pay run
+          example: Draft
+        paymentDate:
           type: string
-          description: Pay group display name
-          example: Weekly USD Pay Group
+          format: date
+          description: Updated payment date
+          example: '2026-04-30'
     Error:
       type: object
       properties:
@@ -496,34 +485,45 @@ components:
               message:
                 type: string
           description: Detailed error information
-    PayPeriod:
+    PayRunCollection:
       type: object
       properties:
-        startDate:
-          type: string
-          format: date
-          description: Start date of the pay period
-          example: '2026-04-30'
-        endDate:
-          type: string
-          format: date
-          description: End date of the pay period
-          example: '2026-04-30'
-    UpdatePayRunRequest:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - Draft
-          - Cancelled
-          description: Updated status for the pay run
-          example: Draft
-        paymentDate:
-          type: string
-          format: date
-          description: Updated payment date
-          example: '2026-04-30'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayRun'
+        total:
+          type: integer
+          description: Total number of pay runs matching the query
+          example: 52
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      example: 20
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+      example: pr_20260430_weekly_001
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
   responses:
     Unauthorized:
       description: Authentication required or token expired
@@ -541,22 +541,6 @@ components:
                 details:
                 - field: amount
                   message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-                details:
-                - field: amount
-                  message: Validation failed for the provided fields.
     BadRequest:
       description: Invalid request parameters
       content:
@@ -566,6 +550,22 @@ components:
           examples:
             BadRequestExample:
               summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
               x-microcks-default: true
               value:
                 error: INVALID_REQUEST

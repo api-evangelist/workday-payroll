@@ -175,28 +175,58 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaxJurisdictionRef:
+    CreateTaxElectionRequest:
       type: object
+      required:
+      - formType
+      - jurisdictionId
+      - filingStatus
       properties:
-        id:
+        formType:
           type: string
-          description: Jurisdiction identifier
+          enum:
+          - W4
+          - StateWithholding
+          - LocalWithholding
+          description: Type of tax form
+          example: W4
+        jurisdictionId:
+          type: string
+          description: Tax jurisdiction identifier
           example: tjur_us_federal
-        descriptor:
+        filingStatus:
           type: string
-          description: Jurisdiction display name
-          example: Weekly USD Pay Group
-    TaxElectionCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxElection'
-        total:
-          type: integer
-          description: Total number of tax elections
-          example: 52
+          description: Filing status
+          example: example
+        multipleJobs:
+          type: boolean
+          description: Multiple jobs indicator
+          example: true
+        dependentsAmount:
+          type: number
+          format: double
+          description: Dependents amount
+          example: 2000.0
+        otherIncome:
+          type: number
+          format: double
+          description: Other income amount
+          example: 0.0
+        deductions:
+          type: number
+          format: double
+          description: Deductions amount
+          example: 0.0
+        additionalWithholding:
+          type: number
+          format: double
+          description: Additional withholding per period
+          example: 50.0
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+          example: '2026-04-30'
     TaxElection:
       type: object
       properties:
@@ -260,58 +290,28 @@ components:
           - Voided
           description: Current status of the election
           example: Active
-    CreateTaxElectionRequest:
+    TaxJurisdictionRef:
       type: object
-      required:
-      - formType
-      - jurisdictionId
-      - filingStatus
       properties:
-        formType:
+        id:
           type: string
-          enum:
-          - W4
-          - StateWithholding
-          - LocalWithholding
-          description: Type of tax form
-          example: W4
-        jurisdictionId:
-          type: string
-          description: Tax jurisdiction identifier
+          description: Jurisdiction identifier
           example: tjur_us_federal
-        filingStatus:
+        descriptor:
           type: string
-          description: Filing status
-          example: example
-        multipleJobs:
-          type: boolean
-          description: Multiple jobs indicator
-          example: true
-        dependentsAmount:
-          type: number
-          format: double
-          description: Dependents amount
-          example: 2000.0
-        otherIncome:
-          type: number
-          format: double
-          description: Other income amount
-          example: 0.0
-        deductions:
-          type: number
-          format: double
-          description: Deductions amount
-          example: 0.0
-        additionalWithholding:
-          type: number
-          format: double
-          description: Additional withholding per period
-          example: 50.0
-        effectiveDate:
-          type: string
-          format: date
-          description: Effective date
-          example: '2026-04-30'
+          description: Jurisdiction display name
+          example: Weekly USD Pay Group
+    TaxElectionCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxElection'
+        total:
+          type: integer
+          description: Total number of tax elections
+          example: 52
     Error:
       type: object
       properties:
@@ -323,46 +323,6 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-  responses:
-    Unauthorized:
-      description: Authentication required or token expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            UnauthorizedExample:
-              summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            BadRequestExample:
-              summary: Default BadRequest response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
   parameters:
     electionId:
       name: electionId
@@ -380,6 +340,46 @@ components:
       schema:
         type: string
       example: w_100542
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   securitySchemes:
     bearerAuth:
       type: http

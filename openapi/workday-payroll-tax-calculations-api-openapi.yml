@@ -130,6 +130,14 @@ components:
         maximum: 100
         default: 20
       example: 20
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+      example: pr_20260430_weekly_001
     offset:
       name: offset
       in: query
@@ -147,15 +155,35 @@ components:
       schema:
         type: string
       example: w_100542
-    payRunId:
-      name: payRunId
-      in: path
-      required: true
-      description: Unique identifier for the pay run
-      schema:
-        type: string
-      example: pr_20260430_weekly_001
   schemas:
+    TaxResult:
+      type: object
+      properties:
+        jurisdiction:
+          $ref: '#/components/schemas/TaxJurisdictionRef'
+        taxType:
+          type: string
+          description: Type of tax
+          example: FederalIncome
+        employeeAmount:
+          type: number
+          format: double
+          description: Employee tax amount
+          example: 287.5
+        employerAmount:
+          type: number
+          format: double
+          description: Employer tax amount
+          example: 287.5
+        taxableWages:
+          type: number
+          format: double
+          description: Taxable wages for this tax type
+          example: 4750.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
     TaxJurisdictionRef:
       type: object
       properties:
@@ -231,45 +259,6 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-    TaxResultCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxResult'
-        total:
-          type: integer
-          description: Total number of tax result records
-          example: 52
-    TaxResult:
-      type: object
-      properties:
-        jurisdiction:
-          $ref: '#/components/schemas/TaxJurisdictionRef'
-        taxType:
-          type: string
-          description: Type of tax
-          example: FederalIncome
-        employeeAmount:
-          type: number
-          format: double
-          description: Employee tax amount
-          example: 287.5
-        employerAmount:
-          type: number
-          format: double
-          description: Employer tax amount
-          example: 287.5
-        taxableWages:
-          type: number
-          format: double
-          description: Taxable wages for this tax type
-          example: 4750.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: USD
     WorkerRef:
       type: object
       properties:
@@ -281,6 +270,17 @@ components:
           type: string
           description: Worker display name
           example: Weekly USD Pay Group
+    TaxResultCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxResult'
+        total:
+          type: integer
+          description: Total number of tax result records
+          example: 52
   responses:
     Unauthorized:
       description: Authentication required or token expired

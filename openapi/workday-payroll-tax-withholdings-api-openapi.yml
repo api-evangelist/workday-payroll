@@ -162,43 +162,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpdateTaxWithholdingRequest:
-      type: object
-      properties:
-        filingStatus:
-          type: string
-          enum:
-          - Single
-          - MarriedFilingJointly
-          - MarriedFilingSeparately
-          - HeadOfHousehold
-          - QualifyingWidower
-          description: Updated filing status
-          example: Single
-        allowances:
-          type: integer
-          description: Updated number of allowances
-          example: 2
-        additionalWithholding:
-          type: number
-          format: double
-          description: Updated additional withholding amount
-          example: 50.0
-        exempt:
-          type: boolean
-          description: Updated exempt status
-          example: false
-    TaxJurisdictionRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Jurisdiction identifier
-          example: tjur_us_federal
-        descriptor:
-          type: string
-          description: Jurisdiction display name
-          example: Weekly USD Pay Group
     TaxWithholdingCollection:
       type: object
       properties:
@@ -210,17 +173,6 @@ components:
           type: integer
           description: Total number of tax withholdings
           example: 52
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
     TaxWithholding:
       type: object
       properties:
@@ -275,23 +227,54 @@ components:
           type: string
           description: ISO 4217 currency code
           example: USD
-  parameters:
-    withholdingId:
-      name: withholdingId
-      in: path
-      required: true
-      description: Unique identifier for the tax withholding
-      schema:
-        type: string
-      example: twh_w100542_federal
-    workerId:
-      name: workerId
-      in: path
-      required: true
-      description: Unique identifier for the worker
-      schema:
-        type: string
-      example: w_100542
+    UpdateTaxWithholdingRequest:
+      type: object
+      properties:
+        filingStatus:
+          type: string
+          enum:
+          - Single
+          - MarriedFilingJointly
+          - MarriedFilingSeparately
+          - HeadOfHousehold
+          - QualifyingWidower
+          description: Updated filing status
+          example: Single
+        allowances:
+          type: integer
+          description: Updated number of allowances
+          example: 2
+        additionalWithholding:
+          type: number
+          format: double
+          description: Updated additional withholding amount
+          example: 50.0
+        exempt:
+          type: boolean
+          description: Updated exempt status
+          example: false
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
+    TaxJurisdictionRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Jurisdiction identifier
+          example: tjur_us_federal
+        descriptor:
+          type: string
+          description: Jurisdiction display name
+          example: Weekly USD Pay Group
   responses:
     Unauthorized:
       description: Authentication required or token expired
@@ -302,19 +285,6 @@ components:
           examples:
             UnauthorizedExample:
               summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
               x-microcks-default: true
               value:
                 error: INVALID_REQUEST
@@ -332,6 +302,36 @@ components:
               value:
                 error: INVALID_REQUEST
                 message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+      example: w_100542
+    withholdingId:
+      name: withholdingId
+      in: path
+      required: true
+      description: Unique identifier for the tax withholding
+      schema:
+        type: string
+      example: twh_w100542_federal
   securitySchemes:
     bearerAuth:
       type: http

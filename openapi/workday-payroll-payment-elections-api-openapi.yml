@@ -65,28 +65,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PaymentElectionCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentElection'
-        total:
-          type: integer
-          description: Total number of payment elections
-          example: 52
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
     PaymentElection:
       type: object
       properties:
@@ -139,6 +117,28 @@ components:
           type: boolean
           description: Whether this election is currently active
           example: true
+    PaymentElectionCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentElection'
+        total:
+          type: integer
+          description: Total number of payment elections
+          example: 52
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
   responses:
     Unauthorized:
       description: Authentication required or token expired

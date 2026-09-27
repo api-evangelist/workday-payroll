@@ -35,7 +35,7 @@ modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: workday-payroll:workday-payroll-agentdefinition-api
-  name: Workday Payroll agentDefinition API
+  name: Workday Payroll Agent Definition API
   description: To view and maintain Agent Definitions with the Agent System of Record.
   humanURL: https://www.workday.com/en-us/products/payroll-management.html
   baseURL: https://api.workday.com/payroll/v1
