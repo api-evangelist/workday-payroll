@@ -139,6 +139,15 @@ components:
               message:
                 type: string
           description: Detailed error information
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker (Workday ID)
+      schema:
+        type: string
+      example: w_100542
   responses:
     Unauthorized:
       description: Authentication required or token expired
@@ -172,15 +181,6 @@ components:
                 details:
                 - field: amount
                   message: Validation failed for the provided fields.
-  parameters:
-    workerId:
-      name: workerId
-      in: path
-      required: true
-      description: Unique identifier for the worker (Workday ID)
-      schema:
-        type: string
-      example: w_100542
   securitySchemes:
     bearerAuth:
       type: http

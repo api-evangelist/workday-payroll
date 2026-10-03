@@ -175,58 +175,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateTaxElectionRequest:
-      type: object
-      required:
-      - formType
-      - jurisdictionId
-      - filingStatus
-      properties:
-        formType:
-          type: string
-          enum:
-          - W4
-          - StateWithholding
-          - LocalWithholding
-          description: Type of tax form
-          example: W4
-        jurisdictionId:
-          type: string
-          description: Tax jurisdiction identifier
-          example: tjur_us_federal
-        filingStatus:
-          type: string
-          description: Filing status
-          example: example
-        multipleJobs:
-          type: boolean
-          description: Multiple jobs indicator
-          example: true
-        dependentsAmount:
-          type: number
-          format: double
-          description: Dependents amount
-          example: 2000.0
-        otherIncome:
-          type: number
-          format: double
-          description: Other income amount
-          example: 0.0
-        deductions:
-          type: number
-          format: double
-          description: Deductions amount
-          example: 0.0
-        additionalWithholding:
-          type: number
-          format: double
-          description: Additional withholding per period
-          example: 50.0
-        effectiveDate:
-          type: string
-          format: date
-          description: Effective date
-          example: '2026-04-30'
     TaxElection:
       type: object
       properties:
@@ -301,17 +249,6 @@ components:
           type: string
           description: Jurisdiction display name
           example: Weekly USD Pay Group
-    TaxElectionCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxElection'
-        total:
-          type: integer
-          description: Total number of tax elections
-          example: 52
     Error:
       type: object
       properties:
@@ -323,33 +260,79 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-  parameters:
-    electionId:
-      name: electionId
-      in: path
-      required: true
-      description: Unique identifier for the tax election
-      schema:
-        type: string
-      example: tel_w100542_w4_2026
-    workerId:
-      name: workerId
-      in: path
-      required: true
-      description: Unique identifier for the worker
-      schema:
-        type: string
-      example: w_100542
+    CreateTaxElectionRequest:
+      type: object
+      required:
+      - formType
+      - jurisdictionId
+      - filingStatus
+      properties:
+        formType:
+          type: string
+          enum:
+          - W4
+          - StateWithholding
+          - LocalWithholding
+          description: Type of tax form
+          example: W4
+        jurisdictionId:
+          type: string
+          description: Tax jurisdiction identifier
+          example: tjur_us_federal
+        filingStatus:
+          type: string
+          description: Filing status
+          example: example
+        multipleJobs:
+          type: boolean
+          description: Multiple jobs indicator
+          example: true
+        dependentsAmount:
+          type: number
+          format: double
+          description: Dependents amount
+          example: 2000.0
+        otherIncome:
+          type: number
+          format: double
+          description: Other income amount
+          example: 0.0
+        deductions:
+          type: number
+          format: double
+          description: Deductions amount
+          example: 0.0
+        additionalWithholding:
+          type: number
+          format: double
+          description: Additional withholding per period
+          example: 50.0
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+          example: '2026-04-30'
+    TaxElectionCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxElection'
+        total:
+          type: integer
+          description: Total number of tax elections
+          example: 52
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           examples:
-            NotFoundExample:
-              summary: Default NotFound response
+            BadRequestExample:
+              summary: Default BadRequest response
               x-microcks-default: true
               value:
                 error: INVALID_REQUEST
@@ -367,19 +350,36 @@ components:
               value:
                 error: INVALID_REQUEST
                 message: Validation failed for the provided fields.
-    BadRequest:
-      description: Invalid request parameters
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           examples:
-            BadRequestExample:
-              summary: Default BadRequest response
+            NotFoundExample:
+              summary: Default NotFound response
               x-microcks-default: true
               value:
                 error: INVALID_REQUEST
                 message: Validation failed for the provided fields.
+  parameters:
+    electionId:
+      name: electionId
+      in: path
+      required: true
+      description: Unique identifier for the tax election
+      schema:
+        type: string
+      example: tel_w100542_w4_2026
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+      example: w_100542
   securitySchemes:
     bearerAuth:
       type: http

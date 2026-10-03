@@ -186,6 +186,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AdjustmentCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Adjustment'
+        total:
+          type: integer
+          description: Total number of adjustments
+          example: 52
     Adjustment:
       type: object
       properties:
@@ -298,17 +309,6 @@ components:
           format: date
           description: Effective date
           example: '2026-04-30'
-    AdjustmentCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Adjustment'
-        total:
-          type: integer
-          description: Total number of adjustments
-          example: 52
     Error:
       type: object
       properties:
@@ -331,6 +331,46 @@ components:
           type: string
           description: Worker display name
           example: Weekly USD Pay Group
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   parameters:
     limit:
       name: limit
@@ -359,46 +399,6 @@ components:
       schema:
         type: string
       example: adj_20260415_00012
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    Unauthorized:
-      description: Authentication required or token expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            UnauthorizedExample:
-              summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            BadRequestExample:
-              summary: Default BadRequest response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
   securitySchemes:
     bearerAuth:
       type: http

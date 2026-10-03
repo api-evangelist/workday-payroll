@@ -190,6 +190,17 @@ components:
           type: string
           description: Check number if payment method is check
           example: '100482'
+    PaymentCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        total:
+          type: integer
+          description: Total number of payments
+          example: 52
     Error:
       type: object
       properties:
@@ -212,26 +223,7 @@ components:
           type: string
           description: Worker display name
           example: Weekly USD Pay Group
-    PaymentCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-        total:
-          type: integer
-          description: Total number of payments
-          example: 52
   parameters:
-    paymentId:
-      name: paymentId
-      in: path
-      required: true
-      description: Unique identifier for the payment
-      schema:
-        type: string
-      example: pmt_20260502_00045
     limit:
       name: limit
       in: query
@@ -242,14 +234,6 @@ components:
         maximum: 100
         default: 20
       example: 20
-    payRunId:
-      name: payRunId
-      in: path
-      required: true
-      description: Unique identifier for the pay run
-      schema:
-        type: string
-      example: pr_20260430_weekly_001
     offset:
       name: offset
       in: query
@@ -259,6 +243,22 @@ components:
         minimum: 0
         default: 0
       example: 0
+    paymentId:
+      name: paymentId
+      in: path
+      required: true
+      description: Unique identifier for the payment
+      schema:
+        type: string
+      example: pmt_20260502_00045
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+      example: pr_20260430_weekly_001
   responses:
     Unauthorized:
       description: Authentication required or token expired

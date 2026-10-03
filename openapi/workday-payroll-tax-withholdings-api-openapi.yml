@@ -162,17 +162,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaxWithholdingCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxWithholding'
-        total:
-          type: integer
-          description: Total number of tax withholdings
-          example: 52
     TaxWithholding:
       type: object
       properties:
@@ -227,6 +216,17 @@ components:
           type: string
           description: ISO 4217 currency code
           example: USD
+    TaxJurisdictionRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Jurisdiction identifier
+          example: tjur_us_federal
+        descriptor:
+          type: string
+          description: Jurisdiction display name
+          example: Weekly USD Pay Group
     UpdateTaxWithholdingRequest:
       type: object
       properties:
@@ -264,31 +264,18 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-    TaxJurisdictionRef:
+    TaxWithholdingCollection:
       type: object
       properties:
-        id:
-          type: string
-          description: Jurisdiction identifier
-          example: tjur_us_federal
-        descriptor:
-          type: string
-          description: Jurisdiction display name
-          example: Weekly USD Pay Group
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxWithholding'
+        total:
+          type: integer
+          description: Total number of tax withholdings
+          example: 52
   responses:
-    Unauthorized:
-      description: Authentication required or token expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            UnauthorizedExample:
-              summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
     BadRequest:
       description: Invalid request parameters
       content:
@@ -298,6 +285,19 @@ components:
           examples:
             BadRequestExample:
               summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
               x-microcks-default: true
               value:
                 error: INVALID_REQUEST
@@ -316,14 +316,6 @@ components:
                 error: INVALID_REQUEST
                 message: Validation failed for the provided fields.
   parameters:
-    workerId:
-      name: workerId
-      in: path
-      required: true
-      description: Unique identifier for the worker
-      schema:
-        type: string
-      example: w_100542
     withholdingId:
       name: withholdingId
       in: path
@@ -332,6 +324,14 @@ components:
       schema:
         type: string
       example: twh_w100542_federal
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker
+      schema:
+        type: string
+      example: w_100542
   securitySchemes:
     bearerAuth:
       type: http

@@ -162,6 +162,39 @@ components:
         default: 0
       example: 0
   schemas:
+    TaxFilingCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxFiling'
+        total:
+          type: integer
+          description: Total number of tax filings
+          example: 52
+    TaxJurisdictionRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Jurisdiction identifier
+          example: tjur_us_federal
+        descriptor:
+          type: string
+          description: Jurisdiction display name
+          example: Weekly USD Pay Group
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: INVALID_REQUEST
+        message:
+          type: string
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
     TaxFiling:
       type: object
       properties:
@@ -232,39 +265,6 @@ components:
           type: string
           description: ISO 4217 currency code
           example: USD
-    TaxFilingCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxFiling'
-        total:
-          type: integer
-          description: Total number of tax filings
-          example: 52
-    TaxJurisdictionRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Jurisdiction identifier
-          example: tjur_us_federal
-        descriptor:
-          type: string
-          description: Jurisdiction display name
-          example: Weekly USD Pay Group
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
-          type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
   responses:
     Unauthorized:
       description: Authentication required or token expired
