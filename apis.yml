@@ -9402,6 +9402,9 @@ apis:
   - type: Examples
     url: examples/tax-worker-tax-summary-example.json
 common:
+- type: CapabilityMap
+  url: capabilities/workday-payroll-capability-edges.yml
+  name: Workday Payroll Business Capability Map
 - type: Website
   url: https://www.workday.com/
 - type: PostmanWorkspace

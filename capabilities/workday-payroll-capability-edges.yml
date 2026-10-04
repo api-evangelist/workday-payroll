@@ -1,0 +1,179 @@
+slug: workday-payroll
+provider: Workday Payroll
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 18
+edges:
+- tag: Pay Runs
+  spec_file: workday-payroll-pay-runs-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.92
+  evidence: POST /payRuns createPayRun ... POST /payRuns/{payRunId}/complete completePayRun; schemas PayGroupRef,
+    PayRun, PayPeriod
+  reason: Operations create, update and complete payroll runs over pay groups and pay periods — payroll
+    administration within HR Operations Management.
+- tag: Payslips
+  spec_file: workday-payroll-payslips-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.92
+  evidence: GET /workers/{workerId}/payslips listWorkerPayslips; schemas Payslip, PayslipEarningLine,
+    PayslipDeductionLine
+  reason: Employee payslips with earnings, deductions and tax lines are payroll administration artefacts.
+- tag: Payroll Adjustments
+  spec_file: workday-payroll-payroll-adjustments-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.88
+  evidence: 'POST /adjustments createPayrollAdjustment; description: ''submitting and managing payroll
+    input data ... one-time payments, payroll adjustments'''
+  reason: Payroll input adjustments against workers are payroll processing administration.
+- tag: Payroll Calculations
+  spec_file: workday-payroll-payroll-calculations-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.88
+  evidence: POST /payRuns/{payRunId}/calculate calculatePayRun; schema CalculationStatus
+  reason: Triggering payroll calculation for a pay run is core payroll administration.
+- tag: Payroll Summaries
+  spec_file: workday-payroll-payroll-summaries-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.88
+  evidence: GET /payRuns/{payRunId}/results/workers listPayRunWorkerResults; schemas PayRunResult, WorkerResult
+  reason: Retrieval of pay run and worker-level payroll results is payroll administration reporting within
+    HR operations.
+- tag: Payment Results
+  spec_file: workday-payroll-payment-results-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: GET /payRuns/{payRunId}/payments  List Payments for a Pay Run; schemas Payment, WorkerRef
+  reason: Payments are the disbursement results of a payroll run to workers — payroll administration,
+    not accounts payable.
+- tag: Payment Elections
+  spec_file: workday-payroll-payment-elections-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /workers/{workerId}/paymentElections listWorkerPaymentElections
+  reason: Worker-level payment election records (how an employee is paid) are payroll administration data,
+    not corporate treasury or AP payments.
+- tag: Workers
+  spec_file: workday-payroll-workers-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /workers/{workerId}/payrollDetails  getWorkerPayrollDetails — schema WorkerPayrollDetails,
+    PayGroupRef
+  reason: Retrieves employee payroll details and pay group assignment — employee records and payroll administration.
+- tag: Deductions
+  spec_file: workday-payroll-deductions-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /workers/{workerId}/deductions listWorkerDeductions; GET /deductionCodes listDeductionCodes
+  reason: Worker payroll deductions and deduction codes are payroll administration within HR operations.
+- tag: Earnings
+  spec_file: workday-payroll-earnings-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: 'GET /workers/{workerId}/earnings listWorkerEarnings; schemas: EarningCode, PayPeriod'
+  reason: Worker earnings per pay period and earning code configuration are payroll administration.
+- tag: Pay Groups
+  spec_file: workday-payroll-pay-groups-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /payGroups/{payGroupId}/workers listPayGroupWorkers Workday Payroll List Workers in a
+    Pay Group
+  reason: Pay group configuration and worker assignment is core payroll administration setup.
+- tag: Tax Elections
+  spec_file: workday-payroll-tax-elections-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: POST /workers/{workerId}/taxElections createWorkerTaxElection; description mentions 'W-4 elections'
+  reason: Employee W-4 / withholding elections are employee payroll records maintained in HR operations.
+- tag: Supplemental Earnings
+  spec_file: workday-payroll-supplemental-earnings-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: 'POST /supplementalEarnings createSupplementalEarning; description: ''payroll input data ...
+    supplemental earnings'''
+  reason: Supplemental earnings submitted as payroll input for workers; payroll administration (adjacent
+    to compensation administration, hence the broader payroll sub-capability).
+- tag: Tax Withholdings
+  spec_file: workday-payroll-tax-withholdings-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: GET /workers/{workerId}/taxWithholdings  listWorkerTaxWithholdings — 'API for managing payroll
+    tax calculations, tax withholdings, ... W-4 elections'
+  reason: Worker-level payroll tax withholding elections are part of payroll administration within HR
+    operations, not corporate tax filing; operations are scoped to a worker record.
+- tag: One-Time Payments
+  spec_file: workday-payroll-one-time-payments-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: POST /oneTimePayments createOneTimePayment Workday Payroll Create a One-time Payment; schema
+    WorkerRef
+  reason: One-time payments to workers submitted as payroll input are payroll administration; could also
+    be read as compensation (bonus) administration.
+- tag: Tax Calculations
+  spec_file: workday-payroll-tax-calculations-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /payRuns/{payRunId}/taxResults listPayRunTaxResults; GET /workers/{workerId}/taxSummary
+  reason: Payroll tax withholding results per pay run and per worker are computed as part of payroll processing,
+    so this sits in payroll administration rather than corporate tax management.
+- tag: Input Batches
+  spec_file: workday-payroll-input-batches-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: 'POST /inputBatches createInputBatch; description: "submitting and managing payroll input
+    data ... batch input submissions"'
+  reason: Although framed as batches, the payload is payroll input records feeding the payroll run, i.e.
+    payroll administration.
+- tag: Time Off Inputs
+  spec_file: workday-payroll-time-off-inputs-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: POST /workers/{workerId}/timeOffInputs  createWorkerTimeOffInput — 'API for submitting and
+    managing payroll input data'
+  reason: Submitting per-worker time-off inputs into the payroll run is payroll administration / HR service
+    delivery.
