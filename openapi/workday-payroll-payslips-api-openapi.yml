@@ -170,14 +170,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    payslipId:
-      name: payslipId
-      in: path
-      required: true
-      description: Unique identifier for the payslip
-      schema:
-        type: string
-      example: ps_w100542_20260430
     workerId:
       name: workerId
       in: path
@@ -195,6 +187,14 @@ components:
         minimum: 0
         default: 0
       example: 0
+    payslipId:
+      name: payslipId
+      in: path
+      required: true
+      description: Unique identifier for the payslip
+      schema:
+        type: string
+      example: ps_w100542_20260430
     limit:
       name: limit
       in: query
@@ -206,6 +206,120 @@ components:
         default: 20
       example: 20
   schemas:
+    PayPeriod:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+          description: Start date of the pay period
+          example: '2026-04-30'
+        endDate:
+          type: string
+          format: date
+          description: End date of the pay period
+          example: '2026-04-30'
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Worker identifier
+          example: w_100542
+        descriptor:
+          type: string
+          description: Worker display name
+          example: Weekly USD Pay Group
+    PayslipDeductionLine:
+      type: object
+      properties:
+        deductionCode:
+          type: string
+          description: Deduction code descriptor
+          example: MEDICAL_PRETAX
+        employeeAmount:
+          type: number
+          format: double
+          description: Employee contribution amount
+          example: 287.5
+        employerAmount:
+          type: number
+          format: double
+          description: Employer contribution amount
+          example: 287.5
+        preTax:
+          type: boolean
+          description: Whether this deduction is pre-tax
+          example: true
+        yearToDateEmployee:
+          type: number
+          format: double
+          description: Year-to-date employee amount
+          example: 8742.5
+        yearToDateEmployer:
+          type: number
+          format: double
+          description: Year-to-date employer amount
+          example: 8742.5
+    PayslipEarningLine:
+      type: object
+      properties:
+        earningCode:
+          type: string
+          description: Earning code descriptor
+          example: REGULAR
+        currentAmount:
+          type: number
+          format: double
+          description: Current period amount
+          example: 2840.0
+        currentHours:
+          type: number
+          format: double
+          description: Current period hours
+          example: 40.0
+        rate:
+          type: number
+          format: double
+          description: Pay rate
+          example: 32.5
+        yearToDateAmount:
+          type: number
+          format: double
+          description: Year-to-date amount for this earning
+          example: 8742.5
+    PayslipTaxLine:
+      type: object
+      properties:
+        taxAuthority:
+          type: string
+          description: Tax authority name
+          example: Internal Revenue Service
+        taxType:
+          type: string
+          description: Type of tax
+          example: FederalIncome
+        currentAmount:
+          type: number
+          format: double
+          description: Current period tax amount
+          example: 2840.0
+        yearToDateAmount:
+          type: number
+          format: double
+          description: Year-to-date tax amount
+          example: 8742.5
+    PayslipCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payslip'
+        total:
+          type: integer
+          description: Total number of payslips
+          example: 52
     Payslip:
       type: object
       properties:
@@ -281,17 +395,6 @@ components:
           format: double
           description: Year-to-date tax withholdings
           example: 8742.5
-    PayslipCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payslip'
-        total:
-          type: integer
-          description: Total number of payslips
-          example: 52
     Error:
       type: object
       properties:
@@ -303,109 +406,6 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-    PayslipTaxLine:
-      type: object
-      properties:
-        taxAuthority:
-          type: string
-          description: Tax authority name
-          example: Internal Revenue Service
-        taxType:
-          type: string
-          description: Type of tax
-          example: FederalIncome
-        currentAmount:
-          type: number
-          format: double
-          description: Current period tax amount
-          example: 2840.0
-        yearToDateAmount:
-          type: number
-          format: double
-          description: Year-to-date tax amount
-          example: 8742.5
-    PayslipDeductionLine:
-      type: object
-      properties:
-        deductionCode:
-          type: string
-          description: Deduction code descriptor
-          example: MEDICAL_PRETAX
-        employeeAmount:
-          type: number
-          format: double
-          description: Employee contribution amount
-          example: 287.5
-        employerAmount:
-          type: number
-          format: double
-          description: Employer contribution amount
-          example: 287.5
-        preTax:
-          type: boolean
-          description: Whether this deduction is pre-tax
-          example: true
-        yearToDateEmployee:
-          type: number
-          format: double
-          description: Year-to-date employee amount
-          example: 8742.5
-        yearToDateEmployer:
-          type: number
-          format: double
-          description: Year-to-date employer amount
-          example: 8742.5
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Worker identifier
-          example: w_100542
-        descriptor:
-          type: string
-          description: Worker display name
-          example: Weekly USD Pay Group
-    PayPeriod:
-      type: object
-      properties:
-        startDate:
-          type: string
-          format: date
-          description: Start date of the pay period
-          example: '2026-04-30'
-        endDate:
-          type: string
-          format: date
-          description: End date of the pay period
-          example: '2026-04-30'
-    PayslipEarningLine:
-      type: object
-      properties:
-        earningCode:
-          type: string
-          description: Earning code descriptor
-          example: REGULAR
-        currentAmount:
-          type: number
-          format: double
-          description: Current period amount
-          example: 2840.0
-        currentHours:
-          type: number
-          format: double
-          description: Current period hours
-          example: 40.0
-        rate:
-          type: number
-          format: double
-          description: Pay rate
-          example: 32.5
-        yearToDateAmount:
-          type: number
-          format: double
-          description: Year-to-date amount for this earning
-          example: 8742.5
   responses:
     Unauthorized:
       description: Authentication required or token expired

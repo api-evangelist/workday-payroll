@@ -249,7 +249,91 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or token expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            UnauthorizedExample:
+              summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
   schemas:
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Worker identifier
+          example: w_100542
+        descriptor:
+          type: string
+          description: Worker display name
+          example: Weekly USD Pay Group
+    CreateOneTimePaymentRequest:
+      type: object
+      required:
+      - workerId
+      - earningCode
+      - amount
+      properties:
+        workerId:
+          type: string
+          description: Worker identifier
+          example: w_100542
+        earningCode:
+          type: string
+          description: Earning code for the payment
+          example: REGULAR
+        amount:
+          type: number
+          format: double
+          description: Payment amount
+          example: 2500.0
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+        reason:
+          type: string
+          description: Reason for the payment
+          example: Q1 2026 performance bonus
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date
+          example: '2026-04-30'
     OneTimePayment:
       type: object
       properties:
@@ -299,6 +383,17 @@ components:
           type: string
           description: User who submitted the request
           example: payroll.admin@example.com
+    OneTimePaymentCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OneTimePayment'
+        total:
+          type: integer
+          description: Total number of one-time payments
+          example: 52
     Error:
       type: object
       properties:
@@ -310,39 +405,6 @@ components:
           type: string
           description: Human-readable error message
           example: Validation failed for the provided fields.
-    CreateOneTimePaymentRequest:
-      type: object
-      required:
-      - workerId
-      - earningCode
-      - amount
-      properties:
-        workerId:
-          type: string
-          description: Worker identifier
-          example: w_100542
-        earningCode:
-          type: string
-          description: Earning code for the payment
-          example: REGULAR
-        amount:
-          type: number
-          format: double
-          description: Payment amount
-          example: 2500.0
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: USD
-        reason:
-          type: string
-          description: Reason for the payment
-          example: Q1 2026 performance bonus
-        effectiveDate:
-          type: string
-          format: date
-          description: Effective date
-          example: '2026-04-30'
     UpdateOneTimePaymentRequest:
       type: object
       properties:
@@ -360,79 +422,7 @@ components:
           format: date
           description: Updated effective date
           example: '2026-04-30'
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Worker identifier
-          example: w_100542
-        descriptor:
-          type: string
-          description: Worker display name
-          example: Weekly USD Pay Group
-    OneTimePaymentCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OneTimePayment'
-        total:
-          type: integer
-          description: Total number of one-time payments
-          example: 52
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            BadRequestExample:
-              summary: Default BadRequest response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    Unauthorized:
-      description: Authentication required or token expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            UnauthorizedExample:
-              summary: Default Unauthorized response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-      example: 20
     offset:
       name: offset
       in: query
@@ -450,6 +440,16 @@ components:
       schema:
         type: string
       example: pmt_20260502_00045
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      example: 20
   securitySchemes:
     bearerAuth:
       type: http

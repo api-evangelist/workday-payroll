@@ -154,6 +154,14 @@ components:
       schema:
         type: string
       example: w_100542
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+      example: pr_20260430_weekly_001
     offset:
       name: offset
       in: query
@@ -173,26 +181,84 @@ components:
         maximum: 100
         default: 20
       example: 20
-    payRunId:
-      name: payRunId
-      in: path
-      required: true
-      description: Unique identifier for the pay run
-      schema:
-        type: string
-      example: pr_20260430_weekly_001
   schemas:
-    Error:
+    PayPeriod:
       type: object
       properties:
-        error:
+        startDate:
           type: string
-          description: Error code
-          example: INVALID_REQUEST
-        message:
+          format: date
+          description: Start date of the pay period
+          example: '2026-04-30'
+        endDate:
           type: string
-          description: Human-readable error message
-          example: Validation failed for the provided fields.
+          format: date
+          description: End date of the pay period
+          example: '2026-04-30'
+    WorkerResult:
+      type: object
+      properties:
+        worker:
+          $ref: '#/components/schemas/WorkerRef'
+        grossPay:
+          type: number
+          format: double
+          description: Worker gross pay for this run
+          example: 1.0
+        netPay:
+          type: number
+          format: double
+          description: Worker net pay for this run
+          example: 1.0
+        totalEarnings:
+          type: number
+          format: double
+          description: Total earnings
+          example: 5240.0
+        totalDeductions:
+          type: number
+          format: double
+          description: Total deductions
+          example: 38210.8
+        totalTaxes:
+          type: number
+          format: double
+          description: Total taxes withheld
+          example: 29167.4
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+        paymentMethod:
+          type: string
+          enum:
+          - DirectDeposit
+          - Check
+          - Wire
+          description: Method of payment
+          example: DirectDeposit
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Worker identifier
+          example: w_100542
+        descriptor:
+          type: string
+          description: Worker display name
+          example: Weekly USD Pay Group
+    WorkerResultCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkerResult'
+        total:
+          type: integer
+          description: Total number of worker results
+          example: 52
     PayRunResult:
       type: object
       properties:
@@ -240,83 +306,17 @@ components:
           type: string
           description: ISO 4217 currency code
           example: USD
-    WorkerResult:
+    Error:
       type: object
       properties:
-        worker:
-          $ref: '#/components/schemas/WorkerRef'
-        grossPay:
-          type: number
-          format: double
-          description: Worker gross pay for this run
-          example: 1.0
-        netPay:
-          type: number
-          format: double
-          description: Worker net pay for this run
-          example: 1.0
-        totalEarnings:
-          type: number
-          format: double
-          description: Total earnings
-          example: 5240.0
-        totalDeductions:
-          type: number
-          format: double
-          description: Total deductions
-          example: 38210.8
-        totalTaxes:
-          type: number
-          format: double
-          description: Total taxes withheld
-          example: 29167.4
-        currency:
+        error:
           type: string
-          description: ISO 4217 currency code
-          example: USD
-        paymentMethod:
+          description: Error code
+          example: INVALID_REQUEST
+        message:
           type: string
-          enum:
-          - DirectDeposit
-          - Check
-          - Wire
-          description: Method of payment
-          example: DirectDeposit
-    WorkerResultCollection:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkerResult'
-        total:
-          type: integer
-          description: Total number of worker results
-          example: 52
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Worker identifier
-          example: w_100542
-        descriptor:
-          type: string
-          description: Worker display name
-          example: Weekly USD Pay Group
-    PayPeriod:
-      type: object
-      properties:
-        startDate:
-          type: string
-          format: date
-          description: Start date of the pay period
-          example: '2026-04-30'
-        endDate:
-          type: string
-          format: date
-          description: End date of the pay period
-          example: '2026-04-30'
+          description: Human-readable error message
+          example: Validation failed for the provided fields.
   responses:
     Unauthorized:
       description: Authentication required or token expired

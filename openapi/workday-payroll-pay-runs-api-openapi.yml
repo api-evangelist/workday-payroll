@@ -323,18 +323,35 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    payRunId:
+      name: payRunId
+      in: path
+      required: true
+      description: Unique identifier for the pay run
+      schema:
+        type: string
+      example: pr_20260430_weekly_001
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      example: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      example: 20
   schemas:
-    PayGroupRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Pay group identifier
-          example: pg_weekly_usd
-        descriptor:
-          type: string
-          description: Pay group display name
-          example: Weekly USD Pay Group
     PayRunCollection:
       type: object
       properties:
@@ -346,6 +363,34 @@ components:
           type: integer
           description: Total number of pay runs matching the query
           example: 52
+    PayPeriod:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+          description: Start date of the pay period
+          example: '2026-04-30'
+        endDate:
+          type: string
+          format: date
+          description: End date of the pay period
+          example: '2026-04-30'
+    UpdatePayRunRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Draft
+          - Cancelled
+          description: Updated status for the pay run
+          example: Draft
+        paymentDate:
+          type: string
+          format: date
+          description: Updated payment date
+          example: '2026-04-30'
     PayRun:
       type: object
       properties:
@@ -421,6 +466,17 @@ components:
           format: date-time
           description: When the pay run was completed
           example: '2026-04-30T16:45:00Z'
+    PayGroupRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pay group identifier
+          example: pg_weekly_usd
+        descriptor:
+          type: string
+          description: Pay group display name
+          example: Weekly USD Pay Group
     Error:
       type: object
       properties:
@@ -442,19 +498,6 @@ components:
               message:
                 type: string
           description: Detailed error information
-    PayPeriod:
-      type: object
-      properties:
-        startDate:
-          type: string
-          format: date
-          description: Start date of the pay period
-          example: '2026-04-30'
-        endDate:
-          type: string
-          format: date
-          description: End date of the pay period
-          example: '2026-04-30'
     CreatePayRunRequest:
       type: object
       required:
@@ -481,38 +524,7 @@ components:
           format: date
           description: Desired payment date
           example: '2026-04-30'
-    UpdatePayRunRequest:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - Draft
-          - Cancelled
-          description: Updated status for the pay run
-          example: Draft
-        paymentDate:
-          type: string
-          format: date
-          description: Updated payment date
-          example: '2026-04-30'
   responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            BadRequestExample:
-              summary: Default BadRequest response
-              x-microcks-default: true
-              value:
-                error: INVALID_REQUEST
-                message: Validation failed for the provided fields.
-                details:
-                - field: amount
-                  message: Validation failed for the provided fields.
     Unauthorized:
       description: Authentication required or token expired
       content:
@@ -545,34 +557,22 @@ components:
                 details:
                 - field: amount
                   message: Validation failed for the provided fields.
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-      example: 20
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-      example: 0
-    payRunId:
-      name: payRunId
-      in: path
-      required: true
-      description: Unique identifier for the pay run
-      schema:
-        type: string
-      example: pr_20260430_weekly_001
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequestExample:
+              summary: Default BadRequest response
+              x-microcks-default: true
+              value:
+                error: INVALID_REQUEST
+                message: Validation failed for the provided fields.
+                details:
+                - field: amount
+                  message: Validation failed for the provided fields.
   securitySchemes:
     bearerAuth:
       type: http

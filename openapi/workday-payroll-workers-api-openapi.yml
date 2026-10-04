@@ -63,18 +63,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Unique identifier for the worker (Workday ID)
+      schema:
+        type: string
+      example: w_100542
   schemas:
-    PayGroupRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Pay group identifier
-          example: pg_weekly_usd
-        descriptor:
-          type: string
-          description: Pay group display name
-          example: Weekly USD Pay Group
     WorkerPayrollDetails:
       type: object
       properties:
@@ -118,6 +116,17 @@ components:
           type: string
           description: Primary tax jurisdiction
           example: US-Federal
+    PayGroupRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pay group identifier
+          example: pg_weekly_usd
+        descriptor:
+          type: string
+          description: Pay group display name
+          example: Weekly USD Pay Group
     Error:
       type: object
       properties:
@@ -139,15 +148,6 @@ components:
               message:
                 type: string
           description: Detailed error information
-  parameters:
-    workerId:
-      name: workerId
-      in: path
-      required: true
-      description: Unique identifier for the worker (Workday ID)
-      schema:
-        type: string
-      example: w_100542
   responses:
     Unauthorized:
       description: Authentication required or token expired
