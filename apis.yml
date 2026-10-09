@@ -9402,6 +9402,12 @@ apis:
   - type: Examples
     url: examples/tax-worker-tax-summary-example.json
 common:
+- type: Plans
+  url: plans/workday-payroll-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/workday-payroll-rate-limits.yml
+- type: FinOps
+  url: finops/workday-payroll-finops.yml
 - type: CapabilityMap
   url: capabilities/workday-payroll-capability-edges.yml
   name: Workday Payroll Business Capability Map
