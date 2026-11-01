@@ -1,4 +1,4 @@
-# Workday Payroll (workday-payroll)
+# Workday Payroll
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,353 +66,282 @@
 
 Workday Payroll provides comprehensive APIs for managing payroll operations, employee compensation, tax calculations, and payment processing within the Workday platform.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/workday-payroll/refs/heads/main/apis.yml)
+**Areas:** Compensation · Enterprise · Human Resources · Payroll · Software-as-a-Service · Tax
 
-## Tags
+## Workday Payroll on APIs.io
 
-- Compensation
-- Enterprise
-- Human Resources
-- Payroll
-- SaaS
-- Tax
+Everything profiled for Workday Payroll is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/workday-payroll/](https://apis.io/providers/workday-payroll/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (21)
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
+- [Workday Payroll Agent Definition API](https://apis.io/apis/workday-payroll/workday-payroll-agentdefinition-api/) — To view and maintain Agent Definitions with the Agent System of Record.
+- [Workday Payroll Deductions API](https://apis.io/apis/workday-payroll/workday-payroll-deductions-api/) — Manage deduction codes and worker deductions
+- [Workday Payroll Earnings API](https://apis.io/apis/workday-payroll/workday-payroll-earnings-api/) — Manage earning codes and worker earnings
+- [Workday Payroll Input Batches API](https://apis.io/apis/workday-payroll/workday-payroll-input-batches-api/) — Manage batch submissions of payroll input data
+- [Workday Payroll One-Time Payments API](https://apis.io/apis/workday-payroll/workday-payroll-one-time-payments-api/) — Submit and manage one-time payment requests
+- [Workday Payroll Pay Groups API](https://apis.io/apis/workday-payroll/workday-payroll-pay-groups-api/) — Configure and manage pay groups for organizing payroll
+- [Workday Payroll Pay Runs API](https://apis.io/apis/workday-payroll/workday-payroll-pay-runs-api/) — Manage payroll processing runs and their lifecycle
+- [Workday Payroll Payment Elections API](https://apis.io/apis/workday-payroll/workday-payroll-payment-elections-api/) — Manage worker payment election and distribution details
+- [Workday Payroll Payment Results API](https://apis.io/apis/workday-payroll/workday-payroll-payment-results-api/) — Retrieve payment processing results and details
+- [Workday Payroll Adjustments API](https://apis.io/apis/workday-payroll/workday-payroll-payroll-adjustments-api/) — Create and manage payroll adjustments and corrections
+- [Workday Payroll Calculations API](https://apis.io/apis/workday-payroll/workday-payroll-payroll-calculations-api/) — Trigger and monitor payroll calculation processes
+- [Workday Payroll Summaries API](https://apis.io/apis/workday-payroll/workday-payroll-payroll-summaries-api/) — Access aggregated payroll result summaries
+- [Workday Payroll Payslips API](https://apis.io/apis/workday-payroll/workday-payroll-payslips-api/) — Access worker payslip and pay statement data
+- [Workday Payroll Supplemental Earnings API](https://apis.io/apis/workday-payroll/workday-payroll-supplemental-earnings-api/) — Submit supplemental earnings such as bonuses and commissions
+- [Workday Payroll Tax Calculations API](https://apis.io/apis/workday-payroll/workday-payroll-tax-calculations-api/) — View and manage tax calculation results
+- [Workday Payroll Tax Elections API](https://apis.io/apis/workday-payroll/workday-payroll-tax-elections-api/) — Access and manage worker tax elections (W-4, state forms)
+- [Workday Payroll Tax Filing API](https://apis.io/apis/workday-payroll/workday-payroll-tax-filing-api/) — Access tax filing data and compliance reports
+- [Workday Payroll Tax Jurisdictions API](https://apis.io/apis/workday-payroll/workday-payroll-tax-jurisdictions-api/) — Retrieve tax jurisdiction and authority information
+- [Workday Payroll Tax Withholdings API](https://apis.io/apis/workday-payroll/workday-payroll-tax-withholdings-api/) — Manage worker tax withholding configurations
+- [Workday Payroll Time Off Inputs API](https://apis.io/apis/workday-payroll/workday-payroll-time-off-inputs-api/) — Submit time off and leave inputs for payroll processing
+- [Workday Payroll Workers API](https://apis.io/apis/workday-payroll/workday-payroll-workers-api/) — Access worker payroll data and compensation details
 
-## APIs
+### Published properties
 
-### Workday Payroll API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Core API for managing payroll processes including payroll calculations, employee pay data, deductions, earnings, and payroll runs.
+#### Agentic access (1)
 
-- **Human URL:** [https://www.workday.com/en-us/products/payroll-management.html](https://www.workday.com/en-us/products/payroll-management.html)
-- **Base URL:** `https://api.workday.com/payroll/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Workday Payroll Agentic Access](https://apis.io/agentic-access/workday-payroll/workday-payroll-agentic-access/)
 
-- Compensation
-- Deductions
-- Earnings
-- Pay-Runs
-- Payroll
+#### JSON Schema (71)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html)
-- [OpenAPI](openapi/workday-payroll-payroll-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workday-payroll-payroll.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workday-payroll-payroll.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://doc.workday.com/admin-guide/en-us/authentication/authentication.html)
-- [A P I Console](https://community.workday.com/api-console)
-- [Rate Limits](https://doc.workday.com/admin-guide/en-us/api-reference/api-rate-limiting.html)
-- [JSON-LD](json-ld/workday-payroll-payroll-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/payroll-calculation-status-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-create-pay-run-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-deduction-code-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-deduction-code-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-deduction-code-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-deduction-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-deduction-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-earning-code-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-earning-code-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-earning-code-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-earning-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-earning-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-pay-group-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-pay-group-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-pay-group-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-pay-period-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-pay-run-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-pay-run-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-update-pay-run-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-worker-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-worker-payroll-details-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-worker-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/payroll-calculation-status-structure.json)
-- [JSON Structure](json-structure/payroll-create-pay-run-request-structure.json)
-- [JSON Structure](json-structure/payroll-deduction-code-collection-structure.json)
-- [JSON Structure](json-structure/payroll-deduction-code-ref-structure.json)
-- [JSON Structure](json-structure/payroll-deduction-code-structure.json)
-- [JSON Structure](json-structure/payroll-deduction-collection-structure.json)
-- [JSON Structure](json-structure/payroll-deduction-structure.json)
-- [JSON Structure](json-structure/payroll-earning-code-collection-structure.json)
-- [JSON Structure](json-structure/payroll-earning-code-ref-structure.json)
-- [JSON Structure](json-structure/payroll-earning-code-structure.json)
-- [JSON Structure](json-structure/payroll-earning-collection-structure.json)
-- [JSON Structure](json-structure/payroll-earning-structure.json)
-- [JSON Structure](json-structure/payroll-pay-group-collection-structure.json)
-- [JSON Structure](json-structure/payroll-pay-group-ref-structure.json)
-- [JSON Structure](json-structure/payroll-pay-group-structure.json)
-- [JSON Structure](json-structure/payroll-pay-period-structure.json)
-- [JSON Structure](json-structure/payroll-pay-run-collection-structure.json)
-- [JSON Structure](json-structure/payroll-pay-run-structure.json)
-- [JSON Structure](json-structure/payroll-update-pay-run-request-structure.json)
-- [JSON Structure](json-structure/payroll-worker-collection-structure.json)
-- [JSON Structure](json-structure/payroll-worker-payroll-details-structure.json)
-- [JSON Structure](json-structure/payroll-worker-ref-structure.json)
-- [Example](examples/payroll-calculation-status-example.json)
-- [Example](examples/payroll-create-pay-run-request-example.json)
-- [Example](examples/payroll-deduction-code-collection-example.json)
-- [Example](examples/payroll-deduction-code-example.json)
-- [Example](examples/payroll-deduction-code-ref-example.json)
-- [Example](examples/payroll-deduction-collection-example.json)
-- [Example](examples/payroll-deduction-example.json)
-- [Example](examples/payroll-earning-code-collection-example.json)
-- [Example](examples/payroll-earning-code-example.json)
-- [Example](examples/payroll-earning-code-ref-example.json)
-- [Example](examples/payroll-earning-collection-example.json)
-- [Example](examples/payroll-earning-example.json)
-- [Example](examples/payroll-pay-group-collection-example.json)
-- [Example](examples/payroll-pay-group-example.json)
-- [Example](examples/payroll-pay-group-ref-example.json)
-- [Example](examples/payroll-pay-period-example.json)
-- [Example](examples/payroll-pay-run-collection-example.json)
-- [Example](examples/payroll-pay-run-example.json)
-- [Example](examples/payroll-update-pay-run-request-example.json)
-- [Example](examples/payroll-worker-collection-example.json)
-- [Example](examples/payroll-worker-payroll-details-example.json)
-- [Example](examples/payroll-worker-ref-example.json)
-- [Example](examples/workday-payroll-list-pay-runs-example.json)
+- [CalculationStatus](https://apis.io/schemas/workday-payroll/payroll-calculation-status/)
+- [CreatePayRunRequest](https://apis.io/schemas/workday-payroll/payroll-create-pay-run-request/)
+- [Deduction](https://apis.io/schemas/workday-payroll/payroll-deduction/)
+- [DeductionCode](https://apis.io/schemas/workday-payroll/payroll-deduction-code/)
+- [DeductionCodeCollection](https://apis.io/schemas/workday-payroll/payroll-deduction-code-collection/)
+- [DeductionCodeRef](https://apis.io/schemas/workday-payroll/payroll-deduction-code-ref/)
+- [DeductionCollection](https://apis.io/schemas/workday-payroll/payroll-deduction-collection/)
+- [Earning](https://apis.io/schemas/workday-payroll/payroll-earning/)
+- [EarningCode](https://apis.io/schemas/workday-payroll/payroll-earning-code/)
+- [EarningCodeCollection](https://apis.io/schemas/workday-payroll/payroll-earning-code-collection/)
+- [EarningCodeRef](https://apis.io/schemas/workday-payroll/payroll-earning-code-ref/)
+- [EarningCollection](https://apis.io/schemas/workday-payroll/payroll-earning-collection/)
+- [Adjustment](https://apis.io/schemas/workday-payroll/payroll-input-adjustment/)
+- [AdjustmentCollection](https://apis.io/schemas/workday-payroll/payroll-input-adjustment-collection/)
+- [CreateAdjustmentRequest](https://apis.io/schemas/workday-payroll/payroll-input-create-adjustment-request/)
+- [CreateInputBatchRequest](https://apis.io/schemas/workday-payroll/payroll-input-create-input-batch-request/)
+- [CreateOneTimePaymentRequest](https://apis.io/schemas/workday-payroll/payroll-input-create-one-time-payment-request/)
+- [CreateSupplementalEarningRequest](https://apis.io/schemas/workday-payroll/payroll-input-create-supplemental-earning-request/)
+- [CreateTimeOffInputRequest](https://apis.io/schemas/workday-payroll/payroll-input-create-time-off-input-request/)
+- [InputBatch](https://apis.io/schemas/workday-payroll/payroll-input-input-batch/)
+- [InputBatchCollection](https://apis.io/schemas/workday-payroll/payroll-input-input-batch-collection/)
+- [InputRecord](https://apis.io/schemas/workday-payroll/payroll-input-input-record/)
+- [OneTimePayment](https://apis.io/schemas/workday-payroll/payroll-input-one-time-payment/)
+- [OneTimePaymentCollection](https://apis.io/schemas/workday-payroll/payroll-input-one-time-payment-collection/)
+- [SupplementalEarning](https://apis.io/schemas/workday-payroll/payroll-input-supplemental-earning/)
+- …and 46 more published on APIs.io
 
-### Workday Payroll Results API
+#### JSON Structure (71)
 
-API for retrieving payroll calculation results, payment details, and historical payroll data.
+Data models expressed in JSON Structure.
 
-- **Human URL:** [https://www.workday.com/en-us/products/payroll-management.html](https://www.workday.com/en-us/products/payroll-management.html)
-- **Base URL:** `https://api.workday.com/payroll-results/v1`
+- [Payroll Calculation Status Structure](https://apis.io/json-structure/workday-payroll/payroll-calculation-status-structure/)
+- [Payroll Create Pay Run Request Structure](https://apis.io/json-structure/workday-payroll/payroll-create-pay-run-request-structure/)
+- [Payroll Deduction Code Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-deduction-code-collection-structure/)
+- [Payroll Deduction Code Ref Structure](https://apis.io/json-structure/workday-payroll/payroll-deduction-code-ref-structure/)
+- [Payroll Deduction Code Structure](https://apis.io/json-structure/workday-payroll/payroll-deduction-code-structure/)
+- [Payroll Deduction Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-deduction-collection-structure/)
+- [Payroll Deduction Structure](https://apis.io/json-structure/workday-payroll/payroll-deduction-structure/)
+- [Payroll Earning Code Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-earning-code-collection-structure/)
+- [Payroll Earning Code Ref Structure](https://apis.io/json-structure/workday-payroll/payroll-earning-code-ref-structure/)
+- [Payroll Earning Code Structure](https://apis.io/json-structure/workday-payroll/payroll-earning-code-structure/)
+- [Payroll Earning Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-earning-collection-structure/)
+- [Payroll Earning Structure](https://apis.io/json-structure/workday-payroll/payroll-earning-structure/)
+- [Payroll Input Adjustment Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-input-adjustment-collection-structure/)
+- [Payroll Input Adjustment Structure](https://apis.io/json-structure/workday-payroll/payroll-input-adjustment-structure/)
+- [Payroll Input Create Adjustment Request Structure](https://apis.io/json-structure/workday-payroll/payroll-input-create-adjustment-request-structure/)
+- [Payroll Input Create Input Batch Request Structure](https://apis.io/json-structure/workday-payroll/payroll-input-create-input-batch-request-structure/)
+- [Payroll Input Create One Time Payment Request Structure](https://apis.io/json-structure/workday-payroll/payroll-input-create-one-time-payment-request-structure/)
+- [Payroll Input Create Supplemental Earning Request Structure](https://apis.io/json-structure/workday-payroll/payroll-input-create-supplemental-earning-request-structure/)
+- [Payroll Input Create Time Off Input Request Structure](https://apis.io/json-structure/workday-payroll/payroll-input-create-time-off-input-request-structure/)
+- [Payroll Input Input Batch Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-input-input-batch-collection-structure/)
+- [Payroll Input Input Batch Structure](https://apis.io/json-structure/workday-payroll/payroll-input-input-batch-structure/)
+- [Payroll Input Input Record Structure](https://apis.io/json-structure/workday-payroll/payroll-input-input-record-structure/)
+- [Payroll Input One Time Payment Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-input-one-time-payment-collection-structure/)
+- [Payroll Input One Time Payment Structure](https://apis.io/json-structure/workday-payroll/payroll-input-one-time-payment-structure/)
+- [Payroll Input Supplemental Earning Collection Structure](https://apis.io/json-structure/workday-payroll/payroll-input-supplemental-earning-collection-structure/)
+- …and 46 more published on APIs.io
 
-#### Tags
+#### JSON-LD (5)
 
-- History
-- Payments
-- Payroll-Results
-- Reporting
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [Workday Payroll Context](https://apis.io/jsonld/workday-payroll/workday-payroll-context/)
+- [Workday Payroll Payroll Context](https://apis.io/jsonld/workday-payroll/workday-payroll-payroll-context/)
+- [Workday Payroll Payroll Input Context](https://apis.io/jsonld/workday-payroll/workday-payroll-payroll-input-context/)
+- [Workday Payroll Payroll Results Context](https://apis.io/jsonld/workday-payroll/workday-payroll-payroll-results-context/)
+- [Workday Payroll Tax Context](https://apis.io/jsonld/workday-payroll/workday-payroll-tax-context/)
 
-- [Documentation](https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html)
-- [OpenAPI](openapi/workday-payroll-payroll-results-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workday-payroll-payroll-results.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workday-payroll-payroll-results.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON-LD](json-ld/workday-payroll-payroll-results-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/payroll-results-pay-period-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-pay-run-result-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payment-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payment-election-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payment-election-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payslip-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payslip-deduction-line-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payslip-earning-line-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payslip-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-payslip-tax-line-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-worker-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-worker-result-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-results-worker-result-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/payroll-results-pay-period-structure.json)
-- [JSON Structure](json-structure/payroll-results-pay-run-result-structure.json)
-- [JSON Structure](json-structure/payroll-results-payment-collection-structure.json)
-- [JSON Structure](json-structure/payroll-results-payment-election-collection-structure.json)
-- [JSON Structure](json-structure/payroll-results-payment-election-structure.json)
-- [JSON Structure](json-structure/payroll-results-payment-structure.json)
-- [JSON Structure](json-structure/payroll-results-payslip-collection-structure.json)
-- [JSON Structure](json-structure/payroll-results-payslip-deduction-line-structure.json)
-- [JSON Structure](json-structure/payroll-results-payslip-earning-line-structure.json)
-- [JSON Structure](json-structure/payroll-results-payslip-structure.json)
-- [JSON Structure](json-structure/payroll-results-payslip-tax-line-structure.json)
-- [JSON Structure](json-structure/payroll-results-worker-ref-structure.json)
-- [JSON Structure](json-structure/payroll-results-worker-result-collection-structure.json)
-- [JSON Structure](json-structure/payroll-results-worker-result-structure.json)
-- [Example](examples/payroll-results-pay-period-example.json)
-- [Example](examples/payroll-results-pay-run-result-example.json)
-- [Example](examples/payroll-results-payment-collection-example.json)
-- [Example](examples/payroll-results-payment-election-collection-example.json)
-- [Example](examples/payroll-results-payment-election-example.json)
-- [Example](examples/payroll-results-payment-example.json)
-- [Example](examples/payroll-results-payslip-collection-example.json)
-- [Example](examples/payroll-results-payslip-deduction-line-example.json)
-- [Example](examples/payroll-results-payslip-earning-line-example.json)
-- [Example](examples/payroll-results-payslip-example.json)
-- [Example](examples/payroll-results-payslip-tax-line-example.json)
-- [Example](examples/payroll-results-worker-ref-example.json)
-- [Example](examples/payroll-results-worker-result-collection-example.json)
-- [Example](examples/payroll-results-worker-result-example.json)
-- [Example](examples/workday-payroll-get-worker-payslip-example.json)
+#### Vocabulary (1)
 
-### Workday Payroll Input API
+The provider's domain terms, defined.
 
-API for submitting and managing payroll input data including one-time payments, adjustments, and supplemental earnings.
+- [Workday Payroll Vocabulary](https://apis.io/vocabularies/workday-payroll/workday-payroll-vocabulary/)
 
-- **Human URL:** [https://www.workday.com/en-us/products/payroll-management.html](https://www.workday.com/en-us/products/payroll-management.html)
-- **Base URL:** `https://api.workday.com/payroll-input/v1`
+#### Examples (74)
 
-#### Tags
+Example requests and responses.
 
-- Adjustments
-- One-Time-Payments
-- Payroll-Input
-- Supplemental-Earnings
+- [Payroll Calculation Status Example](https://apis.io/examples/workday-payroll/payroll-calculation-status-example/)
+- [Payroll Create Pay Run Request Example](https://apis.io/examples/workday-payroll/payroll-create-pay-run-request-example/)
+- [Payroll Deduction Code Collection Example](https://apis.io/examples/workday-payroll/payroll-deduction-code-collection-example/)
+- [Payroll Deduction Code Example](https://apis.io/examples/workday-payroll/payroll-deduction-code-example/)
+- [Payroll Deduction Code Ref Example](https://apis.io/examples/workday-payroll/payroll-deduction-code-ref-example/)
+- [Payroll Deduction Collection Example](https://apis.io/examples/workday-payroll/payroll-deduction-collection-example/)
+- [Payroll Deduction Example](https://apis.io/examples/workday-payroll/payroll-deduction-example/)
+- [Payroll Earning Code Collection Example](https://apis.io/examples/workday-payroll/payroll-earning-code-collection-example/)
+- [Payroll Earning Code Example](https://apis.io/examples/workday-payroll/payroll-earning-code-example/)
+- [Payroll Earning Code Ref Example](https://apis.io/examples/workday-payroll/payroll-earning-code-ref-example/)
+- [Payroll Earning Collection Example](https://apis.io/examples/workday-payroll/payroll-earning-collection-example/)
+- [Payroll Earning Example](https://apis.io/examples/workday-payroll/payroll-earning-example/)
+- [Payroll Input Adjustment Collection Example](https://apis.io/examples/workday-payroll/payroll-input-adjustment-collection-example/)
+- [Payroll Input Adjustment Example](https://apis.io/examples/workday-payroll/payroll-input-adjustment-example/)
+- [Payroll Input Create Adjustment Request Example](https://apis.io/examples/workday-payroll/payroll-input-create-adjustment-request-example/)
+- [Payroll Input Create Input Batch Request Example](https://apis.io/examples/workday-payroll/payroll-input-create-input-batch-request-example/)
+- [Payroll Input Create One Time Payment Request Example](https://apis.io/examples/workday-payroll/payroll-input-create-one-time-payment-request-example/)
+- [Payroll Input Create Supplemental Earning Request Example](https://apis.io/examples/workday-payroll/payroll-input-create-supplemental-earning-request-example/)
+- [Payroll Input Create Time Off Input Request Example](https://apis.io/examples/workday-payroll/payroll-input-create-time-off-input-request-example/)
+- [Payroll Input Input Batch Collection Example](https://apis.io/examples/workday-payroll/payroll-input-input-batch-collection-example/)
+- [Payroll Input Input Batch Example](https://apis.io/examples/workday-payroll/payroll-input-input-batch-example/)
+- [Payroll Input Input Record Example](https://apis.io/examples/workday-payroll/payroll-input-input-record-example/)
+- [Payroll Input One Time Payment Collection Example](https://apis.io/examples/workday-payroll/payroll-input-one-time-payment-collection-example/)
+- [Payroll Input One Time Payment Example](https://apis.io/examples/workday-payroll/payroll-input-one-time-payment-example/)
+- [Payroll Input Supplemental Earning Collection Example](https://apis.io/examples/workday-payroll/payroll-input-supplemental-earning-collection-example/)
+- …and 49 more published on APIs.io
 
-#### Properties
+#### Collections (46)
 
-- [Documentation](https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html)
-- [OpenAPI](openapi/workday-payroll-payroll-input-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workday-payroll-payroll-input.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workday-payroll-payroll-input.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON-LD](json-ld/workday-payroll-payroll-input-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/payroll-input-adjustment-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-adjustment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-create-adjustment-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-create-input-batch-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-create-one-time-payment-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-create-supplemental-earning-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-create-time-off-input-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-input-batch-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-input-batch-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-input-record-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-one-time-payment-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-one-time-payment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-supplemental-earning-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-supplemental-earning-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-time-off-input-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-time-off-input-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-update-one-time-payment-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/payroll-input-worker-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/payroll-input-adjustment-collection-structure.json)
-- [JSON Structure](json-structure/payroll-input-adjustment-structure.json)
-- [JSON Structure](json-structure/payroll-input-create-adjustment-request-structure.json)
-- [JSON Structure](json-structure/payroll-input-create-input-batch-request-structure.json)
-- [JSON Structure](json-structure/payroll-input-create-one-time-payment-request-structure.json)
-- [JSON Structure](json-structure/payroll-input-create-supplemental-earning-request-structure.json)
-- [JSON Structure](json-structure/payroll-input-create-time-off-input-request-structure.json)
-- [JSON Structure](json-structure/payroll-input-input-batch-collection-structure.json)
-- [JSON Structure](json-structure/payroll-input-input-batch-structure.json)
-- [JSON Structure](json-structure/payroll-input-input-record-structure.json)
-- [JSON Structure](json-structure/payroll-input-one-time-payment-collection-structure.json)
-- [JSON Structure](json-structure/payroll-input-one-time-payment-structure.json)
-- [JSON Structure](json-structure/payroll-input-supplemental-earning-collection-structure.json)
-- [JSON Structure](json-structure/payroll-input-supplemental-earning-structure.json)
-- [JSON Structure](json-structure/payroll-input-time-off-input-collection-structure.json)
-- [JSON Structure](json-structure/payroll-input-time-off-input-structure.json)
-- [JSON Structure](json-structure/payroll-input-update-one-time-payment-request-structure.json)
-- [JSON Structure](json-structure/payroll-input-worker-ref-structure.json)
-- [Example](examples/payroll-input-adjustment-collection-example.json)
-- [Example](examples/payroll-input-adjustment-example.json)
-- [Example](examples/payroll-input-create-adjustment-request-example.json)
-- [Example](examples/payroll-input-create-input-batch-request-example.json)
-- [Example](examples/payroll-input-create-one-time-payment-request-example.json)
-- [Example](examples/payroll-input-create-supplemental-earning-request-example.json)
-- [Example](examples/payroll-input-create-time-off-input-request-example.json)
-- [Example](examples/payroll-input-input-batch-collection-example.json)
-- [Example](examples/payroll-input-input-batch-example.json)
-- [Example](examples/payroll-input-input-record-example.json)
-- [Example](examples/payroll-input-one-time-payment-collection-example.json)
-- [Example](examples/payroll-input-one-time-payment-example.json)
-- [Example](examples/payroll-input-supplemental-earning-collection-example.json)
-- [Example](examples/payroll-input-supplemental-earning-example.json)
-- [Example](examples/payroll-input-time-off-input-collection-example.json)
-- [Example](examples/payroll-input-time-off-input-example.json)
-- [Example](examples/payroll-input-update-one-time-payment-request-example.json)
-- [Example](examples/payroll-input-worker-ref-example.json)
-- [Example](examples/workday-payroll-create-one-time-payment-example.json)
+Postman and Open Collection request collections.
 
-### Workday Tax API
+- [Workday Payroll Input Deductions agentDefinition API](https://apis.io/collections/workday-payroll/open-workday-payroll-agentdefinition-api/)
+- [Workday Payroll Input Deductions API](https://apis.io/collections/workday-payroll/open-workday-payroll-deductions-api/)
+- [Workday Payroll Input Deductions Earnings API](https://apis.io/collections/workday-payroll/open-workday-payroll-earnings-api/)
+- [Workday Payroll Input Deductions Input Batches API](https://apis.io/collections/workday-payroll/open-workday-payroll-input-batches-api/)
+- [Workday Payroll Input Deductions One-Time Payments API](https://apis.io/collections/workday-payroll/open-workday-payroll-one-time-payments-api/)
+- [Workday Payroll Input Deductions Pay Groups API](https://apis.io/collections/workday-payroll/open-workday-payroll-pay-groups-api/)
+- [Workday Payroll Input Deductions Pay Runs API](https://apis.io/collections/workday-payroll/open-workday-payroll-pay-runs-api/)
+- [Workday Payroll Input Deductions Payment Elections API](https://apis.io/collections/workday-payroll/open-workday-payroll-payment-elections-api/)
+- [Workday Payroll Input Deductions Payment Results API](https://apis.io/collections/workday-payroll/open-workday-payroll-payment-results-api/)
+- [Workday Payroll API](https://apis.io/collections/workday-payroll/open-workday-payroll-payroll/)
+- [Workday Payroll Input Deductions Payroll Adjustments API](https://apis.io/collections/workday-payroll/open-workday-payroll-payroll-adjustments-api/)
+- [Workday Payroll Input Deductions Payroll Calculations API](https://apis.io/collections/workday-payroll/open-workday-payroll-payroll-calculations-api/)
+- [Workday Payroll Input API](https://apis.io/collections/workday-payroll/open-workday-payroll-payroll-input/)
+- [Workday Payroll Results API](https://apis.io/collections/workday-payroll/open-workday-payroll-payroll-results/)
+- [Workday Payroll Input Deductions Payroll Summaries API](https://apis.io/collections/workday-payroll/open-workday-payroll-payroll-summaries-api/)
+- [Workday Payroll Input Deductions Payslips API](https://apis.io/collections/workday-payroll/open-workday-payroll-payslips-api/)
+- [Workday Payroll Input Deductions Supplemental Earnings API](https://apis.io/collections/workday-payroll/open-workday-payroll-supplemental-earnings-api/)
+- [Workday Payroll Workday Tax API](https://apis.io/collections/workday-payroll/open-workday-payroll-tax/)
+- [Workday Payroll Input Deductions Tax Calculations API](https://apis.io/collections/workday-payroll/open-workday-payroll-tax-calculations-api/)
+- [Workday Payroll Input Deductions Tax Elections API](https://apis.io/collections/workday-payroll/open-workday-payroll-tax-elections-api/)
+- [Workday Payroll Input Deductions Tax Filing API](https://apis.io/collections/workday-payroll/open-workday-payroll-tax-filing-api/)
+- [Workday Payroll Input Deductions Tax Jurisdictions API](https://apis.io/collections/workday-payroll/open-workday-payroll-tax-jurisdictions-api/)
+- [Workday Payroll Input Deductions Tax Withholdings API](https://apis.io/collections/workday-payroll/open-workday-payroll-tax-withholdings-api/)
+- [Workday Payroll Input Deductions Time Off Inputs API](https://apis.io/collections/workday-payroll/open-workday-payroll-time-off-inputs-api/)
+- [Workday Payroll Input Deductions Workers API](https://apis.io/collections/workday-payroll/open-workday-payroll-workers-api/)
+- …and 21 more published on APIs.io
 
-API for managing payroll tax calculations, tax withholdings, and tax filing information.
+#### Governance rules (2)
 
-- **Human URL:** [https://www.workday.com/en-us/products/payroll-management.html](https://www.workday.com/en-us/products/payroll-management.html)
-- **Base URL:** `https://api.workday.com/tax/v1`
+Spectral rulesets for the provider's contracts.
 
-#### Tags
+- [Workday Payroll — jsonschema rules](https://apis.io/rules/workday-payroll/workday-payroll-jsonschema-spectral-rules/)
+- [Workday Payroll API Rules](https://apis.io/rules/workday-payroll/workday-payroll-spectral-rules/)
 
-- Compliance
-- Tax
-- Tax-Filing
-- Withholdings
+#### Security (3)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html)
-- [OpenAPI](openapi/workday-payroll-tax-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workday-payroll-tax.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workday-payroll-tax.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON-LD](json-ld/workday-payroll-tax-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/tax-create-tax-election-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-election-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-election-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-filing-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-filing-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-jurisdiction-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-jurisdiction-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-jurisdiction-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-result-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-result-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-withholding-collection-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-tax-withholding-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-update-tax-withholding-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-worker-ref-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tax-worker-tax-summary-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/tax-create-tax-election-request-structure.json)
-- [JSON Structure](json-structure/tax-tax-election-collection-structure.json)
-- [JSON Structure](json-structure/tax-tax-election-structure.json)
-- [JSON Structure](json-structure/tax-tax-filing-collection-structure.json)
-- [JSON Structure](json-structure/tax-tax-filing-structure.json)
-- [JSON Structure](json-structure/tax-tax-jurisdiction-collection-structure.json)
-- [JSON Structure](json-structure/tax-tax-jurisdiction-ref-structure.json)
-- [JSON Structure](json-structure/tax-tax-jurisdiction-structure.json)
-- [JSON Structure](json-structure/tax-tax-result-collection-structure.json)
-- [JSON Structure](json-structure/tax-tax-result-structure.json)
-- [JSON Structure](json-structure/tax-tax-withholding-collection-structure.json)
-- [JSON Structure](json-structure/tax-tax-withholding-structure.json)
-- [JSON Structure](json-structure/tax-update-tax-withholding-request-structure.json)
-- [JSON Structure](json-structure/tax-worker-ref-structure.json)
-- [JSON Structure](json-structure/tax-worker-tax-summary-structure.json)
-- [Example](examples/tax-create-tax-election-request-example.json)
-- [Example](examples/tax-tax-election-collection-example.json)
-- [Example](examples/tax-tax-election-example.json)
-- [Example](examples/tax-tax-filing-collection-example.json)
-- [Example](examples/tax-tax-filing-example.json)
-- [Example](examples/tax-tax-jurisdiction-collection-example.json)
-- [Example](examples/tax-tax-jurisdiction-example.json)
-- [Example](examples/tax-tax-jurisdiction-ref-example.json)
-- [Example](examples/tax-tax-result-collection-example.json)
-- [Example](examples/tax-tax-result-example.json)
-- [Example](examples/tax-tax-withholding-collection-example.json)
-- [Example](examples/tax-tax-withholding-example.json)
-- [Example](examples/tax-update-tax-withholding-request-example.json)
-- [Example](examples/tax-worker-ref-example.json)
-- [Example](examples/tax-worker-tax-summary-example.json)
+- [Workday Payroll Authentication](https://apis.io/security/workday-payroll/workday-payroll-authentication/)
+- [Workday Payroll Domain Security](https://apis.io/security/workday-payroll/workday-payroll-domain-security/)
+- [Workday Payroll Trust Center](https://apis.io/security/workday-payroll/workday-payroll-trust-center/)
 
-## Common Properties
+#### Plans and pricing (1)
 
-- [Developer Portal](https://community.workday.com/)
-- [Getting Started](https://doc.workday.com/developer/studio/en-us/getting-started.html)
-- [Authentication](https://doc.workday.com/admin-guide/en-us/authentication/authentication.html)
-- [Terms of Service](https://www.workday.com/en-us/legal.html)
-- [Privacy Policy](https://www.workday.com/en-us/privacy.html)
-- [Status Page](https://status.workday.com/)
+Published plans, tiers and prices.
+
+- [Workday Payroll Plans Pricing](https://apis.io/plans/workday-payroll/workday-payroll-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Workday Payroll Rate Limits](https://apis.io/rate-limits/workday-payroll/workday-payroll-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Workday Payroll Finops](https://apis.io/finops/workday-payroll/workday-payroll-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.workday.com/)
+- [Getting started](https://doc.workday.com/developer/studio/en-us/getting-started.html)
+- [Blog](https://newsroom.workday.com/)
 - [Security](https://www.workday.com/en-us/why-workday/security.html)
-- [JSON-LD](json-ld/workday-payroll-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/workday-payroll-pay-run-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workday-payroll-payslip-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/workday-payroll-pay-run-structure.json)
-- [JSON Structure](json-structure/workday-payroll-payslip-structure.json)
-- [Example](examples/workday-payroll-pay-run-example.json)
-- [Example](examples/workday-payroll-payslip-example.json)
-- [Spectral Rules](rules/workday-payroll-spectral-rules.yml)
-- [Vocabulary](vocabulary/workday-payroll-vocabulary.yml)
-- [Tools](https://github.com/Workday/raas-python)
-- [Tools](https://github.com/Workday/everywhere)
-- [Tools](https://github.com/Workday/asor)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Solutions](undefined)
+- [Terms of service](https://www.workday.com/en-us/legal.html)
+- [Privacy policy](https://www.workday.com/en-us/privacy.html)
+- [Status](https://status.workday.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 42.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 74.5 |
+| Contract governance | 27.3 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 22.6 |
+| Access clarity | 34.2 |
+
+**Agent readiness 32.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Employment & Payroll
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/workday-payroll/](https://apis.io/providers/workday-payroll/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Workday Payroll: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/workday-payroll/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
