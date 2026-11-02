@@ -1,0 +1,60 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Workday Payroll
+providerId: workday-payroll
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Compensation
+  - Enterprise
+  - Payroll
+  - HCM
+description: Workday Payroll is sold as a payroll module on top of the Workday HCM tenant subscription. Workday does not publish payroll pricing on workday.com; access is quoted by Workday sales and scoped per supported country / payroll partner.
+sources:
+  - https://www.workday.com/en-us/enterprise-resource-planning.html
+notes: No public per-employee-per-month price. Scaffold Free / Pro / Enterprise tiers have been collapsed.
+plans:
+  - id: workday-payroll-contact-sales
+    name: Contact Sales
+    type: enterprise
+    description: Workday Payroll capability (native Workday Payroll for supported countries plus Workday Payroll Connect for partner-run payrolls) is licensed under the Workday tenant subscription. Pricing is negotiated with Workday sales as part of the master agreement.
+    entries:
+      - label: Payroll Subscription
+        name: payroll_subscription
+        type: subscription
+        metric: varies
+        limit: -1
+        timeFrame: year
+        geo: per supported country
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+    elements:
+      - name: Workday Payroll
+      - name: Workday Payroll Connect
+      - name: REST and SOAP Web Services for Payroll
+      - name: Bundled with Workday Tenant
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  plans:
+  - name: Contact Sales
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
